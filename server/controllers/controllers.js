@@ -55,7 +55,8 @@ module.exports.getUserCards = (req, res) => {
 
   models.readUserCards(userId)
     .then((result) => {
-      if (result.length === 0) {
+      console.log(result);
+      if (result === undefined) {
         res.status(200).send('No User Cards')
       } else {
         res.status(200).send(result);
@@ -85,8 +86,8 @@ module.exports.addUserCards = (req, res) => {
 module.exports.getPromptCards = (req, res) => {
 
   models.readPromptCards()
-    .then((result) => {
-      res.status(200).send(result);
+    .then(({rows}) => {
+      res.status(200).send(rows);
     })
     .catch((err) => {
       console.log('Problem retrieving prompt cards: ', err);
@@ -97,8 +98,8 @@ module.exports.getPromptCards = (req, res) => {
 module.exports.getAnswerCards = (req, res) => {
 
   models.readAnswerCards()
-    .then((result) => {
-      res.status(200).send(result);
+    .then(({rows}) => {
+      res.status(200).send(rows);
     })
     .catch((err) => {
       console.log('Problem retrieving answer cards: ', err);

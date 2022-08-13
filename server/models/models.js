@@ -94,11 +94,12 @@ module.exports.readUserCards = (userId) => {
         client.query(`
           SELECT
             body
-          FROM cards
+          FROM answers
           WHERE user_id = $1
         `, [userId])
         .then((result) => {
           client.release();
+          console.log(result);
           return result;
         })
         .catch((err) => {
@@ -148,18 +149,18 @@ module.exports.readPromptCards = () => {
     pool
       .connect()
       .then((client) => {
-        client.query(`
+        return client.query(`
           SELECT
             body
           FROM
-            prompts
+            prompts;
         `)
         .then((result) => {
           client.release();
           return result;
         })
         .catch((err) => {
-          console.log('Problem reading user: ', err);
+          console.log('Problem reading prompt: ', err);
           client.release();
           return err;
         });
@@ -176,13 +177,13 @@ module.exports.readAnswerCards = () => {
     pool
       .connect()
       .then((client) => {
-        client.query(`
+        return client.query(`
           SELECT
             body
           FROM
             answers
           WHERE
-            user_id = NULL
+            user_id IS NULL
         `)
         .then((result) => {
           client.release();

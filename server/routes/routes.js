@@ -7,7 +7,7 @@ router.post('/user', controllers.addNewUser);
 
 router.put('/user/:userId', controllers.updateUser);
 
-router.get('/cards/:userId', controllers.getUserCards);
+router.get('/cards/specific/:userId', controllers.getUserCards);
 
 router.put('/cards/:userId', controllers.addUserCards);
 
