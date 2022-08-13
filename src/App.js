@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 // import ReactDOM from 'react-dom';
 import { Client } from 'boardgame.io/react';
@@ -35,6 +36,14 @@ const App = () => (
 );
 
 // const App = (Client({game: Apples, numPlayers: 2}))
+
+=======
+import { Client } from 'boardgame.io/react';
+import { TicTacToe } from './game/game';
+import { Apples } from './game/Apples';
+
+const App = Client({ game: Apples, numPlayers: 3,});
+>>>>>>> 36d24bca196302032f8b2ce4e7d193022d1ce14c
 
 
 export default App;
