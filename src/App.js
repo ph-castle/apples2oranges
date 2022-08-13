@@ -6,11 +6,13 @@ import { CreateGame } from "./features/CreateGame";
 import { StyledEngineProvider } from "@mui/material/styles";
 
 export default function App() {
+
   return (
     <StyledEngineProvider injectFirst>
       <div>
         <Header />
         <Container maxWidth="lg">
+
             {/* <Dashboard /> */}
           <CreateGame/>
         </Container>
