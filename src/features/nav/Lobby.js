@@ -13,7 +13,7 @@ export const Lobby = () => {
     <Box
       display="flex"
       flexDirection="column"
-      alignItems="start"
+      alignItems="flex-start"
       minHeight="100vh"
     >
       <Box>
@@ -23,7 +23,15 @@ export const Lobby = () => {
         <Typography variant="h5" sx={{ mt: "1em" }}>
           Enter the session code for the game you want to join
         </Typography>
-        <Box display="flex" gap={1} sx={{ mt: "2em", mb: "3em" }}>
+        <Box
+          gap={1}
+          sx={{
+            mt: "2em",
+            mb: "3em",
+            display: "flex",
+            justifyContent: { xs: "center", md: "flex-start" },
+          }}
+        >
           <Input placeholder="Session Code" />
           <Button variant="contained">Join</Button>
         </Box>
@@ -37,7 +45,7 @@ export const Lobby = () => {
             p: 2,
             bgcolor: "background.default",
             display: "grid",
-            gridTemplateColumns: { md: "1fr 1fr 1fr" },
+            gridTemplateColumns: { sm: "1fr", md: "repeat(3, 1fr)" },
             gap: "2em",
             mt: "1em",
           }}
