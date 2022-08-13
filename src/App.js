@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Container } from "@mui/material";
 import { Header } from "../src/features/nav/Header";
-import { Dashboard } from "./features/Dashboard";
+import { Dashboard } from "./features/nav/Dashboard";
 import { CreateGame } from "./features/CreateGame";
 import { StyledEngineProvider } from "@mui/material/styles";
 

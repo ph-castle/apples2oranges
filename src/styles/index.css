@@ -21,3 +21,94 @@ code {
 body {
   font-family: 'Roboto';
 }
+
+
+
+/*
+  ========================================
+  Cards
+  ========================================
+*/
+
+.answer-card {
+  width: 300px;
+  height: 250px;
+  border: 8px solid #e50000;
+  background-color: #ff6f00;
+  border-radius: 15px;
+  margin: 4px;
+  padding: 4px;
+  position: relative;
+  background-image: -webkit-linear-gradient(#e50000 0%, #ff6f00 60%);
+  background-image: linear-gradient(#e50000 0%, #ff6f00 60%);
+}
+
+.answer-card:hover {
+  border: 8px solid #e50000;
+  background-color: #ff6f00;
+  border-radius: 15px;
+}
+
+.card-text {
+  max-height: 150px;
+  word-wrap: normal;
+  font-size: 20px;
+  padding: 4px;
+  vertical-align: middle;
+  align-items: center;
+  width: 90%;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  overflow-y: auto;
+}
+
+.select-button {
+  position: absolute;
+  color: white;
+  height: 40px;
+  width: 150px;
+  background-color: #00c300;
+  border: 5px solid #00ce00;
+  border-radius: 10px;
+  margin: 5px;
+  padding: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  left: 75px;
+  bottom: 10px;
+  background-image: -webkit-linear-gradient(#00c300 80%, #00dd00 100%);
+  background-image: linear-gradient(#00c300 80%, #00dd00 100%);
+}
+
+.select-button:hover {
+  height: 40px;
+  width: 150px;
+  border-radius: 8px;
+  margin: 4px;
+  padding: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  background-image: -webkit-linear-gradient(#00d800 80%, #00dd00 100%);
+  background-image: linear-gradient(#00d800 80%, #00dd00 100%);
+}
+
+.select-button:active {
+  -ms-transform: translateY(2px);
+  -webkit-transform: translateY(2px);
+  transform: translateY(2px);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  background-image: -webkit-linear-gradient(#00d800 80%, #00dd00 100%);
+  background-image: linear-gradient(#00d800 80%, #00dd00 100%);
+}
+
+
+/*
+  ========================================
+
+  ========================================
+*/
