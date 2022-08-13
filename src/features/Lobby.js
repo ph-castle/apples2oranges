@@ -51,13 +51,13 @@ const Lobby = () => {
     setGameMatchID(matchID);
   };
 
-  const updatePlayerHandler = () => {
-    lobbyClient.updatePlayer("apples-to-oranges", gameMatchID, {
-      playerID: "0",
-      credentials: playerAccessKey,
-      newName: "Al",
-    });
-  };
+  // const updatePlayerHandler = () => {
+  //   lobbyClient.updatePlayer("apples-to-oranges", gameMatchID, {
+  //     playerID: "0",
+  //     credentials: playerAccessKey,
+  //     newName: "Al",
+  //   });
+  // };
 
   return (
     <Box
@@ -95,6 +95,7 @@ const Lobby = () => {
             disabled={!sessionCode.length}
             onClick={() => {
               getMatchHandler(sessionCode).then((match) => {
+                //TODO: reroute here to loading deck
                 joinMatchHandler(sessionCode);
               });
             }}
@@ -126,8 +127,10 @@ const Lobby = () => {
             <Item
               key={elevation}
               elevation={8}
-              matchId="matchID"
-              onClick={() => {}}
+              onClick={() => {
+                //TODO: reroute here to loading deck
+                joinMatchHandler(this.target.key);
+              }}
             >
               Game
             </Item>
@@ -137,39 +140,4 @@ const Lobby = () => {
     </Box>
   );
 };
-
-// import React from "react";
-// import { Button, Box, Input, Paper, Typography } from "@mui/material";
-// import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-
-// const Item = styled(Paper)(() => ({
-//   textAlign: "center",
-//   height: 200,
-//   width: 400,
-//   lineHeight: "200px",
-// }));
-
-// const Lobby = async () => {
-//   // const [matches, setMatches] = useState({});
-
-//   // useEffect(() => {
-//   //   getAllAvailableGames().then(({ matches }) => {
-//   //     console.log(matches);
-//   //     setMatches(matches);
-//   //   });
-//   // }, []);
-
-//   // const getAllAvailableGames = () => {
-//   //   return lobbyClient
-//   //     .listMatches("apples-to-oranges")
-//   //     .catch((err) => console.log(err));
-//   // };
-
-//   // const getMatchHandler = (matchID) => {
-//   //   return lobbyClient.getMatch("apples-to-oranges", matchID);
-//   // };
-//
-//   );
-// };
-
 export default Lobby;
