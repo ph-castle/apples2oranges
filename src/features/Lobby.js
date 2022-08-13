@@ -4,9 +4,10 @@ import { styled } from "@mui/material/styles";
 import { lobbyClient } from "./utils/lobbyClient";
 const Item = styled(Paper)(() => ({
   textAlign: "center",
-  height: 200,
-  width: 400,
-  lineHeight: "200px",
+  height: "10rem",
+  width: "100%",
+  maxWidth: "16rems",
+  lineHeight: "10rem",
 }));
 
 //Need to get current playerId
@@ -65,6 +66,7 @@ const Lobby = () => {
       flexDirection="column"
       alignItems="flex-start"
       minHeight="100vh"
+      width="100%"
     >
       <Box>
         <Typography variant="h3" sx={{ mt: "1em" }}>
@@ -78,8 +80,9 @@ const Lobby = () => {
           sx={{
             mt: "2em",
             mb: "3em",
+            ml: "0.75rem",
             display: "flex",
-            justifyContent: { xs: "center", md: "flex-start" },
+            justifyContent: { xs: "center", sm: "flex-start" },
           }}
         >
           <Input
@@ -104,7 +107,7 @@ const Lobby = () => {
           </Button>
         </Box>
       </Box>
-      <Box>
+      <Box sx={{ width: "100%" }}>
         <Typography variant="h5" sx={{ mt: "1em" }}>
           Join a public game
         </Typography>
@@ -114,12 +117,13 @@ const Lobby = () => {
             bgcolor: "background.default",
             display: "grid",
             gridTemplateColumns: {
-              sm: "1fr",
-              md: "repeat(2, 1fr)",
-              xl: "repeat(3, 1fr)",
+              xs: "1fr",
+              sm: "repeat(2, 1fr)",
+              lg: "repeat(3, 1fr)",
             },
             gap: "2em",
             mt: "1em",
+            justifyItems: "center",
           }}
           style={{ marginTop: "1em" }}
         >
@@ -127,9 +131,9 @@ const Lobby = () => {
             <Item
               key={elevation}
               elevation={8}
-              onClick={() => {
+              onClick={(e) => {
                 //TODO: reroute here to loading deck
-                joinMatchHandler(this.target.key);
+                joinMatchHandler(e.target.key);
               }}
             >
               Game
