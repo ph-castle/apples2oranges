@@ -1,15 +1,19 @@
-import React from 'react';
-import { Client } from 'boardgame.io/react';
-import { SocketIO } from 'boardgame.io/multiplayer'
-import { TicTacToe } from './Game';
-import { TicTacToeBoard } from './board.js';
+import * as React from "react";
+import { Container } from "@mui/material";
+import { Header } from "../src/features/nav/Header";
+import { Dashboard } from "./features/Dashboard";
+import { StyledEngineProvider } from "@mui/material/styles";
 
-const TicTacToeClient = Client({
-  game: TicTacToe,
-  board: TicTacToeBoard,
-  multiplayer: SocketIO({ server: 'localhost:8000' }),
-});
-
-export default function App () {
-  return (TicTacToeClient);
+export default function App() {
+  return (
+    <StyledEngineProvider injectFirst>
+      <div>
+        <Header />
+        <Container maxWidth="lg">
+            {/* <Dashboard /> */}
+        </Container>
+      </div>
+    </StyledEngineProvider>
+  );
 }
+
