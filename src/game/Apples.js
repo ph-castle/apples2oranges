@@ -1,6 +1,7 @@
 //Decks should come in as GET requests from the API. 
-import { Deck } from "./Deck";
+import { AnswerDeck, PromptDeck} from "./Deck";
 
+//IMPORT INVALID_MOVES for move validation 
 export const Apples = {
     name: 'Apples2Oranges',
 
@@ -9,48 +10,75 @@ export const Apples = {
         players: Array(ctx.numPlayers).fill({hand: [], score: 0}),
 
         secret: {
-            promptDeck: Deck,
-            answerDeck: []
+            promptDeck: PromptDeck,
+            answerDeck: AnswerDeck,
         },
         judgeId: 0,
         playRound: 0,
+        handMax: 3,
+        activePrompt: {},
+        submittedAnswers:[],
+        pingas: 0
+
     }),
 
     phases: {
-        deal:  {
+        dealing:  {
+            onBegin: startDealPhase,
             start: true, 
-            moves: { Deal, Shuffle },
             endIf: checkHands,
-        
             next: 'play'
         },
 
-        play: {
-            moves: { Shuffle } 
+        // Increment Judge, don't randomly select
+        //Prompt Card is selected
+        //Non-Judge Players all play an answer
 
-        }
+        
+        play: {
+            onBegin: newJudge,
+            moves: {drawPrompt } 
+
+        },
+       
     },
+
+    
 }
 
 
-function Deal(G, ctx) {
-    G.discardPile = [];
+function startDealPhase(G, ctx) {
+   
+    G.secret.answerDeck = ctx.random.Shuffle(G.secret.answerDeck);
     G.players.forEach((player) => {
-        player.hand.push(G.secret.promptDeck.pop())
-        //hand.push(G.secret.promptDeck.pop())
+        while(player.hand.length < G.handMax) {
+            player.hand.push(G.secret.answerDeck.pop())           
+        }
     })
-    G.playRound = 1;
-  
-    //  G.deck.deal(6, [G.players.0]);
-    //setPlayOrder(G, G.dealerID + 1);
-    //ctx.events.endPhase();
   }
 
-  function Shuffle(G, ctx ) { G.secret.promptDeck = ctx.random.Shuffle(G.secret.promptDeck)   }
+
 
   function checkHands(G, ctx) {
+    //pass in handmax as an argument to this function, here now for test purposes
+   let total = 0;
+
     G.players.forEach((player, index)=> {
-        console.log(`Player: ${index} Hand: ${player.hand} Length: ${player.hand.length}`)
-        return player.hand.length > 1; 
+        total += player.hand.length; 
     })
+
+    return (total === (G.handMax * ctx.numPlayers))
   }
+
+  function newJudge (G, ctx) {
+    let newJudgeId = ctx.random.Die(ctx.numPlayers);
+    G.judgeId = newJudgeId;
+
+
+  }
+
+  function drawPrompt(G, ctx) {
+    G.activePrompt = G.secret.promptDeck.pop();
+    G.pingas++;
+  }
+
