@@ -20,3 +20,21 @@ export default function App() {
     </StyledEngineProvider>
   );
 }
+
+//Game
+// const { matchId } = useParams();
+//
+
+// <Router>
+// <Switch>
+//   <Route path="/login" exact>
+//     <LoginPage />
+//   </Route>
+//   <Route path="/" exact>
+//     <Redirect to="/product/40344" />
+//   </Route>
+//   <Route path="/game/:matchId">
+//     <ProductDetailPage />
+//   </Route>
+// </Switch>
+// </Router>
