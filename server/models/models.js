@@ -6,7 +6,7 @@ module.exports.readUser = (username, password) => {
     pool
       .connect()
       .then((client) => {
-        client.query(`
+        return client.query(`
           SELECT
             id, username, avatar
           FROM users
@@ -34,7 +34,7 @@ module.exports.addUser = (username, password, avatar) => {
     pool
       .connect()
       .then((client) => {
-        client.query(`
+        return client.query(`
           INSERT INTO users (username, password, avatar)
           VALUES ($1, $2, $3)
           RETURNING id
@@ -61,7 +61,7 @@ module.exports.putUser = (userId, username, password, avatar) => {
     pool
       .connect()
       .then((client) => {
-        client.query(`
+        return client.query(`
           UPDATE users
             SET
               username = $1,
@@ -91,7 +91,7 @@ module.exports.readUserCards = (userId) => {
     pool
       .connect()
       .then((client) => {
-        client.query(`
+        return client.query(`
           SELECT
             body
           FROM answers
@@ -121,7 +121,7 @@ module.exports.putUserCards = (userId, cards) => {
     pool
       .connect()
       .then((client) => {
-        client.query(format(`
+        return client.query(format(`
           INSERT INTO
             answers (body, user_id)
           VALUES
