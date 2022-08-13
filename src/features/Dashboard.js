@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Box } from "@mui/material";
+import { Button, Box } from "@mui/material";
 
 export const Dashboard = () => {
   return (
