@@ -1,25 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import { Client } from 'boardgame.io/react';
+import { TicTacToe } from './game/game';
+//import { TicTacToeBoard } from './game/Board.js'
+import { Apples } from './game/Apples';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = Client({ game: Apples, numPlayers: 2,});
+
 
 export default App;
