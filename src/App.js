@@ -4,9 +4,9 @@ import { Container } from "@mui/material";
 import { Header } from "./features/nav/Header";
 import { Dashboard } from "./features/nav/Dashboard";
 import { Lobby } from "./features/nav/Lobby";
+import { CreateGame } from "./features/CreateGame";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { Client } from 'boardgame.io/react';
-
 
 function App() {
   let { matchId } = useParams
@@ -39,3 +39,4 @@ function App() {
 }
 
 export default App;
+
