@@ -5,18 +5,9 @@ const server = Server({
   games: [Apples],
   origins: ['http://127.0.0.1:3000'],
 });
+/// one of these goes to client
 server.run(8000);
-
-import TicTacToe from '../src/Game.js';
-const { Server } = require('boardgame.io/server');
-
-const server = Server({
-  games: [TicTacToe],
-  origins: [
-    'localhost'
-  ],
-}
-);
+server.run(3000);
 
 // const lobbyConfig = {
 //   apiPort: 8080,
@@ -24,5 +15,5 @@ const server = Server({
 // };
 
 
-server.run(3000);
+
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import { Container } from "@mui/material";
 import { Header } from "./features/nav/Header";
 import { Dashboard } from "./features/nav/Dashboard";
@@ -12,11 +12,11 @@ function App() {
   let { matchId } = useParams
   return (
     <StyledEngineProvider injectFirst>
+      <Header/>
       <div>
-        <BrowserRouter>
           <Container maxWidth="lg">
             <Routes>
-              <Route path="/" element={<Header/>}/>
+              {/* <Route path="/" element={<Header/>}> */}
                 <Route path="home" element={<Dashboard/>}/>
               {/* <Route>
                 <CreateGame path='creategame' />
@@ -30,9 +30,9 @@ function App() {
               {/* <Route>
                 <Game path='/game/:matchId' />
               </Route> */}
+              {/* </Route> */}
             </Routes>
           </Container>
-        </BrowserRouter>
       </div>
     </StyledEngineProvider>
   );

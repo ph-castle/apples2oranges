@@ -10,3 +10,11 @@ const getGames = async () => {
 }
 getGames();
 }
+
+import { SocketIO } from 'boardgame.io/multiplayer'
+
+const ApplesClient = Client({
+  game: Apples,
+  board: Board,
+  multiplayer: SocketIO({ server: 'localhost:8000' }),
+});
