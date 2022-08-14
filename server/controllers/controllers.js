@@ -1,4 +1,5 @@
 const models = require('../models/models.js');
+const cloudinary = require('./cloudinary.js');
 
 // returns userId, username, avatar or empty
 module.exports.validateUser = (req, res) => {
@@ -14,11 +15,24 @@ module.exports.validateUser = (req, res) => {
     });
 };
 
-// add new user, return userId
+// returns id of username if it exists
+module.exports.getUsername = (req, res) => {
+  let username = req.params.username;
+  models.readUsername(username)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((err) => {
+      console.log('Error getting username: ', err);
+      res.status(500).send(err);
+    });
+};
+
+// adds new user and returns user info
 module.exports.addNewUser = (req, res) => {
-  let username = req.query.username;
-  let password = req.query.password;
-  let avatar = req.query.avatar;
+  let username = req.body.username;
+  let password = req.body.password;
+  let avatar = req.body.avatar;
 
   if (username === undefined || password === undefined) {
     res.status(400).send('Undefined input');
@@ -37,9 +51,9 @@ module.exports.addNewUser = (req, res) => {
 // updates user's username, password, and avatar
 module.exports.updateUser = (req, res) => {
   let userId = req.params.userId;
-  let username = req.query.username;
-  let password = req.query.password;
-  let avatar = req.query.avatar;
+  let username = req.body.username;
+  let password = req.body.password;
+  let avatar = req.body.avatar;
   models.putUser(userId, username, password, avatar)
     .then(() => {
       res.sendStatus(201);
@@ -105,3 +119,18 @@ module.exports.getAnswerCards = (req, res) => {
       res.status(500).send(err);
     })
 };
+
+// uploads image to cloudinary and returns url
+module.exports.postAvatar = (req, res) => {
+  cloudinary
+    .uploadImage(req.body.img, function (error, result) {
+      console.log(result, error);
+    })
+    .then((results) => {
+      res.status(201).send(results.url);
+    })
+    .catch((err) => {
+      console.log('Error uploading image to cloudinary: ', err);
+      res.status(500).send(err);
+    });
+}
