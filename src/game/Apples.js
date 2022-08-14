@@ -7,18 +7,19 @@ export const Apples = {
 
    setup: (ctx) => ({
      
-        players: Array(ctx.numPlayers).fill({hand: [], score: 0}),
+        players: Array(ctx.numPlayers).fill({hand: [], winners: []}),
 
         secret: {
             promptDeck: PromptDeck,
             answerDeck: AnswerDeck,
         },
-        judgeId: 0,
+
         playRound: 0,
         handMax: 3,
         activePrompt: {},
         submittedAnswers:[],
-        pingas: 0
+        discardPile: []
+        
 
     }),
 
@@ -30,18 +31,25 @@ export const Apples = {
             next: 'play'
         },
 
-        // Increment Judge, don't randomly select
-        //Prompt Card is selected
-        //Non-Judge Players all play an answer
-
         
         play: {
-            onBegin: newJudge,
-            moves: {drawPrompt } 
-
-        },
+            moves: { drawPrompt },
+            turn: {
+                stages: {
+                    playAnswer: { moves: { playAnswer },  next:'judgement'  },
+                    judgement: {moves: {pickWinner}} 
+            },
        
+        },
+        onEnd: (G, ctx) => {G.submittedAnswers = []},
+        next:'dealing'
+    
     },
+   
+
+    }
+   
+
 
     
 }
@@ -55,6 +63,10 @@ function startDealPhase(G, ctx) {
             player.hand.push(G.secret.answerDeck.pop())           
         }
     })
+
+
+
+    // drawPrompt(G, ctx)
   }
 
 
@@ -70,15 +82,36 @@ function startDealPhase(G, ctx) {
     return (total === (G.handMax * ctx.numPlayers))
   }
 
-  function newJudge (G, ctx) {
-    let newJudgeId = ctx.random.Die(ctx.numPlayers);
-    G.judgeId = newJudgeId;
 
-
-  }
 
   function drawPrompt(G, ctx) {
-    G.activePrompt = G.secret.promptDeck.pop();
-    G.pingas++;
+    G.secret.promptDeck =  ctx.random.Shuffle(G.secret.promptDeck);
+    G.activePrompt =  G.secret.promptDeck.pop();
+    ctx.events.setActivePlayers({others: 'playAnswer', minMoves: 1, maxMoves: 1 });
   }
+
+function playAnswer(G, ctx, answerIndex) {
+    let answer = G.players[ctx.playerID].hand.splice(answerIndex, 1)
+
+    G.submittedAnswers[ctx.playerID] = answer[0];
+    G.discardPile.push(answer[0])
+
+   if(allAnswersSumbitted(G,ctx)) {
+    ctx.events.setActivePlayers({currentPlayer: 'judgement', minMoves: 1, maxMoves: 1})
+   }
+
+
+}
+
+function pickWinner(G, ctx, winnerIndex) {
+    let mutantPrompt = G.activePrompt.text.slice(), mutantAnswer = G.submittedAnswers[winnerIndex].text, blank = `________`
+
+    let combo  = mutantPrompt.replace(blank, mutantAnswer);
+    G.players[winnerIndex].winners.push(combo)//mutantAnswer//G.activePrompt.text + G.submittedAnswers[0].text
+    ctx.events.endPhase();
+    
+
+}
+
+function allAnswersSumbitted (G, ctx) {return G.discardPile.length % (ctx.numPlayers - 1) === 0 }
 

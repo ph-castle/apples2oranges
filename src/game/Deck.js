@@ -20,14 +20,14 @@ module.exports.AnswerDeck = [
 ]
 
 module.exports.PromptDeck = [
-    {id: 1, text: `_____ is why I'm banned from all Disney ThemeParks`, type: 'Prompt'},
-    {id: 2, text: `_____ , it's what's for dinner`, type: 'Prompt'},
-    {id: 3, text: `Truly, the greatest pain and greatest pleasure that life can off is _____`, type: 'Prompt'},
-    {id: 4, text: `When you wish up on a _____ your dreams come true~`, type: 'Prompt'},
-    {id: 5, text: `My boss says I'd be management material if I could just stop _____`, type:'Prompt'},
-    {id: 6, text: `If I had a dollar for every time I've seen someone _____ , I'd be a millionaire`, type:'Prompt'},
-    {id: 7, text: `My new catch phrase is _____ !`, type:'Prompt'},
-    {id: 8, text: `Gentlemen.... Behold,  _____!`, type:'Prompt'},
-    {id: 9, text: `I'm coming out of retirement to take one last run at the _____ Championship Circuit`, type:'Prompt'},
-    {id: 10, text: `Watch me whip, and watch me _____`, type:'Prompt'},
+    {id: 1, text: `________ is why I'm banned from all Disney ThemeParks`, type: 'Prompt'},
+    {id: 2, text: `________ , it's what's for dinner`, type: 'Prompt'},
+    {id: 3, text: `Truly, the greatest pain and greatest pleasure that life can off is ________`, type: 'Prompt'},
+    {id: 4, text: `When you wish up on a ________ your dreams come true~`, type: 'Prompt'},
+    {id: 5, text: `My boss says I'd be management material if I could just stop ________`, type:'Prompt'},
+    {id: 6, text: `If I had a dollar for every time I've seen someone ________ , I'd be a millionaire`, type:'Prompt'},
+    {id: 7, text: `My new catch phrase is ________ !`, type:'Prompt'},
+    {id: 8, text: `Gentlemen.... Behold,  ________!`, type:'Prompt'},
+    {id: 9, text: `I'm coming out of retirement to take one last run at the ________ Championship Circuit`, type:'Prompt'},
+    {id: 10, text: `Watch me whip, and watch me ________`, type:'Prompt'},
 ]
