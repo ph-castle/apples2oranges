@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Timer from './Timer';
 import ScoreBoard from './ScoreBoard';
 
-export default function PlayerView({G, ctx, moves, playerID}) {
+export default function PlayerView({G, ctx, moves, playerID, roundTime, setRoundTime}) {
 
   let answers;
   if (G.activePrompt.text) {
@@ -10,7 +10,6 @@ export default function PlayerView({G, ctx, moves, playerID}) {
       <div>
         {G.players[playerID].hand.map((card, i) => {
           return (
-            // add on click event listener to playAnswer
             <span
               key={card.id}
               onClick={()=> moves.playAnswer(i)}
@@ -19,10 +18,6 @@ export default function PlayerView({G, ctx, moves, playerID}) {
             </span>
           )
         })}
-        {Object.keys(G.submittedAnswers).length !== (ctx.numPlayers - 1) ?
-          <Timer time={30} />:
-          <ScoreBoard />
-        }
       </div>
     )
   }
@@ -42,7 +37,16 @@ export default function PlayerView({G, ctx, moves, playerID}) {
         </span>
 
         <div className="answercards">
+        {Object.keys(G.submittedAnswers).length !== (ctx.numPlayers - 1) ?
+          <>
           {answers}
+          <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
+          </>:
+          <>
+            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
+            <ScoreBoard />
+          </>
+        }
         </div>
       {/* {renderView()} */}
     </div>

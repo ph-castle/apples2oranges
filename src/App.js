@@ -14,7 +14,8 @@ import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
 
 function App() {
-  let { matchId } = useParams
+  // let { matchId } = useParams()
+  let matchID = '0';
 
   // generate random matchId (or use create API for authenticated matches)
 
@@ -27,7 +28,7 @@ function App() {
     multiplayer: SocketIO({server: 'localhost:8000'})
   });
 
-  let applesClients=[<ApplesClient playerID="0" />, <ApplesClient playerID="1" />,  <ApplesClient playerID="2" />];
+  let applesClients=[<ApplesClient matchID={matchID} playerID="0" />, <ApplesClient matchID={matchID} playerID="1" />,  <ApplesClient matchID={matchID} playerID="2" />];
 
   return (
     <StyledEngineProvider injectFirst>
