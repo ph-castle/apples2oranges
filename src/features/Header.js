@@ -12,9 +12,9 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { Outlet } from 'react-router-dom';
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Custom Cards", "Logout"];
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -87,9 +87,9 @@ export const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -114,13 +114,13 @@ export const Header = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {settings.map((setting) => (
               <Button
-                key={page}
+                key={setting}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {setting}
               </Button>
             ))}
           </Box>
@@ -156,7 +156,8 @@ export const Header = () => {
           </Box>
         </Toolbar>
       </Container>
+      <Outlet/>
     </AppBar>
   );
 };
-export default Header;
+
