@@ -11,14 +11,14 @@ import { CreateGame } from "./features/CreateGame";
 import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
 
-const ApplesClient = Client({
-  game: Apples,
-  board: ApplesBoard,
-  numPlayers: 3,
-  debug: true,
-  // multiplayer: Local(),
-  multiplayer: SocketIO({server: 'localhost:8000'})
-});
+// const ApplesClient = Client({
+//   game: Apples,
+//   board: ApplesBoard,
+//   numPlayers: 3,
+//   debug: true,
+//   // multiplayer: Local(),
+//   multiplayer: SocketIO({server: 'localhost:8000'})
+// });
 
 export default function App() {
   return (
@@ -29,9 +29,9 @@ export default function App() {
 
             {/* <Dashboard /> */}
           <CreateGame/>
-            <ApplesClient playerID="0" />
+            {/* <ApplesClient playerID="0" />
             <ApplesClient playerID="1" />
-            <ApplesClient playerID="2" />
+            <ApplesClient playerID="2" /> */}
         </Container>
       </div>
     </StyledEngineProvider>

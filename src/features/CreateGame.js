@@ -1,10 +1,22 @@
 import React from 'react';
-import { Box, FormGroup, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Typography, Button } from '@mui/material'
+import { Box, FormGroup, Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Typography, Button } from '@mui/material';
+import { LobbyClient } from 'boardgame.io/client';
+import { SocketIO } from 'boardgame.io/multiplayer';
+import { Apples } from '../game/Apples';
+import { ApplesBoard } from '../game/ApplesBoard';
+
 
 export const CreateGame = () => {
 
-  const clickHandler = async () => {
+  const ApplesClient = new LobbyClient({
+    server: 'http://localhost:8000'
+  });
 
+  const clickHandler = async () => {
+    // const games = await ApplesClient.listGames();
+    // console.log(games);
+    const { matchId } = await ApplesClient.createMatch('Apples', {numPlayers: 3});
+    console.log(matchId);
   }
 
   return (

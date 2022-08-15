@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Box } from "@mui/material";
 
-const Dashboard = () => {
+export const Dashboard = () => {
   return (
     <Box
       display="flex"
