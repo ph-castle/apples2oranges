@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Box, Input, Paper, Typography } from "@mui/material";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import { join } from "boardgame.io";
 
 const Item = styled(Paper)(() => ({
   textAlign: "center",
@@ -8,7 +9,7 @@ const Item = styled(Paper)(() => ({
   width: 400,
   lineHeight: "200px",
 }));
-export const Lobby = () => {
+export const JoinGame = () => {
   return (
     <Box
       display="flex"
