@@ -86,7 +86,7 @@ module.exports.putUser = (userId, username, password, avatar) => {
   );
 };
 
-module.exports.readUserCards = (userId) => {
+module.exports.readUserCards = (userId, NSFW) => {
   return (
     pool
       .connect()
@@ -94,9 +94,11 @@ module.exports.readUserCards = (userId) => {
         return client.query(`
           SELECT
             body
-          FROM answers
-          WHERE user_id = $1
-        `, [userId])
+          FROM
+            answers
+          WHERE
+            user_id = $1 AND NSFW = $2
+        `, [userId, NSFW])
         .then((result) => {
           client.release();
           console.log(result);
@@ -130,7 +132,7 @@ module.exports.putUserCards = (userId, cards) => {
         .then(() => {
           return client.query(format(`
             INSERT INTO
-              answers (body, user_id)
+              answers (body, user_id, NSFW)
             VALUES
               %L
           `, cards), []);
@@ -152,7 +154,7 @@ module.exports.putUserCards = (userId, cards) => {
   );
 };
 
-module.exports.readPromptCards = () => {
+module.exports.readPromptCards = (NSFW) => {
   return (
     pool
       .connect()
@@ -161,8 +163,10 @@ module.exports.readPromptCards = () => {
           SELECT
             body
           FROM
-            prompts;
-        `)
+            prompts
+          WHERE
+            NSFW = $1;
+        `, [NSFW])
         .then((result) => {
           client.release();
           return result;
@@ -180,7 +184,7 @@ module.exports.readPromptCards = () => {
   );
 };
 
-module.exports.readAnswerCards = () => {
+module.exports.readAnswerCards = (NSFW) => {
   return (
     pool
       .connect()
@@ -191,8 +195,8 @@ module.exports.readAnswerCards = () => {
           FROM
             answers
           WHERE
-            user_id IS NULL
-        `)
+            user_id IS NULL AND NSFW = $1
+        `, [NSFW])
         .then((result) => {
           client.release();
           return result;
