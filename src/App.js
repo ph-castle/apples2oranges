@@ -1,14 +1,12 @@
 import * as React from "react";
 import { Routes, Route, useParams } from 'react-router-dom';
 import { Container } from "@mui/material";
-import { Header } from "./features/nav/Header";
-import { Dashboard } from "./features/nav/Dashboard";
-//import { Lobby } from "./lobbyTest";
+import { Header } from "./features/Header";
+import Dashboard from "./features/Dashboard";
 import { CreateGame } from "./features/CreateGame";
 import Game from "./Game";
-import { Lobby } from "./features/nav/Lobby";
+import Lobby from "./features/Lobby";
 import { StyledEngineProvider } from "@mui/material/styles";
-import { Client } from 'boardgame.io/react';
 import { LobbyTest } from './lobbyTest';
 
 function App() {
@@ -32,7 +30,9 @@ function App() {
   );
 }
 
+
 export default App;
 
 
 // pages: edit profile, create custom cards, logout
+
