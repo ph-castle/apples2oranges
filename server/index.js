@@ -1,18 +1,17 @@
-import TicTacToe from '../src/Game.js';
-const { Server } = require('boardgame.io/server');
+require('dotenv').config();
+const express = require('express');
+const router = require('./routes/routes.js');
 
-const server = Server({
-  games: [TicTacToe],
-  origins: [
-    'localhost'
-  ],
-}
-);
+const port = process.env.SERVER_PORT || 3000;
 
-// const lobbyConfig = {
-//   apiPort: 8080,
-//   apiCallback: () => console.log('Running Lobby API on port 8080')
-// };
+const app = express();
 
+app.use(express.json());
 
-server.run(3000);
+app.use('/', router);
+
+app.listen(port, () => {
+  console.log(`\nListening on port ${port}\n`);
+});
+
+module.exports = app;
