@@ -3,12 +3,15 @@ import { Client } from "boardgame.io/react";
 import { SocketIO } from "boardgame.io/multiplayer";
 import { Apples } from "./game/Apples";
 import { ApplesBoard } from "./game/ApplesBoard";
+
 import { Routes, Route, useParams } from "react-router-dom";
 import { Container } from "@mui/material";
 import Header from "./features/Header";
 import Dashboard from "./features/Dashboard";
 import { CreateGame } from "./features/CreateGame";
+
 import Lobby from "./features/Lobby";
+
 import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
 

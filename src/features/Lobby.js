@@ -135,9 +135,9 @@ const Lobby = () => {
           }}
           style={{ marginTop: "1em" }}
         >
-          {[0, 1, 2].map((elevation) => (
+          {[0, 1, 2].map((matchId) => (
             <Item
-              key={elevation}
+              key={matchId}
               elevation={8}
               onClick={(e) => {
                 //TODO: reroute here to loading deck
