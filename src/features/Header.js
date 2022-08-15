@@ -19,7 +19,7 @@ import {
 
 const pages = ["Join a Game"];
 // const pages = [];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Logout"];
 // const settings = [];
 
 const Header = () => {
@@ -147,7 +147,7 @@ const Header = () => {
               </Button>
               <Button
                 sx={{ backgroundColor: "white", border: "1px solid white" }}
-                onClick={() => {}}
+                onClick={() => setIsLoggedIn(true)}
               >
                 Login
               </Button>
@@ -156,6 +156,7 @@ const Header = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  {/* Put user's avatar here */}
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
@@ -177,7 +178,15 @@ const Header = () => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography
+                      textAlign="center"
+                      onClick={(e) => {
+                        e.target.textContent === "Logout" &&
+                          setIsLoggedIn(false);
+                      }}
+                    >
+                      {setting}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>
