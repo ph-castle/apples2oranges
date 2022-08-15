@@ -96,7 +96,7 @@ function playAnswer(G, ctx, answerIndex) {
    }
 }
 
-function pickWinner(G, ctx, winnerID) {
+function pickWinner(G, ctx, winnerIndex) {
     if(G.submittedAnswers[winnerIndex] === undefined) {
 
         return INVALID_MOVE
