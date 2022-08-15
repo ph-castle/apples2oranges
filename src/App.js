@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Client } from 'boardgame.io/react';
 import { SocketIO } from 'boardgame.io/multiplayer';
 import { Apples } from './game/Apples';
@@ -17,17 +17,6 @@ const ApplesClient = Client({
   // multiplayer: Local(),
   multiplayer: SocketIO({server: 'localhost:8000'})
 });
-
-// const App = () => (
-//   <div
-//     style={{ display: 'flex', justifyContent: 'space-around', gap: '1.25rem' }}
-//   >
-
-//   </div>
-// );
-
-
-
 
 export default function App() {
   return (
