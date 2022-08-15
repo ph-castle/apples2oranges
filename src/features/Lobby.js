@@ -10,12 +10,15 @@ const Item = styled(Paper)(() => ({
   lineHeight: "10rem",
 }));
 
+
 //Need to get current playerId
 const Lobby = () => {
   const [playerMatch, setPlayerMatch] = useState({});
   const [playerAccessKey, setPlayerAccessKey] = useState({});
   const [gameMatchID, setGameMatchID] = useState("");
   const [sessionCode, setSessionCode] = useState("");
+
+  const lobbyClient = new LobbyClient({ server: 'http://localhost:8000' });
 
   useEffect(() => {
     getAllAvailableGames().then(({ matches }) => {

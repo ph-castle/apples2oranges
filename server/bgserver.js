@@ -1,19 +1,15 @@
-
-const { Server, Origins } = require('boardgame.io/server');
-const { Apples } = require('../src/components/Apples');
+// const { Gamegame } = require('../src/components/game');
+const { Apples } = require('../src/game/Apples');
 const server = Server({
   games: [Apples],
-  origins: ['http://127.0.0.1:8000'],
+  origins: [Origins.LOCALHOST_IN_DEVELOPMENT],
+//   credentials/authentification stuff,
 });
-/// one of these goes to client
 server.run(8000);
-//server.run(3000);
+
+//Lobby API and Server are run on same port
 
 const lobbyConfig = {
   apiPort: 8000,
   apiCallback: () => console.log('Running Lobby API on port 8000')
 };
-
-
-
-
