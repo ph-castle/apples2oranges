@@ -12,6 +12,7 @@ export default function Login({ setUser }) {
   return (
     <div className="Login">
       <button onClick={() => handleLogin()}>Login</button>
+      {/* Enable each page for testing purposes by uncommenting below */}
       {/* <LoginPage setUser={setUser}/> */}
       {/* <CreateUserPage setUser={setUser}/> */}
     </div>
