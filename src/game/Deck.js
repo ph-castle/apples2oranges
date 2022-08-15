@@ -1,9 +1,3 @@
-
-// function Card (id, text, type) {
-//     this.id = id;
-//     this.text = text;
-//     this.type =type; 
-// }
 module.exports.AnswerDeck = [
     {id: 1, text: 'Pingas', type: 'Answer'},
     {id: 2, text: `Farting on someone's pillow to give them pinkeye`, type: 'Answer'},

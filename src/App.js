@@ -1,18 +1,22 @@
-
-
-
-
-
-
-import * as React from "react";
+import * as React from 'react';
+import { Client } from 'boardgame.io/react';
+import { SocketIO } from 'boardgame.io/multiplayer';
+import { Apples } from './game/Apples';
+import { ApplesBoard } from './game/ApplesBoard';
 import { Container } from "@mui/material";
 import { Header } from "../src/features/nav/Header";
-import { Dashboard } from "./features/nav/Dashboard";
+// import { Dashboard } from "./features/nav/Dashboard";
 import { CreateGame } from "./features/CreateGame";
 import { StyledEngineProvider } from "@mui/material/styles";
-import { Client } from 'boardgame.io/react';
-import { Apples } from './game/Apples';
-const game = Client({ game: Apples, numPlayers: 3,});
+
+const ApplesClient = Client({
+  game: Apples,
+  board: ApplesBoard,
+  numPlayers: 3,
+  debug: true,
+  // multiplayer: Local(),
+  multiplayer: SocketIO({server: 'localhost:8000'})
+});
 
 export default function App() {
   return (
@@ -23,10 +27,12 @@ export default function App() {
 
             {/* <Dashboard /> */}
           <CreateGame/>
+            <ApplesClient playerID="0" />
+            <ApplesClient playerID="1" />
+            <ApplesClient playerID="2" />
         </Container>
       </div>
     </StyledEngineProvider>
   );
 }
-
 
