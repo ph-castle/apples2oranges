@@ -1,11 +1,22 @@
-import './styles/App.css';
+import * as React from "react";
+import { Container } from "@mui/material";
+import { Header } from "../src/features/nav/Header";
+import { Dashboard } from "./features/Dashboard";
+import { CreateGame } from "./features/CreateGame";
+import { StyledEngineProvider } from "@mui/material/styles";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      Go Team Howl's Moving Castle!
-    </div>
+    <StyledEngineProvider injectFirst>
+      <div>
+        <Header />
+        <Container maxWidth="lg">
+
+            {/* <Dashboard /> */}
+          <CreateGame/>
+        </Container>
+      </div>
+    </StyledEngineProvider>
   );
 }
 
-export default App;
