@@ -1,8 +1,10 @@
 import * as React from "react";
 import { Container } from "@mui/material";
-import { Header } from "../src/features/nav/Header";
-import { Dashboard } from "./features/Dashboard";
+import { Header } from "./features/nav/Header";
+import { Lobby } from './features/nav/Lobby'
+import { Dashboard } from "./features/nav/Dashboard";
 import { CreateGame } from "./features/CreateGame";
+import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
 
 export default function App() {
@@ -13,7 +15,9 @@ export default function App() {
         <Container maxWidth="lg">
 
             {/* <Dashboard /> */}
-          <CreateGame/>
+          {/* <CreateGame/> */}
+          {/* <Lobby /> */}
+          <WaitingRoom/>
         </Container>
       </div>
     </StyledEngineProvider>
