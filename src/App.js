@@ -9,9 +9,7 @@ import { Container } from "@mui/material";
 import Header from "./features/Header";
 import Dashboard from "./features/Dashboard";
 import { CreateGame } from "./features/CreateGame";
-
 import Lobby from "./features/Lobby";
-
 import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
 
@@ -42,6 +40,7 @@ function App() {
         <Container maxWidth="lg">
           <Routes>
             {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
+            <Route path="/" element={<Dashboard />} />
             <Route path="/home" element={<Dashboard />} />
             <Route
               path="/creategame"

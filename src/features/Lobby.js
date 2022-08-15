@@ -14,7 +14,6 @@ const Item = styled(Paper)(() => ({
   lineHeight: "10rem",
 }));
 
-
 //Need to get current playerId
 const Lobby = () => {
   const [playerMatch, setPlayerMatch] = useState({});
