@@ -195,7 +195,6 @@ const Header = () => {
           )}
         </Toolbar>
       </Container>
-      <Outlet/>
     </AppBar>
   );
 };
