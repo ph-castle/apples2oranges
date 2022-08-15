@@ -5,7 +5,7 @@ import { INVALID_MOVE } from 'boardgame.io/core'
 
 //END GAME
 //INTEGRATE BACKEND DECKS
-//IMPORT INVALID_MOVES for move validation 
+ 
 // TURN ORDER / RANDOM JUDGE SELECTION *Low Priority *
 export const Apples = {
     name: 'Apples2Oranges',
@@ -98,7 +98,7 @@ function playAnswer(G, ctx, answerIndex) {
 
 function pickWinner(G, ctx, winnerIndex) {
     if(G.submittedAnswers[winnerIndex] === undefined) {
-        
+
         return INVALID_MOVE
     }
 
