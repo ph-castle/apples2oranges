@@ -9,7 +9,7 @@ const Item = styled(Paper)(() => ({
   width: 400,
   lineHeight: "200px",
 }));
-export const JoinGame = () => {
+export const Lobby = () => {
   return (
     <Box
       display="flex"

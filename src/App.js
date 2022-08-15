@@ -6,7 +6,7 @@ import { Dashboard } from "./features/nav/Dashboard";
 //import { Lobby } from "./lobbyTest";
 import { CreateGame } from "./features/CreateGame";
 import Game from "./Game";
-import { JoinGame } from "./features/nav/JoinGame";
+import { Lobby } from "./features/nav/Lobby";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { Client } from 'boardgame.io/react';
 import { LobbyTest } from './lobbyTest';
@@ -19,9 +19,10 @@ function App() {
       <div>
           <Container maxWidth="lg">
             <Routes>
+                {/* <Route path="/createuser" element={<CreateUser/>}/> */}
                 <Route path="/home" element={<Dashboard/>}/>
                 <Route path="/creategame" element={<CreateGame/>}/>
-                <Route  path="/joingame" element={<JoinGame/>}/>
+                <Route  path="/joingame" element={<Lobby/>}/>
                 <Route path="/lobby" element={<LobbyTest/>}/>
                 <Route  path="/game/:matchId" element={<Game/>}/>
             </Routes>
@@ -33,3 +34,5 @@ function App() {
 
 export default App;
 
+
+// pages: edit profile, create custom cards, logout
