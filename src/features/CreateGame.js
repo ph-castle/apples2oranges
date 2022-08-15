@@ -3,6 +3,10 @@ import { Box, FormGroup, Checkbox, FormControl, FormControlLabel, InputLabel, Me
 
 export const CreateGame = () => {
 
+  const clickHandler = async () => {
+
+  }
+
   return (
     <Box
       sx={{
@@ -48,7 +52,7 @@ export const CreateGame = () => {
         <FormControlLabel control={<Checkbox />} label="Make game public" />
       </FormGroup>
 
-      <Button variant="contained" sx={{width: '10rem', mt: '2rem'}} >Create Game</Button>
+      <Button variant="contained" sx={{width: '10rem', mt: '2rem'}} onClick={clickHandler}>Create Game</Button>
     </Box>
   )
 }

@@ -1,40 +1,40 @@
-//Decks should come in as GET requests from the API. 
+//Decks should come in as GET requests from the API.
 import { AnswerDeck, PromptDeck} from "./Deck";
 import { INVALID_MOVE } from 'boardgame.io/core'
 //TODOS
 
 //END GAME
 //INTEGRATE BACKEND DECKS
- 
+//IMPORT INVALID_MOVES for move validation
 // TURN ORDER / RANDOM JUDGE SELECTION *Low Priority *
 export const Apples = {
     name: 'Apples2Oranges',
 
-   setup: (ctx) => ({     
+   setup: (ctx) => ({
         players: Array(ctx.numPlayers).fill({hand: [], winningCards: []}),
 
         secret: {
             promptDeck: PromptDeck,
             answerDeck: AnswerDeck,
         },
-        //Maxiumum Cards per hand. 
+        //Maxiumum Cards per hand.
         handMax: 3,
 
-        //Rounds are incremented once each player has had a 'turn' as the judge. 
+        //Rounds are incremented once each player has had a 'turn' as the judge.
         playRound: 1,
-        
+
         //Prompt and answers for the current turn
         activePrompt: {},
         submittedAnswers:{},
-        //Currently activePrompt and submittedAnswers are cleared at the end of each turn. Discard pile is unnecessary, but could be useful later. 
+        //Currently activePrompt and submittedAnswers are cleared at the end of each turn. Discard pile is unnecessary, but could be useful later.
         discardPile: []
     }),
 
     phases: {
-        
+
         dealing:  {
             onBegin: startDealPhase,
-            start: true, 
+            start: true,
             endIf: checkHands,
             next: 'play'
         },
@@ -43,7 +43,7 @@ export const Apples = {
             turn: {
                 stages: {
                     playAnswer: { moves: { playAnswer },  next:'judgement'  },
-                    judgement: {moves: {pickWinner}} 
+                    judgement: {moves: {pickWinner}}
             },
                 },
         onEnd: cleanUp,
@@ -56,7 +56,7 @@ function startDealPhase(G, ctx) {
     G.secret.answerDeck = ctx.random.Shuffle(G.secret.answerDeck);
     G.players.forEach((player) => {
         while(player.hand.length < G.handMax) {
-            player.hand.push(G.secret.answerDeck.pop())           
+            player.hand.push(G.secret.answerDeck.pop())
         }
     })
   }
@@ -67,7 +67,7 @@ function checkHands(G, ctx) {
    let total = 0;
 
    G.players.forEach((player, index)=> {
-        total += player.hand.length; 
+        total += player.hand.length;
     })
 
     return (total === (G.handMax * ctx.numPlayers))
