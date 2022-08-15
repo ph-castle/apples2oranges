@@ -11,6 +11,9 @@ import { LobbyTest } from './lobbyTest';
 
 function App() {
   let { matchId } = useParams
+
+  // generate random matchId (or use create API for authenticated matches)
+
   return (
     <StyledEngineProvider injectFirst>
       <Header/>
