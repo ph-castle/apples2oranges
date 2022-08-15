@@ -2,8 +2,8 @@ const models = require('../models/models.js');
 
 // returns userId, username, avatar or empty
 module.exports.validateUser = (req, res) => {
-  let username = req.query.username;
-  let password = req.query.password;
+  const { username, password } = req.query;
+
   models.readUser(username, password)
     .then((result) => {
       res.status(200).send(result);
@@ -16,9 +16,7 @@ module.exports.validateUser = (req, res) => {
 
 // add new user, return userId
 module.exports.addNewUser = (req, res) => {
-  let username = req.query.username;
-  let password = req.query.password;
-  let avatar = req.query.avatar;
+  const { username, password, avatar } = req.query;
 
   if (username === undefined || password === undefined) {
     res.status(400).send('Undefined input');
@@ -36,10 +34,9 @@ module.exports.addNewUser = (req, res) => {
 
 // updates user's username, password, and avatar
 module.exports.updateUser = (req, res) => {
-  let userId = req.params.userId;
-  let username = req.query.username;
-  let password = req.query.password;
-  let avatar = req.query.avatar;
+  const { userId } = req.params;
+  const { username, password, avatar } = req.query;
+
   models.putUser(userId, username, password, avatar)
     .then(() => {
       res.sendStatus(201);
@@ -51,9 +48,10 @@ module.exports.updateUser = (req, res) => {
 };
 
 module.exports.getUserCards = (req, res) => {
-  let userId = req.params.userId;
+  const { userId } = req.params;
+  const { NSFW } = req.query;
 
-  models.readUserCards(userId)
+  models.readUserCards(userId, NSFW)
     .then((result) => {
       console.log(result);
       if (result === undefined) {
@@ -69,9 +67,10 @@ module.exports.getUserCards = (req, res) => {
 };
 
 module.exports.addUserCards = (req, res) => {
-  let userId = req.params.userId;
-  let cards = req.params.cards.split('\n');
-  let userCards = cards.map((card) => [card, userId]);
+  const { userId } = req.params;
+  const { NSFW } = req.query;
+  const cards = req.body.cards.split('\n');
+  const userCards = cards.map((card) => [card, userId, NSFW]);
 
   models.putUserCards(userId, userCards)
     .then(() => {
@@ -84,8 +83,8 @@ module.exports.addUserCards = (req, res) => {
 };
 
 module.exports.getPromptCards = (req, res) => {
-
-  models.readPromptCards()
+  const { NSFW } = req.query;
+  models.readPromptCards(NSFW)
     .then(({rows}) => {
       res.status(200).send(rows);
     })
@@ -96,8 +95,8 @@ module.exports.getPromptCards = (req, res) => {
 };
 
 module.exports.getAnswerCards = (req, res) => {
-
-  models.readAnswerCards()
+  const { NSFW } = req.query;
+  models.readAnswerCards(NSFW)
     .then(({rows}) => {
       res.status(200).send(rows);
     })
