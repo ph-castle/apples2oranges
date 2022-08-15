@@ -8,14 +8,18 @@ import Login from './features/login/Login.jsx';
 
 export default function App() {
 
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    'id': 0,
+    'username': '',
+    'avatar': null
+  });
 
   return (
     <StyledEngineProvider injectFirst>
       <div>
         <Header />
         <Container maxWidth="lg">
-          <Login setUser={setUser}/>
+          <Login user={user} setUser={setUser}/>
             {/* <Dashboard /> */}
           <CreateGame/>
         </Container>
