@@ -121,12 +121,20 @@ module.exports.putUserCards = (userId, cards) => {
     pool
       .connect()
       .then((client) => {
-        return client.query(format(`
-          INSERT INTO
-            answers (body, user_id)
-          VALUES
-            %L
-        `, cards), [])
+        return client.query(`
+          DELETE FROM
+            answers
+          WHERE
+            user_id = $1
+        `, [userId])
+        .then(() => {
+          return client.query(format(`
+            INSERT INTO
+              answers (body, user_id)
+            VALUES
+              %L
+          `, cards), []);
+        })
         .then((result) => {
           client.release();
           return result;
