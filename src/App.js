@@ -4,9 +4,9 @@ import { SocketIO } from 'boardgame.io/multiplayer';
 import { Apples } from './game/Apples';
 import { ApplesBoard } from './game/ApplesBoard';
 import { Container } from "@mui/material";
-import { Header } from "./features/nav/Header";
-import { Lobby } from './features/nav/Lobby'
-import { Dashboard } from "./features/nav/Dashboard";
+import { Header } from "./features/Header.js";
+import { Lobby } from './features/Lobby'
+import { Dashboard } from "./features/Dashboard";
 import { CreateGame } from "./features/CreateGame";
 import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
