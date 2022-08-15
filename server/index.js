@@ -5,7 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const router = require('./routes/routes.js');
 
-const port = process.env.SERVER_PORT || 3000;
+const port = process.env.REACT_APP_SERVER_PORT || 3001;
 
 const app = express();
 app.use(cors());
