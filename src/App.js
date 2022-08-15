@@ -5,7 +5,7 @@ import { Apples } from "./game/Apples";
 import { ApplesBoard } from "./game/ApplesBoard";
 import { Routes, Route, useParams } from "react-router-dom";
 import { Container } from "@mui/material";
-import { Header } from "./features/Header";
+import Header from "./features/Header";
 import Dashboard from "./features/Dashboard";
 import { CreateGame } from "./features/CreateGame";
 import Lobby from "./features/Lobby";
@@ -40,6 +40,7 @@ function App() {
         <Container maxWidth="lg">
           <Routes>
             {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
+            <Route path="/" element={<Dashboard />} />
             <Route path="/home" element={<Dashboard />} />
             <Route
               path="/creategame"
@@ -47,7 +48,7 @@ function App() {
             />
             <Route path="/joingame" element={<Lobby />} />
             <Route path="/waitingroom" element={<WaitingRoom />} />
-            <Route path="/game/apples/:matchId" element={<Apples />} />
+            <Route path="/game/apples/:matchId" element={<ApplesClient />} />
           </Routes>
         </Container>
       </div>
