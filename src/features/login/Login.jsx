@@ -1,20 +1,39 @@
-import React from 'react';
-import LoginPage from './LoginPage';
-import CreateUserPage from './CreateUserPage';
+import React, { lazy, Suspense, useState } from 'react';
+const LoginPage = lazy(() => import('./LoginPage'));
+const CreateUserPage = lazy(() => import('./CreateUserPage'));
+const EditProfile = lazy(() => import('./EditProfile'));
+const ProfilePage = lazy(() => import('./ProfilePage'));
 
-export default function Login({ setUser }) {
+export default function Login({ user, setUser }) {
+  const [currentPage, setCurrentPage] = useState('');
 
-  const handleLogin = () => {
-    // switch to Login page
-    // <LoginPage setUser={setUser}/>
-  }
+  const renderView = () => {
+    switch (currentPage) {
+      case '':
+        return null;
+      case 'Create User':
+        return <CreateUserPage setUser={setUser} setCurrentPage={setCurrentPage}/>;
+      case 'Login':
+        return <LoginPage setUser={setUser} setCurrentPage={setCurrentPage}/>;
+      case 'Profile':
+        return <ProfilePage user={user} setUser={setUser} setCurrentPage={setCurrentPage}/>
+      case 'Edit Profile':
+        return <EditProfile user={user} setUser={setUser} setCurrentPage={setCurrentPage}/>
+      default:
+        return <div>Page not found</div>
+    }
+  };
 
   return (
     <div className="Login">
-      <button onClick={() => handleLogin()}>Login</button>
-      {/* Enable each page for testing purposes by uncommenting below */}
-      {/* <LoginPage setUser={setUser}/> */}
-      {/* <CreateUserPage setUser={setUser}/> */}
+      {user.id === 0 ?
+        <button onClick={() => setCurrentPage('Login')}>Login</button>
+        :
+        <button onClick={() => setCurrentPage('Profile')}>View Profile</button>
+      }
+      <Suspense fallback={<p>Loading...</p>}>
+        {renderView()}
+      </Suspense>
     </div>
   )
 }

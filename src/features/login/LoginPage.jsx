@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import CreateUserPage from './CreateUserPage';
 
-export default function LoginPage({ setUser }) {
+export default function LoginPage({ setUser, setCurrentPage }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [valid, setValid] = useState(true);
   const [firstTry, setFirstTry] = useState(true);
 
   const axiosInstance = axios.create({
-    baseURL: `http://localhost:5050`
+    baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
   });
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    console.log('attempting login');
     let options = {
       params: {
         'username': username,
@@ -35,6 +33,7 @@ export default function LoginPage({ setUser }) {
           setPassword('');
           // updates state of user
           setUser(results.data);
+          setCurrentPage('');
           // switch page to lobby?
         }
       })
@@ -45,11 +44,12 @@ export default function LoginPage({ setUser }) {
 
   const createAccount = () => {
     // switch to createUserPage
-    {/* <CreateUserPage setUser={setUser}/> */}
+    setCurrentPage('Create User');
   }
 
   return (
     <div className="Login-page">
+      <h3>Login</h3>
       <form onSubmit={(e) => handleLogin(e)}>
         <label>Username: </label>
         <input
@@ -60,6 +60,7 @@ export default function LoginPage({ setUser }) {
           placeholder="Enter username"
           onChange={(e) => setUsername(e.target.value)}
         />
+        <br/>
         <label>Password: </label>
         <input
           type="password"
@@ -75,6 +76,7 @@ export default function LoginPage({ setUser }) {
             : <div>Incorrect password</div>
           )
         }
+        <br/>
         <button type="submit">Login</button>
       </form>
       <button onClick={() => createAccount()}>Create new account</button>
