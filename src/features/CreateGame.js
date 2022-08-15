@@ -4,6 +4,7 @@ import { Box, FormGroup, Checkbox, FormControl, FormControlLabel, InputLabel, Me
 export const CreateGame = () => {
 
   const clickHandler = async () => {
+    // route user to "/waitingroom/:matchId"
 
   }
 

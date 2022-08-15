@@ -1,10 +1,18 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import { lobbyClient } from "./utils/lobbyClient";
 import { Box, Typography, Button, List, ListItem, ListItemText, createTheme, ThemeProvider } from "@mui/material";
 // import { LobbyClient } from "boardgame.io/client";
 
 export const WaitingRoom = () => {
   // const lobbyClient = new LobbyClient({ se rver: 'localhost:3000'});
   // var {players, matchID} = await lobbyClient.getMatch('game', 'matchID');
+  const { matchId } = useParams();
+
+  lobbyClient
+    .getMatch({
+
+    })
 
   var players = [];
 

@@ -1,10 +1,10 @@
 
 import { React, useState, useEffect } from "react";
 import { Client } from 'boardgame.io/react';
-import { SocketIO } from 'boardgame.io/multiplayer';
+import { SocketIO, Local } from 'boardgame.io/multiplayer';
 import { Apples } from './game/Apples';
 import { ApplesBoard } from './game/ApplesBoard';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Container } from "@mui/material";
 import { Header } from "./features/Header";
 import Dashboard from "./features/Dashboard";
@@ -15,25 +15,22 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import { lobbyClient } from "./features/utils/lobbyClient";
 
 function App() {
-  const [setMatchId, matchId] = useState('');
+  const [matchID, setMatchID] = useState('');
 
   useEffect(() => {
-    getMatchId()
-    .then(nextMatchId => setMatchId(nextMatchId))
-    .catch(err => console.log("error setting matchId state", err))
+    getMatchID()
+    .then(matchID => {
+      console.log(matchID)
+      setMatchID(matchID)
+    })
+    .catch(err => console.log("error getting matchID", err))
   }, [])
 
-  let nextMatchId;
-
-  const getMatchId = () => {
-    return lobbyClient
-      .listMatches('Apples2Oranges')
-      .catch((err) => console.log(err))
-        .then((matches) => {
-          console.log(matches.length);
-          nextMatchId = `${matches.length}`;
-        })
-        .catch((err) => console.log("error setting nextMatchId", err))
+  const getMatchID = async() => {
+    let { matchID } = await lobbyClient.createMatch('Apples2Oranges', {
+      numPlayers: 3
+    });
+    return matchID;
   }
 
 
@@ -42,7 +39,7 @@ function App() {
     board: ApplesBoard,
     numPlayers: 3,
     debug: true,
-    // multiplayer: Local(),
+    //multiplayer: Local(),
     multiplayer: SocketIO({server: 'localhost:8000'})
   });
 
@@ -56,10 +53,10 @@ function App() {
             <Routes>
                 {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
                 <Route path="/home" element={<Dashboard/>}/>
-                <Route path="/creategame" element={<CreateGame applesClients={applesClients}/>}/>
-                <Route  path="/joingame" element={<Lobby/>}/>
-                <Route path="/waitingroom" element={<WaitingRoom/>}/>
-                <Route  path={`/game/apples/:${matchId}`} element={<Apples/>}/>
+                <Route path="/creategame" element={<CreateGame applesClients={applesClients} matchID={matchID} />}/>
+                <Route  path="/joingame" element={<Lobby matchID={matchID} />}/>
+                <Route path="/waitingroom/:matchId" element={<WaitingRoom matchID={matchID} />}/>
+                <Route  path="/game/apples/:matchID" element={<ApplesClient/>}/>
             </Routes>
           </Container>
       </div>
