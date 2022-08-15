@@ -13,14 +13,14 @@ export default function App() {
       <div>
         <Header />
         <Container maxWidth="lg">
-
             {/* <Dashboard /> */}
           {/* <CreateGame/> */}
           {/* <Lobby /> */}
           <WaitingRoom/>
+
+
         </Container>
       </div>
     </StyledEngineProvider>
   );
 }
-
