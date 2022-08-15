@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Box, Input, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-// per lobby api docs (https://github.com/boardgameio/boardgame.io/blob/main/docs/documentation/api/Lobby.md)
-// lobbyClient is an instance of LobbyClient imported below  -- this is different than what Kesang/Heemo
-// which is why I left commented out
-//import { LobbyClient } from 'boardgame.io/client';
 import { lobbyClient } from "./utils/lobbyClient";
 const Item = styled(Paper)(() => ({
   textAlign: "center",
@@ -21,9 +17,6 @@ const Lobby = () => {
   const [playerAccessKey, setPlayerAccessKey] = useState({});
   const [gameMatchID, setGameMatchID] = useState("");
   const [sessionCode, setSessionCode] = useState("");
-
-  //see note above re importing LobbyClient
-  //const lobbyClient = new LobbyClient({ server: 'http://localhost:8000' });
 
   useEffect(() => {
     getAllAvailableGames().then(({ matches }) => {

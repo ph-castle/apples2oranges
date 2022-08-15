@@ -1,5 +1,5 @@
 
-import * as React from "react";
+import { React, useState, useEffect } from "react";
 import { Client } from 'boardgame.io/react';
 import { SocketIO } from 'boardgame.io/multiplayer';
 import { Apples } from './game/Apples';
@@ -12,11 +12,30 @@ import { CreateGame } from "./features/CreateGame";
 import Lobby from "./features/Lobby";
 import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
+import { lobbyClient } from "./features/utils/lobbyClient";
 
 function App() {
-  let { matchId } = useParams
+  const [setMatchId, matchId] = useState('');
 
-  // generate random matchId (or use create API for authenticated matches)
+  useEffect(() => {
+    getMatchId()
+    .then(nextMatchId => setMatchId(nextMatchId))
+    .catch(err => console.log("error setting matchId state", err))
+  }, [])
+
+  let nextMatchId;
+
+  const getMatchId = () => {
+    return lobbyClient
+      .listMatches('Apples2Oranges')
+      .catch((err) => console.log(err))
+        .then((matches) => {
+          console.log(matches.length);
+          nextMatchId = `${matches.length}`;
+        })
+        .catch((err) => console.log("error setting nextMatchId", err))
+  }
+
 
   const ApplesClient = Client({
    game: Apples,
@@ -40,7 +59,7 @@ function App() {
                 <Route path="/creategame" element={<CreateGame applesClients={applesClients}/>}/>
                 <Route  path="/joingame" element={<Lobby/>}/>
                 <Route path="/waitingroom" element={<WaitingRoom/>}/>
-                <Route  path="/game/apples/:matchId" element={<Apples/>}/>
+                <Route  path={`/game/apples/:${matchId}`} element={<Apples/>}/>
             </Routes>
           </Container>
       </div>

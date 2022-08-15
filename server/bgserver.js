@@ -1,3 +1,4 @@
+const { Server, Origins } = require('boardgame.io/server');
 // const { Gamegame } = require('../src/components/game');
 const { Apples } = require('../src/game/Apples');
 const server = Server({
