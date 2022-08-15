@@ -10,10 +10,10 @@ const Dashboard = () => {
       minHeight="100vh"
       gap="12px"
     >
-      <Button variant="contained" sx={{ p: "sm" }}>
+      <Button variant="contained" sx={{ p: "1em" }}>
         Join a Game
       </Button>
-      <Button variant="contained" sx={{ p: "sm" }}>
+      <Button variant="contained" sx={{ p: "1em" }}>
         Create A Game
       </Button>
     </Box>

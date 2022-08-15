@@ -1,20 +1,18 @@
-
 import * as React from "react";
-import { Client } from 'boardgame.io/react';
-import { SocketIO } from 'boardgame.io/multiplayer';
-import { Apples } from './game/Apples';
-import { ApplesBoard } from './game/ApplesBoard';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Client } from "boardgame.io/react";
+import { SocketIO } from "boardgame.io/multiplayer";
+import { Apples } from "./game/Apples";
+import { ApplesBoard } from "./game/ApplesBoard";
 import { Container } from "@mui/material";
-import { Header } from "./features/Header";
-import Dashboard from "./features/Dashboard";
-import { CreateGame } from "./features/CreateGame";
+import Header from "./features/Header.js";
 import Lobby from "./features/Lobby";
+import { Dashboard } from "./features/Dashboard";
+import { CreateGame } from "./features/CreateGame";
 import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
 
 function App() {
-  let { matchId } = useParams
+  // let { matchId } = useParams
 
   // generate random matchId (or use create API for authenticated matches)
 
