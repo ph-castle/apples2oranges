@@ -11,11 +11,13 @@ import { CreateGame } from "./features/CreateGame";
 import Lobby from "./features/Lobby";
 import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
+import { useSelector } from "react-redux";
 
 function App() {
   // let { matchId } = useParams()
-  let matchID = "0";
-
+  // let matchID = "0";
+  const matchID = useSelector((state) => state.main.userMatchID);
+  const playerID = useSelector((state) => state.main.userPlayerID);
   // generate random matchId (or use create API for authenticated matches)
 
   const ApplesClient = Client({
@@ -24,6 +26,8 @@ function App() {
     numPlayers: 3,
     debug: true,
     // multiplayer: Local(),
+    playerID: playerID,
+    matchID: matchID,
     multiplayer: SocketIO({ server: "localhost:8000" }),
   });
 
@@ -42,10 +46,7 @@ function App() {
             {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
             <Route path="/" element={<Dashboard />} />
             <Route path="/home" element={<Dashboard />} />
-            <Route
-              path="/creategame"
-              element={<CreateGame applesClients={applesClients} />}
-            />
+            <Route path="/creategame" element={<CreateGame />} />
             <Route path="/joingame" element={<Lobby />} />
             <Route path="/waitingroom" element={<WaitingRoom />} />
             <Route path="/game/apples/:matchId" element={<ApplesClient />} />

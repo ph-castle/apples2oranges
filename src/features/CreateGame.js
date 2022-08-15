@@ -12,8 +12,13 @@ import {
   Button,
 } from "@mui/material";
 import { lobbyClient } from "./utils/lobbyClient";
+import { useDispatch, useSelector } from "react-redux";
+import { setMatchID, setPlayerID } from "../app/mainSlice";
 
 export const CreateGame = () => {
+  const dispatch = useDispatch();
+  const matchID = useSelector((state) => state.main.matchID);
+
   const clickHandler = () => {
     lobbyClient
       .createMatch("Apples2Oranges", {
@@ -21,6 +26,13 @@ export const CreateGame = () => {
       })
       .then((match) => {
         console.log(match);
+        dispatch(setMatchID(match.matchID));
+        dispatch(setPlayerID(match.playerID));
+        lobbyClient
+          .joinMatch("Apples2Oranges", match.matchID, {
+            playerName: "Heemo",
+          })
+          .then((res) => console.log(res));
       })
       .catch((err) => {
         console.log(err);
