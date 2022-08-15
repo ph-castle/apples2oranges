@@ -29,9 +29,9 @@ export default function App() {
 
             {/* <Dashboard /> */}
           <CreateGame/>
-            <ApplesClient playerID="0" />
+            {/* <ApplesClient playerID="0" /> */}
             <ApplesClient playerID="1" />
-            <ApplesClient playerID="2" />
+            {/* <ApplesClient playerID="2" /> */}
         </Container>
       </div>
     </StyledEngineProvider>
