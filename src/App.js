@@ -7,12 +7,12 @@
 import * as React from "react";
 import { Container } from "@mui/material";
 import { Header } from "../src/features/nav/Header";
-import { Dashboard } from "./features/Dashboard";
+import { Dashboard } from "./features/nav/Dashboard";
 import { CreateGame } from "./features/CreateGame";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { Client } from 'boardgame.io/react';
 import { Apples } from './game/Apples';
-const App = Client({ game: Apples, numPlayers: 3,});
+const game = Client({ game: Apples, numPlayers: 3,});
 
 export default function App() {
   return (
