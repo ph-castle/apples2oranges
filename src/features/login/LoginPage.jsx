@@ -22,7 +22,6 @@ export default function LoginPage({ setUser, setCurrentPage }) {
     }
     axiosInstance.get('/user', options)
       .then((results) => {
-        console.log('results.data: ', results.data);
         if (results.data.id === undefined) {
           setValid(false);
           setFirstTry(false);
@@ -72,8 +71,8 @@ export default function LoginPage({ setUser, setCurrentPage }) {
         />
         {!firstTry &&
           (valid ?
-            <div>Success!</div>
-            : <div>Incorrect password</div>
+            <div className="success">Success!</div>
+            : <div className="warning">Incorrect password</div>
           )
         }
         <br/>

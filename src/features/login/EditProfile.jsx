@@ -182,7 +182,7 @@ export default function EditProfile({ user, setUser, setCurrentPage }) {
           onChange={(e) => setUsername(e.target.value)}
         />
         {usernameTaken &&
-          <div>Username already taken. Please input a different username</div>
+          <div className="warning">Username already taken. Please input a different username</div>
         }
         <br/>
         <label>Current Password: </label>
@@ -195,7 +195,7 @@ export default function EditProfile({ user, setUser, setCurrentPage }) {
           onChange={(e) => setOldPassword(e.target.value)}
         />
         {incorrectPassword &&
-          <div>Incorrect password!</div>
+          <div className="warning">Incorrect password!</div>
         }
         <br/>
         <label>New Password: </label>
@@ -216,7 +216,7 @@ export default function EditProfile({ user, setUser, setCurrentPage }) {
           onChange={(e) => setNewPassword2(e.target.value)}
         />
         {passwordMismatch &&
-          <div>Passwords must match!</div>
+          <div className="warning">Passwords must match!</div>
         }
         <br/>
         <button type="submit" disabled={submitting}>Submit</button>

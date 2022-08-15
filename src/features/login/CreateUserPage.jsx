@@ -109,7 +109,7 @@ export default function CreateUserPage({ setUser, setCurrentPage }) {
     <div className="Login-create-user-page">
       <h3>Create an Account</h3>
       {userCreated &&
-        <h4>Account Created!</h4>
+        <h4 className="success">Account Created!</h4>
       }
       <form onSubmit={(e) => handleSubmit(e)}>
         <label>Username: </label>
@@ -123,7 +123,7 @@ export default function CreateUserPage({ setUser, setCurrentPage }) {
         />
         <br/>
         {usernameTaken &&
-          <div>Username already taken. Please input a different username</div>
+          <div className="warning">Username already taken. Please input a different username</div>
         }
         <label>Password: </label>
         <input
@@ -145,7 +145,7 @@ export default function CreateUserPage({ setUser, setCurrentPage }) {
           onChange={(e) => setPassword2(e.target.value)}
         />
         {!passwordMatches &&
-          <div>Passwords must match!</div>
+          <div className="warning">Passwords must match!</div>
         }
         <br/>
         <label>Upload an avatar: </label>

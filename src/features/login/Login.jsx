@@ -1,4 +1,5 @@
 import React, { lazy, Suspense, useState } from 'react';
+import './Login.css';
 const LoginPage = lazy(() => import('./LoginPage'));
 const CreateUserPage = lazy(() => import('./CreateUserPage'));
 const EditProfile = lazy(() => import('./EditProfile'));
