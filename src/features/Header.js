@@ -4,6 +4,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import IconButton from "@mui/material/IconButton";
 import { GiShinyApple, GiOrangeSlice } from "react-icons/gi";
+
 import {
   AppBar,
   Box,
