@@ -46,10 +46,10 @@ const Lobby = () => {
   };
 
   const joinMatchHandler = (matchID) => {
+    console.log(matchID);
     lobbyClient
-      .joinMatch("apples-to-oranges", matchID, {
-        playerID: "0",
-        playerName: "Alice",
+      .joinMatch("Apples2Oranges", matchID, {
+        playerName: "Kevin",
         data: "optional player meta data",
       })
       .then(({ playerCredentials }) => {

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export const Dashboard = () => {
   return (
@@ -11,10 +12,10 @@ export const Dashboard = () => {
       gap="12px"
     >
       <Button variant="contained" sx={{ p: "sm" }}>
-        Join a Game
+        <Link to="/joingame">Join a Game</Link>
       </Button>
       <Button variant="contained" sx={{ p: "sm" }}>
-        Create A Game
+        <Link to="/creategame">Create A Game</Link>
       </Button>
     </Box>
   );
