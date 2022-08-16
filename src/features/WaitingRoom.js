@@ -345,17 +345,20 @@ import { SocketIO } from 'boardgame.io/multiplayer';
 import { Apples } from '../game/Apples';
 import { ApplesBoard } from '../game/ApplesBoard';
 import { lobbyClient } from './utils/lobbyClient'
-
-const ApplesClient = Client({
-  game: Apples,
-  board: ApplesBoard,
-  debug: true,
-  multiplayer: SocketIO({server: 'localhost:8000'})
-  });
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+// const ApplesClient = Client({
+//   game: Apples,
+//   board: ApplesBoard,
+//   debug: true,
+//   multiplayer: SocketIO({server: 'localhost:8000'})
+//   });
 
 export const WaitingRoom = () => {
-  const matchID = useSelector((state) => state.matchID);
   const playerID = useSelector((state) => state.playerID);
+  const playerCredentials = useSelector((state) => state.playerCredentials);
+  const matchID = useSelector((state) => state.matchID);
+  const navigate = useNavigate();
 
   const { matchID } = useParams();
   const [players, setPlayers] = useState([]);
@@ -384,19 +387,58 @@ useEffect(() => {
 
 }, [show, players.length, matchID]);
 
+function handleStartGame() {
+  console.log('handle click running')
+  setShow(true);
+ // return ApplesClient.start();
+};
+
+
+
+  //navigate(`/game/apples/${matchID}`)
+
+  ApplesClient.start();
+
+
 
 // const leaveRoom = () => {
 
 // }
 
+//const Test = Client({game: 'Apples2Oranges'});
+
+
+
+
+
+// return(
+//   <ApplesClient />
+// )
+
+// update(state) {
+//   if (state === null) return;
+//   // ...
+// };
+
+// // const App = () => (
+// //   <div>
+// //     <
+// //     <ApplesClient playerID="1" />
+// //     <ApplesClient playerID="2" />
+// //   </div>
+// // );
+
+
 if(show) {
   return (
-    <ApplesClient
-     matchID={matchID}
-     playerID={localStorage.getItem("id")}
-     credentials={localStorage.getItem("credentials")}
-     />
-  );
+    <ApplesClient  playerID={playerID} matchID={matchID} credentials={playerCredentials}/>
+  )
+  //   <ApplesClient
+  //     matchID={matchID}
+  //     playerID={playerID}
+  //     credentials={playerCredentials}
+  //   />
+  // )
 } else {
   return (
     <Box
@@ -424,9 +466,25 @@ if(show) {
         ))}
       </List>
       </Box>
-      <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}} onClick={() => setShow(true)}>Start Game</Button>
+      <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}} onClick={() => handleStartGame()}>Start Game</Button>
         {/* <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}}>Start Game</Button> */}
     </Box>
   )
 }
 }
+
+function ApplesClient() {
+
+}
+
+const ApplesClient = new Client({
+  game: Apples,
+  board: ApplesBoard,
+  multiplayer: SocketIO({ server: 'localhost:8000' }),
+  numPlayers: players.length,
+  debug: true,
+  playerID: playerID,
+  matchID: matchID,
+  playerCredentials: playerCredentials
+});
+ApplesClient.start();

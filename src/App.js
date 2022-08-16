@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 function App() {
   const matchID = useSelector((state) => state.matchID);
   const playerID = useSelector((state) => state.playerID);
+  const playerCredentials = useSelector((state) => state.playerCredentials);
 
   // useEffect(() => {
   //   getMatchID()
@@ -34,6 +35,13 @@ function App() {
   //   return matchID;
   // }
 
+  const ApplesClient = Client({
+    game: Apples,
+    board: ApplesBoard,
+    debug: true,
+    multiplayer: SocketIO({server: 'localhost:8000'})
+    });
+
 
   // const matchID = useSelector((state) => state.main.userMatchID);
   // const playerID = useSelector((state) => state.main.userPlayerID);
@@ -46,10 +54,14 @@ function App() {
                 {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
                 <Route path="/" element={<Header/>}>
                   <Route path="home" element={<Dashboard/>}/>
-                  <Route path="creategame" element={<CreateGame applesClients={applesClients} matchID={matchID} />}/>
-                  <Route  path="joingame" element={<Lobby matchID={matchID} />}/>
-                  <Route path="waitingroom/:matchID" element={<WaitingRoom matchID={matchID} />}/>
-                  <Route  path="game/apples/:matchID" element={<ApplesClient playerID={playerID} match={matchID}/>}/>
+                  {/* <Route path="creategame" element={<CreateGame applesClients={applesClients} matchID={matchID} />}/> */}
+                  {/* <Route  path="joingame" element={<Lobby matchID={matchID} />}/> */}
+                  {/* <Route path="waitingroom/:matchID" element={<WaitingRoom matchID={matchID} />}/>
+                  <Route  path="game/apples/:matchID" element={<ApplesClient playerID={playerID} match={matchID}/>}/> */}
+                  <Route path="creategame" element={<CreateGame  />}/>
+                  <Route  path="joingame" element={<Lobby />}/>
+                  <Route path="waitingroom/:matchID" element={<WaitingRoom />}/>
+                  <Route  path="game/apples/:matchID" element={<ApplesClient playerID={playerID} gameID={matchID} credentials={playerCredentials}/>}/>
                   {/* <Route path="*" element={<Redirect />} /> */}
                 </Route>
             </Routes>

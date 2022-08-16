@@ -35,7 +35,7 @@ const ApplesClient = Client({
   //   // Set custom prefix to store data under. Default: 'bgio'.
   //   storageKey: 'bgio',
   // });
-  numPlayers: 3
+  numPlayers: 3,
   debug: true,
   playerID: 0,
   matchID: 'tM8w-LBi-bR',
