@@ -14,7 +14,7 @@ export default function ApplesClient({ playerID, matchID }) {
       console.log(res.data);
       setDecks(res.data);
     });
-  }, [decks]);
+  }, []);
   if (!decks.length) {
     // TODO: display a message here that the decks are loading
     return <div>Waiting for decks...</div>;
