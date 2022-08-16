@@ -18,9 +18,9 @@ import {
 } from "@mui/material/";
 
 const pages = ["Join a Game"];
-// const pages = [];
+
+//TODO: Add additional pages to the user account here
 const settings = ["Logout"];
-// const settings = [];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -140,12 +140,14 @@ const Header = () => {
               </Button>
             ))}
           </Box>
-
+          {/* Maybe setup a global state for logging in */}
           {!isLoggedIn ? (
             <Box sx={{ display: "flex", gap: "1em" }}>
+              {/* TODO: Here is where you join/create account*/}
               <Button sx={{ color: "white", border: "1px solid white" }}>
                 Join
               </Button>
+              {/* TODO: Here is where user logs in */}
               <Button
                 sx={{ backgroundColor: "white", border: "1px solid white" }}
                 onClick={() => setIsLoggedIn(true)}
@@ -157,7 +159,7 @@ const Header = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  {/* Put user's avatar here */}
+                  {/* TODO: Put user's avatar here */}
                   <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
@@ -181,6 +183,7 @@ const Header = () => {
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography
                       textAlign="center"
+                      // TODO: User logout here
                       onClick={(e) => {
                         e.target.textContent === "Logout" &&
                           setIsLoggedIn(false);
