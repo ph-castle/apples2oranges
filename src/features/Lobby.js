@@ -14,7 +14,6 @@ const Item = styled(Paper)(() => ({
   lineHeight: "10rem",
 }));
 
-
 //Need to get current playerId
 const Lobby = () => {
   const [playerMatch, setPlayerMatch] = useState({});
@@ -34,12 +33,12 @@ const Lobby = () => {
 
   const getAllAvailableGames = () => {
     return lobbyClient
-      .listMatches("apples-to-oranges")
+      .listMatches("Apples2Oranges")
       .catch((err) => console.log(err));
   };
 
   const getMatchHandler = (matchID) => {
-    return lobbyClient.getMatch("apples-to-oranges", matchID).catch((err) => {
+    return lobbyClient.getMatch("Apples2Oranges", matchID).catch((err) => {
       //TODO: if invalid matchId, then show validation err on the page
       console.log(err);
     });
@@ -49,7 +48,12 @@ const Lobby = () => {
     console.log(matchID);
     lobbyClient
       .joinMatch("Apples2Oranges", matchID, {
+<<<<<<< HEAD
         playerName: "Kevin",
+=======
+        playerID: "0",
+        playerName: "Alice",
+>>>>>>> main
         data: "optional player meta data",
       })
       .then(({ playerCredentials }) => {
@@ -61,7 +65,7 @@ const Lobby = () => {
   };
 
   // const updatePlayerHandler = () => {
-  //   lobbyClient.updatePlayer("apples-to-oranges", gameMatchID, {
+  //   lobbyClient.updatePlayer('Apples2Oranges', gameMatchID, {
   //     playerID: "0",
   //     credentials: playerAccessKey,
   //     newName: "Al",

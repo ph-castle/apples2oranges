@@ -1,10 +1,9 @@
 import * as React from "react";
-
+import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import IconButton from "@mui/material/IconButton";
 import { GiShinyApple, GiOrangeSlice } from "react-icons/gi";
-
 import {
   AppBar,
   Box,
@@ -52,24 +51,25 @@ const Header = () => {
             <GiOrangeSlice fontSize="1.5rem" />
             {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "Roboto",
-              fontWeight: 700,
-              // letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Apples to Oranges
-          </Typography>
-
+          <Link to={"/home"}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "Roboto",
+                fontWeight: 700,
+                // letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              Apples to Oranges
+            </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -99,9 +99,9 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -130,13 +130,13 @@ const Header = () => {
             Apples 2 Oranges
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {settings.map((setting) => (
+            {pages.map((page) => (
               <Button
-                key={setting}
+                key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {setting}
+                {page}
               </Button>
             ))}
           </Box>
@@ -198,4 +198,4 @@ const Header = () => {
     </AppBar>
   );
 };
-
+export default Header;

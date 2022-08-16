@@ -11,12 +11,16 @@ export const Dashboard = () => {
       minHeight="100vh"
       gap="12px"
     >
-      <Button variant="contained" sx={{ p: "sm" }}>
-        <Link to="/joingame">Join a Game</Link>
-      </Button>
-      <Button variant="contained" sx={{ p: "sm" }}>
-        <Link to="/creategame">Create A Game</Link>
-      </Button>
+      <Link to={"/joingame"}>
+        <Button variant="contained" sx={{ p: "1em" }}>
+          Join a Game
+        </Button>
+      </Link>
+      <Link to={"/creategame"}>
+        <Button variant="contained" sx={{ p: "1em" }}>
+          Create A Game
+        </Button>
+      </Link>
     </Box>
   );
 };

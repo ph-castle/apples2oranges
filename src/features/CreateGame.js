@@ -13,9 +13,12 @@ import {
   Button } from '@mui/material';
 import { lobbyClient } from './utils/lobbyClient'
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch, useSelector } from "react-redux";
+import { setMatchID, setPlayerID } from "../app/mainSlice";
 
 export const CreateGame = () => {
+  const dispatch = useDispatch();
+  const matchID = useSelector((state) => state.main.matchID);
 
   //states
   const [options, setOptions] = useState({numPlayers: '', unlisted: true});
@@ -27,25 +30,25 @@ export const CreateGame = () => {
 
 
   //ClickHandler
-  const clickHandler = async () => {
-    const { matchID } = await lobbyClient.createMatch('Apples2Oranges', options);
-    const { playerCredentials } = await lobbyClient.joinMatch(
-      'Apples2Oranges',
-      matchID,
-      {
-        playerName: name
-      }
-    )
-    const match = await lobbyClient.getMatch('tic-tac-toe', matchID);
-    console.log(match)
-    navigate(`/waitingroom/${matchID}`);
-  }
+  // const clickHandler = async () => {
+  //   const { matchID } = await lobbyClient.createMatch('Apples2Oranges', options);
+  //   const { playerCredentials } = await lobbyClient.joinMatch(
+  //     'Apples2Oranges',
+  //     matchID,
+  //     {
+  //       playerName: name
+  //     }
+  //   )
+  //   const match = await lobbyClient.getMatch('tic-tac-toe', matchID);
+  //   console.log(match)
+  //   navigate(`/waitingroom/${matchID}`);
+  // }
 
-  const getPlayersfunc = async() => {
-    const {matches} = await lobbyClient.listMatches('Apples2Orange');
-    console.log(matches);
-  }
-  getPlayersfunc()
+  // const getPlayersfunc = async() => {
+  //   const {matches} = await lobbyClient.listMatches('Apples2Orange');
+  //   console.log(matches);
+  // }
+  // getPlayersfunc()
   //Handle Change
   const handleChange = (e) => {
     console.log(e.target.type);
@@ -64,19 +67,38 @@ export const CreateGame = () => {
     }
 
   }
+  const clickHandler = () => {
+    lobbyClient
+      .createMatch("Apples2Oranges", {
+        numPlayers: 2,
+      })
+      .then((match) => {
+        console.log(match);
+        dispatch(setMatchID(match.matchID));
+        dispatch(setPlayerID(match.playerID));
+        lobbyClient
+          .joinMatch("Apples2Oranges", match.matchID, {
+            playerName: name,
+          })
+          .then((res) => console.log(res));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <Box
       sx={{
-        display:"flex",
+        display: "flex",
         maxWidth: 400,
         height: 250,
         flexDirection: "column",
         justifyContent: "space-between",
-        ml: {sm: '0rem', md: '4rem'},
-        mt: '2rem',
+        ml: { sm: "0rem", md: "4rem" },
+        mt: "2rem",
       }}
-  >
+    >
       <Typography variant="h4">Create a Game</Typography>
       <FormGroup sx={{height: '18rem', justifyContent: 'space-evenly', mt: '1rem'}}>
       <TextField
@@ -119,7 +141,13 @@ export const CreateGame = () => {
         <FormControlLabel control={<Checkbox name="unlisted" value={options.unlisted} onChange={handleChange} required/>} label="Make game public" />
       </FormGroup>
 
-      <Button variant="contained" sx={{width: '10rem', mt: '2rem'}} onClick={clickHandler}>Create Game</Button>
+      <Button
+        variant="contained"
+        sx={{ width: "10rem", mt: "2rem" }}
+        onClick={clickHandler}
+      >
+        Create Game
+      </Button>
     </Box>
-  )
-}
+  );
+};

@@ -1,7 +1,7 @@
 import React from 'react';
 import Timer from './Timer';
 
-export default function JudgeView({G, ctx, moves}) {
+export default function JudgeView({G, ctx, moves, roundTime, setRoundTime}) {
 
   let answers = (
       <div className="player-choices">
@@ -9,7 +9,8 @@ export default function JudgeView({G, ctx, moves}) {
           return (
             <span
               key={i}
-              onClick={()=>moves.pickWinner(i)}
+              onClick={()=>{moves.pickWinner(i); setRoundTime(60)}}
+
             >
               <p>{G.submittedAnswers?.[answer].text}</p>
             </span>
@@ -32,7 +33,7 @@ export default function JudgeView({G, ctx, moves}) {
             <p>
               Push button to begin round
             </p>
-            <button onClick={()=> moves.drawPrompt()}>Select me daddy!</button>
+            <button onClick={()=> {moves.drawPrompt(); setRoundTime(60)}}>Select me daddy!</button>
           </div>
         }
       </span>
@@ -41,7 +42,7 @@ export default function JudgeView({G, ctx, moves}) {
         {G.activePrompt.text && Object.keys(G.submittedAnswers).length !== (ctx.numPlayers - 1) ?
           <div>
             <p>waiting on player selections</p>
-            <Timer time={30} />
+            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
           </div>:
           answers
         }
