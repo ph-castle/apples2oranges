@@ -1,8 +1,9 @@
 import React from "react";
-import { Button, Box } from "@mui/material";
+import { Button, Box, ButtonGroup } from "@mui/material";
 import { Link } from "react-router-dom";
+import Hero from "../UI/Hero";
 
-const Dashboard = () => {
+const Dashboard = ({ theme }) => {
   return (
     <Box
       display="flex"
@@ -11,16 +12,15 @@ const Dashboard = () => {
       minHeight="100vh"
       gap="12px"
     >
-      <Link to={"/joingame"}>
-        <Button variant="contained" sx={{ p: "1em" }}>
-          Join a Game
-        </Button>
-      </Link>
-      <Link to={"/creategame"}>
-        <Button variant="contained" sx={{ p: "1em" }}>
-          Create A Game
-        </Button>
-      </Link>
+      <Hero theme={theme} />
+      <ButtonGroup variant="contained" color="secondary">
+        <Link to={"/joingame"}>
+          <Button>Join a Game</Button>
+        </Link>
+        <Link to={"/creategame"}>
+          <Button>Create A Game</Button>
+        </Link>
+      </ButtonGroup>
     </Box>
   );
 };

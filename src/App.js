@@ -12,6 +12,9 @@ import Lobby from "./features/Lobby";
 import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { useSelector } from "react-redux";
+import ApplesClient from "./ApplesClient";
+import { theme } from "./UI/theme";
+import { ThemeProvider } from "@mui/material/styles";
 
 function App() {
   // let { matchId } = useParams()
@@ -20,39 +23,33 @@ function App() {
   const playerID = useSelector((state) => state.main.userPlayerID);
   // generate random matchId (or use create API for authenticated matches)
 
-  const ApplesClient = Client({
-    game: Apples,
-    board: ApplesBoard,
-    numPlayers: 3,
-    debug: true,
-    // multiplayer: Local(),
-    playerID: playerID,
-    matchID: matchID,
-    multiplayer: SocketIO({ server: "localhost:8000" }),
-  });
-
-  let applesClients = [
-    <ApplesClient matchID={matchID} playerID="0" />,
-    <ApplesClient matchID={matchID} playerID="1" />,
-    <ApplesClient matchID={matchID} playerID="2" />,
-  ];
+  // let applesClients = [
+  //   <ApplesClient matchID={matchID} playerID="0" />,
+  //   <ApplesClient matchID={matchID} playerID="1" />,
+  //   <ApplesClient matchID={matchID} playerID="2" />,
+  // ];
 
   return (
     <StyledEngineProvider injectFirst>
-      <Header />
-      <div>
-        <Container maxWidth="lg">
-          <Routes>
-            {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/home" element={<Dashboard />} />
-            <Route path="/creategame" element={<CreateGame />} />
-            <Route path="/joingame" element={<Lobby />} />
-            <Route path="/waitingroom" element={<WaitingRoom />} />
-            <Route path="/game/apples/:matchId" element={<ApplesClient />} />
-          </Routes>
-        </Container>
-      </div>
+      <ThemeProvider theme={theme}>
+        <Header />
+        <div>
+          <Container maxWidth="lg">
+            <Routes>
+              {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
+              <Route path="/" element={<Dashboard theme={theme} />} />
+              <Route path="/home" element={<Dashboard theme={theme} />} />
+              <Route path="/creategame" element={<CreateGame />} />
+              <Route path="/joingame" element={<Lobby />} />
+              <Route path="/waitingroom" element={<WaitingRoom />} />
+              <Route
+                path="/game/apples/:matchId"
+                element={<ApplesClient playerID={playerID} matchID={matchID} />}
+              />
+            </Routes>
+          </Container>
+        </div>
+      </ThemeProvider>
     </StyledEngineProvider>
   );
 }
