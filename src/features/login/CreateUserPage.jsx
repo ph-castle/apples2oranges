@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import './Login.css';
 
-export default function CreateUserPage({ setUser, setCurrentPage }) {
+export default function CreateUserPage({ setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
@@ -10,6 +12,8 @@ export default function CreateUserPage({ setUser, setCurrentPage }) {
   const [passwordMatches, setPasswordMatches] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [userCreated, setUserCreated] = useState(false);
+
+  let navigate = useNavigate();
 
   const axiosInstance = axios.create({
     baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
@@ -70,9 +74,9 @@ export default function CreateUserPage({ setUser, setCurrentPage }) {
                     setSubmitting(false);
                     setUserCreated(true);
                     setTimeout(() => {
-                      setCurrentPage('');
                       setUserCreated(false);
                       // route back to main page
+                      navigate('/home');
                     }, 1000)
                   })
                   .catch((err) => {
@@ -101,8 +105,8 @@ export default function CreateUserPage({ setUser, setCurrentPage }) {
     setPasswordMatches(true);
     setSubmitting(false);
     setUserCreated(false);
-    setCurrentPage('');
     // route back to main page
+    navigate('/home');
   };
 
   return (

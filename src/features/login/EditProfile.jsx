@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import './Login.css';
 
-export default function EditProfile({ user, setUser, setCurrentPage }) {
+export default function EditProfile({ user, setUser }) {
   const [username, setUsername] = useState(user.username);
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -12,6 +14,8 @@ export default function EditProfile({ user, setUser, setCurrentPage }) {
   const [passwordMismatch, setPasswordMismatch] = useState(false);
   const [newPhoto, setNewPhoto] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     // if user changes, resets fields
@@ -131,7 +135,7 @@ export default function EditProfile({ user, setUser, setCurrentPage }) {
                         }
                         setUser(newUser);
                         // switched back to user profile
-                        setCurrentPage('Profile');
+                        navigate('/user/profile');
                       })
                       .catch((err) => {
                         console.log('Error updating user: ', err);
@@ -157,7 +161,7 @@ export default function EditProfile({ user, setUser, setCurrentPage }) {
 
   const handleCancel = () => {
     // route back to profile page
-    setCurrentPage('Profile');
+    navigate('/user/profile');
   };
 
   return (

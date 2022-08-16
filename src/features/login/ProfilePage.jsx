@@ -1,11 +1,14 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
+import './Login.css';
 
-export default function ProfilePage({ user, setUser, setCurrentPage }) {
+export default function ProfilePage({ user }) {
+  let navigate = useNavigate();
 
   const handleEdit = () => {
     // switch to EditProfile page
-    setCurrentPage('Edit Profile');
-  }
+    navigate('/user/edit');
+  };
 
   return (
     <div className="Profile">

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import './Login.css';
 
-export default function LoginPage({ setUser, setCurrentPage }) {
+export default function LoginPage({ setUser }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [valid, setValid] = useState(true);
   const [firstTry, setFirstTry] = useState(true);
+  let navigate = useNavigate();
 
   const axiosInstance = axios.create({
     baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
@@ -32,8 +35,8 @@ export default function LoginPage({ setUser, setCurrentPage }) {
           setPassword('');
           // updates state of user
           setUser(results.data);
-          setCurrentPage('');
-          // switch page to lobby?
+          // switch page to home
+          navigate('/home');
         }
       })
       .catch((err) => {
@@ -43,7 +46,7 @@ export default function LoginPage({ setUser, setCurrentPage }) {
 
   const createAccount = () => {
     // switch to createUserPage
-    setCurrentPage('Create User');
+    navigate('/user/create');
   }
 
   return (
