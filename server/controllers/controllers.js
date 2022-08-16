@@ -17,7 +17,7 @@ module.exports.validateUser = (req, res) => {
 
 // returns id of username if it exists
 module.exports.getUsername = (req, res) => {
-  let username = req.params.username;
+  const username = req.params.username;
   models.readUsername(username)
     .then((result) => {
       res.status(200).send(result);
@@ -30,7 +30,7 @@ module.exports.getUsername = (req, res) => {
 
 // adds new user and returns user info
 module.exports.addNewUser = (req, res) => {
-  const { username, password, avatar } = req.query;
+  const { username, password, avatar } = req.body;
 
   if (username === undefined || password === undefined) {
     res.status(400).send('Undefined input');
@@ -49,7 +49,7 @@ module.exports.addNewUser = (req, res) => {
 // updates user's username, password, and avatar
 module.exports.updateUser = (req, res) => {
   const { userId } = req.params;
-  const { username, password, avatar } = req.query;
+  const { username, password, avatar } = req.body;
 
   models.putUser(userId, username, password, avatar)
     .then(() => {
