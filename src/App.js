@@ -12,9 +12,11 @@ import Lobby from "./features/Lobby";
 import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { lobbyClient } from "./features/utils/lobbyClient";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [matchID, setMatchID] = useState('');
+  const matchID = useSelector((state) => state.matchID);
+  const playerID = useSelector((state) => state.playerID);
 
   useEffect(() => {
     getMatchID()
@@ -32,16 +34,9 @@ function App() {
     return matchID;
   }
 
-=======
-import { useSelector } from "react-redux";
 
-function App() {
-  // let { matchId } = useParams()
-  // let matchID = "0";
-  const matchID = useSelector((state) => state.main.userMatchID);
-  const playerID = useSelector((state) => state.main.userPlayerID);
-  // generate random matchId (or use create API for authenticated matches)
->>>>>>> lobby2
+  // const matchID = useSelector((state) => state.main.userMatchID);
+  // const playerID = useSelector((state) => state.main.userPlayerID);
 
   const ApplesClient = Client({
     game: Apples,
@@ -70,8 +65,9 @@ function App() {
                   <Route path="home" element={<Dashboard/>}/>
                   <Route path="creategame" element={<CreateGame applesClients={applesClients} matchID={matchID} />}/>
                   <Route  path="joingame" element={<Lobby matchID={matchID} />}/>
-                  <Route path="waitingroom/:matchId" element={<WaitingRoom matchID={matchID} />}/>
-                  <Route  path="game/apples/:matchID" element={<ApplesClient/>}/>
+                  <Route path="waitingroom/:matchID" element={<WaitingRoom matchID={matchID} />}/>
+                  <Route  path="game/apples/:matchID" element={<ApplesClient playerID={playerID} match={matchID}/>}/>
+                  {/* <Route path="*" element={<Redirect />} /> */}
                 </Route>
             </Routes>
           </Container>
