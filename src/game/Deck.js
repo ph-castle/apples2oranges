@@ -29,6 +29,6 @@ module.exports.PromptDeck = [
 ]
 let testDeck;
 
-axios.get('http://localhost:45000/cards/prompt').then(result => { testDeck = result; return /*console.log(skrrt)*/}).catch(err => {return "error"});
+axios.get('http://localhost:45000/cards/prompt').then(result => { testDeck = result.data; return /*console.log(test)*/}).catch(err => {return "error"});
 
 module.exports.testDeck = testDeck;

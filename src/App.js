@@ -15,7 +15,24 @@ import { StyledEngineProvider } from "@mui/material/styles";
 
 function App() {
   let { matchId } = useParams
-
+//   const [decks, setDecks] = React.useState([]);
+//   // generate random matchId (or use create API for authenticated matches)
+//   React.useEffect(() => {
+//     axios.get("/api/decks").then((res) => {
+//       setDecks(res.data);
+//     });
+//   }, []);
+// //  const newApples = Apples(decks);
+// //   const ApplesClient = Client({
+// //     game: newApples,
+// //     board: ApplesBoard,
+// //     numPlayers: 3,
+// //     debug: true,
+// //     // multiplayer: Local(),
+// //     playerID: playerID,
+// //     matchID: matchID,
+// //     multiplayer: SocketIO({ server: "localhost:8000" }),
+// //   });
   // generate random matchId (or use create API for authenticated matches)
 
   const ApplesClient = Client({
