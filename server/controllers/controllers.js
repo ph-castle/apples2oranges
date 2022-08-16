@@ -3,8 +3,8 @@ const cloudinary = require('./cloudinary.js');
 
 // returns userId, username, avatar or empty
 module.exports.validateUser = (req, res) => {
-  let username = req.query.username;
-  let password = req.query.password;
+  const { username, password } = req.query;
+
   models.readUser(username, password)
     .then((result) => {
       res.status(200).send(result);
@@ -30,9 +30,7 @@ module.exports.getUsername = (req, res) => {
 
 // adds new user and returns user info
 module.exports.addNewUser = (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  let avatar = req.body.avatar;
+  const { username, password, avatar } = req.query;
 
   if (username === undefined || password === undefined) {
     res.status(400).send('Undefined input');
@@ -50,10 +48,9 @@ module.exports.addNewUser = (req, res) => {
 
 // updates user's username, password, and avatar
 module.exports.updateUser = (req, res) => {
-  let userId = req.params.userId;
-  let username = req.body.username;
-  let password = req.body.password;
-  let avatar = req.body.avatar;
+  const { userId } = req.params;
+  const { username, password, avatar } = req.query;
+
   models.putUser(userId, username, password, avatar)
     .then(() => {
       res.sendStatus(201);
@@ -65,11 +62,13 @@ module.exports.updateUser = (req, res) => {
 };
 
 module.exports.getUserCards = (req, res) => {
-  let userId = req.params.userId;
+  const { userId } = req.params;
+  const { NSFW } = req.query;
 
-  models.readUserCards(userId)
+  models.readUserCards(userId, NSFW)
     .then((result) => {
-      if (result.length === 0) {
+      console.log(result);
+      if (result === undefined) {
         res.status(200).send('No User Cards')
       } else {
         res.status(200).send(result);
@@ -82,9 +81,10 @@ module.exports.getUserCards = (req, res) => {
 };
 
 module.exports.addUserCards = (req, res) => {
-  let userId = req.params.userId;
-  let cards = req.params.cards.split('\n');
-  let userCards = cards.map((card) => [card, userId]);
+  const { userId } = req.params;
+  const { NSFW } = req.query;
+  const cards = req.body.cards.split('\n');
+  const userCards = cards.map((card) => [card, userId, NSFW]);
 
   models.putUserCards(userId, userCards)
     .then(() => {
@@ -97,10 +97,10 @@ module.exports.addUserCards = (req, res) => {
 };
 
 module.exports.getPromptCards = (req, res) => {
-
-  models.readPromptCards()
-    .then((result) => {
-      res.status(200).send(result);
+  const { NSFW } = req.query;
+  models.readPromptCards(NSFW)
+    .then(({rows}) => {
+      res.status(200).send(rows);
     })
     .catch((err) => {
       console.log('Problem retrieving prompt cards: ', err);
@@ -109,10 +109,10 @@ module.exports.getPromptCards = (req, res) => {
 };
 
 module.exports.getAnswerCards = (req, res) => {
-
-  models.readAnswerCards()
-    .then((result) => {
-      res.status(200).send(result);
+  const { NSFW } = req.query;
+  models.readAnswerCards(NSFW)
+    .then(({rows}) => {
+      res.status(200).send(rows);
     })
     .catch((err) => {
       console.log('Problem retrieving answer cards: ', err);

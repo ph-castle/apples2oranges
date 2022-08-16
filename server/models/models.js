@@ -114,19 +114,22 @@ module.exports.putUser = (userId, username, password, avatar) => {
   );
 };
 
-module.exports.readUserCards = (userId) => {
+module.exports.readUserCards = (userId, NSFW) => {
   return (
     pool
       .connect()
       .then((client) => {
-        client.query(`
+        return client.query(`
           SELECT
             body
-          FROM cards
-          WHERE user_id = $1
-        `, [userId])
+          FROM
+            answers
+          WHERE
+            user_id = $1 AND NSFW = $2
+        `, [userId, NSFW])
         .then((result) => {
           client.release();
+          console.log(result);
           return result;
         })
         .catch((err) => {
@@ -148,12 +151,20 @@ module.exports.putUserCards = (userId, cards) => {
     pool
       .connect()
       .then((client) => {
-        client.query(format(`
-          INSERT INTO
-            answers (body, user_id)
-          VALUES
-            %L
-        `, cards), [])
+        return client.query(`
+          DELETE FROM
+            answers
+          WHERE
+            user_id = $1
+        `, [userId])
+        .then(() => {
+          return client.query(format(`
+            INSERT INTO
+              answers (body, user_id, NSFW)
+            VALUES
+              %L
+          `, cards), []);
+        })
         .then((result) => {
           client.release();
           return result;
@@ -171,23 +182,25 @@ module.exports.putUserCards = (userId, cards) => {
   );
 };
 
-module.exports.readPromptCards = () => {
+module.exports.readPromptCards = (NSFW) => {
   return (
     pool
       .connect()
       .then((client) => {
-        client.query(`
+        return client.query(`
           SELECT
             body
           FROM
             prompts
-        `)
+          WHERE
+            NSFW = $1;
+        `, [NSFW])
         .then((result) => {
           client.release();
           return result;
         })
         .catch((err) => {
-          console.log('Problem reading user: ', err);
+          console.log('Problem reading prompt: ', err);
           client.release();
           return err;
         });
@@ -199,19 +212,19 @@ module.exports.readPromptCards = () => {
   );
 };
 
-module.exports.readAnswerCards = () => {
+module.exports.readAnswerCards = (NSFW) => {
   return (
     pool
       .connect()
       .then((client) => {
-        client.query(`
+        return client.query(`
           SELECT
             body
           FROM
             answers
           WHERE
-            user_id = NULL
-        `)
+            user_id IS NULL AND NSFW = $1
+        `, [NSFW])
         .then((result) => {
           client.release();
           return result;

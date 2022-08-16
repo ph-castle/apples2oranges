@@ -12,18 +12,20 @@ CREATE TABLE users (
 
 CREATE TABLE prompts (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  body VARCHAR(500) NOT NULL
+  body VARCHAR(500) NOT NULL,
+  NSFW BOOLEAN NOT NULL
 );
 
 CREATE TABLE answers (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   body VARCHAR(500) NOT NULL,
-  user_id INTEGER DEFAULT NULL REFERENCES users(id)
+  user_id INTEGER DEFAULT NULL REFERENCES users(id),
+  NSFW BOOLEAN NOT NULL
 );
 
-\COPY prompts(body) FROM '/Users/roycechun/Desktop/RFP2205/apples2oranges/db/schemas/data/prompts.csv' CSV HEADER;
+\COPY prompts(body, NSFW) FROM '/Users/roycechun/Desktop/RFP2205/apples2oranges/db/schemas/data/prompts.csv' CSV HEADER;
 
-\COPY answers(body) FROM '/Users/roycechun/Desktop/RFP2205/apples2oranges/db/schemas/data/answers.csv' CSV HEADER;
+\COPY answers(body, NSFW) FROM '/Users/roycechun/Desktop/RFP2205/apples2oranges/db/schemas/data/answers.csv' CSV HEADER;
 
 CREATE INDEX user_id_index ON users USING HASH (id);
 
