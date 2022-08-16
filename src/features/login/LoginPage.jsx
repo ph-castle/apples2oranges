@@ -19,7 +19,7 @@ export default function LoginPage({ setUser, setCurrentPage }) {
         'username': username,
         'password': password
       }
-    }
+    };
     axiosInstance.get('/user', options)
       .then((results) => {
         if (results.data.id === undefined) {
