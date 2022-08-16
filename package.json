@@ -31,8 +31,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server-dev": "npx nodemon --watch server server/index.js",
-    "server": "node server/index.js"
+    "bg-server": "nodemon -r esm server/bgserver.js",
+    "postgres-server": "node server/index.js",
+    "postgres-server-dev": "npx nodemon --watch server server/index.js"
   },
   "eslintConfig": {
     "extends": [
