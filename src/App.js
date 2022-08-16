@@ -1,4 +1,3 @@
-
 import { React, useState, useEffect } from "react";
 import { Client } from 'boardgame.io/react';
 import { SocketIO, Local } from 'boardgame.io/multiplayer';
@@ -6,7 +5,7 @@ import { Apples } from './game/Apples';
 import { ApplesBoard } from './game/ApplesBoard';
 import { Routes, Route } from 'react-router-dom';
 import { Container } from "@mui/material";
-import { Header } from "./features/Header";
+import Header from "./features/Header";
 import Dashboard from "./features/Dashboard";
 import { CreateGame } from "./features/CreateGame";
 import Lobby from "./features/Lobby";
@@ -33,9 +32,19 @@ function App() {
     return matchID;
   }
 
+=======
+import { useSelector } from "react-redux";
+
+function App() {
+  // let { matchId } = useParams()
+  // let matchID = "0";
+  const matchID = useSelector((state) => state.main.userMatchID);
+  const playerID = useSelector((state) => state.main.userPlayerID);
+  // generate random matchId (or use create API for authenticated matches)
+>>>>>>> lobby2
 
   const ApplesClient = Client({
-   game: Apples,
+    game: Apples,
     board: ApplesBoard,
     numPlayers: 3,
     debug: true,
@@ -45,7 +54,11 @@ function App() {
     multiplayer: SocketIO({server: 'localhost:8000'})
   });
 
-  let applesClients=[<ApplesClient playerID="0" />, <ApplesClient playerID="1" />,  <ApplesClient playerID="2" />];
+  let applesClients = [
+    <ApplesClient matchID={matchID} playerID="0" />,
+    <ApplesClient matchID={matchID} playerID="1" />,
+    <ApplesClient matchID={matchID} playerID="2" />,
+  ];
 
   return (
     <StyledEngineProvider injectFirst>
@@ -69,6 +82,4 @@ function App() {
 
 export default App;
 
-
 // pages: edit profile, create custom cards, logout
-
