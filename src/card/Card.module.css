@@ -1,0 +1,64 @@
+.answer_card {
+  background-color: #ff6f00;
+  background-image: -webkit-linear-gradient(#e50000 0%, #ff6f00 60%);
+  background-image: linear-gradient(#e50000 0%, #ff6f00 60%);
+  border: 8px solid #e50000;
+  border-radius: 15px;
+  height: 8rem;
+  margin: 8px;
+  position: relative;
+  min-width: 12rem;
+  width: 17rem;
+  position: relative;
+}
+
+.answer_card:hover {
+  background-image: -webkit-linear-gradient(#ff6f00 30%, #e50000 70%);
+  background-image: linear-gradient(#ff6f00 30%, #e50000 70%);
+}
+
+.card_text {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  left: 50%;
+  max-height: 115px;
+  padding: 4px;
+  position: absolute;
+  overflow-y: auto;
+  text-align: center;
+  top: 32%;
+  transform: translate(-50%, -50%);
+  vertical-align: middle;
+  width: 90%;
+  word-wrap: normal;
+}
+
+.select_button {
+  background-image: linear-gradient(#00c300 50%, #00dd00 100%);
+  background-image: -webkit-linear-gradient(#00c300 50%, #00dd00 100%);
+  border: 5px solid #00ce00;
+  border-radius: 10px;
+  bottom: 5px;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  height: 40px;
+  left: 28%;
+  margin: 5px;
+  padding: 4px;
+  position: absolute;
+  width: 40%;
+}
+
+.select_button:hover {
+  background-image: -webkit-linear-gradient(#00d800 80%, #00dd00 100%);
+  background-image: linear-gradient(#00d800 80%, #00dd00 100%);
+}
+
+.select_button:active {
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+  -ms-transform: translateY(3px);
+  transform: translateY(3px);
+  -webkit-transform: translateY(3px);
+}
