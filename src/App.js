@@ -18,42 +18,25 @@ function App() {
   const matchID = useSelector((state) => state.matchID);
   const playerID = useSelector((state) => state.playerID);
 
-  useEffect(() => {
-    getMatchID()
-    .then(matchID => {
-      console.log(matchID)
-      setMatchID(matchID)
-    })
-    .catch(err => console.log("error getting matchID", err))
-  }, [])
+  // useEffect(() => {
+  //   getMatchID()
+  //   .then(matchID => {
+  //     console.log(matchID)
+  //     setMatchID(matchID)
+  //   })
+  //   .catch(err => console.log("error getting matchID", err))
+  // }, [])
 
-  const getMatchID = async() => {
-    let { matchID } = await lobbyClient.createMatch('Apples2Oranges', {
-      numPlayers: 3
-    });
-    return matchID;
-  }
+  // const getMatchID = async() => {
+  //   let { matchID } = await lobbyClient.createMatch('Apples2Oranges', {
+  //     numPlayers: 3
+  //   });
+  //   return matchID;
+  // }
 
 
   // const matchID = useSelector((state) => state.main.userMatchID);
   // const playerID = useSelector((state) => state.main.userPlayerID);
-
-  const ApplesClient = Client({
-    game: Apples,
-    board: ApplesBoard,
-    numPlayers: 3,
-    debug: true,
-    playerID: 0,
-    matchID: matchID,
-    //multiplayer: Local(),
-    multiplayer: SocketIO({server: 'localhost:8000'})
-  });
-
-  let applesClients = [
-    <ApplesClient matchID={matchID} playerID="0" />,
-    <ApplesClient matchID={matchID} playerID="1" />,
-    <ApplesClient matchID={matchID} playerID="2" />,
-  ];
 
   return (
     <StyledEngineProvider injectFirst>
