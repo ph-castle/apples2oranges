@@ -1,30 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import './styles/index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./styles/index.css";
+import { Provider } from "react-redux";
+import App from "./App.js";
+import store from "./app/store";
 // import reportWebVitals from './reportWebVitals';
 
+const ENV = process.env.REACT_APP_ENV;
 
-const ENV = process.env.REACT_APP_ENV
-
-let SERVER
-if (ENV === 'dev')    {
-    SERVER = `http://${window.location.hostname}:8000`  // Local
+let SERVER;
+if (ENV === "dev") {
+  SERVER = `http://${window.location.hostname}:8000`; // Local
 } else {
-    SERVER = `https://${window.location.hostname}` // Prod
+  SERVER = `https://${window.location.hostname}`; // Prod
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-     <App gameServer={SERVER}/>
+      <Provider store={store}>
+        <App gameServer={SERVER} />
+      </Provider>
     </BrowserRouter>
-  </React.StrictMode>);
+  </React.StrictMode>
+);
 
 // // If you want to start measuring performance in your app, pass a function
 // // to log results (for example: reportWebVitals(console.log))
 // // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // reportWebVitals();
-
