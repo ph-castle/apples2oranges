@@ -39,6 +39,8 @@ function App() {
     board: ApplesBoard,
     numPlayers: 3,
     debug: true,
+    playerID: 0,
+    matchID: matchID,
     //multiplayer: Local(),
     multiplayer: SocketIO({server: 'localhost:8000'})
   });
