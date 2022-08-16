@@ -14,8 +14,7 @@ import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
 
 function App() {
-  // let { matchId } = useParams()
-  let matchID = '0';
+  let { matchId } = useParams
 
   // generate random matchId (or use create API for authenticated matches)
 
@@ -24,11 +23,12 @@ function App() {
     board: ApplesBoard,
     numPlayers: 3,
     debug: true,
+  setupData: {test: [10]}
     // multiplayer: Local(),
-    multiplayer: SocketIO({server: 'localhost:8000'})
+    //multiplayer: SocketIO({server: 'localhost:8000'})
   });
 
-  let applesClients=[<ApplesClient matchID={matchID} playerID="0" />, <ApplesClient matchID={matchID} playerID="1" />,  <ApplesClient matchID={matchID} playerID="2" />];
+  let applesClients=[<ApplesClient playerID="0" />, <ApplesClient playerID="1" />,  <ApplesClient playerID="2" />];
 
   return (
     <StyledEngineProvider injectFirst>
@@ -36,6 +36,7 @@ function App() {
       <div>
           <Container maxWidth="lg">
             <Routes>
+              
                 {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
                 <Route path="/home" element={<Dashboard/>}/>
                 <Route path="/creategame" element={<CreateGame applesClients={applesClients}/>}/>
@@ -44,6 +45,9 @@ function App() {
                 <Route  path="/game/apples/:matchId" element={<Apples/>}/>
             </Routes>
           </Container>
+          <ApplesClient playerID="0" />
+          <ApplesClient playerID="1" />
+          <ApplesClient playerID="2" />
       </div>
     </StyledEngineProvider>
   );

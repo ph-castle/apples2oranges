@@ -1,3 +1,5 @@
+const { default: axios } = require("axios")
+require('cors');
 module.exports.AnswerDeck = [
     {id: 1, text: 'Pingas', type: 'Answer'},
     {id: 2, text: `Farting on someone's pillow to give them pinkeye`, type: 'Answer'},
@@ -25,3 +27,8 @@ module.exports.PromptDeck = [
     {id: 9, text: `I'm coming out of retirement to take one last run at the ________ Championship Circuit`, type:'Prompt'},
     {id: 10, text: `Watch me whip, and watch me ________`, type:'Prompt'},
 ]
+let testDeck;
+
+axios.get('http://localhost:45000/cards/prompt').then(result => { testDeck = result; return /*console.log(skrrt)*/}).catch(err => {return "error"});
+
+module.exports.testDeck = testDeck;

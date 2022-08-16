@@ -2,20 +2,25 @@
 import { AnswerDeck, PromptDeck} from "./Deck";
 import { INVALID_MOVE } from 'boardgame.io/core'
 //TODOS
+import axios from 'axios';
 
 //END GAME
 //INTEGRATE BACKEND DECKS
 //IMPORT INVALID_MOVES for move validation
 // TURN ORDER / RANDOM JUDGE SELECTION *Low Priority *
-export const Apples = {
+//NOTES I NEEED HELP MANIPULATING STATE OR FIGURING OUT HOW TO PASS SETUPDATA INTO THE GAME. I HAVE CALLED THE API AND CAN LIST THE DECKS FROM INSIDE THE GAME, BUT CAN'T READ THEM INTO STATE
+
+
+export const Apples = (decks) =>  ({
     name: 'Apples2Oranges',
 
-   setup: (ctx) => ({
+   setup: (ctx, setupData) => ({
         players: Array(ctx.numPlayers).fill({hand: [], winningCards: []}),
 
         secret: {
-            promptDeck: PromptDeck,
+            promptDeck: decks,
             answerDeck: AnswerDeck,
+         
         },
         //Maxiumum Cards per hand.
         handMax: 3,
@@ -25,7 +30,7 @@ export const Apples = {
 
         //Prompt and answers for the current turn
         activePrompt: {},
-        submittedAnswers:{},
+        submittedAnswers:[],
         //Currently activePrompt and submittedAnswers are cleared at the end of each turn. Discard pile is unnecessary, but could be useful later.
         discardPile: []
     }),
@@ -50,9 +55,18 @@ export const Apples = {
         next:'dealing'
         },
     }
-}
+})
 
 function startDealPhase(G, ctx) {
+    if(G.playRound === 1) {
+
+        //G.secret.promptDeck = ['test', 'ayyyy']
+//    axios.get('http://localhost:45000/cards/prompt')
+//          .then((result) =>  {G.secret.promptDeck = result.data})
+//          .catch(err => {return "error"});
+      
+       
+    }
     G.secret.answerDeck = ctx.random.Shuffle(G.secret.answerDeck);
     G.players.forEach((player) => {
         while(player.hand.length < G.handMax) {
