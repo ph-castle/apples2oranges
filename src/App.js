@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Routes, Route, useParams } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Container } from "@mui/material";
 import Header from "./features/Header";
 import Dashboard from "./features/Dashboard";
@@ -10,21 +10,12 @@ import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import ApplesClient from "./ApplesClient";
-import axios from "axios";
 
 function App() {
   // let { matchId } = useParams()
   // let matchID = "0";
   const matchID = useSelector((state) => state.main.userMatchID);
   const playerID = useSelector((state) => state.main.userPlayerID);
-  const [decks, setDecks] = React.useState([]);
-  // generate random matchId (or use create API for authenticated matches)
-  React.useEffect(() => {
-    axios.get("/cards/prompt").then((res) => {
-      console.log(res.data);
-      setDecks(res.data);
-    });
-  }, []);
 
   // let applesClients = [
   //   <ApplesClient matchID={matchID} playerID="0" />,
@@ -44,18 +35,10 @@ function App() {
             <Route path="/creategame" element={<CreateGame />} />
             <Route path="/joingame" element={<Lobby />} />
             <Route path="/waitingroom" element={<WaitingRoom />} />
-            {decks.length > 0 && (
-              <Route
-                path="/game/apples/:matchId"
-                element={
-                  <ApplesClient
-                    decks={decks}
-                    matchID={matchID}
-                    playerID={playerID}
-                  />
-                }
-              />
-            )}
+            <Route
+              path="/game/apples/:matchId"
+              element={<ApplesClient matchID={matchID} playerID={playerID} />}
+            />
           </Routes>
         </Container>
       </div>
