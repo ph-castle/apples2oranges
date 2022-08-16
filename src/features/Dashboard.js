@@ -13,14 +13,14 @@ const Dashboard = ({ theme }) => {
       gap="12px"
     >
       <Hero theme={theme} />
-      <ButtonGroup variant="contained" color="secondary">
+      {/* <ButtonGroup variant="contained" color="secondary">
         <Link to={"/joingame"}>
           <Button>Join a Game</Button>
         </Link>
         <Link to={"/creategame"}>
           <Button>Create A Game</Button>
         </Link>
-      </ButtonGroup>
+      </ButtonGroup> */}
     </Box>
   );
 };

@@ -33,7 +33,7 @@ function App() {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <Header />
-        <div>
+        <div style={{ position: "relative" }}>
           <Container maxWidth="lg">
             <Routes>
               {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
