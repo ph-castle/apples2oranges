@@ -47,16 +47,17 @@ function App() {
 
   return (
     <StyledEngineProvider injectFirst>
-      <Header/>
       <div>
           <Container maxWidth="lg">
             <Routes>
                 {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
-                <Route path="/home" element={<Dashboard/>}/>
-                <Route path="/creategame" element={<CreateGame applesClients={applesClients} matchID={matchID} />}/>
-                <Route  path="/joingame" element={<Lobby matchID={matchID} />}/>
-                <Route path="/waitingroom/:matchId" element={<WaitingRoom matchID={matchID} />}/>
-                <Route  path="/game/apples/:matchID" element={<ApplesClient/>}/>
+                <Route path="/" element={<Header/>}>
+                  <Route path="home" element={<Dashboard/>}/>
+                  <Route path="creategame" element={<CreateGame applesClients={applesClients} matchID={matchID} />}/>
+                  <Route  path="joingame" element={<Lobby matchID={matchID} />}/>
+                  <Route path="waitingroom/:matchId" element={<WaitingRoom matchID={matchID} />}/>
+                  <Route  path="game/apples/:matchID" element={<ApplesClient/>}/>
+                </Route>
             </Routes>
           </Container>
       </div>
