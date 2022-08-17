@@ -40,16 +40,23 @@ export const CreateGame = () => {
   };
 
   return (
+    // <Box
+    //   sx={{
+    //     display: "flex",
+    //     maxWidth: 400,
+    //     height: 250,
+    //     flexDirection: "column",
+    //     justifyContent: "space-between",
+    //     ml: { sm: "0rem", md: "4rem" },
+    //     mt: "2rem",
+    //   }}
+    // >
     <Box
-      sx={{
-        display: "flex",
-        maxWidth: 400,
-        height: 250,
-        flexDirection: "column",
-        justifyContent: "space-between",
-        ml: { sm: "0rem", md: "4rem" },
-        mt: "2rem",
-      }}
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="100vh"
+      gap="12px"
     >
       <Typography variant="h4">Create a Game</Typography>
       <FormGroup

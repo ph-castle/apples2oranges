@@ -31,8 +31,8 @@ export default function Hero() {
           width: "10ch",
           height: "2ch",
           fontFamily: "sans-serif",
-          color: "white",
-          textShadow: "0 0 10px black",
+          color: "red",
+          textShadow: "0 0 10px white",
         }}
       >
         <div
@@ -44,7 +44,21 @@ export default function Hero() {
         >
           Apples
         </div>{" "}
-        To Oranges
+        To{" "}
+        <Typography
+          color="orange"
+          sx={{
+            textTransform: "uppercase",
+            fontSize: "6rem",
+            fontWeight: "800",
+            // width: "10ch",
+            // height: "2ch",
+            fontFamily: "sans-serif",
+            textShadow: "0 0 10px white",
+          }}
+        >
+          Oranges
+        </Typography>
       </Typography>
       {cards.slice(0, 20).map((card, i) => (
         <AnimationCard key={card.body} card={card} i={i} />

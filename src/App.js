@@ -40,7 +40,7 @@ export default function App() {
             position: "relative",
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            backgroundColor: "rgba(0,0,0, 0.8)",
             overflow: "hidden",
           }}
         >
