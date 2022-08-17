@@ -2,6 +2,17 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import './Login.css';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormHelperText from '@mui/material/FormHelperText';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Avatar from '@mui/material/Avatar';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+
 
 export default function CreateUserPage({ setUser }) {
   const [username, setUsername] = useState('');
@@ -9,7 +20,7 @@ export default function CreateUserPage({ setUser }) {
   const [password2, setPassword2] = useState('');
   const [photo, setPhoto] = useState('');
   const [usernameTaken, setUsernameTaken] = useState(false);
-  const [passwordMatches, setPasswordMatches] = useState(true);
+  const [passwordMismatch, setPasswordMismatch] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [userCreated, setUserCreated] = useState(false);
 
@@ -38,7 +49,7 @@ export default function CreateUserPage({ setUser }) {
           setUsernameTaken(false);
           if (password === password2) {
             // password matches, can create a new account
-            setPasswordMatches(true);
+            setPasswordMismatch(false);
             setSubmitting(true);
             // uploads photo to cloudinary
             let photoPromise = new Promise((resolve, reject) => {
@@ -87,7 +98,7 @@ export default function CreateUserPage({ setUser }) {
                 console.log('Error uploading image: ', err);
               });
           } else {
-            setPasswordMatches(false);
+            setPasswordMismatch(true);
           }
         } else {
           setUsernameTaken(true);
@@ -102,7 +113,7 @@ export default function CreateUserPage({ setUser }) {
     setPassword2('');
     setPhoto('');
     setUsernameTaken(false);
-    setPasswordMatches(true);
+    setPasswordMismatch(false);
     setSubmitting(false);
     setUserCreated(false);
     // route back to main page
@@ -110,59 +121,109 @@ export default function CreateUserPage({ setUser }) {
   };
 
   return (
-    <div className="Login-create-user-page">
-      <h3>Create an Account</h3>
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection='column'
+      height="100vh"
+      gap="12px"
+      width='50%'
+      margin='auto'
+      mt={4}
+      // display='block'
+    >
+      <Typography variant="h4">Create an Account</Typography>
       {userCreated &&
-        <h4 className="success">Account Created!</h4>
+        <Typography variant="h6">Account Created!</Typography>
       }
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <label>Username: </label>
-        <input
-          type="text"
-          required
-          autoComplete="off"
-          value={username}
-          placeholder="Enter username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
+      <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
+        <FormControl sx={{ width: '25ch', mt: '1rem' }}>
+          <InputLabel size="small" required>Username</InputLabel>
+          <OutlinedInput
+            type="text"
+            value={username}
+            required
+            onChange={(e) => setUsername(e.target.value)}
+            label="Username"
+            error={usernameTaken}
+            size="small"
+          />
+          {
+            usernameTaken ?
+            (<FormHelperText>Username already taken</FormHelperText>)
+            :
+            (<FormHelperText>&nbsp;</FormHelperText>)
+          }
+        </FormControl>
         <br/>
-        {usernameTaken &&
-          <div className="warning">Username already taken. Please input a different username</div>
-        }
-        <label>Password: </label>
-        <input
-          type="password"
-          required
-          autoComplete="off"
-          value={password}
-          placeholder="Enter password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <FormControl sx={{ width: '25ch', mt:1 }}>
+          <InputLabel size="small" required>Password</InputLabel>
+          <OutlinedInput
+            type="password"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            label="Password"
+            error={passwordMismatch}
+            size="small"
+          />
+          <FormHelperText>&nbsp;</FormHelperText>
+        </FormControl>
         <br/>
-        <label>Confirm Password: </label>
-        <input
-          type="password"
-          required
-          autoComplete="off"
-          value={password2}
-          placeholder="Enter password again"
-          onChange={(e) => setPassword2(e.target.value)}
-        />
-        {!passwordMatches &&
-          <div className="warning">Passwords must match!</div>
-        }
+        <FormControl sx={{ width: '25ch', mt:1 }}>
+          <InputLabel size="small" required>Confirm Password</InputLabel>
+          <OutlinedInput
+            type="password"
+            value={password2}
+            required
+            onChange={(e) => setPassword2(e.target.value)}
+            label="Password"
+            error={passwordMismatch}
+            size="small"
+          />
+          {
+            passwordMismatch ?
+            (<FormHelperText>Passwords must match!</FormHelperText>)
+            :
+            (<FormHelperText>&nbsp;</FormHelperText>)
+          }
+        </FormControl>
         <br/>
-        <label>Upload an avatar: </label>
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          onChange={(e) => uploadImage(e)}
-        />
+        <FormControl sx={{ width: '25ch' }}>
+          <Button
+            variant="contained"
+            component="label"
+            sx={{ p: "sm", width: '26ch'}}
+          >
+            <AddPhotoAlternateIcon />&nbsp;Upload avatar
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              onChange={(e) => uploadImage(e)}
+              hidden
+            />
+          </Button>
+        </FormControl>
         {photo.length > 0 && <img className="avatar-thumbnail" src={photo} alt="avatar"/>}
         <br/>
-        <button type="submit" disabled={submitting}>Create account</button>
-        <button onClick={() => {handleCancel()}}>Cancel</button>
+        <br/>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ p: "sm", width: '26ch' }}
+          disabled={submitting}
+        >
+          Create account
+        </Button>
       </form>
-    </div>
+      <Button
+        variant="contained"
+        sx={{ p: "sm", width: '26ch', mt: '1rem' }}
+        onClick={(e) => {handleCancel()}}
+      >
+        Cancel
+      </Button>
+    </Box>
   )
 }

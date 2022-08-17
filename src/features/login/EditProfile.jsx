@@ -171,15 +171,27 @@ export default function EditProfile({ user, setUser }) {
   };
 
   return (
+    // <Box
+    //   sx={{
+    //       width: '50%',
+    //       margin: 'auto',
+    //       mt: 4,
+    //       display: 'block'
+    //   }}>
     <Box
-      sx={{
-          width: '50%',
-          margin: 'auto',
-          mt: 4,
-          display: 'block'
-      }}>
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection='column'
+      height="100vh"
+      gap="12px"
+      width='50%'
+      margin='auto'
+      mt={4}
+      // display='block'
+    >
       <Typography variant="h4">Edit Profile</Typography>
-      <form noValidate autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
+      <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
         <Avatar
           src={photo}
           alt="avatar"

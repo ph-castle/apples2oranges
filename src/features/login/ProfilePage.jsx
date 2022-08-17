@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 
 export default function ProfilePage({ user }) {
-  console.log('user id: ', user.id);
   let navigate = useNavigate();
 
   return (
