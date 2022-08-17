@@ -16,21 +16,15 @@ code {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-<<<<<<< HEAD
+
   /* outline: solid red; */
 }
 
 body {
   font-family: Roboto;
-  /* background-color: black; */
+  background-color: black;
   color: white;
   /* overflow: hidden; */
   height: 100%;
   width: 100%;
-=======
-}
-
-body {
-  font-family: 'Roboto';
->>>>>>> 58cf2cdfa88671bc2e5b0040121a3e9cd80d0b3f
 }

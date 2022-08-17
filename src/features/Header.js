@@ -1,9 +1,5 @@
 import * as React from "react";
-<<<<<<< HEAD
-import { Link, Outlet } from "react-router-dom";
-=======
 import { Link, useNavigate } from "react-router-dom";
->>>>>>> 58cf2cdfa88671bc2e5b0040121a3e9cd80d0b3f
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { GiShinyApple, GiOrangeSlice } from "react-icons/gi";
@@ -46,47 +42,6 @@ const Header = ({ user, setUser }) => {
   };
 
   return (
-<<<<<<< HEAD
-    <>
-      <AppBar position="static">
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
-              <GiShinyApple fontSize="1.5rem" />
-              <GiOrangeSlice fontSize="1.5rem" />
-              {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-            </Box>
-            <Link to={"/home"}>
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "Roboto",
-                  fontWeight: 700,
-                  // letterSpacing: ".1rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                Apples to Oranges
-              </Typography>
-            </Link>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-=======
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -95,12 +50,12 @@ const Header = ({ user, setUser }) => {
             <GiOrangeSlice fontSize="1.5rem" />
             {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           </Box>
-          <Link to={"/home"}>
+          <Link to={"/home"} style={{ textDecoration: "none" }} color="white">
             <Typography
               variant="h6"
               noWrap
               component="a"
-              href="/"
+              href="/home"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -186,14 +141,19 @@ const Header = ({ user, setUser }) => {
           </Box>
           {user.id === 0 ? (
             <Box sx={{ display: "flex", gap: "1em" }}>
-              <Button sx={{ color: "white", border: "1px solid white" }}
-                onClick={() => {navigate('/user/create')}}
+              <Button
+                sx={{ color: "white", border: "1px solid white" }}
+                onClick={() => {
+                  navigate("/user/create");
+                }}
               >
                 Join
               </Button>
               <Button
                 sx={{ backgroundColor: "white", border: "1px solid white" }}
-                onClick={() => {navigate('/user/login')}}
+                onClick={() => {
+                  navigate("/user/login");
+                }}
               >
                 Login
               </Button>
@@ -205,42 +165,29 @@ const Header = ({ user, setUser }) => {
                   <Avatar alt="avatar" src={user.avatar} />
                 </IconButton>
               </Tooltip>
->>>>>>> 58cf2cdfa88671bc2e5b0040121a3e9cd80d0b3f
               <Menu
+                sx={{ mt: "45px" }}
                 id="menu-appbar"
-                anchorEl={anchorElNav}
+                anchorEl={anchorElUser}
                 anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 keepMounted
                 transformOrigin={{
                   vertical: "top",
-                  horizontal: "left",
+                  horizontal: "right",
                 }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
               >
-<<<<<<< HEAD
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-=======
                 {settings.map((setting) => (
-                  <MenuItem key={setting}
+                  <MenuItem
+                    key={setting}
                     onClick={(e) => {
                       switch (e.target.textContent) {
                         case "Profile":
-                          navigate('/user/profile');
+                          navigate("/user/profile");
                           handleCloseUserMenu();
                           break;
                         // TODO: navigate to custom cards page
@@ -249,121 +196,27 @@ const Header = ({ user, setUser }) => {
                           break;
                         case "Logout":
                           setUser({
-                            'id': 0,
-                            'username': '',
-                            'avatar': null
+                            id: 0,
+                            username: "",
+                            avatar: null,
                           });
-                          navigate('/home')
+                          navigate("/home");
                           handleCloseUserMenu();
                           break;
-                        default: console.log('invalid page');
+                        default:
+                          console.log("invalid page");
                       }
                     }}
                   >
-                    <Typography
-                      textAlign="center"
-                    >
-                      {setting}
-                    </Typography>
->>>>>>> 58cf2cdfa88671bc2e5b0040121a3e9cd80d0b3f
+                    <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
             </Box>
-            {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
-            <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
-              <GiShinyApple fontSize="1.5rem" />
-              <GiOrangeSlice fontSize="1.5rem" />
-            </Box>
-            <Typography
-              variant="h7"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "Roboto",
-                fontWeight: 700,
-                // letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              Apples 2 Oranges
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
-              ))}
-            </Box>
-            {!isLoggedIn ? (
-              <Box sx={{ display: "flex", gap: "1em" }}>
-                <Button sx={{ color: "white", border: "1px solid white" }}>
-                  Join
-                </Button>
-                <Button
-                  sx={{ backgroundColor: "white", border: "1px solid white" }}
-                  onClick={() => setIsLoggedIn(true)}
-                >
-                  Login
-                </Button>
-              </Box>
-            ) : (
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    {/* Put user's avatar here */}
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography
-                        textAlign="center"
-                        onClick={(e) => {
-                          e.target.textContent === "Logout" &&
-                            setIsLoggedIn(false);
-                        }}
-                      >
-                        {setting}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
-            )}
-          </Toolbar>
-        </Container>
-      </AppBar>
-      <Outlet />
-    </>
+          )}
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 
