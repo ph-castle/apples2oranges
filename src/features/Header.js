@@ -215,4 +215,5 @@ const Header = ({ user, setUser }) => {
     </AppBar>
   );
 };
+
 export default Header;
