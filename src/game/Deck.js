@@ -83,16 +83,7 @@ module.exports.AnswerDeck = [
     {id: 82, text: "You've activated my trap card!", type: 'Answer'},
     {id: 83, text: "A micropig wearing a tiny raincoat and booties", type: 'Answer'},
     {id: 84, text: "Childhood obesity", type: 'Answer'},
-
-
-
-
-
-
-
-
-
-    
+   
 ]
 
 module.exports.PromptDeck = [
