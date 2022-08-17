@@ -111,4 +111,14 @@ const Test = Client({
 export default Test;
 
 
+<Button onClick={addHost}>
+Addd Host
+</Button>
+ <Button onClick={addPlayer1}>
+  Addd Player 1
+ </Button>
+ <Button onClick={addPlayer2}>
+ Addd Player 2
+ </Button>
+
 

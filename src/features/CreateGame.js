@@ -50,7 +50,6 @@ export const CreateGame = () => {
         console.log("error creating match in CreateGame clickHandler", err)
       )
       .then((match) => {
-        console.log("matchID from CreatGame", match);
         matchTemp = match.matchID;
         dispatch(setMatchID(match.matchID));
         lobbyClient
@@ -61,14 +60,18 @@ export const CreateGame = () => {
             console.log("error joining match in CreateGame clickHandler", err)
           )
           .then((player) => {
-            localStorage.setItem("matchID", matchTemp);
-            localStorage.setItem("name", name);
-            localStorage.setItem("id", player.playerID);
-            localStorage.setItem("credentials", player.playerCredentials);
+            console.log(player);
             // dispatch(setPlayerID(player.playerID));
             // dispatch(setPlayerCredentials(player.playerCredentials));
+            // <<<<<<< HEAD
           });
+
+        localStorage.setItem("name", name);
+        localStorage.setItem("id", player.playerID);
+        localStorage.setItem("credentials", player.playerCredentials);
       })
+      // >>>>>>> 67eec3bc7faa7287f1b3e2c6ca092d6c4a3ae3ae
+      // })
       .then(() => {
         console.log("matchTemp", matchTemp);
         navigate(`/waitingroom/${matchTemp}`);
