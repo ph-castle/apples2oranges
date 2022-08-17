@@ -6,10 +6,9 @@ import {
   List,
   ListItem,
   ListItemText,
-  createTheme,
-  ThemeProvider } from "@mui/material";
-import { useParams, useNavigate } from 'react-router-dom';
-import { lobbyClient } from './utils/lobbyClient'
+ } from "@mui/material";
+import { useParams, useNavigate, Route, Routes } from 'react-router-dom';
+import { lobbyClient } from './utils/lobbyClient';
 
 
 export const WaitingRoom = () => {
@@ -27,10 +26,10 @@ useEffect(() => {
       .then(({players}) => {
         console.log(players);
         setPlayers(players);
-        localStorage.setItem("players", players);
+        // localStorage.setItem("players", players.length);
         const currentPlayers = players.filter((player) => player.name);
         setCurrPlayers(currentPlayers);
-        if (currentPlayers.length === 3) {
+        if (currentPlayers.length === players.length) {
           setShow(true); //everyone has joined, show them the board
         }
       })

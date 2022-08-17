@@ -1,8 +1,4 @@
 import { React, useState, useEffect } from "react";
-import { Client } from 'boardgame.io/react';
-import { SocketIO, Local } from 'boardgame.io/multiplayer';
-import { Apples } from './game/Apples';
-import { ApplesBoard } from './game/ApplesBoard';
 import { Routes, Route } from 'react-router-dom';
 import { Container } from "@mui/material";
 import Header from "./features/Header";
@@ -10,23 +6,11 @@ import Dashboard from "./features/Dashboard";
 import { CreateGame } from "./features/CreateGame";
 import Lobby from "./features/Lobby";
 import { WaitingRoom } from "./features/WaitingRoom";
+import { Apples2Oranges } from './features/gameRoom'
 import { StyledEngineProvider } from "@mui/material/styles";
-// import { lobbyClient } from "./features/utils/lobbyClient";
 import { useSelector } from "react-redux";
-import { ApplesClient } from './features/utils/ApplesClient';
 
 function App() {
-
-
-  // useEffect(() => {
-  //   getMatchID()
-  //   .then(matchID => {
-  //     console.log(matchID)
-  //     setMatchID(matchID)
-  //   })
-  //   .catch(err => console.log("error getting matchID", err))
-  // }, [])
-
 
   return (
     <StyledEngineProvider injectFirst>
@@ -40,12 +24,7 @@ function App() {
             <Route path="/creategame" element={<CreateGame />} />
             <Route path="/joingame" element={<Lobby />} />
             <Route path="/waitingroom/:matchID" element={<WaitingRoom />} />
-            <Route path="/game/apples/:matchID" element={  <ApplesClient
-                                                              matchID={localStorage.getItem("matchID")}
-                                                              numPlayers={localStorage.getItem("players")}
-                                                              playerID={localStorage.getItem("id")}
-                                                              credentials={localStorage.getItem("credentials")}
-                                                              />} />
+            <Route path="/game/apples/:matchID" element={<Apples2Oranges />}/>
           </Routes>
         </Container>
       </div>

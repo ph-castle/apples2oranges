@@ -11,6 +11,7 @@ export const Apples = {
     name: 'Apples2Oranges',
 
    setup: (ctx) => ({
+
         players: Array(ctx.numPlayers).fill({hand: [], winningCards: []}),
 
         secret: {

@@ -12,15 +12,12 @@ import {
   TextField,
   Button } from '@mui/material';
 import { lobbyClient } from "./utils/lobbyClient";
-import { useDispatch, useSelector } from "react-redux";
-import { setMatchID, setPlayerID, setPlayerCredentials } from "../app/mainSlice";
 import { useNavigate } from "react-router-dom";
 
 export const CreateGame = () => {
-  const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const [options, setOptions] = useState({numPlayers: '', unlisted: false});
+  const [options, setOptions] = useState({numPlayers: '', setupData: {}, unlisted: false});
   const [customCards, setCustomCards] = useState();
   const [name, setName] = useState();
 
@@ -33,14 +30,17 @@ export const CreateGame = () => {
     } else if (name === 'nickname') {
       console.log(name, value);
       setName(value);
+    } else if (name === 'rounds') {
+      setOptions({...options, setupData: {rounds: value}});
     } else if (name === 'unlisted') {
       setOptions({...options, [name]: checked});
-      console.log(options);
     } else {
       setOptions({...options, [name]: value});
+      localStorage.setItem('players', value);
     }
 
   }
+  console.log(options);
 
   const clickHandler = () => {
     let matchTemp;
@@ -50,7 +50,6 @@ export const CreateGame = () => {
       .then((match) => {
         console.log("matchID from CreatGame", match);
         matchTemp = match.matchID;
-        dispatch(setMatchID(match.matchID));
         lobbyClient
           .joinMatch("Apples2Oranges", match.matchID, {
             playerName: name,
@@ -72,8 +71,6 @@ export const CreateGame = () => {
       .catch((err) => {
         console.log("catch all error in CreateGamee clickHandler", err);
       });
-    // let match = useSelector((state) => state.matchID)
-
   };
 
 
@@ -99,12 +96,42 @@ export const CreateGame = () => {
           onChange={handleChange}
           sx={{ m: 1, minWidth: '2rem', mb: '1rem' }}
         />
-      <FormControl required sx={{ m: 1, minWidth: '2rem', mb: '1rem' }}>
-        <InputLabel id="demo-simple-select-required-label">Number of Rounds</InputLabel>
+      <Box
+        sx={{display: 'flex', justifyContent:'space-between', flexDirection:'row'}}>
+      <FormControl required sx={{ m: 1, minWidth: '2rem', mb: '1rem', width: '50%' }}>
+        <InputLabel id="demo-simple-select-required-label">Number of Players</InputLabel>
         <Select
           labelId="demo-simple-select-required-label"
           id="demo-simple-select-required"
           name="numPlayers"
+          value={options.numPlayers}
+          label="Number of Players"
+          onChange={handleChange}
+          required
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={3}>Three</MenuItem>
+          <MenuItem value={4}>Four</MenuItem>
+          <MenuItem value={5}>Five</MenuItem>
+          <MenuItem value={6}>Six</MenuItem>
+          <MenuItem value={7}>Seven</MenuItem>
+          <MenuItem value={8}>Eight</MenuItem>
+          <MenuItem value={9}>Nine</MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={11}>Eleven</MenuItem>
+          <MenuItem value={12}>Twelve</MenuItem>
+        </Select>
+
+      </FormControl>
+      <FormControl required sx={{ m: 1, minWidth: '2rem', mb: '1rem', width: '50%' }}>
+        <InputLabel id="demo-simple-select-required-label">Number of Rounds</InputLabel>
+        <Select
+          labelId="demo-simple-select-required-label"
+          id="demo-simple-select-required"
+          name="rounds"
+          value={options.setupData.rounds}
           label="Number of Rounds"
           onChange={handleChange}
           required
@@ -127,6 +154,7 @@ export const CreateGame = () => {
         </Select>
 
       </FormControl>
+      </Box>
         <FormControlLabel control={<Checkbox name="customCards"/>} label="Allow custom cards" />
         <FormControlLabel control={<Checkbox name="unlisted" value={options.unlisted} onChange={handleChange} required/>} label="Make game public" />
       </FormGroup>

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Box, Input, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { lobbyClient } from "./utils/lobbyClient";
-import { useDispatch, useSelector } from "react-redux";
-import { setMatchID, setPlayerID, setPlayerCredentials } from "../app/mainSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { setMatchID, setPlayerID, setPlayerCredentials } from "../app/mainSlice";
 import { useNavigate } from "react-router-dom";
 
 
@@ -17,7 +17,6 @@ const Item = styled(Paper)(() => ({
 
 //Need to get current playerId
 const Lobby = () => {
-  const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const [playerMatch, setPlayerMatch] = useState([]);
