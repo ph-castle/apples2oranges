@@ -38,13 +38,13 @@ function App() {
             <Route path="/home" element={<Dashboard />} />
             <Route path="/creategame" element={<CreateGame />} />
             <Route path="/joingame" element={<Lobby />} />
-            <Route path="/waitingroom/:matchID" element={<WaitingRoom />} />
-            <Route path="/game/apples/:matchID" element={  <ApplesClient
+            <Route path="/apples/:room/:matchID" element={<WaitingRoom />} />
+            {/* <Route path="/appples/applesclient/:matchID" element={  <ApplesClient
                                                               matchID={localStorage.getItem("matchID")}
                                                               numPlayers={localStorage.getItem("players")}
                                                               playerID={localStorage.getItem("id")}
                                                               credentials={localStorage.getItem("credentials")}
-                                                              />} />
+                                                              />} /> */}
           </Routes>
         </Container>
       </div>

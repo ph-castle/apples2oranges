@@ -59,7 +59,8 @@ import { SocketIO } from 'boardgame.io/multiplayer';
 import { Apples } from '../game/Apples';
 import { ApplesBoard } from '../game/ApplesBoard';
 import { lobbyClient } from './utils/lobbyClient'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setMatchID, setPlayerID, setPlayerCredentials, setRoom } from "../app/mainSlice";
 
 
 export const WaitingRoom = () => {
@@ -69,6 +70,8 @@ export const WaitingRoom = () => {
   const navigate = useNavigate();
   const [players, setPlayers] = useState([]);
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+
 
 
 
@@ -97,7 +100,11 @@ useEffect(() => {
 function handleStartGame() {
   console.log('handle click running')
   setShow(true);
+  //{navigate(`/game/apples/${localStorage.getItem('matchID')}`)};
+  dispatch(setRooom('game'));
+  localStorage.setItem('room', 'game');
 };
+
 
 const ApplesClient = Client({
   game: Apples,
@@ -111,59 +118,20 @@ const ApplesClient = Client({
 });
 
 
-
-
-
-
-//   //navigate(`/game/apples/${matchID}`)
-
-
-
-
-
-
-// // return(
-// //   <ApplesClient />
-// // )
-
-// // update(state) {
-// //   if (state === null) return;
-// //   // ...
-// // };
-
-// // // const App = () => (
-// // //   <div>
-// // //     <
-// // //     <ApplesClient playerID="1" />
-// // //     <ApplesClient playerID="2" />
-// // //   </div>
-// // // );
-
-
-if(show) {
-  return (
-    <ApplesClient  playerID={playerID} matchID={matchID} credentials={playerCredentials}/>
-  )
-  //   <ApplesClient
-  //     matchID={matchID}
-  //     playerID={playerID}
-  //     credentials={playerCredentials}
-  //   />
-  // )
-=======
-
-// const leaveRoom = () => {
-
 console.log(localStorage.getItem("id")); //0 host
 
-if(show) {
-  return (
-    navigate(`/game/apples/${localStorage.getItem('matchID')}`)
-  );
->>>>>>> lobby
-} else {
-  return (
-    <Box
+
+  return(
+    <>
+    {show
+    ? (
+    <ApplesClient
+      playerID={localStorage.getItem("id")}
+      matchID={matchID}
+      credentials={localStorage.getItem("credentials")}
+    />
+  ) :
+  (<Box
       sx={{
         display:"flex",
         maxWidth: 500,
@@ -188,24 +156,12 @@ if(show) {
         ))}
       </List>
       </Box>
-<<<<<<< HEAD
-      <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}} onClick={() => handleStartGame()}>Start Game</Button>
-        {/* <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}}>Start Game</Button> */}
-         {/* <ApplesClient playerID="0" /> */}
+      {players.length >= 3
+      ? <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}} onClick={() => setShow(true)}>Start Game</Button>
+      : <Button variant="contained" disabled sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}}>Start Game</Button>}
     </Box>
-  )
-}
+  )}
+</>
+)
 }
 
-// function ApplesClient() {
-
-// }
-=======
-      <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}} onClick={() => setShow(true)}>Start Game</Button>
-        {/* <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}}>Start Game</Button> */}
-    </Box>
-  )
-}
->>>>>>> lobby
-
-}

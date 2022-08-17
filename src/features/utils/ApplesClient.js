@@ -7,6 +7,7 @@ export const ApplesClient = Client({
   game: Apples,
   board: ApplesBoard,
   debug: true,
-  matchID: localStorage.getItem("matchID"),
-  multiplayer: SocketIO({server: 'localhost:8000'})
+  matchID: localStorage.getItem('matchID'),
+  multiplayer: SocketIO({server: 'localhost:8000'}),
+  playerID: localStorage.getItem('playerID')
   });

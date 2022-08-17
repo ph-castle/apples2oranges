@@ -4,6 +4,7 @@ const initialState = {
   matchID: "",
   playerID: "",
   playerCredentials: "",
+  room: "",
 };
 
 export const mainSlice = createSlice({
@@ -18,9 +19,12 @@ export const mainSlice = createSlice({
     },
     setPlayerCredentials: (state, action) => {
       state.playerCredentials = action.payload;
+    },
+    setRoom: (state, action) => {
+      state.room = action.payload;
     }
   },
 });
 
-export const { setMatchID, setPlayerID, setPlayerCredentials } = mainSlice.actions;
+export const { setMatchID, setPlayerID, setPlayerCredentials, setRoom } = mainSlice.actions;
 export default mainSlice.reducer;
