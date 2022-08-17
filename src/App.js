@@ -31,6 +31,7 @@ function App() {
   return (
     <StyledEngineProvider injectFirst>
       <div>
+        <Header />
         <Container maxWidth="lg">
           <Routes>
             {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}

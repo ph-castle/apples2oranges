@@ -9,16 +9,14 @@ import {
   createTheme,
   ThemeProvider } from "@mui/material";
 import { useParams, useNavigate } from 'react-router-dom';
-
 import { lobbyClient } from './utils/lobbyClient'
-// import { useSelector } from "react-redux";
+
 
 export const WaitingRoom = () => {
   const navigate = useNavigate();
   const { matchID } = useParams();
   const [players, setPlayers] = useState([]);
   const [currPlayers, setCurrPlayers] = useState([]);
-  const [copied, setCopied] = useState(false);
   const [show, setShow] = useState(false);
   const playerID = localStorage.getItem("id");
   const playerCredentials = localStorage.getItem("credentials");
@@ -32,7 +30,7 @@ useEffect(() => {
         localStorage.setItem("players", players);
         const currentPlayers = players.filter((player) => player.name);
         setCurrPlayers(currentPlayers);
-        if (currentPlayers.length === players.length) {
+        if (currentPlayers.length === 3) {
           setShow(true); //everyone has joined, show them the board
         }
       })
