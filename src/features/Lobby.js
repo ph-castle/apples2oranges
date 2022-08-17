@@ -20,9 +20,9 @@ const Lobby = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const [playerMatch, setPlayerMatch] = useState({});
-  const [playerAccessKey, setPlayerAccessKey] = useState({});
-  const [gameMatchID, setGameMatchID] = useState("");
+  const [playerMatch, setPlayerMatch] = useState([]);
+  // const [playerAccessKey, setPlayerAccessKey] = useState({});
+  // const [gameMatchID, setGameMatchID] = useState("");
   const [sessionCode, setSessionCode] = useState("");
   const [name, setName] = useState('');
 
@@ -46,16 +46,16 @@ const Lobby = () => {
   //   });
   // };
 
-  const joinMatchHandler = () => {
+  const joinMatchHandler = (matchID) => {
     lobbyClient
-      .joinMatch("Apples2Oranges", sessionCode, {
+      .joinMatch("Apples2Oranges", matchID, {
        // playerID: "0",
         playerName: name,
         //data: "optional player meta data",
       })
       .then((player) => {
         console.log("player cred in Lobby", player);
-        localStorage.setItem("matchID", sessionCode);
+        localStorage.setItem("matchID", matchID);
         localStorage.setItem("name", name);
         localStorage.setItem("id", player.playerID);
         localStorage.setItem("credentials", player.playerCredentials);
@@ -63,7 +63,7 @@ const Lobby = () => {
         // dispatch(setPlayerCredentials(player.playerCredentials));
       })
       .then(() => {
-        navigate(`/waitingroom/${sessionCode}`);
+        navigate(`/waitingroom/${matchID}`);
       })
       .catch(err => console.log("error in lobby join match handler", err))
   };
@@ -149,7 +149,7 @@ const Lobby = () => {
             onClick={() =>
               // getMatchHandler(sessionCode).then((match) => {
                 //TODO: reroute here to loading deck
-                joinMatchHandler()
+                joinMatchHandler(sessionCode)
               // }}
             }
           >
@@ -177,17 +177,18 @@ const Lobby = () => {
           }}
           style={{ marginTop: "1em" }}
         >
-          {[0, 1, 2].map((matchId) => (
-            <Item
-              key={matchId}
+          {playerMatch.map((match) => (
+            <><Item
+              key={match.matchID}
               elevation={8}
-              onClick={(e) => {
-                //TODO: reroute here to loading deck
-                joinMatchHandler(e.target.key);
-              }}
             >
-              Game
+              {match.matchID}
             </Item>
+            <Button  onClick={() => {
+              //TODO: reroute here to loading deck
+              joinMatchHandler(match.matchID);
+            }}>Join</Button>
+            </>
           ))}
         </Box>
       </Box>
