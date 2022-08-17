@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 export const CreateGame = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
+  let room = useSelector((state) => state.room);
+
 
   const [options, setOptions] = useState({numPlayers: '', unlisted: false});
   const [customCards, setCustomCards] = useState();
@@ -57,8 +59,8 @@ export const CreateGame = () => {
       .catch(err => console.log("error joining match in CreateGame clickHandler", err))
           .then((player) => {
             console.log(player);
-            // dispatch(setPlayerID(player.playerID));
-            // dispatch(setPlayerCredentials(player.playerCredentials));
+            dispatch(setPlayerID(player.playerID));
+            dispatch(setPlayerCredentials(player.playerCredentials));
             localStorage.setItem("name", name)
             localStorage.setItem("id", player.playerID)
             localStorage.setItem("credentials", player.playerCredentials);
@@ -66,12 +68,12 @@ export const CreateGame = () => {
       })
       .then(() => {
         console.log('matchTemp', matchTemp);
-        navigate(`/waitingroom/${matchTemp}`);
+        navigate(`/apples/:room/${matchTemp}`);
       })
       .catch((err) => {
         console.log("catch all error in CreateGamee clickHandler", err);
       });
-    // let match = useSelector((state) => state.matchID)
+      let match = useSelector((state) => state.matchID)
 
   };
 

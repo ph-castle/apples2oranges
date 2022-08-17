@@ -75,6 +75,7 @@ export const WaitingRoom = () => {
 
 
 
+
 useEffect(() => {
   const interval = setInterval(() => {
     lobbyClient.getMatch('Apples2Oranges', matchID)
@@ -101,7 +102,7 @@ function handleStartGame() {
   console.log('handle click running')
   setShow(true);
   //{navigate(`/game/apples/${localStorage.getItem('matchID')}`)};
-  dispatch(setRooom('game'));
+  dispatch(setRoom("game"));
   localStorage.setItem('room', 'game');
 };
 
