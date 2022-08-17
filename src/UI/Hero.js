@@ -7,7 +7,7 @@ export default function Hero() {
   const [cards, setCards] = useState([]);
   useEffect(() => {
     console.log("fetching cards");
-    axios("http://54.177.127.149:45000/cards/prompt")
+    axios("http://13.57.223.4:45000/cards/prompt")
       .then((res) => {
         console.log("res");
         setCards(res.data);
@@ -32,6 +32,7 @@ export default function Hero() {
           height: "2ch",
           fontFamily: "sans-serif",
           color: "white",
+          textShadow: "0 0 10px black",
         }}
       >
         <div
