@@ -50,12 +50,12 @@ const Header = ({ user, setUser }) => {
             <GiOrangeSlice fontSize="1.5rem" />
             {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           </Box>
-          <Link to={"/home"}>
+          <Link to={"/home"} style={{ textDecoration: "none" }} color="white">
             <Typography
               variant="h6"
               noWrap
               component="a"
-              href="/"
+              href="/home"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -141,14 +141,19 @@ const Header = ({ user, setUser }) => {
           </Box>
           {user.id === 0 ? (
             <Box sx={{ display: "flex", gap: "1em" }}>
-              <Button sx={{ color: "white", border: "1px solid white" }}
-                onClick={() => {navigate('/user/create')}}
+              <Button
+                sx={{ color: "white", border: "1px solid white" }}
+                onClick={() => {
+                  navigate("/user/create");
+                }}
               >
                 Join
               </Button>
               <Button
                 sx={{ backgroundColor: "white", border: "1px solid white" }}
-                onClick={() => {navigate('/user/login')}}
+                onClick={() => {
+                  navigate("/user/login");
+                }}
               >
                 Login
               </Button>
@@ -177,11 +182,12 @@ const Header = ({ user, setUser }) => {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting}
+                  <MenuItem
+                    key={setting}
                     onClick={(e) => {
                       switch (e.target.textContent) {
                         case "Profile":
-                          navigate('/user/profile');
+                          navigate("/user/profile");
                           handleCloseUserMenu();
                           break;
                         // TODO: navigate to custom cards page
@@ -190,22 +196,19 @@ const Header = ({ user, setUser }) => {
                           break;
                         case "Logout":
                           setUser({
-                            'id': 0,
-                            'username': '',
-                            'avatar': null
+                            id: 0,
+                            username: "",
+                            avatar: null,
                           });
-                          navigate('/home')
+                          navigate("/home");
                           handleCloseUserMenu();
                           break;
-                        default: console.log('invalid page');
+                        default:
+                          console.log("invalid page");
                       }
                     }}
                   >
-                    <Typography
-                      textAlign="center"
-                    >
-                      {setting}
-                    </Typography>
+                    <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
