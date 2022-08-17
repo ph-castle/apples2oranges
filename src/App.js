@@ -35,7 +35,7 @@ export default function App() {
 
   return (
     <StyledEngineProvider injectFirst>
-      <Header />
+      <Header user={user} setUser={setUser}/>
       <div>
         <Container maxWidth="lg">
           <Routes>
