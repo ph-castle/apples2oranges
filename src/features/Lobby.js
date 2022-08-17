@@ -55,8 +55,10 @@ const Lobby = () => {
       })
       .then((player) => {
         console.log("player cred in Lobby", player);
-        dispatch(setPlayerID(player.playerID));
-        dispatch(setPlayerCredentials(player.playerCredentials));
+        localStorage.setItem("id", player.playerID);
+        localStorage.setItem("id", player.playerCredentials);
+        // dispatch(setPlayerID(player.playerID));
+        // dispatch(setPlayerCredentials(player.playerCredentials));
       })
       .then(() => {
         navigate(`/waitingroom/${sessionCode}`);

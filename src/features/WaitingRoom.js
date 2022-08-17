@@ -60,15 +60,15 @@ useEffect(() => {
 
 // const leaveRoom = () => {
 
-
+console.log(localStorage.getItem("id"));
 
 if(show) {
   return (
     <ApplesClient
      matchID={matchID}
      numPlayers={players.length}
-     playerID={playerID}
-     credentials={playerCredentials}
+     playerID={localStorage.getItem("id")}
+     credentials={localStorage.getItem("credentials")}
      />
   );
 } else {

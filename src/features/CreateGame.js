@@ -58,8 +58,10 @@ export const CreateGame = () => {
       .catch(err => console.log("error joining match in CreateGame clickHandler", err))
           .then((player) => {
             console.log(player);
-            dispatch(setPlayerID(player.playerID));
-            dispatch(setPlayerCredentials(player.playerCredentials));
+            localStorage.setItem("id", player.playerID)
+            localStorage.setItem("credentials", player.playerCredentials);
+            // dispatch(setPlayerID(player.playerID));
+            // dispatch(setPlayerCredentials(player.playerCredentials));
           })
       })
       .then(() => {
