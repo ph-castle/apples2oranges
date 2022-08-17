@@ -142,13 +142,13 @@ const Header = ({ user, setUser }) => {
           {user.id === 0 ? (
             <Box sx={{ display: "flex", gap: "1em" }}>
               <Button sx={{ color: "white", border: "1px solid white" }}
-                onClick={() => {navigate("/user/create")}}
+                onClick={() => {navigate('/user/create')}}
               >
                 Join
               </Button>
               <Button
                 sx={{ backgroundColor: "white", border: "1px solid white" }}
-                onClick={() => {navigate("/user/login")}}
+                onClick={() => {navigate('/user/login')}}
               >
                 Login
               </Button>
@@ -181,7 +181,7 @@ const Header = ({ user, setUser }) => {
                     onClick={(e) => {
                       switch (e.target.textContent) {
                         case "Profile":
-                          navigate("/user/profile");
+                          navigate('/user/profile');
                           handleCloseUserMenu();
                           break;
                         // TODO: navigate to custom cards page
@@ -194,6 +194,7 @@ const Header = ({ user, setUser }) => {
                             'username': '',
                             'avatar': null
                           });
+                          navigate('/home')
                           handleCloseUserMenu();
                           break;
                         default: console.log('invalid page');
