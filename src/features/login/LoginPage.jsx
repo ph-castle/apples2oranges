@@ -65,15 +65,27 @@ export default function LoginPage({ setUser }) {
   };
 
   return (
+    // <Box
+    //   sx={{
+          // width: '50%',
+          // margin: 'auto',
+          // mt: 4,
+          // display: 'block'
+    //   }}>
     <Box
-      sx={{
-          width: '50%',
-          margin: 'auto',
-          mt: 4,
-          display: 'block'
-      }}>
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="100vh"
+      flexDirection='column'
+      gap="12px"
+      width='50%'
+      margin='auto'
+      mt={4}
+      display='block'
+      >
       <Typography variant="h4">Login</Typography>
-      <form noValidate autoComplete="off" onSubmit={(e) => handleLogin(e)}>
+      <form autoComplete="off" onSubmit={(e) => handleLogin(e)}>
         <FormGroup sx={{ mt: '1rem' }}>
           <FormControl sx={{ width: '25ch', mt: '1rem' }}>
             <InputLabel required>Username</InputLabel>
@@ -137,3 +149,4 @@ export default function LoginPage({ setUser }) {
     </Box>
   )
 }
+

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   FormGroup,
@@ -9,91 +9,220 @@ import {
   MenuItem,
   Select,
   Typography,
+  TextField,
   Button,
 } from "@mui/material";
 import { lobbyClient } from "./utils/lobbyClient";
-import { useDispatch, useSelector } from "react-redux";
-import { setMatchID, setPlayerID } from "../app/mainSlice";
+import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+
+const StyledMenuItem = styled(MenuItem)({
+  fontSize: {
+    sm: "1.5rem",
+    md: "2rem",
+  },
+  padding: "1rem",
+  color: "black",
+  backgroundColor: "white",
+});
+
+const StyledSelect = styled(Select)({
+  fontSize: {
+    sm: "1.5rem",
+    md: "2rem",
+  },
+  padding: "1rem",
+  color: "black",
+  backgroundColor: "white",
+});
 
 export const CreateGame = () => {
-  const dispatch = useDispatch();
-  const matchID = useSelector((state) => state.main.matchID);
+  let navigate = useNavigate();
+
+  const [options, setOptions] = useState({
+    numPlayers: 3,
+    setupData: {},
+    unlisted: false,
+  });
+  const [customCards, setCustomCards] = useState([]);
+  const [name, setName] = useState();
+
+  // localStorage.setItem("name", name);
+
+  const handleChange = (e) => {
+    console.log(e.target.type);
+    const { name, value, checked } = e.target;
+
+    if (name === "customCards") {
+      setCustomCards(checked);
+    } else if (name === "nickname") {
+      console.log(name, value);
+      setName(value);
+    } else if (name === "rounds") {
+      setOptions({ ...options, setupData: { rounds: value } });
+    } else if (name === "unlisted") {
+      setOptions({ ...options, [name]: checked });
+    } else {
+      setOptions({ ...options, [name]: value });
+      localStorage.setItem("players", value);
+    }
+  };
 
   const clickHandler = () => {
+    let matchTemp;
     lobbyClient
-      .createMatch("Apples2Oranges", {
-        numPlayers: 2,
-      })
+      .createMatch("Apples2Oranges", options)
       .then((match) => {
-        console.log(match);
-        dispatch(setMatchID(match.matchID));
-        dispatch(setPlayerID(match.playerID));
+        matchTemp = match.matchID;
         lobbyClient
           .joinMatch("Apples2Oranges", match.matchID, {
-            playerName: "Heemo",
+            playerName: name,
           })
-          .then((res) => console.log(res));
+          .catch((err) =>
+            console.log("error joining match in CreateGame clickHandler", err)
+          )
+          .then((player) => {
+            console.log(player);
+            localStorage.setItem("name", name);
+            localStorage.setItem("id", player.playerID);
+            localStorage.setItem("credentials", player.playerCredentials);
+          });
+      })
+      .then(() => {
+        console.log("matchTemp", matchTemp);
+        navigate(`/apples/:room/${matchTemp}`);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("catch all error in CreateGamee clickHandler", err);
       });
+    // let match = useSelector((state) => state.matchID)
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        maxWidth: 400,
-        height: 250,
-        flexDirection: "column",
-        justifyContent: "space-between",
-        ml: { sm: "0rem", md: "4rem" },
-        mt: "2rem",
-      }}
-    >
-      <Typography variant="h4">Create a Game</Typography>
-      <FormGroup
-        sx={{ height: "12.5rem", justifyContent: "space-evenly", mt: "1rem" }}
+    <Box height="100vh" width="100%">
+      <Box
+        display="flex"
+        justifyContent="center"
+        width="100%"
+        height="100%"
+        margin="auto"
+        backgroundColor="skyblue"
+        // alignItems="center"
+        padding="2rem"
+        flexDirection="column"
+        gap="1rem"
       >
-        <FormControl required sx={{ m: 1, minWidth: "2rem", mb: "1rem" }}>
-          <InputLabel id="demo-simple-select-required-label">
-            Number of Rounds
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-required-label"
-            id="demo-simple-select-required"
-            // value={age}
-            label="Number of Rounds"
-            // onChange={handleChange}
+        <Typography variant="h4">Create a Game</Typography>
+        <FormGroup
+          sx={{
+            height: "18rem",
+            display: "flex",
+            justifyContent: "space-evenly",
+            mt: "1rem",
+          }}
+        >
+          <TextField
+            required
+            id="outlined-required"
+            label="Nickname"
+            name="nickname"
+            onChange={handleChange}
+            sx={{ m: 1, minWidth: "2rem", mb: "1rem", color: "black" }}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: "row",
+            }}
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={1}>One</MenuItem>
-            <MenuItem value={2}>Two</MenuItem>
-            <MenuItem value={3}>Three</MenuItem>
-            <MenuItem value={4}>Four</MenuItem>
-            <MenuItem value={5}>Five</MenuItem>
-            <MenuItem value={6}>Six</MenuItem>
-            <MenuItem value={7}>Seven</MenuItem>
-            <MenuItem value={8}>Eight</MenuItem>
-            <MenuItem value={9}>Nine</MenuItem>
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={11}>Eleven</MenuItem>
-            <MenuItem value={12}>Twelve</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControlLabel control={<Checkbox />} label="Allow custom cards" />
-        <FormControlLabel control={<Checkbox />} label="Make game public" />
-      </FormGroup>
+            <FormControl
+              required
+              sx={{ m: 1, minWidth: "2rem", mb: "1rem", width: "50%" }}
+            >
+              <InputLabel id="demo-simple-select-required-label">
+                Number of Players
+              </InputLabel>
+              <StyledSelect
+                labelId="demo-simple-select-required-label"
+                id="demo-simple-select-required"
+                name="numPlayers"
+                value={options.numPlayers}
+                label="Number of Players"
+                onChange={handleChange}
+                sx={{}}
+                required
+              >
+                <StyledMenuItem value="">
+                  <em>None</em>
+                </StyledMenuItem>
+                <StyledMenuItem value={3}>Three</StyledMenuItem>
+                <StyledMenuItem value={4}>Four</StyledMenuItem>
+                <StyledMenuItem value={5}>Five</StyledMenuItem>
+                <StyledMenuItem value={6}>Six</StyledMenuItem>
+                <StyledMenuItem value={7}>Seven</StyledMenuItem>
+                <StyledMenuItem value={8}>Eight</StyledMenuItem>
+              </StyledSelect>
+            </FormControl>
+            <FormControl
+              required
+              sx={{ m: 1, minWidth: "2rem", mb: "1rem", width: "50%" }}
+            >
+              <InputLabel id="demo-simple-select-required-label">
+                Number of Rounds
+              </InputLabel>
+              <StyledSelect
+                labelId="demo-simple-select-required-label"
+                id="demo-simple-select-required"
+                name="rounds"
+                value={options.setupData.rounds}
+                label="Number of Rounds"
+                onChange={handleChange}
+                required
+              >
+                <StyledMenuItem value="">
+                  <em>None</em>
+                </StyledMenuItem>
+                <StyledMenuItem value={1}>One</StyledMenuItem>
+                <StyledMenuItem value={2}>Two</StyledMenuItem>
+                <StyledMenuItem value={3}>Three</StyledMenuItem>
+                <StyledMenuItem value={4}>Four</StyledMenuItem>
+                <StyledMenuItem value={5}>Five</StyledMenuItem>
+                <StyledMenuItem value={6}>Six</StyledMenuItem>
+                <StyledMenuItem value={7}>Seven</StyledMenuItem>
+                <StyledMenuItem value={8}>Eight</StyledMenuItem>
+                <StyledMenuItem value={9}>Nine</StyledMenuItem>
+                <StyledMenuItem value={10}>Ten</StyledMenuItem>
+                <StyledMenuItem value={11}>Eleven</StyledMenuItem>
+                <StyledMenuItem value={12}>Twelve</StyledMenuItem>
+              </StyledSelect>
+            </FormControl>
+          </Box>
+          <FormControlLabel
+            control={<Checkbox name="customCards" />}
+            label="Allow custom cards"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="unlisted"
+                value={options.unlisted}
+                onChange={handleChange}
+                required
+              />
+            }
+            label="Make game public"
+          />
+        </FormGroup>
 
-      <Button
-        variant="contained"
-        sx={{ width: "10rem", mt: "2rem" }}
-        onClick={clickHandler}
-      >
-        Create Game
-      </Button>
+        <Button
+          variant="contained"
+          sx={{ width: "10rem", mt: "2rem" }}
+          onClick={clickHandler}
+        >
+          Create Game
+        </Button>
+      </Box>
     </Box>
   );
 };
