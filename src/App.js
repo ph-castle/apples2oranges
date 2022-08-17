@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Client } from 'boardgame.io/react';
 import { SocketIO } from 'boardgame.io/multiplayer';
 import { Apples } from './game/Apples';
@@ -21,16 +21,12 @@ export default function App() {
   let matchID = '0';
   // generate random matchId (or use create API for authenticated matches)
 
-  // current user
+  // current user, guest is when id = 0
   const [user, setUser] = useState({
     'id': 0,
     'username': '',
     'avatar': null
   });
-
-  useEffect(() => {
-    console.log('updated user: ', user);
-  }, [user]);
 
   const ApplesClient = Client({
    game: Apples,
