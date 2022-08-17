@@ -1,0 +1,23 @@
+.board_area {
+  padding: 32px;
+  display: inline-flex;
+}
+
+.player_hand{
+  background-color: rgb(199, 199, 199);
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 19rem 19rem 19rem 19rem;
+  grid-template-rows: 10rem 10rem;
+  height: 320px;
+  margin: 16px;
+  width: 1225px;
+}
+
+.judge_hand {
+  background-color: #555;
+  border-radius: 15px;
+  width: 305px;
+  height: 650px;
+  margin: 16px;
+}

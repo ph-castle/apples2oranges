@@ -1,7 +1,10 @@
 import * as React from "react";
+<<<<<<< HEAD
 import { Link, Outlet } from "react-router-dom";
+=======
+import { Link, useNavigate } from "react-router-dom";
+>>>>>>> 58cf2cdfa88671bc2e5b0040121a3e9cd80d0b3f
 import MenuIcon from "@mui/icons-material/Menu";
-
 import IconButton from "@mui/material/IconButton";
 import { GiShinyApple, GiOrangeSlice } from "react-icons/gi";
 import {
@@ -18,14 +21,14 @@ import {
 } from "@mui/material/";
 
 const pages = ["Join a Game"];
-// const pages = [];
-const settings = ["Logout"];
-// const settings = [];
 
-const Header = () => {
+//TODO: Add additional pages to the user account here
+const settings = ["Profile", "Custom Cards", "Logout"];
+
+const Header = ({ user, setUser }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  let navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -43,6 +46,7 @@ const Header = () => {
   };
 
   return (
+<<<<<<< HEAD
     <>
       <AppBar position="static">
         <Container maxWidth="xl">
@@ -82,6 +86,126 @@ const Header = () => {
               >
                 <MenuIcon />
               </IconButton>
+=======
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+            <GiShinyApple fontSize="1.5rem" />
+            <GiOrangeSlice fontSize="1.5rem" />
+            {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
+          </Box>
+          <Link to={"/home"}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "Roboto",
+                fontWeight: 700,
+                // letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              Apples to Oranges
+            </Typography>
+          </Link>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
+          <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
+            <GiShinyApple fontSize="1.5rem" />
+            <GiOrangeSlice fontSize="1.5rem" />
+          </Box>
+          <Typography
+            variant="h7"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
+              flexGrow: 1,
+              fontFamily: "Roboto",
+              fontWeight: 700,
+              // letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            Apples 2 Oranges
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
+          {user.id === 0 ? (
+            <Box sx={{ display: "flex", gap: "1em" }}>
+              <Button sx={{ color: "white", border: "1px solid white" }}
+                onClick={() => {navigate('/user/create')}}
+              >
+                Join
+              </Button>
+              <Button
+                sx={{ backgroundColor: "white", border: "1px solid white" }}
+                onClick={() => {navigate('/user/login')}}
+              >
+                Login
+              </Button>
+            </Box>
+          ) : (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="avatar" src={user.avatar} />
+                </IconButton>
+              </Tooltip>
+>>>>>>> 58cf2cdfa88671bc2e5b0040121a3e9cd80d0b3f
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
@@ -106,9 +230,42 @@ const Header = () => {
                   textDecoration: "none",
                 }}
               >
+<<<<<<< HEAD
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page}</Typography>
+=======
+                {settings.map((setting) => (
+                  <MenuItem key={setting}
+                    onClick={(e) => {
+                      switch (e.target.textContent) {
+                        case "Profile":
+                          navigate('/user/profile');
+                          handleCloseUserMenu();
+                          break;
+                        // TODO: navigate to custom cards page
+                        case "Custom Cards":
+                          handleCloseUserMenu();
+                          break;
+                        case "Logout":
+                          setUser({
+                            'id': 0,
+                            'username': '',
+                            'avatar': null
+                          });
+                          navigate('/home')
+                          handleCloseUserMenu();
+                          break;
+                        default: console.log('invalid page');
+                      }
+                    }}
+                  >
+                    <Typography
+                      textAlign="center"
+                    >
+                      {setting}
+                    </Typography>
+>>>>>>> 58cf2cdfa88671bc2e5b0040121a3e9cd80d0b3f
                   </MenuItem>
                 ))}
               </Menu>
@@ -209,4 +366,5 @@ const Header = () => {
     </>
   );
 };
+
 export default Header;
