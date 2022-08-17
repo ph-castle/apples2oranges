@@ -7,9 +7,3 @@ const server = Server({
 });
 server.run(8000);
 
-//Lobby API and Server are run on same port
-// const lobbyConfig = {
-//   apiPort: 8000,
-//   apiCallback: () => console.log('Running Lobby API on port 8000')
-// };
-

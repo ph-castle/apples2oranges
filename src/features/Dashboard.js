@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Box, ButtonGroup } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Dashboard = () => {
+export const Dashboard = () => {
   return (
     <Box
       display="flex"
