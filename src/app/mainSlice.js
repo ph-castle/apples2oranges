@@ -4,6 +4,7 @@ const initialState = {
   matchID: "",
   playerID: "",
   playerCredentials: "",
+  spotifyToken: "",
 };
 
 export const mainSlice = createSlice({
@@ -18,9 +19,18 @@ export const mainSlice = createSlice({
     },
     setPlayerCredentials: (state, action) => {
       state.playerCredentials = action.payload;
-    }
+    },
+    setSpotifyToken: (state, action) => {
+      state.spotifyToken = action.payload;
+    },
   },
 });
 
-export const { setMatchID, setPlayerID, setPlayerCredentials } = mainSlice.actions;
+export const {
+  setMatchID,
+  setPlayerID,
+  setPlayerCredentials,
+  setSpotifyToken,
+} = mainSlice.actions;
+
 export default mainSlice.reducer;

@@ -17,7 +17,7 @@ function App() {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <Header />
-        <Hero theme={theme} />
+        {/* <Hero theme={theme} /> */}
         <Container
           sx={{
             position: "relative",

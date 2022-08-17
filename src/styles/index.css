@@ -21,9 +21,9 @@ code {
 
 body {
   font-family: Roboto;
-  background-color: black;
+  /* background-color: black; */
   color: white;
-  overflow: hidden;
+  /* overflow: hidden; */
   height: 100%;
   width: 100%;
 }
