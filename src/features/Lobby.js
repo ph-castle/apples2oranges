@@ -55,8 +55,10 @@ const Lobby = () => {
       })
       .then((player) => {
         console.log("player cred in Lobby", player);
+        localStorage.setItem("matchID", sessionCode);
+        localStorage.setItem("name", name);
         localStorage.setItem("id", player.playerID);
-        localStorage.setItem("id", player.playerCredentials);
+        localStorage.setItem("credentials", player.playerCredentials);
         // dispatch(setPlayerID(player.playerID));
         // dispatch(setPlayerCredentials(player.playerCredentials));
       })

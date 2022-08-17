@@ -8,33 +8,17 @@ import {
   ListItemText,
   createTheme,
   ThemeProvider } from "@mui/material";
-import { useParams } from 'react-router-dom';
-import { Client } from 'boardgame.io/react';
-import { SocketIO } from 'boardgame.io/multiplayer';
-import { Apples } from '../game/Apples';
-import { ApplesBoard } from '../game/ApplesBoard';
+import { useParams, useNavigate } from 'react-router-dom';
+
 import { lobbyClient } from './utils/lobbyClient'
 import { useSelector } from "react-redux";
 
 export const WaitingRoom = () => {
-
+  const navigate = useNavigate();
   const { matchID } = useParams();
   const [players, setPlayers] = useState([]);
   const [copied, setCopied] = useState(false);
   const [show, setShow] = useState(false);
-  const playerID = useSelector((state) => state.playerID);
-  const playerCredentials = useSelector((state) => state.playerCredentials);
-
-console.log(playerID);
-  const ApplesClient = Client({
-    game: Apples,
-    board: ApplesBoard,
-    matchID: matchID,
-    debug: true,
-    numPlayers: players.length,
-    multiplayer: SocketIO({server: 'localhost:8000'})
-    });
-
 
 useEffect(() => {
   const interval = setInterval(() => {
@@ -42,6 +26,7 @@ useEffect(() => {
       .then(({players}) => {
         console.log(players);
         setPlayers(players);
+        localStorage.setItem("players", players);
         const currPlayers = players.filter((player) => player.name);
         if (currPlayers.length === players.length) {
           setShow(true); //everyone has joined, show them the board
@@ -60,16 +45,11 @@ useEffect(() => {
 
 // const leaveRoom = () => {
 
-console.log(localStorage.getItem("id"));
+console.log(localStorage.getItem("id")); //0 host
 
 if(show) {
   return (
-    <ApplesClient
-     matchID={matchID}
-     numPlayers={players.length}
-     playerID={localStorage.getItem("id")}
-     credentials={localStorage.getItem("credentials")}
-     />
+    navigate(`/game/apples/${localStorage.getItem('matchID')}`)
   );
 } else {
   return (
