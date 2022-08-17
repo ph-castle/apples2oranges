@@ -1,17 +1,9 @@
 import * as React from "react";
-<<<<<<< HEAD
-// import { Client } from 'boardgame.io/react';
-// import { SocketIO } from 'boardgame.io/multiplayer';
-import { Apples } from './game/Apples';
-// import { ApplesBoard } from './game/ApplesBoard';
-import { Routes, Route, useParams } from 'react-router-dom';
-=======
 import { Client } from "boardgame.io/react";
 import { SocketIO } from "boardgame.io/multiplayer";
 import { Apples } from "./game/Apples";
 import { ApplesBoard } from "./game/ApplesBoard";
 import { Routes, Route, useParams } from "react-router-dom";
->>>>>>> main
 import { Container } from "@mui/material";
 import Header from "./features/Header";
 import Dashboard from "./features/Dashboard";
@@ -56,7 +48,7 @@ function App() {
             <Route path="/home" element={<Dashboard />} />
             <Route path="/creategame" element={<CreateGame />} />
             <Route path="/joingame" element={<Lobby />} />
-            <Route path="/waitingroom" element={<WaitingRoom />} />
+            <Route path="/waitingroom/:matchID" element={<WaitingRoom />} />
             <Route path="/game/apples/:matchId" element={<ApplesClient />} />
           </Routes>
         </Container>

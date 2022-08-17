@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   matchID: "",
   playerID: "",
+  playerCredentials: "",
 };
 
 export const mainSlice = createSlice({
@@ -15,8 +16,11 @@ export const mainSlice = createSlice({
     setPlayerID: (state, action) => {
       state.playerID = action.payload;
     },
+    setPlayerCredentials: (state, action) => {
+      state.playerCredentials = action.payload;
+    }
   },
 });
 
-export const { setMatchID, setPlayerID } = mainSlice.actions;
+export const { setMatchID, setPlayerID, setPlayerCredentials, playerID, playerCredentials } = mainSlice.actions;
 export default mainSlice.reducer;

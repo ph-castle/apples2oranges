@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Button, Box, Input, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-// per lobby api docs (https://github.com/boardgameio/boardgame.io/blob/main/docs/documentation/api/Lobby.md)
-// lobbyClient is an instance of LobbyClient imported below  -- this is different than what Kesang/Heemo
-// which is why I left commented out
-//import { LobbyClient } from 'boardgame.io/client';
 import { lobbyClient } from "./utils/lobbyClient";
+import { useDispatch, useSelector } from "react-redux";
+import { setMatchID, setPlayerID, setPlayerCredentials } from "../app/mainSlice";
+import { useNavigate } from "react-router-dom";
+
+
 const Item = styled(Paper)(() => ({
   textAlign: "center",
   height: "10rem",
@@ -16,13 +17,14 @@ const Item = styled(Paper)(() => ({
 
 //Need to get current playerId
 const Lobby = () => {
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+
   const [playerMatch, setPlayerMatch] = useState({});
   const [playerAccessKey, setPlayerAccessKey] = useState({});
   const [gameMatchID, setGameMatchID] = useState("");
   const [sessionCode, setSessionCode] = useState("");
-
-  //see note above re importing LobbyClient
-  //const lobbyClient = new LobbyClient({ server: 'http://localhost:8000' });
+  const [name, setName] = useState('');
 
   useEffect(() => {
     getAllAvailableGames().then(({ matches }) => {
@@ -37,31 +39,29 @@ const Lobby = () => {
       .catch((err) => console.log(err));
   };
 
-  const getMatchHandler = (matchID) => {
-    return lobbyClient.getMatch("Apples2Oranges", matchID).catch((err) => {
-      //TODO: if invalid matchId, then show validation err on the page
-      console.log(err);
-    });
-  };
+  // const getMatchHandler = (matchID) => {
+  //   return lobbyClient.getMatch("Apples2Oranges", matchID).catch((err) => {
+  //     //TODO: if invalid matchId, then show validation err on the page
+  //     console.log(err);
+  //   });
+  // };
 
-  const joinMatchHandler = (matchID) => {
-    console.log(matchID);
+  const joinMatchHandler = () => {
     lobbyClient
-      .joinMatch("Apples2Oranges", matchID, {
-<<<<<<< HEAD
-        playerName: "Kevin",
-=======
-        playerID: "0",
-        playerName: "Alice",
->>>>>>> main
-        data: "optional player meta data",
+      .joinMatch("Apples2Oranges", sessionCode, {
+       // playerID: "0",
+        playerName: name,
+        //data: "optional player meta data",
       })
-      .then(({ playerCredentials }) => {
-        console.log(playerCredentials);
-        setPlayerAccessKey(playerCredentials);
-      });
-
-    setGameMatchID(matchID);
+      .then((player) => {
+        console.log("player cred in Lobby", player);
+        dispatch(setPlayerID(player.playerID));
+        dispatch(setPlayerCredentials(player.playerCredentials));
+      })
+      .then(() => {
+        navigate(`/waitingroom/${sessionCode}`);
+      })
+      .catch(err => console.log("error in lobby join match handler", err))
   };
 
   // const updatePlayerHandler = () => {
@@ -84,9 +84,6 @@ const Lobby = () => {
         <Typography variant="h3" sx={{ mt: "1em" }}>
           Join a Game
         </Typography>
-        <Typography variant="h5" sx={{ mt: "1em" }}>
-          Enter the session code for the game you want to join
-        </Typography>
         <Box
           gap={1}
           sx={{
@@ -97,6 +94,9 @@ const Lobby = () => {
             justifyContent: { xs: "center", sm: "flex-start" },
           }}
         >
+        <Typography variant="h5" sx={{ mt: "1em" }}>
+          Enter the session code for the game you want to join
+        </Typography>
           <Input
             placeholder="Session Code"
             value={sessionCode}
@@ -105,7 +105,7 @@ const Lobby = () => {
               setSessionCode(e.target.value);
             }}
           />
-          <Button
+          {/* <Button
             variant="contained"
             disabled={!sessionCode.length}
             onClick={() => {
@@ -114,6 +114,40 @@ const Lobby = () => {
                 joinMatchHandler(sessionCode);
               });
             }}
+          >
+            Join
+          </Button> */}
+        </Box>
+        <Box
+          gap={1}
+          sx={{
+            mt: "2em",
+            mb: "3em",
+            ml: "0.75rem",
+            display: "flex",
+            justifyContent: { xs: "center", sm: "flex-start" },
+          }}
+        >
+        <Typography variant="h5" sx={{ mt: "1em" }}>
+          Enter the player name you'll use for this game
+        </Typography>
+          <Input
+            placeholder="Nick Name"
+            value={name}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setName(e.target.value);
+            }}
+          />
+          <Button
+            variant="contained"
+            disabled={""}
+            onClick={() =>
+              // getMatchHandler(sessionCode).then((match) => {
+                //TODO: reroute here to loading deck
+                joinMatchHandler()
+              // }}
+            }
           >
             Join
           </Button>

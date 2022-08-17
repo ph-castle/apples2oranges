@@ -14,13 +14,7 @@ import { SocketIO } from 'boardgame.io/multiplayer';
 import { Apples } from '../game/Apples';
 import { ApplesBoard } from '../game/ApplesBoard';
 import { lobbyClient } from './utils/lobbyClient'
-
-const ApplesClient = Client({
-  game: Apples,
-  board: ApplesBoard,
-  debug: true,
-  multiplayer: SocketIO({server: 'localhost:8000'})
-  });
+import { useSelector } from "react-redux";
 
 export const WaitingRoom = () => {
 
@@ -28,6 +22,18 @@ export const WaitingRoom = () => {
   const [players, setPlayers] = useState([]);
   const [copied, setCopied] = useState(false);
   const [show, setShow] = useState(false);
+  const playerID = useSelector((state) => state.playerID);
+  const playerCredentials = useSelector((state) => state.playerCredentials);
+
+console.log(playerID);
+  const ApplesClient = Client({
+    game: Apples,
+    board: ApplesBoard,
+    matchID: matchID,
+    debug: true,
+    numPlayers: players.length,
+    multiplayer: SocketIO({server: 'localhost:8000'})
+    });
 
 
 useEffect(() => {
@@ -52,17 +58,17 @@ useEffect(() => {
 }, [show, players.length, matchID]);
 
 
-const leaveRoom = () => {
+// const leaveRoom = () => {
 
-}
+
 
 if(show) {
   return (
     <ApplesClient
-     gameID={matchID}
+     matchID={matchID}
      numPlayers={players.length}
-     playerID={localStorage.getItem("id")}
-     credentials={localStorage.getItem("credentials")}
+     playerID={playerID}
+     credentials={playerCredentials}
      />
   );
 } else {
@@ -97,4 +103,5 @@ if(show) {
     </Box>
   )
 }
+
 }

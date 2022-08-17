@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import {
   Box,
   FormGroup,
@@ -11,45 +11,19 @@ import {
   Typography,
   TextField,
   Button } from '@mui/material';
-import { lobbyClient } from './utils/lobbyClient'
-import { useNavigate } from 'react-router-dom';
+import { lobbyClient } from "./utils/lobbyClient";
 import { useDispatch, useSelector } from "react-redux";
-import { setMatchID, setPlayerID } from "../app/mainSlice";
+import { setMatchID, setPlayerID, setPlayerCredentials } from "../app/mainSlice";
+import { useNavigate } from "react-router-dom";
 
 export const CreateGame = () => {
   const dispatch = useDispatch();
-  const matchID = useSelector((state) => state.main.matchID);
+  let navigate = useNavigate();
 
-  //states
-  const [options, setOptions] = useState({numPlayers: '', unlisted: true});
+  const [options, setOptions] = useState({numPlayers: '', unlisted: false});
   const [customCards, setCustomCards] = useState();
   const [name, setName] = useState();
 
-  //navigate
-  let navigate = useNavigate();
-
-
-  //ClickHandler
-  // const clickHandler = async () => {
-  //   const { matchID } = await lobbyClient.createMatch('Apples2Oranges', options);
-  //   const { playerCredentials } = await lobbyClient.joinMatch(
-  //     'Apples2Oranges',
-  //     matchID,
-  //     {
-  //       playerName: name
-  //     }
-  //   )
-  //   const match = await lobbyClient.getMatch('tic-tac-toe', matchID);
-  //   console.log(match)
-  //   navigate(`/waitingroom/${matchID}`);
-  // }
-
-  // const getPlayersfunc = async() => {
-  //   const {matches} = await lobbyClient.listMatches('Apples2Orange');
-  //   console.log(matches);
-  // }
-  // getPlayersfunc()
-  //Handle Change
   const handleChange = (e) => {
     console.log(e.target.type);
     const {name, value, checked } = e.target;
@@ -67,25 +41,38 @@ export const CreateGame = () => {
     }
 
   }
+
   const clickHandler = () => {
+    let matchTemp;
     lobbyClient
-      .createMatch("Apples2Oranges", {
-        numPlayers: 2,
-      })
+      .createMatch("Apples2Oranges", options)
+      .catch(err => console.log("error creating match in CreateGame clickHandler", err))
       .then((match) => {
-        console.log(match);
+        console.log("matchID from CreatGame", match);
+        matchTemp = match.matchID;
         dispatch(setMatchID(match.matchID));
-        dispatch(setPlayerID(match.playerID));
         lobbyClient
           .joinMatch("Apples2Oranges", match.matchID, {
             playerName: name,
           })
-          .then((res) => console.log(res));
+      .catch(err => console.log("error joining match in CreateGame clickHandler", err))
+          .then((player) => {
+            console.log(player);
+            dispatch(setPlayerID(player.playerID));
+            dispatch(setPlayerCredentials(player.playerCredentials));
+          })
+      })
+      .then(() => {
+        console.log('matchTemp', matchTemp);
+        navigate(`/waitingroom/${matchTemp}`);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("catch all error in CreateGamee clickHandler", err);
       });
+    // let match = useSelector((state) => state.matchID)
+
   };
+
 
   return (
     <Box
@@ -151,3 +138,4 @@ export const CreateGame = () => {
     </Box>
   );
 };
+
