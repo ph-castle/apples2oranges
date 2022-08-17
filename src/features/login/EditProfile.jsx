@@ -159,11 +159,6 @@ export default function EditProfile({ user, setUser }) {
 
   };
 
-  const handleCancel = () => {
-    // route back to profile page
-    navigate('/user/profile');
-  };
-
   return (
     <div className="Login-edit-profile-page">
       <h3>Edit Profile</h3>
@@ -224,7 +219,7 @@ export default function EditProfile({ user, setUser }) {
         }
         <br/>
         <button type="submit" disabled={submitting}>Submit</button>
-        <button onClick={() => {handleCancel()}}>Cancel</button>
+        <button onClick={() => {navigate('/user/profile')}}>Cancel</button>
       </form>
     </div>
   )

@@ -5,11 +5,6 @@ import './Login.css';
 export default function ProfilePage({ user }) {
   let navigate = useNavigate();
 
-  const handleEdit = () => {
-    // switch to EditProfile page
-    navigate('/user/edit');
-  };
-
   return (
     <div className="Profile">
       <h3>Profile</h3>
@@ -19,7 +14,8 @@ export default function ProfilePage({ user }) {
       <br/>
       Username: {user.username}
       <br/>
-      <button onClick={() => handleEdit()}>Edit profile</button>
+      <button onClick={() => navigate('/user/edit')}>Edit profile</button>
+      <button onClick={() => navigate('/home')}>Back to Home</button>
     </div>
   )
 }
