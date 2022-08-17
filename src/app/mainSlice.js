@@ -22,5 +22,5 @@ export const mainSlice = createSlice({
   },
 });
 
-export const { setMatchID, setPlayerID, setPlayerCredentials, playerID, playerCredentials } = mainSlice.actions;
+export const { setMatchID, setPlayerID, setPlayerCredentials } = mainSlice.actions;
 export default mainSlice.reducer;

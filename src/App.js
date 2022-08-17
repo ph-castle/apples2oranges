@@ -1,9 +1,9 @@
-import * as React from "react";
-import { Client } from "boardgame.io/react";
-import { SocketIO } from "boardgame.io/multiplayer";
-import { Apples } from "./game/Apples";
-import { ApplesBoard } from "./game/ApplesBoard";
-import { Routes, Route, useParams } from "react-router-dom";
+import { React, useState, useEffect } from "react";
+import { Client } from 'boardgame.io/react';
+import { SocketIO, Local } from 'boardgame.io/multiplayer';
+import { Apples } from './game/Apples';
+import { ApplesBoard } from './game/ApplesBoard';
+import { Routes, Route } from 'react-router-dom';
 import { Container } from "@mui/material";
 import Header from "./features/Header";
 import Dashboard from "./features/Dashboard";
@@ -11,35 +11,43 @@ import { CreateGame } from "./features/CreateGame";
 import Lobby from "./features/Lobby";
 import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
+import { lobbyClient } from "./features/utils/lobbyClient";
 import { useSelector } from "react-redux";
 
 function App() {
-  // let { matchId } = useParams()
-  // let matchID = "0";
-  const matchID = useSelector((state) => state.main.userMatchID);
-  const playerID = useSelector((state) => state.main.userPlayerID);
-  // generate random matchId (or use create API for authenticated matches)
+  const matchID = useSelector((state) => state.matchID);
+  const playerID = useSelector((state) => state.playerID);
+  const playerCredentials = useSelector((state) => state.playerCredentials);
+
+  // useEffect(() => {
+  //   getMatchID()
+  //   .then(matchID => {
+  //     console.log(matchID)
+  //     setMatchID(matchID)
+  //   })
+  //   .catch(err => console.log("error getting matchID", err))
+  // }, [])
+
+  // const getMatchID = async() => {
+  //   let { matchID } = await lobbyClient.createMatch('Apples2Oranges', {
+  //     numPlayers: 3
+  //   });
+  //   return matchID;
+  // }
 
   const ApplesClient = Client({
     game: Apples,
     board: ApplesBoard,
-    numPlayers: 3,
     debug: true,
-    // multiplayer: Local(),
-    playerID: playerID,
-    matchID: matchID,
-    multiplayer: SocketIO({ server: "localhost:8000" }),
-  });
+    multiplayer: SocketIO({server: 'localhost:8000'})
+    });
 
-  let applesClients = [
-    <ApplesClient matchID={matchID} playerID="0" />,
-    <ApplesClient matchID={matchID} playerID="1" />,
-    <ApplesClient matchID={matchID} playerID="2" />,
-  ];
+
+  // const matchID = useSelector((state) => state.main.userMatchID);
+  // const playerID = useSelector((state) => state.main.userPlayerID);
 
   return (
     <StyledEngineProvider injectFirst>
-      <Header />
       <div>
         <Container maxWidth="lg">
           <Routes>
