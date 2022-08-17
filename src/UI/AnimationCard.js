@@ -15,6 +15,9 @@ export default function AnimationCard({ card, i }) {
   const isEven = i % 2 === 0;
   const AnimatedCard = styled(Card)({
     transform: "rotate3d(1, 1, 1, -45deg) scale(1.5)",
+    display: "inline-block",
+    animation:
+      "rotate-in-diag-1 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
     position: "absolute",
     top: `${cardProps[i].top}%`,
     left: `${cardProps[i].left}%`,
@@ -29,17 +32,41 @@ export default function AnimationCard({ card, i }) {
     fontSize: "32px",
     fontWeight: "800",
     overflow: "hidden",
-    boxShadow: "0px 0px 0px 0px rgba(0,0,0,0.2)",
-    "&:hover": {
-      transform: "rotate3d(1, 1, 1, -50deg) scale(2)",
+    textShadow: "0 0 10px white",
+    "@keyframes rotate-in-diag-1": {
+      "0%": {
+        // "-webkit-transform": "rotate3d(1, 1, 0, -360deg)",
+        transform: "rotate3d(1, 1, 0, -360deg)",
+        opacity: "0",
+      },
+      "50%": {
+        // "-webkit-transform": "rotate3d(1, 1, 0, 0deg)",
+        transform: "rotate3d(1, 1, 0, 0deg)",
+        opacity: "1",
+      },
+      "100%": {
+        // "-webkit-transform": "rotate3d(1, 1, 0, 0deg)",
+        transform: "rotate3d(1, 1, 1, -45deg) scale(1.5)",
+      },
     },
   });
   // "translateY(0)"
   return (
     <AnimatedCard>
-      <CardContent>
-        <Typography variant="body2">{card.body}</Typography>
-      </CardContent>
+      {/* <CardContent> */}
+      <Typography
+        variant="body2"
+        sx={{
+          padding: "1rem",
+          fontFamily: "roboto",
+          textShadow: `0 0 10px ${!isEven ? "black" : "white"}`,
+          fontWeight: "800",
+        }}
+        color={!isEven ? "black" : "white"}
+      >
+        {card.body}
+      </Typography>
+      {/* </CardContent> */}
     </AnimatedCard>
   );
 }

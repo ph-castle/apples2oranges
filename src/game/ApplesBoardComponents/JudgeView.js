@@ -1,5 +1,6 @@
 import React from 'react';
 import Timer from './Timer';
+// import Card from '../../card/Card.js';
 
 export default function JudgeView({G, ctx, moves, roundTime, setRoundTime}) {
 

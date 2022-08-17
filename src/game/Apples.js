@@ -7,14 +7,14 @@ import { INVALID_MOVE } from "boardgame.io/core";
 //INTEGRATE BACKEND DECKS
 //IMPORT INVALID_MOVES for move validation
 // TURN ORDER / RANDOM JUDGE SELECTION *Low Priority *
-export const Apples = (decks) => ({
+export const Apples = ({
   name: "Apples2Oranges",
 
   setup: (ctx) => ({
     players: Array(ctx.numPlayers).fill({ hand: [], winningCards: [] }),
 
     secret: {
-      promptDeck: decks,
+      promptDeck: [],
       answerDeck: AnswerDeck,
     },
     //Maxiumum Cards per hand.

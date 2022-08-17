@@ -7,14 +7,14 @@ import { CreateGame } from "./features/CreateGame";
 import Lobby from "./features/Lobby";
 import { WaitingRoom } from "./features/WaitingRoom";
 import { StyledEngineProvider } from "@mui/material/styles";
-import { theme } from "./UI/theme";
+import { theme } from "./styles/theme";
 import { ThemeProvider } from "@mui/material/styles";
 import Hero from "./UI/Hero";
 import ProfilePage from "./features/login/ProfilePage";
 import EditProfile from "./features/login/EditProfile";
 import LoginPage from "./features/login/LoginPage";
 import CreateUserPage from "./features/login/CreateUserPage";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Apples2Oranges } from "./features/gameRoom";
 
 export default function App() {

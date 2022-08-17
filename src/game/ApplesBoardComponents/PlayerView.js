@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Timer from './Timer';
 import ScoreBoard from './ScoreBoard';
+// import Card from '../../card/Card.js';
 
 export default function PlayerView({G, ctx, moves, playerID, roundTime, setRoundTime}) {
 
@@ -10,12 +11,14 @@ export default function PlayerView({G, ctx, moves, playerID, roundTime, setRound
       <div>
         {G.players[playerID].hand.map((card, i) => {
           return (
+
             <span
               key={card.id}
               onClick={()=> moves.playAnswer(i)}
             >
               <p>{card.text}</p>
             </span>
+
           )
         })}
       </div>
