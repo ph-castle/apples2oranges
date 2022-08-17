@@ -11,7 +11,7 @@ import { cardProps } from "./cardProps";
 // `;
 
 export default function AnimationCard({ card, i }) {
-  const [animationToggle, setAnimationToggle] = React.useState(false);
+  // const [animationToggle, setAnimationToggle] = React.useState(false);
   const isEven = i % 2 === 0;
   const AnimatedCard = styled(Card)({
     transform: "rotate3d(1, 1, 1, -45deg) scale(1.5)",
@@ -30,8 +30,8 @@ export default function AnimationCard({ card, i }) {
     fontWeight: "800",
     overflow: "hidden",
     boxShadow: "0px 0px 0px 0px rgba(0,0,0,0.2)",
-    onHover: {
-      animation: "rotate-scale-up 4s linear both",
+    "&:hover": {
+      transform: "rotate3d(1, 1, 1, -50deg) scale(2)",
     },
   });
   // "translateY(0)"

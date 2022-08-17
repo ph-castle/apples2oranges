@@ -6,6 +6,9 @@ export const theme = createTheme({
     // In Chinese and Japanese the characters are usually larger,
     // so a smaller fontsize may be appropriate.
     fontSize: 16,
+    allVariants: {
+      color: "white",
+    },
   },
   palette: {
     primary: {
@@ -26,7 +29,7 @@ export const theme = createTheme({
       standard: 300,
       // this is to be used in complex animations
       complex: 375,
-      // recommended when something is entering screen
+      // recommended when something is entering screzen
       enteringScreen: 225,
       // recommended when something is leaving screen
       leavingScreen: 195,
