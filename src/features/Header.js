@@ -177,27 +177,31 @@ const Header = ({ user, setUser }) => {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <MenuItem key={setting}
+                    onClick={(e) => {
+                      switch (e.target.textContent) {
+                        case "Profile":
+                          navigate("/user/profile");
+                          handleCloseUserMenu();
+                          break;
+                        // TODO: navigate to custom cards page
+                        case "Custom Cards":
+                          handleCloseUserMenu();
+                          break;
+                        case "Logout":
+                          setUser({
+                            'id': 0,
+                            'username': '',
+                            'avatar': null
+                          });
+                          handleCloseUserMenu();
+                          break;
+                        default: console.log('invalid page');
+                      }
+                    }}
+                  >
                     <Typography
                       textAlign="center"
-                      onClick={(e) => {
-                        switch (e.target.textContent) {
-                          case "Profile":
-                            navigate("/user/profile");
-                            break;
-                          // TODO: navigate to custom cards page
-                          case "Custom Cards":
-                            break;
-                          case "Logout":
-                            setUser({
-                              'id': 0,
-                              'username': '',
-                              'avatar': null
-                            });
-                            break;
-                          default: console.log('invalid page');
-                        }
-                      }}
                     >
                       {setting}
                     </Typography>
