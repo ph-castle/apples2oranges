@@ -40,9 +40,8 @@ function App() {
     board: ApplesBoard,
     numPlayers: 3,
     debug: true,
-  setupData: {test: [10]}
     // multiplayer: Local(),
-    //multiplayer: SocketIO({server: 'localhost:8000'})
+   multiplayer: SocketIO({server: 'localhost:8000'})
   });
 
   let applesClients=[<ApplesClient playerID="0" />, <ApplesClient playerID="1" />,  <ApplesClient playerID="2" />];
