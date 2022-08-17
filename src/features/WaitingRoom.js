@@ -1,27 +1,3 @@
-// import { React, useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
-// import { lobbyClient } from "./utils/lobbyClient";
-// import { Box, Typography, Button, List, ListItem, ListItemText, createTheme, ThemeProvider, Input, Paper } from "@mui/material";
-// import { useSelector,  useDispatch  } from "react-redux";
-// import { setMatchID, setPlayerID, setPlayerCredentials } from "../app/mainSlice";
-// import { Client } from 'boardgame.io/react';
-// import { Apples } from '../game/Apples';
-// import { Local, SocketIO } from 'boardgame.io/multiplayer';
-// import { ApplesBoard } from '../game/ApplesBoard';
-// import { useNavigate } from "react-router-dom";
-
-// export const WaitingRoom = () => {
-//   let dispatch = useDispatch();
-//   const [startGame, setStartGame] = useState(false);
-//   const [minPlayers, setMinPlayers] = useState(false);
-//   let [players, setPlayers] = useState([]);
-//   const [show, setShow] = useState(false);
-//   let timeout;
-//   let { matchID } = useParams();
-//   setMatchID(matchID);
-//   const [pName, setPName] = useState('');
-//   let navigate = useNavigate();
-//   let playerID = useSelector((state) => state.playerID);
 
 
   // navigate here either from lobby if matchID => !startGame, from createGame(playerID = 0), or using URL
@@ -35,146 +11,21 @@
       // conditionally render the AppleClient instead of the waiting room
       // update the URL either by window.location or can add Route to apple
 
-//   // function joinGame(matchID, name) {
-//   // return getPlayer(matchID, name)
-//   //   .then(player => {
-//   //     console.log(`credentials and id returned for player ${name}`, player);
-//   //     dispatch(setPlayerID(player.playerID));
-//   //     dispatch(setPlayerCredentials(player.playerCredentials));
-//   //   })
-//   //   .catch((err) => {
-//   //   console.log("catch all error in getPlayer from join gameclickHandler", err);
-//   //   });
-//   // }
-
-
-//   // const getPlayer = async(matchID, name) => {
-//   //   try {
-//   //     let player = await lobbyClient.joinMatch('Apples2Oranges', matchID, { playerName: name});
-//   //     return player;
-//   //   } catch(err) {
-//   //     console.log("error getting playe async function", err);
-//   //   }
-//   //   return null;
-//   // }
-
-
-//   // const makeGame = async(matchID) => {
-//   //   if (matchID.length > 0) {
-//   //     try {
-//   //       const host = await joinGame(matchID, "host");
-//   //     } catch(err) {
-//   //       console.log("eror makeing host", err);
-//   //     }
-//   //     try {
-//   //       const player1 = await joinGame(matchID, "player1");
-//   //     } catch(err) {
-//   //       console.log("eror makeing player1", err);
-//   //     }
-//   //     try {
-//   //       const player2 = await joinGame(matchID, "player2");
-//   //     } catch(err) {
-//   //       console.log("eror makeing player2", err);
-//   //     }
-//   //   }
-//   //   return;
-//   // };
-
-//   // if (matchID.length > 0) {
-//   //   makeGame(matchID);
-//   // } else {
-//   //   console.log("matchID not long enough");
-//   // }
-
-
-//const AppT = Client({game: 'Apples2Oranges'});
-
-
-// const ApplesClient = Client({
-//   game: Apples,
-//   board: ApplesBoard,
-//   multiplayer: SocketIO({ server: 'localhost:8000' }),
-//   numPlayers: 3,
-//   debug: false,
-//   //playerID: 0,
-//   matchID: 'tM8w-LBi-bR',
-//   playerCredentials: ''
-// });
-
-// // update(state) {
-// //   if (state === null) return;
-// //   // ...
-// // };
+  // function joinGame(matchID, name) {
+  // return getPlayer(matchID, name)
+  //   .then(player => {
+  //     console.log(`credentials and id returned for player ${name}`, player);
+  //     dispatch(setPlayerID(player.playerID));
+  //     dispatch(setPlayerCredentials(player.playerCredentials));
+  //   })
+  //   .catch((err) => {
+  //   console.log("catch all error in getPlayer from join gameclickHandler", err);
+  //   });
+  // }
 
 
 
-// const AppT = () => (
-//   <div>
-//     <ApplesClient playerID="0" />
-//     {/* <ApplesClient playerID="1" />
-//     <ApplesClient playerID="2" /> */}
-//   </div>
-// );
 
-
-// useEffect(() => {
-//   const interval = setInterval(() => {
-//     lobbyClient.getMatch('Apples2Oranges', matchID)
-//       .then(({players}) => {
-//         console.log(players);
-//         setPlayers(players);
-//         const currPlayers = players.filter((player) => player.name);
-//         if (currPlayers.length === players.length) {
-//           setShow(true); //everyone has joined, show them the board
-//         }
-//       })
-//   }, 500);
-//   if(show) {
-//     clearInterval(interval);
-//   }
-//   return () => {
-//     clearInterval(interval);
-//   };
-
-// }, [show, players.length, matchID]);
-
-//   // matchID &&
-//   // const updatePlayers = async(matchID) => {
-//   //   try {
-//   //     match = await lobbyClient.getMatch('Apples2Oranges', matchID);
-//   //     console.log(match);
-//   //     setPlayers(match.players)
-//   //   } catch(err) {
-//   //     console.log("error getting match in WaitingRoom", err);
-//   //   }
-//   //   if (!startGame) {
-//   //   } else {
-//   //     try {
-//   //       timeout = await setTimeout(updatePlayers, 20000);
-//   //     } catch(err) {
-//   //       console.log("error using setTimeout in WaitingRoom update players function", err);
-//   //     }
-//   //   } // else could make clients here
-//   // };
-
-
-//   console.log("matchID", matchID); //tM8w-LBi-bR
-
-//   // useEffect((matchID) => {
-//   //   updatePlayers(matchID)
-//   //   // make a client for each player
-//   // }, [matchID]);
-
-
-
-//   function handleClickStartGame() {
-//     // these two things are kind of redundant
-//      setStartGame(true);
-//      clearTimeout(timeout);
-//      // display some message saying others can join later using code, if forget code in url (should also display on game page)
-//      // could make clients here
-//      // redirect to
-//   }
 
 //   function joinMatchHandler(e, pName) {
 //     lobbyClient
@@ -192,62 +43,6 @@
 
 
 
-
-
-//   return(
-//     <>
-//           <Box
-//             sx={{
-//               display:"flex",
-//               maxWidth: 500,
-//               height: "80vh",
-//               flexDirection:"column",
-//               p:'1rem',
-//               ml: {md: '2rem'},
-//               mt: '0.5rem'
-//             }}
-//           >
-//             <Typography variant="h4" sx={{fontSize: {xs:'1.7rem', sm: '2rem', md:'2.2rem'}, mt: '0.6rem'}}>Waiting for players</Typography>
-//             <Button variant="contained" sx={{p:'0.5rem', mt: '1rem', fontSize: {sm: '1rem',md:'1.2rem'}}}>Your Session Code: {matchID}</Button>
-//             <Box>
-//               <List sx={{ width: '100%', maxHeight: 400, bgcolor: 'color', p: '1rem', overflowY:'scroll' }}>
-//               {players.map((value, index) => (
-//                 <ListItem
-//                   key={value}
-//                   disableGutters
-//                 >
-//                <ListItemText primaryTypographyProps={{fontSize: {sm: '18px', md: '20px'}}} primary={`${index + 1}. ${value.name === undefined ? '' : value.name}`} />
-//               </ListItem>
-//               ))}
-//               </List>
-//             </Box>
-//             {players.length >= 3
-//             ? <Button
-//                 variant="contained"
-//                 type="button"
-//                 sx={{p:'0.5rem', width: '50%', ml: '1rem', fontSize: {sm: '1rem', md: '1.wrem'}}}
-//               >
-//               Start Game
-//               </Button>
-//             : <Button
-//                 variant="contained"
-//                 type="button"
-//                 disabled
-//                 sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}}
-//               >
-//               Start Game
-//               </Button>
-//             }
-
-//        {/* <ApplesClient name={player2} playerID={playerID} /> */}
-//        <div>
-//         <ApplesClient playerID="0" />
-//       </div>
-//     </Box>
-
-
-// )}
-
 import React, {useState, useEffect} from "react";
 import {
   Box,
@@ -258,31 +53,23 @@ import {
   ListItemText,
   createTheme,
   ThemeProvider } from "@mui/material";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Client } from 'boardgame.io/react';
 import { SocketIO } from 'boardgame.io/multiplayer';
 import { Apples } from '../game/Apples';
 import { ApplesBoard } from '../game/ApplesBoard';
 import { lobbyClient } from './utils/lobbyClient'
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-// const ApplesClient = Client({
-//   game: Apples,
-//   board: ApplesBoard,
-//   debug: true,
-//   multiplayer: SocketIO({server: 'localhost:8000'})
-//   });
+
 
 export const WaitingRoom = () => {
   const playerID = useSelector((state) => state.playerID);
   const playerCredentials = useSelector((state) => state.playerCredentials);
-  //const matchID = useSelector((state) => state.matchID);
-  const navigate = useNavigate();
-
   const { matchID } = useParams();
+  const navigate = useNavigate();
   const [players, setPlayers] = useState([]);
-  const [copied, setCopied] = useState(false);
   const [show, setShow] = useState(false);
+
 
 
 useEffect(() => {
@@ -291,6 +78,7 @@ useEffect(() => {
       .then(({players}) => {
         console.log(players);
         setPlayers(players);
+        localStorage.setItem("players", players);
         const currPlayers = players.filter((player) => player.name);
         if (currPlayers.length === players.length) {
           setShow(true); //everyone has joined, show them the board
@@ -304,12 +92,11 @@ useEffect(() => {
     clearInterval(interval);
   };
 
-}, [show, players.length, matchID]);
+}, [show, players, matchID]);
 
 function handleStartGame() {
   console.log('handle click running')
   setShow(true);
- // return ApplesClient.start();
 };
 
 const ApplesClient = Client({
@@ -318,37 +105,18 @@ const ApplesClient = Client({
   multiplayer: SocketIO({ server: 'localhost:8000' }),
   numPlayers: 3,
   debug: true,
-  //playerID: 0,
-  matchID: 'tM8w-LBi-bR',
-  playerCredentials: ''
+  playerID: playerID,
+  matchID: matchID,
+  playerCredentials: playerCredentials,
 });
 
-// update(state) {
-//   if (state === null) return;
-//   // ...
-// };
 
 
 
-// const AppT = () => (
-//   <div>
-//     <ApplesClient playerID="0" />
-//     {/* <ApplesClient playerID="1" />
-//     <ApplesClient playerID="2" /> */}
-//   </div>
-// );
+
 
 //   //navigate(`/game/apples/${matchID}`)
 
-//   ApplesClient.start();
-
-
-
-// // const leaveRoom = () => {
-
-// // }
-
-// //const Test = Client({game: 'Apples2Oranges'});
 
 
 
@@ -382,6 +150,17 @@ if(show) {
   //     credentials={playerCredentials}
   //   />
   // )
+=======
+
+// const leaveRoom = () => {
+
+console.log(localStorage.getItem("id")); //0 host
+
+if(show) {
+  return (
+    navigate(`/game/apples/${localStorage.getItem('matchID')}`)
+  );
+>>>>>>> lobby
 } else {
   return (
     <Box
@@ -409,6 +188,7 @@ if(show) {
         ))}
       </List>
       </Box>
+<<<<<<< HEAD
       <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}} onClick={() => handleStartGame()}>Start Game</Button>
         {/* <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}}>Start Game</Button> */}
          {/* <ApplesClient playerID="0" /> */}
@@ -420,15 +200,12 @@ if(show) {
 // function ApplesClient() {
 
 // }
+=======
+      <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}} onClick={() => setShow(true)}>Start Game</Button>
+        {/* <Button variant="contained" sx={{p:'0.5rem', width: '50%', ml: '1rem',fontSize: {sm: '1rem', md: '1.wrem'}}}>Start Game</Button> */}
+    </Box>
+  )
+}
+>>>>>>> lobby
 
-// const ApplesClient = new Client({
-//   game: Apples,
-//   board: ApplesBoard,
-//   multiplayer: SocketIO({ server: 'localhost:8000' }),
-//   numPlayers: players.length,
-//   debug: true,
-//   playerID: playerID,
-//   matchID: matchID,
-//   playerCredentials: playerCredentials
-// });
-// ApplesClient.start();
+}
