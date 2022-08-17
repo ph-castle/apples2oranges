@@ -45,7 +45,7 @@
   font-weight: 600;
   height: 40px;
   left: 28%;
-  margin: 5px;
+  margin: 5px 5px 0px 5px;
   padding: 4px;
   position: absolute;
   width: 40%;
@@ -62,3 +62,15 @@
   transform: translateY(3px);
   -webkit-transform: translateY(3px);
 }
+
+.social_media {
+  display: flex;
+  position: absolute;
+  align-content: right;
+  bottom: 8px;
+  right: 8px;
+  line-height: 1.3em;
+  text-align: center;
+  vertical-align: middle;
+}
+

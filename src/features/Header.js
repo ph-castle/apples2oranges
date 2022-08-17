@@ -1,7 +1,6 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-
 import IconButton from "@mui/material/IconButton";
 import { GiShinyApple, GiOrangeSlice } from "react-icons/gi";
 import {
@@ -20,12 +19,12 @@ import {
 const pages = ["Join a Game"];
 
 //TODO: Add additional pages to the user account here
-const settings = ["Logout"];
+const settings = ["Profile", "Custom Cards", "Logout"];
 
-const Header = () => {
+const Header = ({ user, setUser }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  let navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -140,17 +139,16 @@ const Header = () => {
               </Button>
             ))}
           </Box>
-          {/* Maybe setup a global state for logging in */}
-          {!isLoggedIn ? (
+          {user.id === 0 ? (
             <Box sx={{ display: "flex", gap: "1em" }}>
-              {/* TODO: Here is where you join/create account*/}
-              <Button sx={{ color: "white", border: "1px solid white" }}>
+              <Button sx={{ color: "white", border: "1px solid white" }}
+                onClick={() => {navigate('/user/create')}}
+              >
                 Join
               </Button>
-              {/* TODO: Here is where user logs in */}
               <Button
                 sx={{ backgroundColor: "white", border: "1px solid white" }}
-                onClick={() => setIsLoggedIn(true)}
+                onClick={() => {navigate('/user/login')}}
               >
                 Login
               </Button>
@@ -159,8 +157,7 @@ const Header = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  {/* TODO: Put user's avatar here */}
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="avatar" src={user.avatar} />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -180,14 +177,32 @@ const Header = () => {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <MenuItem key={setting}
+                    onClick={(e) => {
+                      switch (e.target.textContent) {
+                        case "Profile":
+                          navigate('/user/profile');
+                          handleCloseUserMenu();
+                          break;
+                        // TODO: navigate to custom cards page
+                        case "Custom Cards":
+                          handleCloseUserMenu();
+                          break;
+                        case "Logout":
+                          setUser({
+                            'id': 0,
+                            'username': '',
+                            'avatar': null
+                          });
+                          navigate('/home')
+                          handleCloseUserMenu();
+                          break;
+                        default: console.log('invalid page');
+                      }
+                    }}
+                  >
                     <Typography
                       textAlign="center"
-                      // TODO: User logout here
-                      onClick={(e) => {
-                        e.target.textContent === "Logout" &&
-                          setIsLoggedIn(false);
-                      }}
                     >
                       {setting}
                     </Typography>
@@ -201,4 +216,5 @@ const Header = () => {
     </AppBar>
   );
 };
+
 export default Header;

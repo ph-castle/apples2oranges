@@ -14,13 +14,41 @@ module.exports.readUser = (username, password) => {
         `, [username, password])
         .then((result) => {
           client.release();
-          return result;
+          return result.rows[0];
         })
         .catch((err) => {
           console.log('Problem reading user: ', err);
           client.release();
           return err;
-        });
+        })
+      })
+      .catch((err) => {
+        console.log('Error connecting to pool: ', err);
+        return err;
+      })
+  );
+};
+
+module.exports.readUsername = (username) => {
+  return (
+    pool
+      .connect()
+      .then((client) => {
+        return client.query(`
+          SELECT
+            id
+          FROM users
+          WHERE username = $1
+        `, [username])
+        .then((result) => {
+          client.release();
+          return result.rows[0];
+        })
+        .catch((err) => {
+          console.log('Problem reading username: ', err);
+          client.release();
+          return err;
+        })
       })
       .catch((err) => {
         console.log('Error connecting to pool: ', err);
@@ -37,11 +65,11 @@ module.exports.addUser = (username, password, avatar) => {
         return client.query(`
           INSERT INTO users (username, password, avatar)
           VALUES ($1, $2, $3)
-          RETURNING id
+          RETURNING id, username, password, avatar
         `, [username, password, avatar])
         .then((result) => {
           client.release();
-          return result;
+          return result.rows[0];
         })
         .catch((err) => {
           console.log('Problem adding user: ', err);
