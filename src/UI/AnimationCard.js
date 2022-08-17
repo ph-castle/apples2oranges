@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Hidden, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
+import { cardProps } from "./cardProps";
 // const Item = styled(Paper)`
 //   text-align: center;
 //   height: 10rem;
@@ -10,33 +10,33 @@ import { styled } from "@mui/material/styles";
 //   line-height: 10rem;
 // `;
 
-export default function AnimationCard({ card }) {
+export default function AnimationCard({ card, i }) {
+  const [animationToggle, setAnimationToggle] = React.useState(false);
+  const isEven = i % 2 === 0;
   const AnimatedCard = styled(Card)({
-    animation: "rotate-scale-up .65s linear both",
+    transform: "rotate3d(1, 1, 1, -45deg) scale(1.5)",
     position: "absolute",
-    bottom: `${Math.random() * 800}px`,
-    right: `-${Math.random() * 800}px`,
-    width: "10rem",
-    height: "12rem",
+    top: `${cardProps[i].top}%`,
+    left: `${cardProps[i].left}%`,
+    width: "25%",
+    maxWidth: "12rem",
+    height: "40%",
+    maxHeight: "16rem",
+    outline: `solid 2px ${!isEven ? "black" : "white"}`,
     zIndex: "-1",
+    backgroundColor: isEven ? "black" : "white",
+    color: !isEven ? "black" : "white",
+    fontSize: "32px",
+    fontWeight: "800",
+    overflow: "hidden",
     boxShadow: "0px 0px 0px 0px rgba(0,0,0,0.2)",
-    transform: "translate(-50%, -50%)",
-
-    "@keyframes rotate-scale-up": {
-      "0%": {
-        transform: "rotate(0deg) scale(1)",
-      },
-      "100%": {
-        // transform: "rotate(360deg) scale(1.5)",
-        transform: "rotate3d(1, 1, 1, 45deg)",
-        top: card.top,
-        left: card.left,
-      },
+    onHover: {
+      animation: "rotate-scale-up 4s linear both",
     },
   });
-  return (dd .
-    g
-    <AnimatedCard key={card.body}>
+  // "translateY(0)"
+  return (
+    <AnimatedCard>
       <CardContent>
         <Typography variant="body2">{card.body}</Typography>
       </CardContent>

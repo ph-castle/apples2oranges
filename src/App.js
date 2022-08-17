@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import ApplesClient from "./ApplesClient";
 import { theme } from "./UI/theme";
 import { ThemeProvider } from "@mui/material/styles";
+import Hero from "./UI/Hero";
 
 function App() {
   // let { matchId } = useParams()
@@ -33,22 +34,29 @@ function App() {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <Header />
-        <div style={{ position: "relative" }}>
-          <Container maxWidth="lg">
-            <Routes>
-              {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
-              <Route path="/" element={<Dashboard theme={theme} />} />
-              <Route path="/home" element={<Dashboard theme={theme} />} />
-              <Route path="/creategame" element={<CreateGame />} />
-              <Route path="/joingame" element={<Lobby />} />
-              <Route path="/waitingroom" element={<WaitingRoom />} />
-              <Route
-                path="/game/apples/:matchId"
-                element={<ApplesClient playerID={playerID} matchID={matchID} />}
-              />
-            </Routes>
-          </Container>
-        </div>
+        <Hero theme={theme} />
+        <Container
+          sx={{
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            overflow: "hidden",
+          }}
+        >
+          <Routes>
+            {/* <Route path="/profile/:username" element={<EditProfile/>}/> */}
+            <Route path="/" element={<Dashboard theme={theme} />} />
+            <Route path="/home" element={<Dashboard theme={theme} />} />
+            <Route path="/creategame" element={<CreateGame />} />
+            <Route path="/joingame" element={<Lobby />} />
+            <Route path="/waitingroom" element={<WaitingRoom />} />
+            <Route
+              path="/game/apples/:matchId"
+              element={<ApplesClient playerID={playerID} matchID={matchID} />}
+            />
+          </Routes>
+        </Container>
       </ThemeProvider>
     </StyledEngineProvider>
   );

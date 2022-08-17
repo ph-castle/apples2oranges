@@ -12,6 +12,10 @@ const Item = styled(Paper)(() => ({
   width: "100%",
   maxWidth: "16rems",
   lineHeight: "10rem",
+  outline: "white solid 1px",
+  backgroundColor: "black",
+  color: "white",
+  fontSize: "2rem",
 }));
 
 //Need to get current playerId
@@ -121,7 +125,6 @@ const Lobby = () => {
         <Box
           sx={{
             p: 2,
-            bgcolor: "background.default",
             display: "grid",
             gridTemplateColumns: {
               xs: "1fr",

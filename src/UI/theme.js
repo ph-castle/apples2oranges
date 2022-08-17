@@ -1,15 +1,20 @@
 import { createTheme } from "@mui/material/styles";
-import { red, orange } from "@mui/material/colors";
+import { green, grey } from "@mui/material/colors";
 
 export const theme = createTheme({
+  typography: {
+    // In Chinese and Japanese the characters are usually larger,
+    // so a smaller fontsize may be appropriate.
+    fontSize: 16,
+  },
   palette: {
     primary: {
-      main: orange[500],
+      main: grey[900],
     },
     secondary: {
-      light: red[300],
-      main: red[500],
-      bold: red[800],
+      light: green[300],
+      main: green[200],
+      bold: green[500],
     },
   },
   transitions: {
