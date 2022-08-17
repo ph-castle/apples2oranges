@@ -1,21 +1,70 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import './Login.css';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
 
 export default function ProfilePage({ user }) {
+  console.log('user id: ', user.id);
   let navigate = useNavigate();
 
   return (
-    <div className="Profile">
-      <h3>Profile</h3>
-      {user.avatar !== null &&
-        <img className="avatar-thumbnail" src={user.avatar} alt="avatar"/>
+    <Box
+      sx={{
+          width: '50%',
+          margin: 'auto',
+          mt: 4,
+      }}>
+      <Typography variant="h4">Profile</Typography>
+      <br/>
+      {user.id !== 0 ?
+        (
+          <div>
+            <Avatar
+              src={user.avatar}
+              alt="avatar"
+              sx={{ width: '4em', height: '4em', margin: 'auto'}}
+            />
+            <br/>
+            <Typography variant="h6" align="center">
+              Username: {user.username}
+            </Typography>
+            <br/>
+            <Button
+              variant="contained"
+              sx={{ p: "sm", width: '20ch', mt: '2rem',
+              display: 'block', margin: 'auto'}}
+              onClick={() => navigate('/user/edit')}
+            >
+              Edit profile
+            </Button>
+            <br/>
+            <Button variant="contained"
+              sx={{ p: "sm", width: '20ch', mt: '2rem', display: 'block', margin: 'auto' }}
+              onClick={() => navigate('/home')}
+            >
+              Back to Home
+            </Button>
+          </div>
+        )
+        :
+        (
+          <div>
+            <Typography variant="h6" align="center">
+              Please login to see your profile
+            </Typography>
+            <br/>
+            <Button variant="contained"
+              sx={{ p: "sm", width: '20ch', mt: '2rem', display: 'block', margin: 'auto' }}
+              onClick={() => navigate('/user/login')}
+            >
+              Login
+            </Button>
+          </div>
+        )
       }
-      <br/>
-      Username: {user.username}
-      <br/>
-      <button onClick={() => navigate('/user/edit')}>Edit profile</button>
-      <button onClick={() => navigate('/home')}>Back to Home</button>
-    </div>
+    </Box>
   )
 }

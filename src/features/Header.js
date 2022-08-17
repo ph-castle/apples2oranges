@@ -157,7 +157,7 @@ const Header = ({ user, setUser }) => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src={user.avatar} />
+                  <Avatar alt="avatar" src={user.avatar} />
                 </IconButton>
               </Tooltip>
               <Menu

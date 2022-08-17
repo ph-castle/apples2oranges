@@ -2,6 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import './Login.css';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormHelperText from '@mui/material/FormHelperText';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Avatar from '@mui/material/Avatar';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+
 
 export default function EditProfile({ user, setUser }) {
   const [username, setUsername] = useState(user.username);
@@ -160,67 +171,122 @@ export default function EditProfile({ user, setUser }) {
   };
 
   return (
-    <div className="Login-edit-profile-page">
-      <h3>Edit Profile</h3>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        {photo !== null && <img className="avatar-thumbnail" src={photo} alt="avatar"/>}
-        <br/>
-        <label>Upload a new avatar: </label>
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          onChange={(e) => uploadImage(e)}
+    <Box
+      sx={{
+          width: '50%',
+          margin: 'auto',
+          mt: 4,
+          display: 'block'
+      }}>
+      <Typography variant="h4">Edit Profile</Typography>
+      <form noValidate autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
+        <Avatar
+          src={photo}
+          alt="avatar"
+          sx={{ width: '4em', height: '4em'}}
         />
         <br/>
-        <label>Username: </label>
-        <input
-          type="text"
-          autoComplete="off"
-          value={username}
-          placeholder="Change username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        {usernameTaken &&
-          <div className="warning">Username already taken. Please input a different username</div>
-        }
+        <FormControl sx={{ width: '25ch' }}>
+          <Button
+            variant="contained"
+            component="label"
+            sx={{ p: "sm", width: '26ch'}}
+          >
+            <AddPhotoAlternateIcon />&nbsp;Upload avatar
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              onChange={(e) => uploadImage(e)}
+              hidden
+            />
+          </Button>
+        </FormControl>
         <br/>
-        <label>Current Password: </label>
-        <input
-          type="password"
-          required
-          autoComplete="off"
-          value={oldPassword}
-          placeholder="Enter current password"
-          onChange={(e) => setOldPassword(e.target.value)}
-        />
-        {incorrectPassword &&
-          <div className="warning">Incorrect password!</div>
-        }
+        <FormControl sx={{ width: '25ch', mt: '1rem' }}>
+          <InputLabel size="small">Username</InputLabel>
+          <OutlinedInput
+            type="text"
+            value={username}
+            required
+            onChange={(e) => setUsername(e.target.value)}
+            label="Username"
+            error={usernameTaken}
+            size="small"
+          />
+          {
+            usernameTaken ?
+            (<FormHelperText>Username already taken</FormHelperText>)
+            :
+            (<FormHelperText>&nbsp;</FormHelperText>)
+          }
+        </FormControl>
         <br/>
-        <label>New Password: </label>
-        <input
-          type="password"
-          autoComplete="off"
-          value={newPassword}
-          placeholder="Enter new password"
-          onChange={(e) => setNewPassword(e.target.value)}
-        />
+        <FormControl sx={{ width: '25ch' }}>
+          <InputLabel required size="small">Password</InputLabel>
+          <OutlinedInput
+            type="password"
+            value={oldPassword}
+            required
+            onChange={(e) => setOldPassword(e.target.value)}
+            label="Password"
+            error={incorrectPassword}
+            size="small"
+          />
+          {
+            incorrectPassword ?
+            (<FormHelperText>Incorrect password!</FormHelperText>)
+            :
+            (<FormHelperText>&nbsp;</FormHelperText>)
+          }
+        </FormControl>
         <br/>
-        <label>Confirm New Password: </label>
-        <input
-          type="password"
-          autoComplete="off"
-          value={newPassword2}
-          placeholder="Enter password again"
-          onChange={(e) => setNewPassword2(e.target.value)}
-        />
-        {passwordMismatch &&
-          <div className="warning">Passwords must match!</div>
-        }
+        <FormControl sx={{ width: '25ch' }}>
+          <InputLabel size="small">New Password</InputLabel>
+          <OutlinedInput
+            type="password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            label="Password"
+            error={passwordMismatch}
+            size="small"
+          />
+          <FormHelperText>&nbsp;</FormHelperText>
+        </FormControl>
         <br/>
-        <button type="submit" disabled={submitting}>Submit</button>
-        <button onClick={() => {navigate('/user/profile')}}>Cancel</button>
+        <FormControl sx={{ width: '25ch' }}>
+          <InputLabel size="small">Confirm New Password</InputLabel>
+          <OutlinedInput
+            type="password"
+            value={newPassword2}
+            onChange={(e) => setNewPassword2(e.target.value)}
+            label="Password"
+            error={passwordMismatch}
+            size="small"
+          />
+          {
+            passwordMismatch ?
+            (<FormHelperText>Passwords must match!</FormHelperText>)
+            :
+            (<FormHelperText>&nbsp;</FormHelperText>)
+          }
+        </FormControl>
+        <br/>
+        <Button
+            type="submit"
+            variant="contained"
+            sx={{ p: "sm", width: '26ch' }}
+            disabled={submitting}
+          >
+            Submit
+          </Button>
       </form>
-    </div>
+      <Button
+        variant="contained"
+        sx={{ p: "sm", width: '26ch', mt: '1rem' }}
+        onClick={(e) => navigate('/user/profile')}
+      >
+        Cancel
+      </Button>
+    </Box>
   )
 }
