@@ -9,8 +9,10 @@ import {
   Select,
   Typography,
   TextField,
+  OutlinedInput,
   Button,
 } from "@mui/material";
+
 import { styled } from "@mui/material/styles";
 
 export const StyledContainer = styled(Box)({
@@ -32,8 +34,14 @@ export const StyledInnerBox = styled(Box)({
 });
 
 export const StyledTextField = styled(TextField)({
-  color: "white",
-  backgroundColor: "grey",
+  backgroundColor: "white",
+
+  "& label": {
+    color: "black",
+  },
+  "& input": {
+    textShadow: "0 0 1rem white",
+  },
 });
 
 export const StyledInputLabel = styled(InputLabel)({
@@ -53,7 +61,7 @@ export const StyledMenuItem = styled(MenuItem)({
 export const StyledFormGroup = styled(FormGroup)({
   // height: "18rem",
   // display: "flex",
-  backgroundColor: "black",
+  // backgroundColor: "black",
 });
 
 export const StyledCheckboxContainer = styled(Box)({
@@ -71,10 +79,14 @@ export const StyledFormControlLabel = styled(FormControlLabel)({
   textAlign: "start",
   outline: "white solid 1px",
   margin: "auto",
+  // color: "black",
 });
 
 export const StyledCheckbox = styled(Checkbox)({
   color: "orange",
+  "&.Mui-checked": {
+    color: "orange",
+  },
 });
 
 export const StyledFormControl = styled(FormControl)({
@@ -102,4 +114,14 @@ export const StyledButton = styled(Button)({
   },
   padding: "0.8em",
   outline: "1px solid orange",
+});
+
+export const StyledOutlineInput = styled(OutlinedInput)({
+  color: "black",
+  backgroundColor: "#f1f3f5",
+
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   flexDirection: "column",
 });

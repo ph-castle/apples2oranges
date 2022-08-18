@@ -1,16 +1,4 @@
-import {
-  Box,
-  FormGroup,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 export const StyledComponentContainer = styled(Box)({

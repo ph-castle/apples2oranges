@@ -11,6 +11,7 @@ import {
   StyledInputLabel,
   StyledTypography,
   StyledTextField,
+  StyledOutlineInput,
   StyledCheckbox,
   StyledFormControlLabel,
   StyledContainer,
