@@ -1,6 +1,8 @@
 import React from "react";
 import Timer from "./Timer";
+import PCard from "../../card/PCard.js";
 import Card from "../../card/Card.js";
+import styles from "../../card/Card.module.css"
 
 export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
   let cardArray = [];
@@ -21,7 +23,6 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
   let answers = (
     <div className="player-choices">
       {cardArray}
-      {/* <Timer time={30} /> */}
     </div>
   );
 
@@ -30,17 +31,16 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
       THIS IS WHAT THE JUDGE SEES
       <span className="active-prompt">
         {G.activePrompt.body ? (
-          <p>{G.activePrompt.body}</p>
+          <PCard children={G.activePrompt.body} className={styles.answer_card}/>
         ) : (
           <div>
-            <p>Push button to begin round</p>
             <button
               onClick={() => {
                 moves.drawRemotePrompt();
                 setRoundTime(60);
               }}
             >
-              Select me daddy!
+              Select me Daddy!
             </button>
           </div>
         )}

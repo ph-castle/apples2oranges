@@ -14,6 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { StyledComponentContainer } from "../../styles/globalStyles";
 
 export default function LoginPage({ setUser }) {
   const [username, setUsername] = useState("");
@@ -75,13 +76,7 @@ export default function LoginPage({ setUser }) {
     // mt: 4,
     // display: 'block'
     //   }}>
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      flexDirection="column"
-      gap="12px"
-    >
+    <StyledComponentContainer>
       <Typography variant="h4">Login</Typography>
       <form autoComplete="off" onSubmit={(e) => handleLogin(e)}>
         <FormGroup sx={{ mt: "1rem" }}>
@@ -145,6 +140,6 @@ export default function LoginPage({ setUser }) {
       >
         Create account
       </Button>
-    </Box>
+    </StyledComponentContainer>
   );
 }

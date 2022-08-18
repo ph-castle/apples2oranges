@@ -3,12 +3,13 @@ import { Button, Box, ButtonGroup } from "@mui/material";
 import { Link } from "react-router-dom";
 import { toggleAnimation } from "../app/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { StyledComponentContainer } from "../styles/globalStyles";
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
   const animationtoggle = useSelector((state) => state.main.animationtoggle);
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" gap="12px">
+    <StyledComponentContainer>
       <ButtonGroup
         variant="contained"
         onClick={() => dispatch(toggleAnimation())}
@@ -38,7 +39,7 @@ export const Dashboard = () => {
           </Button>
         </Link>
       </ButtonGroup>
-    </Box>
+    </StyledComponentContainer>
   );
 };
 

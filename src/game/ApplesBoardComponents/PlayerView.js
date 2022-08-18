@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Timer from "./Timer";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
+import PCard from "../../card/PCard.js";
+import styles from "../../card/Card.module.css"
 
 export default function PlayerView({
   G,
@@ -36,8 +38,8 @@ export default function PlayerView({
     <div>
       THIS IS WHAT THE PLEBS SEE
       <span className="active-prompt">
-        {G.activePrompt.body ? (
-          <p>{G.activePrompt.body}</p>
+        {G.activePrompt.text ? (
+          <PCard children={G.activePrompt.body} className={styles.answer_card} />
         ) : (
           <p>Waiting on Judge to wake up and pull his foot out of his ass</p>
         )}
