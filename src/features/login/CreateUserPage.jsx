@@ -11,6 +11,7 @@ import {
   StyledFormHelperText,
 } from "../../styles/createUserPageStyles";
 import "./Login.css";
+import { StyledComponentContainer } from "../../styles/globalStyles";
 
 export default function CreateUserPage({ setUser }) {
   const [username, setUsername] = useState("");
@@ -107,7 +108,7 @@ export default function CreateUserPage({ setUser }) {
   };
 
   return (
-    <>
+    <StyledComponentContainer>
       <StyledTypography>Create an Account</StyledTypography>
       {userCreated && <StyledTypography>Account Created!</StyledTypography>}
       <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
@@ -182,6 +183,6 @@ export default function CreateUserPage({ setUser }) {
       <StyledButton variant="contained" onClick={(e) => handleCancel()}>
         Cancel
       </StyledButton>
-    </>
+    </StyledComponentContainer>
   );
 }

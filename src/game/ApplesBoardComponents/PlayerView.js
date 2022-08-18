@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Timer from "./Timer";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
+import PCard from "../../card/PCard.js";
+import styles from "../../card/Card.module.css"
 
 export default function PlayerView({
   G,
@@ -29,7 +31,7 @@ export default function PlayerView({
     setChatInput(value);
   }
   let answers;
-  if (G.activePrompt.text) {
+  if (G.activePrompt.body) {
     answers = (
       <div>
         {G.players[playerID].hand.map((card, i) => {
@@ -41,7 +43,7 @@ export default function PlayerView({
               playerId={i}
               moves={moves}
               key={card.id}
-              text={card.text}
+              text={card.body}
             />
           );
         })}
@@ -54,7 +56,8 @@ export default function PlayerView({
       THIS IS WHAT THE PLEBS SEE
       <span className="active-prompt">
         {G.activePrompt.text ? (
-          <p>{G.activePrompt.text}</p>
+          <PCard children={G.activePrompt.body} className={styles.answer_card} />
+          // <p>{G.activePrompt.text}</p>
         ) : (
           <p>Waiting on Judge to wake up and pull his foot out of his ass</p>
         )}
