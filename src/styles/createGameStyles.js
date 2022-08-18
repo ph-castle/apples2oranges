@@ -115,10 +115,16 @@ export const StyledCheckbox = styled(Checkbox)({
   backgroundColor: "white",
 });
 
-// const Item = styled(Paper)`
-//   text-align: center;
-//   height: 10rem;
-//   width: 100%;
-//   max-width: 16rems;
-//   line-height: 10rem;
-// `;
+export const StyledFormControlLabel = styled(FormControlLabel)({
+  fontSize: {
+    sm: "1.5rem",
+    md: "2rem",
+  },
+
+  color: "black",
+  backgroundColor: "white",
+  padding: "1rem",
+  width: "50%",
+  margin: "auto",
+  textAlign: "center",
+});

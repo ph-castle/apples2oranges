@@ -1,8 +1,7 @@
 import React, { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-import { FormControlLabel } from "@mui/material";
 import { lobbyClient } from "./utils/lobbyClient";
-import createGameReducer from "./createGameReducer";
+import createGameReducer, { initialCreateGameState } from "./createGameReducer";
 import {
   StyledMenuItem,
   StyledSelect,
@@ -14,8 +13,8 @@ import {
   StyledTextField,
   StyledCheckbox,
   StyledButton,
+  StyledFormControlLabel,
 } from "../styles/createGameStyles";
-import { initialCreateGameState } from "./createGameReducer";
 
 export const CreateGame = () => {
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ export const CreateGame = () => {
   );
   const { name, options, customCards } = CreateGameState;
 
-  const clickHandler = () => {
+  const createGameHandler = () => {
     lobbyClient
       .createMatch("Apples2Oranges", options)
       .then((match) => {
@@ -65,7 +64,6 @@ export const CreateGame = () => {
           onChange={(e) => dispatch(e.target)}
           required
         />
-
         <StyledFormControl required>
           <StyledInputLabel id="demo-simple-select-required-label">
             Number of Players
@@ -79,9 +77,7 @@ export const CreateGame = () => {
             value={options.numPlayers}
             required
           >
-            <StyledMenuItem value="">
-              <em>None</em>
-            </StyledMenuItem>
+            <StyledMenuItem value="">None</StyledMenuItem>
             <StyledMenuItem value={3}>Three</StyledMenuItem>
             <StyledMenuItem value={4}>Four</StyledMenuItem>
             <StyledMenuItem value={5}>Five</StyledMenuItem>
@@ -95,12 +91,12 @@ export const CreateGame = () => {
             Number of Rounds
           </StyledInputLabel>
           <StyledSelect
-            labelId="demo-simple-select-required-label"
             id="demo-simple-select-required"
-            name="rounds"
-            value={options.setupData.rounds}
             label="Number of Rounds"
+            name="rounds"
+            labelId="demo-simple-select-required-label"
             onChange={(e) => dispatch(e.target)}
+            value={options.setupData.rounds}
             required
           >
             <StyledMenuItem value={1}>One</StyledMenuItem>
@@ -117,11 +113,11 @@ export const CreateGame = () => {
             <StyledMenuItem value={12}>Twelve</StyledMenuItem>
           </StyledSelect>
         </StyledFormControl>
-        <FormControlLabel
+        <StyledFormControlLabel
           control={<StyledCheckbox name="customCards" />}
           label="Allow custom cards"
         />
-        <FormControlLabel
+        <StyledFormControlLabel
           control={
             <StyledCheckbox
               name="unlisted"
@@ -133,8 +129,7 @@ export const CreateGame = () => {
           label="Make game public"
         />
       </StyledFormGroup>
-
-      <StyledButton variant="contained" onClick={clickHandler}>
+      <StyledButton variant="contained" onClick={createGameHandler}>
         Create Game
       </StyledButton>
     </StyledBox>
