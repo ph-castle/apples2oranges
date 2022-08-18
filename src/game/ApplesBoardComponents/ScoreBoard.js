@@ -7,26 +7,23 @@ export default function ScoreBoard({
   matchData,
 }) {
 
-  let standings = {};
+  let standings = {};  // {name:  , winningCards: }
   let players = G.players;
-  let playersWithNames = [];
-  let playerNames = {};
+
+  players.forEach((player, index) => {
+    // validate that player.playerID === index;
+    standings[index] = player;
+  });
+  console.log(standings);
 
   matchData.forEach((namedPlayer) => {
     let playerID = namedPlayer.id;
-    let playerName = namedPlayed.name;
-    playerNames[playerID] = playerName;
+    let playerName = namedPlayer.name;
+    standings[playerID].playerName = playerName;
   });
-  console.log(playerNames);
+  console.log(standings);
 
-  players.forEach((player, index) => {
-    player.playerID = index;
-    player.
-  });
-
-  }
-
-  function calculateStandings()
+  standings.values().sort((a, b) => (a.winningHands - b.winningHands));
 
   // G = {
   //   players:[
@@ -69,9 +66,9 @@ export default function ScoreBoard({
       {" "}
       This is the scoreboard
       <ol>
-        <li>FIRST</li>
-        <li>SECOND</li>
-        <li>THIRD</li>
+        {standings.map((standing) => {
+      return <li>standing.name</li>
+    })}
       </ol>
     </div>
   );
