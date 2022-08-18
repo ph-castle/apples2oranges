@@ -1,10 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import "./styles/index.css";
 import { Provider } from "react-redux";
-import App from "./App.js";
 import store from "./app/store";
+import App from "./App.js";
+
+import { StyledEngineProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "./styles/theme";
+import "./styles/index.css";
 // import reportWebVitals from './reportWebVitals';
 
 const ENV = process.env.REACT_APP_ENV;
@@ -18,11 +22,15 @@ if (ENV === "dev") {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <App gameServer={SERVER} />
-      </Provider>
-    </BrowserRouter>
+  <StyledEngineProvider injectFirst>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App gameServer={SERVER} />
+        </Provider>
+      </BrowserRouter>
+    </ThemeProvider>
+  </StyledEngineProvider>
 );
 
 // // If you want to start measuring performance in your app, pass a function

@@ -7,14 +7,14 @@ import { INVALID_MOVE } from "boardgame.io/core";
 //INTEGRATE BACKEND DECKS
 //IMPORT INVALID_MOVES for move validation
 // TURN ORDER / RANDOM JUDGE SELECTION *Low Priority *
-export const Apples = ({
+export const Apples = {
   name: "Apples2Oranges",
 
   setup: (ctx) => ({
     players: Array(ctx.numPlayers).fill({ hand: [], winningCards: [] }),
 
     secret: {
-      promptDeck: [],
+      promptDeck: PromptDeck,
       answerDeck: AnswerDeck,
     },
     //Maxiumum Cards per hand.
@@ -49,7 +49,7 @@ export const Apples = ({
       next: "dealing",
     },
   },
-});
+};
 
 function startDealPhase(G, ctx) {
   G.secret.answerDeck = ctx.random.Shuffle(G.secret.answerDeck);
@@ -107,7 +107,7 @@ function pickWinner(G, ctx, winnerIndex) {
   let mutantPrompt = G.activePrompt.text.slice(),
     mutantAnswer = G.submittedAnswers[winnerIndex].text,
     blank = `________`;
-
+  console.log("winnerIndex inside pickWinner: ", winnerIndex);
   let combo = mutantPrompt.replace(blank, mutantAnswer);
   G.players[winnerIndex].winningCards.push(combo); //mutantAnswer//G.activePrompt.text + G.submittedAnswers[0].text
   ctx.events.endPhase();
