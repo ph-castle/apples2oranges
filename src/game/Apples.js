@@ -90,7 +90,7 @@ function playAnswer(G, ctx, answerIndex) {
   G.submittedAnswers[ctx.playerID] = answer[0];
   G.discardPile.push(answer[0]);
 
-  if (allAnswersSumbitted(G, ctx)) {
+  if (allAnswersSubmitted(G, ctx)) {
     ctx.events.setActivePlayers({
       currentPlayer: "judgement",
       minMoves: 1,
@@ -113,7 +113,7 @@ function pickWinner(G, ctx, winnerIndex) {
   ctx.events.endPhase();
 }
 
-function allAnswersSumbitted(G, ctx) {
+function allAnswersSubmitted(G, ctx) {
   return G.discardPile.length % (ctx.numPlayers - 1) === 0;
 }
 

@@ -14,7 +14,8 @@ import ProfilePage from "./features/login/ProfilePage";
 import EditProfile from "./features/login/EditProfile";
 import LoginPage from "./features/login/LoginPage";
 import CreateUserPage from "./features/login/CreateUserPage";
-import CardInput from "./features/custom/CardInput";
+import CustomCards from "./features/custom/CustomCards";
+import EditCards from "./features/custom/EditCards";
 // import { useSelector } from "react-redux";
 import { Apples2Oranges } from "./features/gameRoom";
 
@@ -55,7 +56,8 @@ export default function App() {
               path="/user/create"
               element={<CreateUserPage setUser={setUser} />}
             />
-            <Route path="/user/customcards" element={<CardInput user={user} />} />
+            <Route path="/user/customcards" element={<CustomCards user={user} />} />
+            <Route path="/user/editcards" element={<EditCards user={user} />} />
             <Route path="/creategame" element={<CreateGame />} />
             <Route path="/joingame" element={<Lobby />} />
             <Route path="/waitingroom/:matchID" element={<WaitingRoom />} />

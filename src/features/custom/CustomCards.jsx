@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-export default function CardInput({ user }) {
+export default function EditCards({ user }) {
   const [prompts, setPrompts] = useState('');
   const [answers, setAnswers] = useState('');
   const [NSFW, setNSFW] = useState(false);
@@ -19,6 +19,24 @@ export default function CardInput({ user }) {
     baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
   });
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const currentPrompts = await axiosInstance.get(`/cards/answer/${user.id}`);
+      const currentAnswers = await axiosInstance.get(`/cards/answer/${user.id}`);
+
+      if (currentPrompts.length > 0) {
+        setPrompts(currentPrompts.map((data) => data.body).join('\n'));
+      }
+
+      if (currentAnswers.length > 0) {
+        setAnswers(currentAnswers.map((data) => data.body).join('\n'));
+      }
+    }
+
+    fetchData();
+  }, []);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -26,7 +44,7 @@ export default function CardInput({ user }) {
     if (prompt.length > 0) {
       await axiosInstance.put(`/cards/prompt/${user.id}`, {
         params: {
-          cards: prompts.split('\n'),
+          cards: prompts.split('\n').filter(item => item),
           NSFW: false,
         }
       });
@@ -35,7 +53,7 @@ export default function CardInput({ user }) {
     if (answers.length > 0) {
       await axiosInstance.put(`/cards/answers/${user.id}`, {
         params: {
-          cards: answers.split('\n'),
+          cards: answers.split('\n').filter(item => item),
           NSFW: false,
         }
       });
@@ -69,6 +87,7 @@ export default function CardInput({ user }) {
           label="Prompt Cards"
           placeholder="Prompt Cards"
           maxRows={15}
+          value={prompts}
           style={{width: '50%'}}
           onChange={(e) => setPrompts(e.target.value)}
           multiline
@@ -78,6 +97,7 @@ export default function CardInput({ user }) {
           label="Answer Cards"
           placeholder="Answer Cards"
           maxRows={15}
+          value={answers}
           style={{width: '50%'}}
           onChange={(e) => setAnswers(e.target.value)}
           multiline
