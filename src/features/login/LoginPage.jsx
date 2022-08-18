@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 // import StyledOutlineInput from "@mui/material/StyledOutlineInput";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { StyledComponentContainer } from "../../styles/globalStyles";
+import { Heading, StyledComponentContainer } from "../../styles/globalStyles";
 import {
   StyledTypography,
   StyledOutlineInput,
@@ -74,23 +74,7 @@ export default function LoginPage({ setUser }) {
 
   return (
     <StyledComponentContainer>
-      <StyledTypography
-        sx={{
-          padding: "1rem",
-          fontFamily: "roboto",
-          textShadow: "0 0 10px white",
-          fontWeight: "800",
-          fontSize: {
-            xs: "1rem",
-            sm: "1.5rem",
-            md: "1.8rem",
-            lg: "2rem",
-          },
-          color: "white",
-        }}
-      >
-        Login
-      </StyledTypography>
+      <Heading>Login</Heading>
       <form autoComplete="off" onSubmit={(e) => handleLogin(e)}>
         <FormGroup sx={{ mt: "1rem" }}>
           <FormControl sx={{ width: "25ch", mt: "1rem" }}>

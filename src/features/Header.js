@@ -55,29 +55,32 @@ const Header = ({ user, setUser }) => {
               mr: 1,
             }}
           >
-            <GiShinyApple fontSize="1.5rem" />
-            <GiOrangeSlice fontSize="1.5rem" />
-            {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
+            <Link to={"/home"} style={{ textDecoration: "none" }} color="white">
+              <GiShinyApple fontSize="1.5rem" />
+              <GiOrangeSlice fontSize="1.5rem" />
+              {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
+            </Link>
           </Box>
-          <Link to={"/home"} style={{ textDecoration: "none" }} color="white">
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/home"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "Roboto",
-                fontWeight: 700,
-                // letterSpacing: ".1rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
+
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/home"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "Roboto",
+              fontWeight: 700,
+              // letterSpacing: ".1rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            <Link to={"/home"} style={{ textDecoration: "none" }} color="white">
               Apples to Oranges
-            </Typography>
-          </Link>
+            </Link>
+          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -125,6 +128,7 @@ const Header = ({ user, setUser }) => {
             <GiShinyApple fontSize="1.5rem" />
             <GiOrangeSlice fontSize="1.5rem" />
           </Box>
+
           <Typography
             variant="h7"
             noWrap
@@ -141,7 +145,9 @@ const Header = ({ user, setUser }) => {
               textDecoration: "none",
             }}
           >
-            Apples 2 Oranges
+            <Link to={"/home"} style={{ textDecoration: "none" }} color="white">
+              Apples 2 Oranges
+            </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (

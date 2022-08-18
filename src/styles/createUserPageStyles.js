@@ -13,14 +13,6 @@ export const StyledFormControl = styled(FormControl)({
   width: "25ch",
 });
 
-export const StyledTypography = styled(Typography)({
-  padding: "1rem",
-  fontFamily: "roboto",
-  textShadow: "0 0 10px white",
-  fontWeight: "800",
-  color: "white",
-});
-
 export const StyledInputLabel = styled(InputLabel)({
   //   color: "orange",
   color: "black",
@@ -48,7 +40,10 @@ export const StyledFormHelperText = styled(FormHelperText)({
 export const StyledButton = styled(Button)({
   // p: "sm",
   // // width: "26ch",
-  p: "sm",
   width: "25ch",
-  mt: "2rem",
+  outline: "white solid 1px",
+  boxShadow: "0 0 10px white",
+  "&:hover": {
+    boxShadow: "0 0 20px white",
+  },
 });

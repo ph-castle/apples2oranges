@@ -18,6 +18,7 @@ import {
   StyledInnerBox,
   StyledCheckboxContainer,
 } from "../styles/createGameStyles";
+import { Heading } from "../styles/globalStyles";
 import { Box, Typography } from "@mui/material";
 // import { StyledComponentContainer } from "../styles/globalStyles";
 import axios from "axios";
@@ -73,23 +74,7 @@ export function CreateGame() {
 
   return (
     <StyledContainer>
-      <StyledTypography
-        sx={{
-          padding: "1rem",
-          fontFamily: "roboto",
-          textShadow: "0 0 10px white",
-          fontWeight: "800",
-          fontSize: {
-            xs: "1rem",
-            sm: "1.5rem",
-            md: "1.8rem",
-            lg: "2rem",
-          },
-          color: "white",
-        }}
-      >
-        Create a Game
-      </StyledTypography>
+      <Heading>Create a Game</Heading>
       <StyledInnerBox>
         <StyledFormGroup>
           <StyledFormControl required>

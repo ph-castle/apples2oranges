@@ -6,12 +6,11 @@ import {
   StyledFormControl,
   StyledButton,
   StyledInputLabel,
-  StyledTypography,
   StyledOutlineInput,
   StyledFormHelperText,
 } from "../../styles/createUserPageStyles";
 import "./Login.css";
-import { StyledComponentContainer } from "../../styles/globalStyles";
+import { Heading, StyledComponentContainer } from "../../styles/globalStyles";
 
 export default function CreateUserPage({ setUser }) {
   const [username, setUsername] = useState("");
@@ -109,19 +108,8 @@ export default function CreateUserPage({ setUser }) {
 
   return (
     <StyledComponentContainer>
-      <StyledTypography
-        sx={{
-          fontSize: {
-            xs: "1rem",
-            sm: "1.5rem",
-            md: "1.8rem",
-            lg: "2rem",
-          },
-        }}
-      >
-        Create an Account
-      </StyledTypography>
-      {userCreated && <StyledTypography>Account Created!</StyledTypography>}
+      <Heading>Create an Account</Heading>
+      {userCreated && <Heading>Account Created!</Heading>}
       <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
         <StyledFormControl>
           <StyledInputLabel required>Username</StyledInputLabel>
