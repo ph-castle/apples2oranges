@@ -44,7 +44,7 @@
   font-size: 1.2rem;
   font-weight: 600;
   height: 40px;
-  left: 8%;
+  left: 28%;
   margin: 5px 5px 0px 5px;
   padding: 4px;
   position: absolute;
@@ -76,7 +76,6 @@
 
 
 /* PROMPT CARD */
-
 
 .prompt_card {
   background-color: #00c300;
