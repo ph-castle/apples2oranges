@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Box, Input, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { lobbyClient } from "./utils/lobbyClient";
-import { useDispatch, useSelector } from "react-redux";
-import { setMatchID, setPlayerID, setPlayerCredentials } from "../app/mainSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { setMatchID, setPlayerID, setPlayerCredentials } from "../app/mainSlice";
 import { useNavigate } from "react-router-dom";
 
 
@@ -21,15 +21,16 @@ const Item = styled(Paper)(() => ({
 
 //Need to get current playerId
 const Lobby = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const [playerMatch, setPlayerMatch] = useState({});
-  const [playerAccessKey, setPlayerAccessKey] = useState({});
-  const [gameMatchID, setGameMatchID] = useState("");
+  const [playerMatch, setPlayerMatch] = useState([]);
+  // const [playerAccessKey, setPlayerAccessKey] = useState({});
+  // const [gameMatchID, setGameMatchID] = useState("");
   const [sessionCode, setSessionCode] = useState("");
   const [name, setName] = useState('');
 
+  console.log(playerMatch);
   useEffect(() => {
     getAllAvailableGames().then(({ matches }) => {
       console.log(matches);
@@ -50,26 +51,32 @@ const Lobby = () => {
   //   });
   // };
 
-  const joinMatchHandler = () => {
+  const joinMatchHandler = (matchID) => {
+    if(name === '') {
+      alert('please input a name');
+    }
+    if (localStorage.getItem('id') || localStorage.getItem('matchID') === matchID) {
+      alert('already joined game')
+      navigate(`/waitingroom/${matchID}`) // --> direct them to the game room
+    } else {
     lobbyClient
-      .joinMatch("Apples2Oranges", sessionCode, {
+      .joinMatch("Apples2Oranges", matchID, {
        // playerID: "0",
         playerName: name,
         //data: "optional player meta data",
       })
       .then((player) => {
         console.log("player cred in Lobby", player);
-        localStorage.setItem("matchID", sessionCode);
+        localStorage.setItem("matchID", matchID);
         localStorage.setItem("name", name);
         localStorage.setItem("id", player.playerID);
         localStorage.setItem("credentials", player.playerCredentials);
-        // dispatch(setPlayerID(player.playerID));
-        // dispatch(setPlayerCredentials(player.playerCredentials));
       })
       .then(() => {
-        navigate(`/waitingroom/${sessionCode}`);
+        navigate(`/waitingroom/${matchID}`);
       })
       .catch(err => console.log("error in lobby join match handler", err))
+    }
   };
 
   // const updatePlayerHandler = () => {
@@ -153,7 +160,7 @@ const Lobby = () => {
             onClick={() =>
               // getMatchHandler(sessionCode).then((match) => {
                 //TODO: reroute here to loading deck
-                joinMatchHandler()
+                joinMatchHandler(sessionCode)
               // }}
             }
           >
@@ -180,17 +187,23 @@ const Lobby = () => {
           }}
           style={{ marginTop: "1em" }}
         >
-          {[0, 1, 2].map((matchId) => (
+          {playerMatch.map((match) => (
+            <Box>
             <Item
-              key={matchId}
+              key={match.matchID}
               elevation={8}
-              onClick={(e) => {
-                //TODO: reroute here to loading deck
-                joinMatchHandler(e.target.key);
-              }}
+              // onClick={(e) => {
+              //   //TODO: reroute here to loading deck
+              //   joinMatchHandler(matchId);
+              // }}
             >
               Game
             </Item>
+            <Button onClick={() => {
+                //TODO: reroute here to loading deck
+                joinMatchHandler(match.matchID);
+              }}>Join</Button>
+            </Box>
           ))}
         </Box>
       </Box>

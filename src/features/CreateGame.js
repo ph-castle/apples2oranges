@@ -90,7 +90,7 @@ export const CreateGame = () => {
       })
       .then(() => {
         console.log("matchTemp", matchTemp);
-        navigate(`/apples/:room/${matchTemp}`);
+        navigate(`/waitingroom/${matchTemp}`);
       })
       .catch((err) => {
         console.log("catch all error in CreateGamee clickHandler", err);
