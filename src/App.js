@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Header from "./features/Header";
 import MainRoutes from "./MainRoutes";
 import Hero from "./UI/Hero";
-import { StyledContainer } from "./styles/appStyles";
 
 export default function App() {
   const [user, setUser] = useState({
@@ -15,9 +14,7 @@ export default function App() {
     <>
       <Header user={user} setUser={setUser} />
       <Hero />
-      <StyledContainer>
-        <MainRoutes user={user} setUser={setUser} />
-      </StyledContainer>
+      <MainRoutes user={user} setUser={setUser} />
     </>
   );
 }
