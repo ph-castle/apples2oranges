@@ -38,9 +38,8 @@ export default function PlayerView({
     <div>
       THIS IS WHAT THE PLEBS SEE
       <span className="active-prompt">
-        {G.activePrompt.text ? (
+        {G.activePrompt.body ? (
           <PCard children={G.activePrompt.body} className={styles.answer_card} />
-          // <p>{G.activePrompt.text}</p>
         ) : (
           <p>Waiting on Judge to wake up and pull his foot out of his ass</p>
         )}
