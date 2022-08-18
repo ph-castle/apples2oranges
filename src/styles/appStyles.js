@@ -8,15 +8,3 @@ export const StyledContainer = styled(Box)({
   backgroundColor: "rgba(0,0,0, 0.8)",
   overflow: "hidden",
 });
-
-export const StyledBox = styled(Box)({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "column",
-  height: "100%",
-  gap: "12px",
-  width: "100%",
-  margin: "auto",
-  mt: 4,
-});

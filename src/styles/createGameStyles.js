@@ -33,17 +33,18 @@ export const StyledSelect = styled(Select)({
   backgroundColor: "white",
 });
 
-export const StyledBox = styled(Box)({
-  display: "flex",
-  justifyContent: "center",
-  width: "100%",
-  height: "100%",
-  margin: "auto",
-  backgroundColor: "black",
-  padding: "2rem",
-  flexDirection: "column",
-  gap: "1rem",
-});
+// export const StyledComponentContainer = styled(Box)({
+//   display: "flex",
+//   justifyContent: "center",
+//   flexDirection: "column",
+//   gap: "1rem",
+//   width: "100%",
+//   maxWidth: "1200px",
+//   height: "100%",
+//   margin: "auto",
+//   backgroundColor: "yellow",
+//   padding: "2rem",
+// });
 
 export const StyledFormGroup = styled(FormGroup)({
   height: "18rem",

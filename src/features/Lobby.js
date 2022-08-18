@@ -9,6 +9,7 @@ import {
   setPlayerCredentials,
 } from "../app/mainSlice";
 import { useNavigate } from "react-router-dom";
+import { StyledComponentContainer } from "../styles/globalStyles";
 
 const Item = styled(Paper)(() => ({
   textAlign: "center",
@@ -75,7 +76,7 @@ const Lobby = () => {
     //   minHeight="100vh"
     //   width="100%"
     // ></Box>
-    <>
+    <StyledComponentContainer>
       <Box>
         <Typography variant="h3" sx={{ mt: "1em" }}>
           Join a Game
@@ -158,7 +159,7 @@ const Lobby = () => {
           ))}
         </Box>
       </Box>
-    </>
+    </StyledComponentContainer>
   );
 };
 export default Lobby;

@@ -5,7 +5,7 @@ import createGameReducer, { initialCreateGameState } from "./createGameReducer";
 import {
   StyledMenuItem,
   StyledSelect,
-  StyledBox,
+  // StyledComponentContainer,
   StyledFormGroup,
   StyledFormControl,
   StyledInputLabel,
@@ -15,6 +15,7 @@ import {
   StyledButton,
   StyledFormControlLabel,
 } from "../styles/createGameStyles";
+import { StyledComponentContainer } from "../styles/globalStyles";
 
 export function CreateGame() {
   const navigate = useNavigate();
@@ -54,7 +55,7 @@ export function CreateGame() {
   };
 
   return (
-    <StyledBox>
+    <StyledComponentContainer>
       <StyledTypography>Create a Game</StyledTypography>
       <StyledFormGroup>
         <StyledTextField
@@ -132,6 +133,6 @@ export function CreateGame() {
       <StyledButton variant="contained" onClick={createGameHandler}>
         Create Game
       </StyledButton>
-    </StyledBox>
+    </StyledComponentContainer>
   );
 }
