@@ -11,15 +11,16 @@ import { styled } from "@mui/material/styles";
 
 export const StyledFormControl = styled(FormControl)({
   width: "25ch",
-  border: "1px solid yellow",
-  backgroundColor: "green",
-  //   height: "100%",
-  display: "flex",
-  alignItems: "center",
-  //   marginTop: "1rem",
 });
 
-export const StyledTypography = styled(Typography)({});
+export const StyledTypography = styled(Typography)({
+  padding: "1rem",
+  fontFamily: "roboto",
+  textShadow: "0 0 10px white",
+  fontWeight: "800",
+
+  color: "white",
+});
 
 export const StyledInputLabel = styled(InputLabel)({
   //   color: "orange",
@@ -29,13 +30,13 @@ export const StyledInputLabel = styled(InputLabel)({
   },
   "&.Mui-focused fieldset": {
     textShadow: "0 0 10px green",
-    borderColor: "#C52328",
+    borderColor: "#C52328 1px solid",
     borderWidth: "2px",
   },
 });
 export const StyledOutlineInput = styled(OutlinedInput)({
-  color: "white",
-  backgroundColor: "blue",
+  color: "black",
+  backgroundColor: "white",
   //   display: "flex",
   //   justifyContent: "center",
   //   alignItems: "center",

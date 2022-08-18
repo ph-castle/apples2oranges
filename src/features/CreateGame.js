@@ -20,7 +20,7 @@ import {
 } from "../styles/createGameStyles";
 import { Box, Typography } from "@mui/material";
 // import { StyledComponentContainer } from "../styles/globalStyles";
-
+import axios from "axios";
 export function CreateGame() {
   const navigate = useNavigate();
 
@@ -30,7 +30,12 @@ export function CreateGame() {
   );
   const { name, options, customCards } = CreateGameState;
 
-  const createGameHandler = () => {
+  const createGameHandler = async () => {
+    let { data } = await axios.get("http://3.101.13.217:45000/cards/prompt");
+    let result = await axios.get("http://3.101.13.217:45000/cards/answer");
+    dispatch({ name: "options1", value: data });
+    dispatch({ name: "options2", value: result.data });
+
     let matchTemp;
     lobbyClient
       .createMatch("Apples2Oranges", options)
@@ -62,7 +67,7 @@ export function CreateGame() {
         navigate(`/waitingroom/${matchTemp}`);
       })
       .catch((err) => {
-        console.log("catch all error in CreateGamee clickHandler", err);
+        console.log("catch all error in CreateGame clickHandler", err);
       });
   };
 

@@ -36,6 +36,28 @@ export default function createGameReducer(state, { name, checked, value }) {
           [name]: checked,
         },
       };
+    case "options1":
+      return {
+        ...state,
+        options: {
+          ...state.options,
+          setupData: {
+            ...state.options.setupData,
+            remotePromptDeck: value,
+          },
+        },
+      };
+    case "options2":
+      return {
+        ...state,
+        options: {
+          ...state.options,
+          setupData: {
+            ...state.options.setupData,
+            remoteAnswerDeck: value,
+          },
+        },
+      };
     default:
       localStorage.setItem("players", value);
 

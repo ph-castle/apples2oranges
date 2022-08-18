@@ -109,7 +109,19 @@ export default function CreateUserPage({ setUser }) {
 
   return (
     <StyledComponentContainer>
-      <StyledTypography>Create an Account</StyledTypography>
+      <StyledTypography
+        sx={{
+          fontSize: {
+            xs: "1rem",
+            sm: "1.5rem",
+            md: "1.8rem",
+            lg: "2rem",
+          },
+        }}
+        variant="body2"
+      >
+        Create a Game
+      </StyledTypography>
       {userCreated && <StyledTypography>Account Created!</StyledTypography>}
       <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
         <StyledFormControl>
