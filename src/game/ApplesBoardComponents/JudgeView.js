@@ -1,6 +1,8 @@
 import React from "react";
 import Timer from "./Timer";
+import PCard from "../../card/PCard.js";
 import Card from "../../card/Card.js";
+import styles from "../../card/Card.module.css"
 
 export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
   let cardArray = [];
@@ -13,7 +15,8 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
         ctx={ctx}
         moves={moves}
         setRoundTime={setRoundTime}
-        text={G.submittedAnswers[playerId].text}
+        text={G.submittedAnswers[playerId].body}
+
       />
     );
   }
@@ -29,24 +32,25 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
     <div>
       THIS IS WHAT THE JUDGE SEES
       <span className="active-prompt">
-        {G.activePrompt.text ? (
-          <p>{G.activePrompt.text}</p>
+        {G.activePrompt.body ? (
+          <PCard children={G.activePrompt.body} className={styles.answer_card}/>
         ) : (
           <div>
-            <p>Push button to begin round</p>
+            {/* <p>Push button to begin round</p> */}
             <button
               onClick={() => {
                 moves.drawPrompt();
                 setRoundTime(60);
               }}
+
             >
-              Select me daddy!
+              Select me Daddy!
             </button>
           </div>
         )}
       </span>
       <div className="answer">
-        {G.activePrompt.text &&
+        {G.activePrompt.body &&
         Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
           <div>
             <p>Waiting on player selections</p>

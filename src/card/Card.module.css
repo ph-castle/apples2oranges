@@ -44,7 +44,7 @@
   font-size: 1.2rem;
   font-weight: 600;
   height: 40px;
-  left: 28%;
+  left: 8%;
   margin: 5px 5px 0px 5px;
   padding: 4px;
   position: absolute;
@@ -52,7 +52,7 @@
 }
 
 .select_button:hover {
-  background-image: -webkit-linear-gradient(#00d800 80%, #00dd00 100%);
+  background-image: -webkit-linear-gradient(#00d800 80%, #00c700 100%);
   background-image: linear-gradient(#00d800 80%, #00dd00 100%);
 }
 
@@ -74,3 +74,37 @@
   vertical-align: middle;
 }
 
+
+/* PROMPT CARD */
+
+
+.prompt_card {
+  background-color: #00c300;
+  background-image: -webkit-linear-gradient(#00c300 0%, #009100 60%);
+  background-image: linear-gradient(#009100 0%, #00c300 60%);
+  border: 12px solid #00c300;
+  border-radius: 25px;
+  height: 20rem;
+  margin: 8px;
+  position: relative;
+  min-width: 12rem;
+  width: 17rem;
+  position: relative;
+}
+
+.prompt_card_text {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 600;
+  left: 50%;
+  max-height: 250px;
+  padding: 4px;
+  position: absolute;
+  overflow-y: auto;
+  text-align: center;
+  top: 32%;
+  transform: translate(-50%, -50%);
+  vertical-align: middle;
+  width: 90%;
+  word-wrap: normal;
+}
