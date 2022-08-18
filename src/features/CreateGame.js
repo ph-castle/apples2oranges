@@ -86,7 +86,7 @@ export const CreateGame = () => {
       sx={{
         display: "flex",
         maxWidth: 400,
-        height: 250,
+        height: 400,
         flexDirection: "column",
         justifyContent: "space-between",
         ml: { sm: "0rem", md: "4rem" },
