@@ -23,7 +23,7 @@ export default function ScoreBoard({
   });
   console.log(standings);
 
-  standings.values().sort((a, b) => (a.winningHands - b.winningHands));
+  Object.values(standings).sort((a, b) => (a.winningHands - b.winningHands));
 
   // G = {
   //   players:[
