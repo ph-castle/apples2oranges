@@ -40,6 +40,7 @@ export default function CardInput({ user }) {
         }
       });
     }
+    navigate('/home');
   }
 
   console.log(NSFW, prompts, answers);
