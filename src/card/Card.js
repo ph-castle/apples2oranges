@@ -8,15 +8,6 @@ import {
 } from "react-share";
 
 export default class Card extends React.Component {
-
-  drag = (e) => {
-    e.dataTransfer.setData('transfer', e.target.id)
-  }
-
-  noAllowDrop = (e) => {
-    e.stopPropagation();
-  }
-
   render() {
     const shareTitle = 'Apples to Oranges!';
     const shareMessage = `I'm playing Apples to Oranges and found this hilarious!\n${this.props.children}`;
@@ -26,8 +17,6 @@ export default class Card extends React.Component {
       <div
         id={this.props.id}
         draggable="true"
-        onDragStart={this.drag}
-        onDragOver={this.noAllowDrop}
         className={styles.answer_card}
       >
         <div className={styles.card_text}>
