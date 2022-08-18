@@ -113,10 +113,6 @@ function pickWinner(G, ctx, winnerIndex) {
     ctx.events.endPhase();
 }
 
-<<<<<<< HEAD
-function allAnswersSubmitted(G, ctx) {
-  return G.discardPile.length % (ctx.numPlayers - 1) === 0;
-=======
 function allAnswersSubmitted (G, ctx) {return G.discardPile.length % (ctx.numPlayers - 1) === 0 }
 
 
@@ -128,7 +124,6 @@ function cleanUp (G, ctx) {
     }
     G.submittedAnswers = {};
     G.activePrompt = {};
->>>>>>> main
 }
 
 function drawRemotePrompt(G, ctx) {
