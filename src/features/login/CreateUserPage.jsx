@@ -108,15 +108,11 @@ export default function CreateUserPage({ setUser }) {
 
   return (
     <>
-      <StyledTypography variant="h4">Create an Account</StyledTypography>
-      {userCreated && (
-        <StyledTypography variant="h6">Account Created!</StyledTypography>
-      )}
+      <StyledTypography>Create an Account</StyledTypography>
+      {userCreated && <StyledTypography>Account Created!</StyledTypography>}
       <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
         <StyledFormControl>
-          <StyledInputLabel size="small" required>
-            Username
-          </StyledInputLabel>
+          <StyledInputLabel required>Username</StyledInputLabel>
           <StyledOutlineInput
             type="text"
             value={username}
@@ -124,7 +120,6 @@ export default function CreateUserPage({ setUser }) {
             onChange={(e) => setUsername(e.target.value)}
             label="Username"
             error={usernameTaken}
-            size="small"
           />
           {usernameTaken ? (
             <StyledFormHelperText>Username already taken</StyledFormHelperText>
@@ -134,9 +129,7 @@ export default function CreateUserPage({ setUser }) {
         </StyledFormControl>
         <br />
         <StyledFormControl>
-          <StyledInputLabel size="small" required>
-            Password
-          </StyledInputLabel>
+          <StyledInputLabel required>Password</StyledInputLabel>
           <StyledOutlineInput
             type="password"
             value={password}
@@ -144,15 +137,12 @@ export default function CreateUserPage({ setUser }) {
             onChange={(e) => setPassword(e.target.value)}
             label="Password"
             error={passwordMismatch}
-            size="small"
           />
           <StyledFormHelperText>&nbsp;</StyledFormHelperText>
         </StyledFormControl>
         <br />
         <StyledFormControl>
-          <StyledInputLabel size="small" required>
-            Confirm Password
-          </StyledInputLabel>
+          <StyledInputLabel required>Confirm Password</StyledInputLabel>
           <StyledOutlineInput
             type="password"
             value={password2}
@@ -160,7 +150,6 @@ export default function CreateUserPage({ setUser }) {
             onChange={(e) => setPassword2(e.target.value)}
             label="Password"
             error={passwordMismatch}
-            size="small"
           />
           {passwordMismatch ? (
             <StyledFormHelperText>Passwords must match!</StyledFormHelperText>
