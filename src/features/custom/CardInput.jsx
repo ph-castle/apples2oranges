@@ -23,23 +23,23 @@ export default function CardInput({ user }) {
     e.preventDefault();
 
     console.log('in submit', prompts.split('\n'), answers.split('\n'), user.id);
-    // if (prompt.length > 0) {
-    //   await axiosInstance.put(`/cards/prompt/${user.id}`, {
-    //     params: {
-    //       cards: prompt.split('\n'),
-    //       NSFW: false,
-    //     }
-    //   })
-    // }
+    if (prompt.length > 0) {
+      await axiosInstance.put(`/cards/prompt/${user.id}`, {
+        params: {
+          cards: prompt.split('\n'),
+          NSFW: false,
+        }
+      });
+    }
 
-    // if (answers.length > 0) {
-    //   await axiosInstance.put(`/cards/answers/${user.id}`, {
-    //     params: {
-    //       cards: answers.split('\n'),
-    //       NSFW: false,
-    //     }
-    //   })
-    // }
+    if (answers.length > 0) {
+      await axiosInstance.put(`/cards/answers/${user.id}`, {
+        params: {
+          cards: answers.split('\n'),
+          NSFW: false,
+        }
+      });
+    }
   }
 
   console.log(NSFW, prompts, answers);
