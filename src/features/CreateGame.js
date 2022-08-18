@@ -1,8 +1,5 @@
 import React, { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import axios from "axios";
-=======
 import { lobbyClient } from "./utils/lobbyClient";
 import createGameReducer, { initialCreateGameState } from "./createGameReducer";
 import {
@@ -23,8 +20,7 @@ import {
 } from "../styles/createGameStyles";
 import { Box, Typography } from "@mui/material";
 // import { StyledComponentContainer } from "../styles/globalStyles";
->>>>>>> main
-
+import axios from "axios";
 export function CreateGame() {
   const navigate = useNavigate();
 
@@ -34,41 +30,12 @@ export function CreateGame() {
   );
   const { name, options, customCards } = CreateGameState;
 
-<<<<<<< HEAD
-  const handleChange = async (e) => {
-    console.log(e.target.type);
-    const { name, value, checked } = e.target;
+  const createGameHandler = async () => {
+    let { data } = await axios.get("http://3.101.13.217:45000/cards/prompt");
+    let result = await axios.get("http://3.101.13.217:45000/cards/answer");
+    dispatch({ name: "options1", value: data });
+    dispatch({ name: "options2", value: result.data });
 
-    if (name === "customCards") {
-      setCustomCards(checked);
-    } else if (name === "nickname") {
-      console.log(name, value);
-      setName(value);
-    } else if (name === "rounds") {
-      setOptions({ ...options, setupData: { rounds: value } });
-    } else if (name === "unlisted") {
-      setOptions({ ...options, [name]: checked });
-    } else {
-      setOptions({ ...options, [name]: value });
-      localStorage.setItem("players", value);
-    }
-    
-    let { data } = await axios.get('http://3.101.13.217:45000/cards/prompt')    
-    setOptions(previousOptions => {  return {...previousOptions, setupData: {...previousOptions.setupData, remotePromptDeck: data}}  })
-    console.log(options);
-
-    let result = await axios.get('http://3.101.13.217:45000/cards/answer')   
-    setOptions(previousOptions => {  return {...previousOptions, setupData: {...previousOptions.setupData, remoteAnswerDeck: result.data}}  })
-  
-
-    
-  };
-  console.log(options);
-
-  const clickHandler = () => {
-=======
-  const createGameHandler = () => {
->>>>>>> main
     let matchTemp;
     lobbyClient
       .createMatch("Apples2Oranges", options)
@@ -100,27 +67,11 @@ export function CreateGame() {
         navigate(`/waitingroom/${matchTemp}`);
       })
       .catch((err) => {
-        console.log("catch all error in CreateGamee clickHandler", err);
+        console.log("catch all error in CreateGame clickHandler", err);
       });
   };
 
   return (
-<<<<<<< HEAD
-    <Box
-      sx={{
-        display: "flex",
-        maxWidth: 400,
-        height: 750,
-        flexDirection: "column",
-        justifyContent: "space-between",
-        ml: { sm: "0rem", md: "4rem" },
-        mt: "2rem",
-      }}
-    >
-      <Typography variant="h4">Create a Game</Typography>
-      <FormGroup
-        sx={{ height: "18rem", justifyContent: "space-evenly", mt: "1rem" }}
-=======
     <StyledContainer>
       <StyledTypography
         sx={{
@@ -137,7 +88,6 @@ export function CreateGame() {
           color: "white",
         }}
         variant="body2"
->>>>>>> main
       >
         Create a Game
       </StyledTypography>
