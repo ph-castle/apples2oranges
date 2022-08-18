@@ -14,8 +14,12 @@ import {
   StyledCheckbox,
   StyledButton,
   StyledFormControlLabel,
+  StyledContainer,
+  StyledInnerBox,
+  StyledCheckboxContainer,
 } from "../styles/createGameStyles";
-import { StyledComponentContainer } from "../styles/globalStyles";
+import { Box, Typography } from "@mui/material";
+// import { StyledComponentContainer } from "../styles/globalStyles";
 
 export function CreateGame() {
   const navigate = useNavigate();
@@ -55,84 +59,106 @@ export function CreateGame() {
   };
 
   return (
-    <StyledComponentContainer>
-      <StyledTypography>Create a Game</StyledTypography>
-      <StyledFormGroup>
-        <StyledTextField
-          id="outlined-required"
-          label="Nickname"
-          name="nickname"
-          onChange={(e) => dispatch(e.target)}
-          required
-        />
-        <StyledFormControl required>
-          <StyledInputLabel id="demo-simple-select-required-label">
-            Number of Players
-          </StyledInputLabel>
-          <StyledSelect
-            id="demo-simple-select-required"
-            label="Number of Players"
-            name="numPlayers"
-            labelId="demo-simple-select-required-label"
-            onChange={(e) => dispatch(e.target)}
-            value={options.numPlayers}
-            required
-          >
-            <StyledMenuItem value="">None</StyledMenuItem>
-            <StyledMenuItem value={3}>Three</StyledMenuItem>
-            <StyledMenuItem value={4}>Four</StyledMenuItem>
-            <StyledMenuItem value={5}>Five</StyledMenuItem>
-            <StyledMenuItem value={6}>Six</StyledMenuItem>
-            <StyledMenuItem value={7}>Seven</StyledMenuItem>
-            <StyledMenuItem value={8}>Eight</StyledMenuItem>
-          </StyledSelect>
-        </StyledFormControl>
-        <StyledFormControl required>
-          <StyledInputLabel id="demo-simple-select-required-label">
-            Number of Rounds
-          </StyledInputLabel>
-          <StyledSelect
-            id="demo-simple-select-required"
-            label="Number of Rounds"
-            name="rounds"
-            labelId="demo-simple-select-required-label"
-            onChange={(e) => dispatch(e.target)}
-            value={options.setupData.rounds}
-            required
-          >
-            <StyledMenuItem value={1}>One</StyledMenuItem>
-            <StyledMenuItem value={2}>Two</StyledMenuItem>
-            <StyledMenuItem value={3}>Three</StyledMenuItem>
-            <StyledMenuItem value={4}>Four</StyledMenuItem>
-            <StyledMenuItem value={5}>Five</StyledMenuItem>
-            <StyledMenuItem value={6}>Six</StyledMenuItem>
-            <StyledMenuItem value={7}>Seven</StyledMenuItem>
-            <StyledMenuItem value={8}>Eight</StyledMenuItem>
-            <StyledMenuItem value={9}>Nine</StyledMenuItem>
-            <StyledMenuItem value={10}>Ten</StyledMenuItem>
-            <StyledMenuItem value={11}>Eleven</StyledMenuItem>
-            <StyledMenuItem value={12}>Twelve</StyledMenuItem>
-          </StyledSelect>
-        </StyledFormControl>
-        <StyledFormControlLabel
-          control={<StyledCheckbox name="customCards" />}
-          label="Allow custom cards"
-        />
-        <StyledFormControlLabel
-          control={
-            <StyledCheckbox
-              name="unlisted"
-              value={options.unlisted}
-              onChange={(e) => dispatch(e.target)}
+    <StyledContainer>
+      <StyledTypography
+        sx={{
+          padding: "1rem",
+          fontFamily: "roboto",
+          textShadow: "0 0 10px white",
+          fontWeight: "800",
+          fontSize: {
+            xs: "1rem",
+            sm: "1.5rem",
+            md: "1.8rem",
+            lg: "2rem",
+          },
+          color: "white",
+        }}
+        variant="body2"
+      >
+        Create a Game
+      </StyledTypography>
+      <StyledInnerBox>
+        <StyledFormGroup>
+          <StyledFormControl required>
+            <StyledTextField
+              id="outlined-required"
+              label="Nickname"
+              name="nickname"
               required
             />
-          }
-          label="Make game public"
-        />
-      </StyledFormGroup>
+          </StyledFormControl>
+          <StyledFormControl required>
+            <StyledInputLabel id="demo-simple-select-required-label">
+              Number of Players
+            </StyledInputLabel>
+            <StyledSelect
+              id="demo-simple-select-required"
+              label="Number of Players"
+              name="numPlayers"
+              labelId="demo-simple-select-required-label"
+              onChange={(e) => dispatch(e.target)}
+              value={options.numPlayers}
+              required
+            >
+              <StyledMenuItem value="">None</StyledMenuItem>
+              <StyledMenuItem value={3}>Three</StyledMenuItem>
+              <StyledMenuItem value={4}>Four</StyledMenuItem>
+              <StyledMenuItem value={5}>Five</StyledMenuItem>
+              <StyledMenuItem value={6}>Six</StyledMenuItem>
+              <StyledMenuItem value={7}>Seven</StyledMenuItem>
+              <StyledMenuItem value={8}>Eight</StyledMenuItem>
+            </StyledSelect>
+          </StyledFormControl>
+          <StyledFormControl required>
+            <StyledInputLabel id="demo-simple-select-required-label">
+              Number of Rounds
+            </StyledInputLabel>
+            <StyledSelect
+              id="demo-simple-select-required"
+              label="Number of Rounds"
+              name="rounds"
+              labelId="demo-simple-select-required-label"
+              onChange={(e) => dispatch(e.target)}
+              value={options.setupData.rounds}
+              required
+            >
+              <StyledMenuItem value={1}>One</StyledMenuItem>
+              <StyledMenuItem value={2}>Two</StyledMenuItem>
+              <StyledMenuItem value={3}>Three</StyledMenuItem>
+              <StyledMenuItem value={4}>Four</StyledMenuItem>
+              <StyledMenuItem value={5}>Five</StyledMenuItem>
+              <StyledMenuItem value={6}>Six</StyledMenuItem>
+              <StyledMenuItem value={7}>Seven</StyledMenuItem>
+              <StyledMenuItem value={8}>Eight</StyledMenuItem>
+              <StyledMenuItem value={9}>Nine</StyledMenuItem>
+              <StyledMenuItem value={10}>Ten</StyledMenuItem>
+              <StyledMenuItem value={11}>Eleven</StyledMenuItem>
+              <StyledMenuItem value={12}>Twelve</StyledMenuItem>
+            </StyledSelect>
+          </StyledFormControl>
+          <StyledCheckboxContainer>
+            <StyledFormControlLabel
+              control={<StyledCheckbox name="customCards" />}
+              label="Allow custom cards"
+            />
+            <StyledFormControlLabel
+              control={
+                <StyledCheckbox
+                  name="unlisted"
+                  value={options.unlisted}
+                  onChange={(e) => dispatch(e.target)}
+                  required
+                />
+              }
+              label="Make game public"
+            />
+          </StyledCheckboxContainer>
+        </StyledFormGroup>
+      </StyledInnerBox>
       <StyledButton variant="contained" onClick={createGameHandler}>
         Create Game
       </StyledButton>
-    </StyledComponentContainer>
+    </StyledContainer>
   );
 }
