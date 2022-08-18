@@ -9,6 +9,10 @@ import {
   setPlayerCredentials,
 } from "../app/mainSlice";
 import { useNavigate } from "react-router-dom";
+import {
+  StyledComponentContainer,
+  StyledInnerBox,
+} from "../styles/globalStyles";
 
 const Item = styled(Paper)(() => ({
   textAlign: "center",
@@ -75,21 +79,12 @@ const Lobby = () => {
     //   minHeight="100vh"
     //   width="100%"
     // ></Box>
-    <>
+    <StyledComponentContainer>
       <Box>
         <Typography variant="h3" sx={{ mt: "1em" }}>
           Join a Game
         </Typography>
-        <Box
-          gap={1}
-          sx={{
-            mt: "2em",
-            mb: "3em",
-            ml: "0.75rem",
-            display: "flex",
-            justifyContent: { xs: "center", sm: "flex-start" },
-          }}
-        >
+        <Box>
           <Typography variant="h5" sx={{ mt: "1em" }}>
             Enter the session code for the game you want to join
           </Typography>
@@ -97,21 +92,11 @@ const Lobby = () => {
             placeholder="Session Code"
             value={sessionCode}
             onChange={(e) => {
-              console.log(e.target.value);
               setSessionCode(e.target.value);
             }}
           />
         </Box>
-        <Box
-          gap={1}
-          sx={{
-            mt: "2em",
-            mb: "3em",
-            ml: "0.75rem",
-            display: "flex",
-            justifyContent: { xs: "center", sm: "flex-start" },
-          }}
-        >
+        <StyledInnerBox>
           <Typography variant="h5" sx={{ mt: "1em" }}>
             Enter the player name you'll use for this game
           </Typography>
@@ -126,7 +111,7 @@ const Lobby = () => {
           <Button variant="contained" onClick={() => joinMatchHandler()}>
             Join
           </Button>
-        </Box>
+        </StyledInnerBox>
       </Box>
       <Box sx={{ width: "100%" }}>
         <Typography variant="h5" sx={{ mt: "1em" }}>
@@ -158,7 +143,7 @@ const Lobby = () => {
           ))}
         </Box>
       </Box>
-    </>
+    </StyledComponentContainer>
   );
 };
 export default Lobby;
