@@ -24,7 +24,6 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
   let answers = (
     <div className="player-choices">
       {cardArray}
-      {/* <Timer time={30} /> */}
     </div>
   );
 
@@ -36,13 +35,11 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
           <PCard children={G.activePrompt.body} className={styles.answer_card}/>
         ) : (
           <div>
-            {/* <p>Push button to begin round</p> */}
             <button
               onClick={() => {
                 moves.drawPrompt();
                 setRoundTime(60);
               }}
-
             >
               Select me Daddy!
             </button>
