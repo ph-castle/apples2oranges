@@ -87,7 +87,6 @@ export function CreateGame() {
           },
           color: "white",
         }}
-        variant="body2"
       >
         Create a Game
       </StyledTypography>

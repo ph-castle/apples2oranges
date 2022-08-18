@@ -18,7 +18,6 @@ export const StyledTypography = styled(Typography)({
   fontFamily: "roboto",
   textShadow: "0 0 10px white",
   fontWeight: "800",
-
   color: "white",
 });
 
@@ -47,6 +46,9 @@ export const StyledFormHelperText = styled(FormHelperText)({
 });
 
 export const StyledButton = styled(Button)({
+  // p: "sm",
+  // // width: "26ch",
   p: "sm",
-  width: "26ch",
+  width: "25ch",
+  mt: "2rem",
 });

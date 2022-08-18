@@ -118,9 +118,8 @@ export default function CreateUserPage({ setUser }) {
             lg: "2rem",
           },
         }}
-        variant="body2"
       >
-        Create a Game
+        Create an Account
       </StyledTypography>
       {userCreated && <StyledTypography>Account Created!</StyledTypography>}
       <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>

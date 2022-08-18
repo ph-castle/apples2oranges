@@ -8,13 +8,19 @@ import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormHelperText from "@mui/material/FormHelperText";
-import InputLabel from "@mui/material/InputLabel";
+// import StyledInputLabel from "@mui/material/StyledInputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import OutlinedInput from "@mui/material/OutlinedInput";
+// import StyledOutlineInput from "@mui/material/StyledOutlineInput";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { StyledComponentContainer } from "../../styles/globalStyles";
+import {
+  StyledTypography,
+  StyledOutlineInput,
+  StyledButton,
+  StyledInputLabel,
+} from "../../styles/createUserPageStyles";
 
 export default function LoginPage({ setUser }) {
   const [username, setUsername] = useState("");
@@ -62,27 +68,34 @@ export default function LoginPage({ setUser }) {
       });
   };
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
+  const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
   return (
-    // <Box
-    //   sx={{
-    // width: '50%',
-    // margin: 'auto',
-    // mt: 4,
-    // display: 'block'
-    //   }}>
     <StyledComponentContainer>
-      <Typography variant="h4">Login</Typography>
+      <StyledTypography
+        sx={{
+          padding: "1rem",
+          fontFamily: "roboto",
+          textShadow: "0 0 10px white",
+          fontWeight: "800",
+          fontSize: {
+            xs: "1rem",
+            sm: "1.5rem",
+            md: "1.8rem",
+            lg: "2rem",
+          },
+          color: "white",
+        }}
+      >
+        Login
+      </StyledTypography>
       <form autoComplete="off" onSubmit={(e) => handleLogin(e)}>
         <FormGroup sx={{ mt: "1rem" }}>
           <FormControl sx={{ width: "25ch", mt: "1rem" }}>
-            <InputLabel required>Username</InputLabel>
-            <OutlinedInput
+            <StyledInputLabel required>Username</StyledInputLabel>
+            <StyledOutlineInput
               type="text"
               value={username}
               required
@@ -92,8 +105,8 @@ export default function LoginPage({ setUser }) {
           </FormControl>
           <br />
           <FormControl sx={{ width: "25ch", mt: "1rem" }}>
-            <InputLabel required>Password</InputLabel>
-            <OutlinedInput
+            <StyledInputLabel required>Password</StyledInputLabel>
+            <StyledOutlineInput
               type={showPassword ? "text" : "password"}
               value={password}
               required
@@ -121,25 +134,24 @@ export default function LoginPage({ setUser }) {
               <FormHelperText>&nbsp;</FormHelperText>
             )}
           </FormControl>
-          <FormControl sx={{ width: "25ch", mt: "1rem" }}>
-            <Button
+          <FormControl>
+            <StyledButton
               type="submit"
               variant="contained"
-              sx={{ p: "sm" }}
               disabled={attemptingLogin}
             >
               Login
-            </Button>
+            </StyledButton>
           </FormControl>
         </FormGroup>
       </form>
-      <Button
+      <StyledButton
         variant="contained"
-        sx={{ p: "sm", width: "26ch", mt: "2rem" }}
+        // sx={{ p: "sm", width: "26ch", mt: "2rem" }}
         onClick={(e) => navigate("/user/create")}
       >
         Create account
-      </Button>
+      </StyledButton>
     </StyledComponentContainer>
   );
 }
