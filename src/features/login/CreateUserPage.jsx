@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './Login.css';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
-import FormHelperText from '@mui/material/FormHelperText';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Avatar from '@mui/material/Avatar';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-
+import axios from "axios";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import {
+  StyledFormControl,
+  StyledButton,
+  StyledInputLabel,
+  StyledTypography,
+  StyledOutlineInput,
+  StyledFormHelperText,
+} from "../../styles/createUserPageStyles";
+import "./Login.css";
 
 export default function CreateUserPage({ setUser }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-  const [photo, setPhoto] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [photo, setPhoto] = useState("");
   const [usernameTaken, setUsernameTaken] = useState(false);
   const [passwordMismatch, setPasswordMismatch] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -27,7 +25,7 @@ export default function CreateUserPage({ setUser }) {
   let navigate = useNavigate();
 
   const axiosInstance = axios.create({
-    baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
+    baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`,
   });
 
   const uploadImage = (e) => {
@@ -42,105 +40,84 @@ export default function CreateUserPage({ setUser }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     // check if username exists first
-    axiosInstance.get(`/user/${username}`)
-      .then((results) => {
-        if (results.data.id === undefined) {
-          // username not taken, check if passwords match
-          setUsernameTaken(false);
-          if (password === password2) {
-            // password matches, can create a new account
-            setPasswordMismatch(false);
-            setSubmitting(true);
-            // uploads photo to cloudinary
-            let photoPromise = new Promise((resolve, reject) => {
-              if (photo !== '') {
-                axiosInstance.post('/cloudinary', {img: photo})
-                .then((photoURL) => {
-                  resolve(photoURL.data);
-                })
-                .catch((err) => {
-                  reject(err);
-                });
-              } else {
-                resolve(null);
-              }
-            });
-            photoPromise
-              .then((photoURL) => {
-                let data = {
-                  'username': username,
-                  'password': password,
-                  'avatar': photoURL
-                };
-                // posts new user
-                axiosInstance.post('/user', data)
-                  .then((results) => {
-                    // sets current user data
-                    setUser(results.data);
-                    // reset fields
-                    setUsername('');
-                    setPassword('');
-                    setPassword2('');
-                    setPhoto('');
-                    setSubmitting(false);
-                    setUserCreated(true);
-                    setTimeout(() => {
-                      setUserCreated(false);
-                      // route back to main page
-                      navigate('/home');
-                    }, 1000)
-                  })
-                  .catch((err) => {
-                    console.log('Error creating user: ', err);
-                  });
-              })
-              .catch((err) => {
-                console.log('Error uploading image: ', err);
-              });
-          } else {
-            setPasswordMismatch(true);
-          }
-        } else {
-          setUsernameTaken(true);
-        }
-      })
+    axiosInstance.get(`/user/${username}`).then((results) => {
+      if (results.data.id !== undefined) return setUsernameTaken(true);
+      // username not taken, check if passwords match
+      setUsernameTaken(false);
+      if (password !== password2) return setPasswordMismatch(true);
+      // password matches, can create a new account
+      setPasswordMismatch(false);
+      setSubmitting(true);
+      // uploads photo to cloudinary
+      photo &&
+        postCloudinary(photo)
+          .then((photoURL) =>
+            // posts new user
+            postNewUser({
+              username,
+              password,
+              avatar: photoURL,
+            })
+          )
+          .catch((err) => console.log("Error uploading image: ", err));
+    });
+  };
+
+  const postCloudinary = (photo) =>
+    axiosInstance
+      .post("/cloudinary", { img: photo })
+      .then((photoURL) => photoURL.data)
+      .catch((err) => err);
+
+  const postNewUser = (data) =>
+    axiosInstance
+      .post("/user", data)
+      .then((results) => handleUserData(results))
+      .catch((err) => console.log("Error creating user: ", err));
+
+  const handleResetInputs = () => {
+    setUsername("");
+    setPassword("");
+    setPassword2("");
+    setPhoto("");
+    setSubmitting(false);
+  };
+
+  const handleUserData = ({ data }) => {
+    // sets current user data
+    setUser(data);
+    // reset fields
+    handleResetInputs();
+    setUserCreated(true);
+    setTimeout(() => {
+      setUserCreated(false);
+      // route back to main page
+      navigate("/home");
+    }, 1000);
   };
 
   const handleCancel = () => {
     // reset fields
-    setUsername('');
-    setPassword('');
-    setPassword2('');
-    setPhoto('');
+    handleResetInputs();
     setUsernameTaken(false);
     setPasswordMismatch(false);
-    setSubmitting(false);
     setUserCreated(false);
     // route back to main page
-    navigate('/home');
+    navigate("/home");
   };
 
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      flexDirection='column'
-      height="100vh"
-      gap="12px"
-      width='50%'
-      margin='auto'
-      mt={4}
-      // display='block'
-    >
-      <Typography variant="h4">Create an Account</Typography>
-      {userCreated &&
-        <Typography variant="h6">Account Created!</Typography>
-      }
+    <>
+      <StyledTypography variant="h4">Create an Account</StyledTypography>
+      {userCreated && (
+        <StyledTypography variant="h6">Account Created!</StyledTypography>
+      )}
       <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
-        <FormControl sx={{ width: '25ch', mt: '1rem' }}>
-          <InputLabel size="small" required>Username</InputLabel>
-          <OutlinedInput
+        <StyledFormControl>
+          <StyledInputLabel size="small" required>
+            Username
+          </StyledInputLabel>
+          <StyledOutlineInput
             type="text"
             value={username}
             required
@@ -149,17 +126,18 @@ export default function CreateUserPage({ setUser }) {
             error={usernameTaken}
             size="small"
           />
-          {
-            usernameTaken ?
-            (<FormHelperText>Username already taken</FormHelperText>)
-            :
-            (<FormHelperText>&nbsp;</FormHelperText>)
-          }
-        </FormControl>
-        <br/>
-        <FormControl sx={{ width: '25ch', mt:1 }}>
-          <InputLabel size="small" required>Password</InputLabel>
-          <OutlinedInput
+          {usernameTaken ? (
+            <StyledFormHelperText>Username already taken</StyledFormHelperText>
+          ) : (
+            <StyledFormHelperText>&nbsp;</StyledFormHelperText>
+          )}
+        </StyledFormControl>
+        <br />
+        <StyledFormControl>
+          <StyledInputLabel size="small" required>
+            Password
+          </StyledInputLabel>
+          <StyledOutlineInput
             type="password"
             value={password}
             required
@@ -168,12 +146,14 @@ export default function CreateUserPage({ setUser }) {
             error={passwordMismatch}
             size="small"
           />
-          <FormHelperText>&nbsp;</FormHelperText>
-        </FormControl>
-        <br/>
-        <FormControl sx={{ width: '25ch', mt:1 }}>
-          <InputLabel size="small" required>Confirm Password</InputLabel>
-          <OutlinedInput
+          <StyledFormHelperText>&nbsp;</StyledFormHelperText>
+        </StyledFormControl>
+        <br />
+        <StyledFormControl>
+          <StyledInputLabel size="small" required>
+            Confirm Password
+          </StyledInputLabel>
+          <StyledOutlineInput
             type="password"
             value={password2}
             required
@@ -182,48 +162,37 @@ export default function CreateUserPage({ setUser }) {
             error={passwordMismatch}
             size="small"
           />
-          {
-            passwordMismatch ?
-            (<FormHelperText>Passwords must match!</FormHelperText>)
-            :
-            (<FormHelperText>&nbsp;</FormHelperText>)
-          }
-        </FormControl>
-        <br/>
-        <FormControl sx={{ width: '25ch' }}>
-          <Button
-            variant="contained"
-            component="label"
-            sx={{ p: "sm", width: '26ch'}}
-          >
-            <AddPhotoAlternateIcon />&nbsp;Upload avatar
+          {passwordMismatch ? (
+            <StyledFormHelperText>Passwords must match!</StyledFormHelperText>
+          ) : (
+            <StyledFormHelperText>&nbsp;</StyledFormHelperText>
+          )}
+        </StyledFormControl>
+        <br />
+        <StyledFormControl>
+          <StyledButton variant="contained" component="label">
+            <AddPhotoAlternateIcon />
+            &nbsp;Upload avatar
             <input
               type="file"
               accept="image/png, image/jpeg"
               onChange={(e) => uploadImage(e)}
               hidden
             />
-          </Button>
-        </FormControl>
-        {photo.length > 0 && <img className="avatar-thumbnail" src={photo} alt="avatar"/>}
-        <br/>
-        <br/>
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{ p: "sm", width: '26ch' }}
-          disabled={submitting}
-        >
+          </StyledButton>
+        </StyledFormControl>
+        {photo.length > 0 && (
+          <img className="avatar-thumbnail" src={photo} alt="avatar" />
+        )}
+        <br />
+        <br />
+        <StyledButton type="submit" variant="contained" disabled={submitting}>
           Create account
-        </Button>
+        </StyledButton>
       </form>
-      <Button
-        variant="contained"
-        sx={{ p: "sm", width: '26ch', mt: '1rem' }}
-        onClick={(e) => {handleCancel()}}
-      >
+      <StyledButton variant="contained" onClick={(e) => handleCancel()}>
         Cancel
-      </Button>
-    </Box>
-  )
+      </StyledButton>
+    </>
+  );
 }
