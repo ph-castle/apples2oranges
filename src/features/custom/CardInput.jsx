@@ -26,7 +26,7 @@ export default function CardInput({ user }) {
     if (prompt.length > 0) {
       await axiosInstance.put(`/cards/prompt/${user.id}`, {
         params: {
-          cards: prompt.split('\n'),
+          cards: prompts.split('\n'),
           NSFW: false,
         }
       });

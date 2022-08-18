@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Timer from './Timer';
+import Box from '@mui/material/Box';
 // import Card from '../../card/Card.js';
 
 export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendChatMessage, chatMessages }) {
@@ -63,17 +64,25 @@ export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendC
           answers
         }
       </div>
-      <div style={{borderStyle: 'solid', width: '251px'}}>
+
+      <Box
+        display="flex"
+        flexDirection="column"
+        height="100vh"
+        margin="auto"
+        alignItems="center"
+        justifyContent="center"
+      >
         {chatMessages.length > 0 ? chatMessages.map(({ payload, sender }, index) => {
-          return <div>{`${sender}: ${payload.message}`}</div>
-        }) : null}
+            return <div>{`${sender}: ${payload.message}`}</div>
+          }) : null}
 
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={chatInput} onChange={handleChange} style={{width: '190px'}}/>
-          <button type="submit" style={{width: '55px'}}>Send</button>
-        </form>
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={chatInput} onChange={handleChange} style={{width: '190px'}}/>
+            <button type="submit" style={{width: '55px'}}>Send</button>
+          </form>
+      </Box>
 
-      </div>
       {/* {renderView()} */}
     </div>
   )

@@ -84,13 +84,14 @@ export const CreateGame = () => {
           .then((player) => {
             console.log(player);
             localStorage.setItem("name", name);
+            console.log('id', player.playerID);
             localStorage.setItem("id", player.playerID);
             localStorage.setItem("credentials", player.playerCredentials);
           });
       })
       .then(() => {
         console.log("matchTemp", matchTemp);
-        navigate(`/apples/:room/${matchTemp}`);
+        navigate(`/waitingroom/${matchTemp}`);
       })
       .catch((err) => {
         console.log("catch all error in CreateGamee clickHandler", err);
