@@ -9,10 +9,25 @@ import {
 } from "react-share";
 
 export default class Card extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handleSelect = () => {
+    if (this.props.player) {
+      this.props.moves.playAnswer(this.props.playerId);
+    } else {
+      console.log('selected player id: ', this.props.playerId);
+      this.props.moves.pickWinner(this.props.playerId);
+      this.props.setRoundTime(60);
+    }
+  }
   render() {
     const shareTitle = 'Apples to Oranges!';
     const shareMessage = `I'm playing Apples to Oranges and found this hilarious!\n${this.props.text}`;
     const url = String(window.location);
+    
+  
 
     return (
       <div
@@ -21,9 +36,9 @@ export default class Card extends React.Component {
         className={styles.answer_card}
       >
         <div className={styles.card_text}>
-          {this.props.children}
+          {this.props.text}
         </div>
-        <button className={styles.select_button} onClick={this.handleSelect}>
+        <button className={styles.select_button} onClick={this.handleSelect.bind(this)}>
           Select
         </button>
         <div className={styles.social_media}>

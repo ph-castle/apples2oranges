@@ -30,10 +30,11 @@ export function ApplesBoard({ ctx, G, moves, playerID }) {
           <button onClick={() => {
             lobbyClient
               .playAgain("Apples2Oranges", localStorage.getItem("matchID"), nextGameParams)
-              .then((nextMatchID) => {
-                console.log("next match id: ", nextMatchID);
-                localStorage.setItem("matchID", nextMatchID);
-                navigate(`/waitingroom/${nextMatchID}`);
+              .then((results) => {
+            
+                console.log("next match id: ", results.nextMatchID);
+                localStorage.setItem("matchID", results.nextMatchID);
+                navigate(`/waitingroom/${results.nextMatchID}`);
               })
               .catch((err) => {
                 console.log('Error creating next game: ', err);
