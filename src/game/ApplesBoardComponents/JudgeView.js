@@ -32,7 +32,6 @@ export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendC
         moves={moves}
         setRoundTime={setRoundTime}
         text={G.submittedAnswers[playerId].body}
-
       />
     );
   }
@@ -53,7 +52,7 @@ export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendC
           <div>
             <button
               onClick={() => {
-                moves.drawPrompt();
+                moves.drawRemotePrompt();
                 setRoundTime(60);
               }}
             >
