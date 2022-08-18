@@ -13,118 +13,93 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-export const StyledMenuItem = styled(MenuItem)({
-  fontSize: {
-    sm: "1.5rem",
-    md: "2rem",
-  },
-  padding: "1rem",
-  color: "black",
-  backgroundColor: "white",
-});
-
-export const StyledSelect = styled(Select)({
-  fontSize: {
-    sm: "1.5rem",
-    md: "2rem",
-  },
-  padding: "1rem",
-  color: "black",
-  backgroundColor: "white",
-});
-
-export const StyledBox = styled(Box)({
+export const StyledContainer = styled(Box)({
   display: "flex",
   justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+  gap: "1rem",
   width: "100%",
+  maxWidth: "1200px",
   height: "100%",
-  margin: "auto",
-  backgroundColor: "black",
+  margin: "0 auto",
   padding: "2rem",
-  flexDirection: "column",
-  gap: "1rem",
+  // height: "100%",
 });
 
-export const StyledFormGroup = styled(FormGroup)({
-  height: "18rem",
-  display: "flex",
-  justifyContent: "space-evenly",
-  mt: "1rem",
-});
-
-export const StyledFormControl = styled(FormControl)({
-  m: 1,
-  minWidth: "2rem",
-  mb: "1rem",
-  width: "50%",
-});
-
-export const StyledButton = styled(Button)({
-  width: "10rem",
-  mt: "2rem",
-});
-
-export const StyledInputLabel = styled(InputLabel)({
-  fontSize: {
-    sm: "1.5rem",
-    md: "2rem",
-  },
-  color: "black",
-  backgroundColor: "white",
-  padding: "1rem",
-  width: "50%",
-  margin: "auto",
-  textAlign: "center",
-  justifyContent: "center",
-  alignItems: "center",
-  display: "flex",
-  flexDirection: "column",
-  gap: "1rem",
-});
-
-export const StyledTypography = styled(Typography)({
-  fontSize: {
-    sm: "1.5rem",
-    md: "2rem",
-  },
-  color: "black",
-  backgroundColor: "white",
-  padding: "1rem",
-  width: "50%",
-  margin: "auto",
-  textAlign: "center",
-  justifyContent: "center",
-  alignItems: "center",
-  display: "flex",
-  flexDirection: "column",
-  gap: "1rem",
+export const StyledInnerBox = styled(Box)({
+  // padding: "2rem",
 });
 
 export const StyledTextField = styled(TextField)({
-  m: 1,
-  minWidth: "2rem",
-  mb: "1rem",
+  color: "white",
+  backgroundColor: "grey",
+});
+
+export const StyledInputLabel = styled(InputLabel)({
   color: "black",
 });
 
-export const StyledCheckbox = styled(Checkbox)({
-  m: 1,
-  minWidth: "2rem",
-  mb: "1rem",
+export const StyledSelect = styled(Select)({
   color: "black",
   backgroundColor: "white",
 });
 
+export const StyledMenuItem = styled(MenuItem)({
+  color: "black",
+  backgroundColor: "white",
+});
+
+export const StyledFormGroup = styled(FormGroup)({
+  // height: "18rem",
+  // display: "flex",
+  backgroundColor: "black",
+});
+
+export const StyledCheckboxContainer = styled(Box)({
+  display: "flex",
+  gap: "1rem",
+  padding: "1rem",
+  marginTop: "1rem",
+  // justifyContent: "center",
+  alignItems: "space-between",
+  flexDirection: "column",
+});
+
 export const StyledFormControlLabel = styled(FormControlLabel)({
+  padding: "0.8em",
+  textAlign: "start",
+  outline: "white solid 1px",
+  margin: "auto",
+});
+
+export const StyledCheckbox = styled(Checkbox)({
+  color: "orange",
+});
+
+export const StyledFormControl = styled(FormControl)({
+  marginTop: "1em",
+});
+
+export const StyledTypography = styled(Typography)({
+  padding: "1rem",
+  fontFamily: "roboto",
+  textShadow: "0 0 10px white",
+  fontWeight: "800",
+  fontSize: {
+    xs: "1rem",
+    sm: "1.5rem",
+    md: "1.8rem",
+    lg: "2rem",
+  },
+  color: "white",
+});
+
+export const StyledButton = styled(Button)({
   fontSize: {
     sm: "1.5rem",
     md: "2rem",
   },
-
-  color: "black",
-  backgroundColor: "white",
-  padding: "1rem",
-  width: "50%",
-  margin: "auto",
-  textAlign: "center",
+  padding: "0.8em",
+  outline: "1px solid orange",
 });

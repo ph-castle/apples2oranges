@@ -10,6 +10,18 @@ export const theme = createTheme({
       color: "white",
     },
   },
+  textField: {
+    width: "90%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    paddingBottom: 0,
+    marginTop: 0,
+    fontWeight: 500,
+  },
+  input: {
+    color: "black",
+  },
+
   palette: {
     primary: {
       main: "rgba(0,0,0,0.87)",

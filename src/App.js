@@ -17,6 +17,8 @@ import CreateUserPage from "./features/login/CreateUserPage";
 // import { useSelector } from "react-redux";
 import { Apples2Oranges } from "./features/gameRoom";
 
+import { StyledContainer, StyledBox } from "./styles/appStyles";
+
 export default function App() {
   const [user, setUser] = useState({
     id: 0,
@@ -29,15 +31,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <Header user={user} setUser={setUser} />
         <Hero />
-        <Container
-          sx={{
-            position: "relative",
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0,0,0, 0.8)",
-            overflow: "hidden",
-          }}
-        >
+        <StyledContainer>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/home" element={<Dashboard />} />
@@ -59,7 +53,7 @@ export default function App() {
             <Route path="/waitingroom/:matchID" element={<WaitingRoom />} />
             <Route path="/game/apples/:matchID" element={<Apples2Oranges />} />
           </Routes>
-        </Container>
+        </StyledContainer>
       </ThemeProvider>
     </StyledEngineProvider>
   );
