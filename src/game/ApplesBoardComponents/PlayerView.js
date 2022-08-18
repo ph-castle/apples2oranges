@@ -1,31 +1,7 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import Timer from './Timer';
-import ScoreBoard from './ScoreBoard';
-// import Card from '../../card/Card.js';
-
-export default function PlayerView({G, ctx, moves, playerID, roundTime, setRoundTime, sendChatMessage, chatMessages }) {
-  const [chatInput, setChatInput] = useState('');
-
-  const handleSubmit = (e) => {
-    console.log('here is submit');
-    e.preventDefault();
-    sendChatMessage({ message: chatInput, time: Date.now()});
-    console.log('here is after send chat');
-    setChatInput('');
-  }
-
-  const handleChange = (e) => {
-    const { value } = e.target;
-    console.log(value);
-    setChatInput(value);
-  }
-=======
 import React, { useState } from "react";
 import Timer from "./Timer";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
->>>>>>> main
 
 export default function PlayerView({
   G,
