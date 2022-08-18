@@ -14,9 +14,9 @@ export const StyledBox = styled(Box)({
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
-  height: "100vh",
+  height: "100%",
   gap: "12px",
-  width: "50%",
+  width: "100%",
   margin: "auto",
   mt: 4,
 });
