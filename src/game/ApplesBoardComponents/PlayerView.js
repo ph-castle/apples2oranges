@@ -12,7 +12,7 @@ export default function PlayerView({
   setRoundTime,
 }) {
   let answers;
-  if (G.activePrompt.text) {
+  if (G.activePrompt.body) {
     answers = (
       <div>
         {G.players[playerID].hand.map((card, i) => {
@@ -24,7 +24,7 @@ export default function PlayerView({
               playerId={i}
               moves={moves}
               key={card.id}
-              text={card.text}
+              text={card.body}
             />
           );
         })}
@@ -36,8 +36,8 @@ export default function PlayerView({
     <div>
       THIS IS WHAT THE PLEBS SEE
       <span className="active-prompt">
-        {G.activePrompt.text ? (
-          <p>{G.activePrompt.text}</p>
+        {G.activePrompt.body ? (
+          <p>{G.activePrompt.body}</p>
         ) : (
           <p>Waiting on Judge to wake up and pull his foot out of his ass</p>
         )}

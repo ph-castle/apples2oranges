@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { lobbyClient } from "./utils/lobbyClient";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const CreateGame = () => {
   let navigate = useNavigate();
@@ -26,7 +27,7 @@ export const CreateGame = () => {
   const [customCards, setCustomCards] = useState();
   const [name, setName] = useState();
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     console.log(e.target.type);
     const { name, value, checked } = e.target;
 
@@ -43,6 +44,16 @@ export const CreateGame = () => {
       setOptions({ ...options, [name]: value });
       localStorage.setItem("players", value);
     }
+    
+    let { data } = await axios.get('http://3.101.13.217:45000/cards/prompt')    
+    setOptions(previousOptions => {  return {...previousOptions, setupData: {...previousOptions.setupData, remotePromptDeck: data}}  })
+    console.log(options);
+
+    let result = await axios.get('http://3.101.13.217:45000/cards/answer')   
+    setOptions(previousOptions => {  return {...previousOptions, setupData: {...previousOptions.setupData, remoteAnswerDeck: result.data}}  })
+  
+
+    
   };
   console.log(options);
 
@@ -86,7 +97,7 @@ export const CreateGame = () => {
       sx={{
         display: "flex",
         maxWidth: 400,
-        height: 250,
+        height: 750,
         flexDirection: "column",
         justifyContent: "space-between",
         ml: { sm: "0rem", md: "4rem" },

@@ -13,7 +13,7 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
         ctx={ctx}
         moves={moves}
         setRoundTime={setRoundTime}
-        text={G.submittedAnswers[playerId].text}
+        text={G.submittedAnswers[playerId].body}
       />
     );
   }
@@ -29,14 +29,14 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
     <div>
       THIS IS WHAT THE JUDGE SEES
       <span className="active-prompt">
-        {G.activePrompt.text ? (
-          <p>{G.activePrompt.text}</p>
+        {G.activePrompt.body ? (
+          <p>{G.activePrompt.body}</p>
         ) : (
           <div>
             <p>Push button to begin round</p>
             <button
               onClick={() => {
-                moves.drawPrompt();
+                moves.drawRemotePrompt();
                 setRoundTime(60);
               }}
             >
@@ -46,7 +46,7 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
         )}
       </span>
       <div className="answer">
-        {G.activePrompt.text &&
+        {G.activePrompt.body &&
         Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
           <div>
             <p>Waiting on player selections</p>
