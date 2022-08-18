@@ -68,13 +68,14 @@ const Lobby = () => {
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="flex-start"
-      minHeight="100vh"
-      width="100%"
-    >
+    // <Box
+    //   display="flex"
+    //   flexDirection="column"
+    //   alignItems="flex-start"
+    //   minHeight="100vh"
+    //   width="100%"
+    // ></Box>
+    <>
       <Box>
         <Typography variant="h3" sx={{ mt: "1em" }}>
           Join a Game
@@ -157,7 +158,7 @@ const Lobby = () => {
           ))}
         </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 export default Lobby;

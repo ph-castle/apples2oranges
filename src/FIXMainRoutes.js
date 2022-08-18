@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Dashboard from "./features/Dashboard";
-import CreateGame from "./features/CreateGame";
+import { CreateGame } from "./features/CreateGame";
 import Lobby from "./features/Lobby";
 import { WaitingRoom } from "./features/WaitingRoom";
 import { Apples2Oranges } from "./features/gameRoom";
