@@ -16,18 +16,12 @@ export const StyledFormControl = styled(FormControl)({
 export const StyledInputLabel = styled(InputLabel)({
   //   color: "orange",
   color: "black",
-  "&:focus": {
-    textShadow: "0 0 10px green",
-  },
-  "&.Mui-focused fieldset": {
-    textShadow: "0 0 10px green",
-    borderColor: "#C52328 1px solid",
-    borderWidth: "2px",
-  },
+  backgroundColor: "none",
 });
 export const StyledOutlineInput = styled(OutlinedInput)({
   color: "black",
-  backgroundColor: "white",
+  backgroundColor: "#f1f3f5",
+
   //   display: "flex",
   //   justifyContent: "center",
   //   alignItems: "center",
@@ -39,8 +33,8 @@ export const StyledFormHelperText = styled(FormHelperText)({
 
 export const StyledButton = styled(Button)({
   // p: "sm",
-  // // width: "26ch",
   width: "25ch",
+
   outline: "white solid 1px",
   boxShadow: "0 0 10px orange",
   "&:hover": {
