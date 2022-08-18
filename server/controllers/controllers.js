@@ -80,13 +80,13 @@ module.exports.getUserCards = (req, res) => {
     })
 };
 
-module.exports.addUserCards = (req, res) => {
+module.exports.addUserAnswerCards = (req, res) => {
   const { userId } = req.params;
   const { NSFW } = req.query;
-  const cards = req.body.cards.split('\n');
+  const cards = req.query.cards.split('\n');
   const userCards = cards.map((card) => [card, userId, NSFW]);
 
-  models.putUserCards(userId, userCards)
+  models.putUserAnswerCards(userId, userCards)
     .then(() => {
       res.status(201).send('201 CREATED');
     })
@@ -95,6 +95,24 @@ module.exports.addUserCards = (req, res) => {
       res.status(500).send(err);
     })
 };
+
+
+module.exports.addUserPromptCards = (req, res) => {
+  const { userId } = req.params;
+  const { NSFW } = req.query;
+  const cards = req.query.cards.split('\n');
+  const userCards = cards.map((card) => [card, userId, NSFW]);
+
+  models.putUserPromptCards(userId, userCards)
+    .then(() => {
+      res.status(201).send('201 CREATED');
+    })
+    .catch((err) => {
+      console.log('Problem adding user cards: ', err);
+      res.status(500).send(err);
+    })
+};
+
 
 module.exports.getPromptCards = (req, res) => {
   const { NSFW } = req.query;

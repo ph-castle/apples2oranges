@@ -146,7 +146,7 @@ module.exports.readUserCards = (userId, NSFW) => {
   );
 };
 
-module.exports.putUserCards = (userId, cards) => {
+module.exports.putUserAnswerCards = (userId, cards) => {
   return (
     pool
       .connect()
@@ -161,6 +161,42 @@ module.exports.putUserCards = (userId, cards) => {
           return client.query(format(`
             INSERT INTO
               answers (body, user_id, NSFW)
+            VALUES
+              %L
+          `, cards), []);
+        })
+        .then((result) => {
+          client.release();
+          return result;
+        })
+        .catch((err) => {
+          console.log('Problem reading user: ', err);
+          client.release();
+          return err;
+        });
+      })
+      .catch((err) => {
+        console.log('Error connecting to pool: ', err);
+        return err;
+      })
+  );
+};
+
+module.exports.putUserPromptCards = (userId, cards) => {
+  return (
+    pool
+      .connect()
+      .then((client) => {
+        return client.query(`
+          DELETE FROM
+            prompts
+          WHERE
+            user_id = $1
+        `, [userId])
+        .then(() => {
+          return client.query(format(`
+            INSERT INTO
+              prompts (body, user_id, NSFW)
             VALUES
               %L
           `, cards), []);
