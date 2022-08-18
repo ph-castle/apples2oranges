@@ -32,10 +32,13 @@ export function CreateGame() {
   const { name, options, customCards } = CreateGameState;
 
   const createGameHandler = async () => {
-    let { data } = await axios.get("http://3.101.13.217:45000/cards/prompt");
+
+    console.log(data)
     let result = await axios.get("http://3.101.13.217:45000/cards/answer");
+    console.log(result.data)
     dispatch({ name: "options1", value: data });
     dispatch({ name: "options2", value: result.data });
+    console.log(CreateGameState)
 
     let matchTemp;
     lobbyClient
