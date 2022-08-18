@@ -10,39 +10,18 @@ import { styled } from "@mui/material/styles";
 import { cardProps } from "./cardProps";
 import { toggleAnimation } from "../app/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
-
-// const Item = styled(Paper)`
-//   text-align: center;
-//   height: 10rem;
-//   width: 100%;
-//   max-width: 16rems;
-//   line-height: 10rem;
-// `;
-
-const rotateOut = keyframes`
-  0% {
-      -webkit-transform: rotate(0);
-              transform: rotate(0);
-      opacity: 1;
-    }
-    100% {
-      -webkit-transform: rotate(-360deg);
-              transform: rotate(-360deg);
-      opacity: 0;
-    }
-  }
-`;
+import { rotateOut, rollIn, rollOut } from "./KeyFrames";
 
 export default function AnimationCard({ card, i }) {
-  // const [animationToggle, setAnimationToggle] = React.useState(false);
   const dispatch = useDispatch();
-  const animationToggle = useSelector((state) => state.main.animationToggle);
+  const animatestate = useSelector((state) => state.main.animatestate);
   const isEven = i % 2 === 0;
-  const AnimatedCard = styled(Card)(({ animationToggle }) => ({
+
+  const AnimatedCard = styled(Card)(({ animatestate }) => ({
     transform: "rotate3d(1, 1, 1, -45deg) scale(1.5)",
     cursor: "pointer",
     display: "inline-block",
-    animation: !animationToggle
+    animation: !animatestate
       ? "rotate-in-diag-1 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both"
       : `${rotateOut} 0.6s cubic-bezier(0.550, 0.085, 0.680, 0.530) both`,
     position: "absolute",
@@ -56,7 +35,6 @@ export default function AnimationCard({ card, i }) {
     zIndex: "-1",
     backgroundColor: isEven ? "black" : "white",
     color: !isEven ? "black" : "white",
-    fontSize: "32px",
     fontWeight: "800",
     overflow: "hidden",
     textShadow: "0 0 10px white",
@@ -80,13 +58,13 @@ export default function AnimationCard({ card, i }) {
   // "translateY(0)"
   useEffect(() => {
     let timeout;
-    if (animationToggle === true) {
+    if (animatestate === true) {
       // dispatch(toggleAnimation(false));
       timeout = setTimeout(() => {
         dispatch(toggleAnimation());
       }, 1000);
     }
-    if (animationToggle === false) {
+    if (animatestate === false) {
       // dispatch(toggleAnimation(true));
       timeout = setTimeout(() => {
         dispatch(toggleAnimation(true));
@@ -96,10 +74,10 @@ export default function AnimationCard({ card, i }) {
     return () => {
       clearTimeout(timeout);
     };
-  }, [dispatch, animationToggle]);
+  }, [dispatch, animatestate]);
   return (
     <AnimatedCard
-      animationToggle={animationToggle}
+      animatestate={animatestate.toString()}
       onClick={() => dispatch(toggleAnimation())}
     >
       {/* <CardContent> */}
@@ -110,6 +88,12 @@ export default function AnimationCard({ card, i }) {
           fontFamily: "roboto",
           textShadow: `0 0 10px ${!isEven ? "black" : "white"}`,
           fontWeight: "800",
+          fontSize: {
+            xs: "0.6rem",
+            sm: "0.7rem",
+            md: "0.8rem",
+            lg: "1rem",
+          },
         }}
         color={!isEven ? "black" : "white"}
       >

@@ -16,14 +16,14 @@ code {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* outline: solid 1px rgb(255, 165, 0); */
+  outline: solid 1px rgb(255, 165, 0);
 }
 
 body {
   font-family: Roboto;
   background-color: black;
   color: white;
-  /* overflow: hidden; */
+  overflow: hidden;
   height: 100%;
   width: 100%;
 }

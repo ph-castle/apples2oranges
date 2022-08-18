@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
-  const animationToggle = useSelector((state) => state.main.animationToggle);
+  const animationtoggle = useSelector((state) => state.main.animationtoggle);
   return (
     <Box
       display="flex"

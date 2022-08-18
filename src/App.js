@@ -18,7 +18,6 @@ import CreateUserPage from "./features/login/CreateUserPage";
 import { Apples2Oranges } from "./features/gameRoom";
 
 export default function App() {
-
   const [user, setUser] = useState({
     id: 0,
     username: "",
@@ -34,7 +33,7 @@ export default function App() {
           sx={{
             position: "relative",
             width: "100%",
-            height: "100%",
+            height: "100vh",
             backgroundColor: "rgba(0,0,0, 0.8)",
             overflow: "hidden",
           }}
@@ -58,7 +57,7 @@ export default function App() {
             <Route path="/creategame" element={<CreateGame />} />
             <Route path="/joingame" element={<Lobby />} />
             <Route path="/waitingroom/:matchID" element={<WaitingRoom />} />
-            <Route path="/game/apples/:matchID" element={<Apples2Oranges />}/>
+            <Route path="/game/apples/:matchID" element={<Apples2Oranges />} />
           </Routes>
         </Container>
       </ThemeProvider>

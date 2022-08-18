@@ -5,7 +5,7 @@ const initialState = {
   playerID: "",
   playerCredentials: "",
   spotifyToken: "",
-  animationToggle: false,
+  animatestate: false,
 };
 
 export const mainSlice = createSlice({
@@ -25,9 +25,9 @@ export const mainSlice = createSlice({
       state.spotifyToken = action.payload;
     },
     toggleAnimation: (state, action) => {
-      state.animationToggle = action.payload
+      state.animatestate = action.payload
         ? action.payload
-        : !state.animationToggle;
+        : !state.animatestate;
     },
   },
 });
