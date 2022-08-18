@@ -18,7 +18,6 @@ import CreateUserPage from "./features/login/CreateUserPage";
 import { Apples2Oranges } from "./features/gameRoom";
 
 export default function App() {
-
   const [user, setUser] = useState({
     id: 0,
     username: "",
@@ -58,10 +57,30 @@ export default function App() {
             <Route path="/creategame" element={<CreateGame />} />
             <Route path="/joingame" element={<Lobby />} />
             <Route path="/waitingroom/:matchID" element={<WaitingRoom />} />
-            <Route path="/game/apples/:matchID" element={<Apples2Oranges />}/>
+            <Route path="/game/apples/:matchID" element={<Apples2Oranges />} />
           </Routes>
         </Container>
       </ThemeProvider>
     </StyledEngineProvider>
   );
 }
+// import React, { useState } from "react";
+// import Header from "./features/Header";
+// import MainRoutes from "./MainRoutes";
+// import Hero from "./UI/Hero";
+
+// export default function App() {
+//   const [user, setUser] = useState({
+//     id: 0,
+//     username: "",
+//     avatar: null,
+//   });
+
+//   return (
+//     <>
+//       <Header user={user} setUser={setUser} />
+//       <Hero />
+//       <MainRoutes user={user} setUser={setUser} />
+//     </>
+//   );
+// }

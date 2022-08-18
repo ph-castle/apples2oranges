@@ -12,7 +12,7 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: grey[900],
+      main: "rgba(0,0,0,0.87)",
     },
     secondary: {
       light: green[300],
