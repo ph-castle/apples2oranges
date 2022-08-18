@@ -15,6 +15,7 @@ import {
 import { lobbyClient } from "./utils/lobbyClient";
 import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
+import axios from "axios";
 
 const StyledMenuItem = styled(MenuItem)({
   fontSize: {
@@ -49,7 +50,7 @@ export const CreateGame = () => {
 
   // localStorage.setItem("name", name);
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     console.log(e.target.type);
     const { name, value, checked } = e.target;
 
@@ -66,6 +67,15 @@ export const CreateGame = () => {
       setOptions({ ...options, [name]: value });
       localStorage.setItem("players", value);
     }
+
+    let { data } = await axios.get('http://13.57.223.4:45000/cards/prompt')
+    setOptions(previousOptions => {
+      return  {...previousOptions, setupData: {...previousOptions.setupData, deck: data}}
+    })
+
+    console.log(options)
+
+
   };
 
   const clickHandler = () => {

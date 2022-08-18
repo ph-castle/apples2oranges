@@ -10,7 +10,8 @@ import { INVALID_MOVE } from "boardgame.io/core";
 export const Apples = ({
   name: "Apples2Oranges",
 
-  setup: (ctx) => ({
+  setup: (ctx, setupData) => ({
+    data: setupData,
     players: Array(ctx.numPlayers).fill({ hand: [], winningCards: [] }),
 
     secret: {
@@ -18,8 +19,8 @@ export const Apples = ({
       answerDeck: AnswerDeck,
     },
     //Maxiumum Cards per hand.
-    handMax: 3,
-
+    handMax: 7,
+    
     //Rounds are incremented once each player has had a 'turn' as the judge.
     playRound: 1,
 
