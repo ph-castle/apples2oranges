@@ -4,10 +4,6 @@ import styles from './Card.module.css';
 
 export default class Card extends React.Component {
 
-  drag = (e) => {
-    e.dataTransfer.setData('transfer', e.target.id)
-  }
-
   noAllowDrop = (e) => {
     e.stopPropagation();
   }
