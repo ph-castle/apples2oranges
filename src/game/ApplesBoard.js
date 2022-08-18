@@ -6,7 +6,7 @@ import PlayerView from "./ApplesBoardComponents/PlayerView";
 // import ScoreBoard from './ApplesBoardComponents/ScoreBoard';
 // import Timer from './ApplesBoardComponents/Timer';
 
-export function ApplesBoard({ ctx, G, moves, playerID }) {
+export function ApplesBoard({ ctx, G, moves, playerID, matchData }) {
   const [roundTime, setRoundTime] = useState();
   //create two different views that will be returned depending on if player is judge or not
 
@@ -42,6 +42,7 @@ export function ApplesBoard({ ctx, G, moves, playerID }) {
             playerID={playerID}
             roundTime={roundTime}
             setRoundTime={setRoundTime}
+            matchData={matchData}
           />
         )}
       </div>

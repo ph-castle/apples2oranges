@@ -10,6 +10,7 @@ export default function PlayerView({
   playerID,
   roundTime,
   setRoundTime,
+  matchData
 }) {
   let answers;
   if (G.activePrompt.text) {
@@ -51,7 +52,7 @@ export default function PlayerView({
         ) : (
           <>
             <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
-            <ScoreBoard />
+            <ScoreBoard G={G}  ctx={ctx} playerID={playerID} matchData={matchData}/>
           </>
         )}
       </div>
