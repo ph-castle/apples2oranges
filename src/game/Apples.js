@@ -104,7 +104,7 @@ function pickWinner(G, ctx, winnerIndex) {
     }
 
     let mutantPrompt = G.activePrompt.text.slice(), mutantAnswer = G.submittedAnswers[winnerIndex].text, blank = `________`
-
+    console.log('winnerIndex inside pickWinner: ', winnerIndex);
     let combo  = mutantPrompt.replace(blank, mutantAnswer);
     G.players[winnerIndex].winningCards.push(combo)//mutantAnswer//G.activePrompt.text + G.submittedAnswers[0].text
     ctx.events.endPhase();
