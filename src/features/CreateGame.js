@@ -31,9 +31,16 @@ export function CreateGame() {
   const { name, options, customCards } = CreateGameState;
 
   const createGameHandler = () => {
+    let matchTemp;
     lobbyClient
       .createMatch("Apples2Oranges", options)
+      .catch((err) =>
+        console.log("error creating match in CreateGame clickHandler", err)
+      )
       .then((match) => {
+        console.log("matchID from CreatGame", match);
+        matchTemp = match.matchID;
+        console.log("name", name);
         lobbyClient
           .joinMatch("Apples2Oranges", match.matchID, {
             playerName: name,
@@ -42,19 +49,20 @@ export function CreateGame() {
             console.log("error joining match in CreateGame clickHandler", err)
           )
           .then((player) => {
-            console.log(player);
+            localStorage.setItem("matchID", matchTemp);
             localStorage.setItem("name", name);
             localStorage.setItem("id", player.playerID);
             localStorage.setItem("credentials", player.playerCredentials);
+            // dispatch(setPlayerID(player.playerID));
+            // dispatch(setPlayerCredentials(player.playerCredentials));
           });
-        return match.matchID;
       })
-      .then((matchID) => {
-        console.log("matchTemp", matchID);
-        navigate(`/apples/:room/${matchID}`);
+      .then(() => {
+        console.log("matchTemp", matchTemp);
+        navigate(`/waitingroom/${matchTemp}`);
       })
       .catch((err) => {
-        console.log("catch all error in Create Game clickHandler", err);
+        console.log("catch all error in CreateGamee clickHandler", err);
       });
   };
 
@@ -85,6 +93,7 @@ export function CreateGame() {
               id="outlined-required"
               label="Nickname"
               name="nickname"
+              onChange={(e) => dispatch(e.target)}
               required
             />
           </StyledFormControl>
