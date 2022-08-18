@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Timer from "./Timer";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
 import PCard from "../../card/PCard.js";
@@ -9,9 +8,7 @@ export default function PlayerView({
   G,
   ctx,
   moves,
-  playerID,
-  roundTime,
-  setRoundTime,
+  playerID
 }) {
   let answers;
   if (G.activePrompt.body) {
@@ -33,7 +30,23 @@ export default function PlayerView({
       </div>
     );
   }
-
+  let cardArray = [];
+  for (let playerId in G.submittedAnswers) {
+    cardArray.push(
+      <Card
+        playerId={playerId}
+        player={false}
+        G={G}
+        ctx={ctx}
+        text={G.submittedAnswers[playerId].body}
+      />
+    );
+  }
+  let submittedAnswers = (
+    <div className="player-choices">
+      {cardArray}
+    </div>
+  );
   return (
     <div>
       THIS IS WHAT THE PLEBS SEE
@@ -47,12 +60,14 @@ export default function PlayerView({
       <div className="answercards">
         {Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
           <>
-            {answers}
-            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
+            {G.players[playerID].hand.length < 7 ?
+              submittedAnswers:
+              answers
+            }
           </>
         ) : (
           <>
-            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
+            {submittedAnswers}
             <ScoreBoard />
           </>
         )}
