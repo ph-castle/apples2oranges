@@ -42,8 +42,8 @@ export const StyledButton = styled(Button)({
   // // width: "26ch",
   width: "25ch",
   outline: "white solid 1px",
-  boxShadow: "0 0 10px white",
+  boxShadow: "0 0 10px orange",
   "&:hover": {
-    boxShadow: "0 0 20px white",
+    boxShadow: "0 0 20px orange",
   },
 });

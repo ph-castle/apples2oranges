@@ -12,13 +12,12 @@ import {
   StyledTypography,
   StyledTextField,
   StyledCheckbox,
-  StyledButton,
   StyledFormControlLabel,
   StyledContainer,
   StyledInnerBox,
   StyledCheckboxContainer,
 } from "../styles/createGameStyles";
-import { Heading } from "../styles/globalStyles";
+import { Heading, StyledButton } from "../styles/globalStyles";
 import { Box, Typography } from "@mui/material";
 // import { StyledComponentContainer } from "../styles/globalStyles";
 import axios from "axios";

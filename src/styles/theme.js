@@ -24,7 +24,9 @@ export const theme = createTheme({
 
   palette: {
     primary: {
+      light: grey[300],
       main: "rgba(0,0,0,0.87)",
+      bold: grey[700],
     },
     secondary: {
       light: green[300],

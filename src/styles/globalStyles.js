@@ -44,6 +44,27 @@ export const StyledTypography = styled(Typography)({
   color: "white",
 });
 
+export const StyledButton = styled(Button)({
+  width: "25ch",
+  outline: "white solid 1px",
+  boxShadow: "0 0 10px orange",
+  "&:hover": {
+    boxShadow: "0 0 20px orange",
+  },
+});
+export const StyledDashButtons = styled(Button)({
+  padding: "1rem",
+  //   width: "25",
+  outline: "white 2px solid",
+
+  "&:hover": {
+    transform: "scale(1.1)",
+  },
+  backgroundColor: "black",
+});
+
+// export
+
 export function Heading(props) {
   return (
     <StyledTypography
