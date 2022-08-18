@@ -15,6 +15,8 @@ import {
   Menu,
   Typography,
 } from "@mui/material/";
+import { toggleAnimation } from "../app/mainSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const pages = ["Join a Game"];
 
@@ -25,6 +27,8 @@ const Header = ({ user, setUser }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   let navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -45,7 +49,12 @@ const Header = ({ user, setUser }) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+            }}
+          >
             <GiShinyApple fontSize="1.5rem" />
             <GiOrangeSlice fontSize="1.5rem" />
             {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
@@ -99,7 +108,13 @@ const Header = ({ user, setUser }) => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page}
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    dispatch(toggleAnimation());
+                  }}
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -145,6 +160,7 @@ const Header = ({ user, setUser }) => {
                 sx={{ color: "white", border: "1px solid white" }}
                 onClick={() => {
                   navigate("/user/create");
+                  dispatch(toggleAnimation());
                 }}
               >
                 Join
@@ -153,6 +169,7 @@ const Header = ({ user, setUser }) => {
                 sx={{ backgroundColor: "white", border: "1px solid white" }}
                 onClick={() => {
                   navigate("/user/login");
+                  dispatch(toggleAnimation());
                 }}
               >
                 Login

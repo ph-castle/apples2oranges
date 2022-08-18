@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Timer from './Timer';
+import Timer from "./Timer";
+import Card from "../../card/Card.js";
 import Box from '@mui/material/Box';
-// import Card from '../../card/Card.js';
 
 export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendChatMessage, chatMessages }) {
   const [chatInput, setChatInput] = useState('');
@@ -20,49 +20,58 @@ export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendC
     setChatInput(value);
   }
 
+  let cardArray = [];
+  for (let playerId in G.submittedAnswers) {
+    cardArray.push(
+      <Card
+        playerId={playerId}
+        player={false}
+        G={G}
+        ctx={ctx}
+        moves={moves}
+        setRoundTime={setRoundTime}
+        text={G.submittedAnswers[playerId].text}
+      />
+    );
+  }
+
   let answers = (
-      <div className="player-choices">
-        {Object.keys(G.submittedAnswers).map((answer, i) => {
-          return (
-            <span
-              key={i}
-              onClick={()=>{moves.pickWinner(i); setRoundTime(60)}}
-
-            >
-              <p>{G.submittedAnswers?.[answer].text}</p>
-            </span>
-          )
-        })}
-        {/* <Timer time={30} /> */}
-      </div>
-    )
-
+    <div className="player-choices">
+      {cardArray}
+      {/* <Timer time={30} /> */}
+    </div>
+  );
 
   return (
     <div>
       THIS IS WHAT THE JUDGE SEES
       <span className="active-prompt">
-        {G.activePrompt.text?
-          <p>
-            {G.activePrompt.text}
-          </p>:
+        {G.activePrompt.text ? (
+          <p>{G.activePrompt.text}</p>
+        ) : (
           <div>
-            <p>
-              Push button to begin round
-            </p>
-            <button onClick={()=> {moves.drawPrompt(); setRoundTime(60)}}>Select me daddy!</button>
+            <p>Push button to begin round</p>
+            <button
+              onClick={() => {
+                moves.drawPrompt();
+                setRoundTime(60);
+              }}
+            >
+              Select me daddy!
+            </button>
           </div>
-        }
+        )}
       </span>
       <div className="answer">
-        {/* {console.log(G.submittedAnswers)} */}
-        {G.activePrompt.text && Object.keys(G.submittedAnswers).length !== (ctx.numPlayers - 1) ?
+        {G.activePrompt.text &&
+        Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
           <div>
-            <p>waiting on player selections</p>
+            <p>Waiting on player selections</p>
             <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
-          </div>:
+          </div>
+        ) : (
           answers
-        }
+        )}
       </div>
 
       <Box
@@ -85,5 +94,5 @@ export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendC
 
       {/* {renderView()} */}
     </div>
-  )
+  );
 }

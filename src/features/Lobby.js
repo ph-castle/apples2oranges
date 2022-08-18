@@ -3,9 +3,12 @@ import { Button, Box, Input, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { lobbyClient } from "./utils/lobbyClient";
 import { useDispatch, useSelector } from "react-redux";
-import { setMatchID, setPlayerID, setPlayerCredentials } from "../app/mainSlice";
+import {
+  setMatchID,
+  setPlayerID,
+  setPlayerCredentials,
+} from "../app/mainSlice";
 import { useNavigate } from "react-router-dom";
-
 
 const Item = styled(Paper)(() => ({
   textAlign: "center",
@@ -19,7 +22,6 @@ const Item = styled(Paper)(() => ({
   fontSize: "2rem",
 }));
 
-//Need to get current playerId
 const Lobby = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -28,7 +30,7 @@ const Lobby = () => {
   const [playerAccessKey, setPlayerAccessKey] = useState({});
   const [gameMatchID, setGameMatchID] = useState("");
   const [sessionCode, setSessionCode] = useState("");
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
 
   useEffect(() => {
     getAllAvailableGames().then(({ matches }) => {
@@ -43,17 +45,10 @@ const Lobby = () => {
       .catch((err) => console.log(err));
   };
 
-  // const getMatchHandler = (matchID) => {
-  //   return lobbyClient.getMatch("Apples2Oranges", matchID).catch((err) => {
-  //     //TODO: if invalid matchId, then show validation err on the page
-  //     console.log(err);
-  //   });
-  // };
-
   const joinMatchHandler = () => {
     lobbyClient
       .joinMatch("Apples2Oranges", sessionCode, {
-       // playerID: "0",
+        // playerID: "0",
         playerName: name,
         //data: "optional player meta data",
       })
@@ -69,25 +64,18 @@ const Lobby = () => {
       .then(() => {
         navigate(`/waitingroom/${sessionCode}`);
       })
-      .catch(err => console.log("error in lobby join match handler", err))
+      .catch((err) => console.log("error in lobby join match handler", err));
   };
 
-  // const updatePlayerHandler = () => {
-  //   lobbyClient.updatePlayer('Apples2Oranges', gameMatchID, {
-  //     playerID: "0",
-  //     credentials: playerAccessKey,
-  //     newName: "Al",
-  //   });
-  // };
-
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="flex-start"
-      minHeight="100vh"
-      width="100%"
-    >
+    // <Box
+    //   display="flex"
+    //   flexDirection="column"
+    //   alignItems="flex-start"
+    //   minHeight="100vh"
+    //   width="100%"
+    // ></Box>
+    <>
       <Box>
         <Typography variant="h3" sx={{ mt: "1em" }}>
           Join a Game
@@ -102,9 +90,9 @@ const Lobby = () => {
             justifyContent: { xs: "center", sm: "flex-start" },
           }}
         >
-        <Typography variant="h5" sx={{ mt: "1em" }}>
-          Enter the session code for the game you want to join
-        </Typography>
+          <Typography variant="h5" sx={{ mt: "1em" }}>
+            Enter the session code for the game you want to join
+          </Typography>
           <Input
             placeholder="Session Code"
             value={sessionCode}
@@ -113,18 +101,6 @@ const Lobby = () => {
               setSessionCode(e.target.value);
             }}
           />
-          {/* <Button
-            variant="contained"
-            disabled={!sessionCode.length}
-            onClick={() => {
-              getMatchHandler(sessionCode).then((match) => {
-                //TODO: reroute here to loading deck
-                joinMatchHandler(sessionCode);
-              });
-            }}
-          >
-            Join
-          </Button> */}
         </Box>
         <Box
           gap={1}
@@ -136,9 +112,9 @@ const Lobby = () => {
             justifyContent: { xs: "center", sm: "flex-start" },
           }}
         >
-        <Typography variant="h5" sx={{ mt: "1em" }}>
-          Enter the player name you'll use for this game
-        </Typography>
+          <Typography variant="h5" sx={{ mt: "1em" }}>
+            Enter the player name you'll use for this game
+          </Typography>
           <Input
             placeholder="Nick Name"
             value={name}
@@ -147,16 +123,7 @@ const Lobby = () => {
               setName(e.target.value);
             }}
           />
-          <Button
-            variant="contained"
-            disabled={""}
-            onClick={() =>
-              // getMatchHandler(sessionCode).then((match) => {
-                //TODO: reroute here to loading deck
-                joinMatchHandler()
-              // }}
-            }
-          >
+          <Button variant="contained" onClick={() => joinMatchHandler()}>
             Join
           </Button>
         </Box>
@@ -184,17 +151,14 @@ const Lobby = () => {
             <Item
               key={matchId}
               elevation={8}
-              onClick={(e) => {
-                //TODO: reroute here to loading deck
-                joinMatchHandler(e.target.key);
-              }}
+              onClick={(e) => joinMatchHandler(e.target.key)}
             >
               Game
             </Item>
           ))}
         </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 export default Lobby;
