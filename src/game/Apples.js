@@ -1,5 +1,5 @@
 //Decks should come in as GET requests from the API.
-import { AnswerDeck, PromptDeck} from "./Deck";
+//import { AnswerDeck, PromptDeck} from "./Deck";
 import { INVALID_MOVE } from 'boardgame.io/core'
 //TODOS
 
@@ -10,18 +10,20 @@ import { INVALID_MOVE } from 'boardgame.io/core'
 export const Apples = {
     name: 'Apples2Oranges',
 
-   setup: (ctx) => ({
+   setup: (ctx, setupData) => ({
+        data: setupData,
 
         players: Array(ctx.numPlayers).fill({hand: [], winningCards: []}),
 
-        secret: {
-            promptDeck: PromptDeck,
-            answerDeck: AnswerDeck,
-        },
+        // secret: {
+        //     promptDeck: PromptDeck,
+        //     answerDeck: AnswerDeck,
+        // },
         //Maxiumum Cards per hand.
-        handMax: 3,
+        handMax: 7,
 
         //Rounds are incremented once each player has had a 'turn' as the judge.
+    
         playRound: 1,
 
         //Prompt and answers for the current turn
@@ -34,13 +36,13 @@ export const Apples = {
     phases: {
 
         dealing:  {
-            onBegin: startDealPhase,
+            onBegin: RemoteDealPhase,
             start: true,
             endIf: checkHands,
             next: 'play'
         },
         play: {
-            moves: { drawPrompt },
+            moves: { drawRemotePrompt },
             turn: {
                 stages: {
                     playAnswer: { moves: { playAnswer },  next:'judgement'  },
@@ -50,7 +52,8 @@ export const Apples = {
         onEnd: cleanUp,
         next:'dealing'
         },
-    }
+    },
+    endIf: endCondition
 }
 
 function startDealPhase(G, ctx) {
@@ -103,10 +106,10 @@ function pickWinner(G, ctx, winnerIndex) {
         return INVALID_MOVE
     }
 
-    let mutantPrompt = G.activePrompt.text.slice(), mutantAnswer = G.submittedAnswers[winnerIndex].text, blank = `________`
+    let mutantPrompt = G.activePrompt.body.slice(), mutantAnswer = G.submittedAnswers[winnerIndex].body , blank = `________`
     console.log('winnerIndex inside pickWinner: ', winnerIndex);
-    let combo  = mutantPrompt.replace(blank, mutantAnswer);
-    G.players[winnerIndex].winningCards.push(combo)//mutantAnswer//G.activePrompt.text + G.submittedAnswers[0].text
+    //let combo  = mutantPrompt.replace(blank, mutantAnswer);
+    G.players[winnerIndex].winningCards.push({mutantPrompt, mutantAnswer})//mutantAnswer//G.activePrompt.text + G.submittedAnswers[0].text
     ctx.events.endPhase();
 }
 
@@ -121,4 +124,39 @@ function cleanUp (G, ctx) {
     }
     G.submittedAnswers = {};
     G.activePrompt = {};
+}
+
+function drawRemotePrompt(G, ctx) {
+    G.data.remotePromptDeck =  ctx.random.Shuffle(G.data.remotePromptDeck);
+    G.activePrompt =  G.data.remotePromptDeck.pop();
+    ctx.events.setActivePlayers({others: 'playAnswer', minMoves: 1, maxMoves: 1 });
+  }
+
+
+  function RemoteDealPhase(G, ctx) {
+    if(G.data) {
+        G.data.remoteAnswerDeck = ctx.random.Shuffle(G.data.remoteAnswerDeck);
+        G.players.forEach((player) => {
+            while(player.hand.length < G.handMax) {
+                player.hand.push(G.data.remoteAnswerDeck.pop())
+            }
+        })
+
+    }
+  }
+
+  function endCondition (G, ctx) {
+    if(G.data) {
+        if (G.data.rounds + 1 === G.playRound) {
+            let winnerId = 0
+            for(let i = 1; i < ctx.numPlayers; i++) {
+                if(G.players[i].winningCards.length > G.players[winnerId].winningCards.length) {
+                    winnerId = i;
+                }
+            }
+            return {winner: winnerId};
+    
+        }
+
+    }
 }
