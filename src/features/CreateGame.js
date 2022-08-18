@@ -16,7 +16,7 @@ import {
   StyledFormControlLabel,
 } from "../styles/createGameStyles";
 
-export const CreateGame = () => {
+export default function CreateGame() {
   const navigate = useNavigate();
 
   const [CreateGameState, dispatch] = useReducer(
@@ -134,4 +134,4 @@ export const CreateGame = () => {
       </StyledButton>
     </StyledBox>
   );
-};
+}

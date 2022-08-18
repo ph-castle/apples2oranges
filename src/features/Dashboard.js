@@ -8,13 +8,7 @@ export const Dashboard = () => {
   const dispatch = useDispatch();
   const animationtoggle = useSelector((state) => state.main.animationtoggle);
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      height="100vh"
-      gap="12px"
-    >
+    <Box display="flex" justifyContent="center" alignItems="center" gap="12px">
       <ButtonGroup
         variant="contained"
         onClick={() => dispatch(toggleAnimation())}
