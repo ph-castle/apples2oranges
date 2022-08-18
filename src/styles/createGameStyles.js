@@ -20,20 +20,33 @@ export const StyledContainer = styled(Box)({
   flexDirection: "column",
   gap: "1rem",
   width: "100%",
-  maxWidth: "1200px",
+  maxWidth: "1000px",
   height: "100%",
-  margin: "0 auto",
+  // margin: "0 auto",
   padding: "2rem",
   // height: "100%",
 });
 
 export const StyledInnerBox = styled(Box)({
   // padding: "2rem",
+  display: "flex",
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: "rgba(255, 165, 0, 0.4)",
+  width: '50%',
+  margin: '0 auto'
 });
 
 export const StyledTextField = styled(TextField)({
-  color: "white",
+  color: "black",
   backgroundColor: "grey",
+  width: '80%',
+  // margin: 'auto',
+  borderRadius: '5px',
+  '&.css-lr6geh-MuiFormLabel-root-MuiInputLabel-root': {
+    color: 'black',
+  }
 });
 
 export const StyledInputLabel = styled(InputLabel)({
@@ -43,17 +56,23 @@ export const StyledInputLabel = styled(InputLabel)({
 export const StyledSelect = styled(Select)({
   color: "black",
   backgroundColor: "white",
+  width: '80%',
+
 });
 
 export const StyledMenuItem = styled(MenuItem)({
   color: "black",
   backgroundColor: "white",
+
 });
 
 export const StyledFormGroup = styled(FormGroup)({
   // height: "18rem",
   // display: "flex",
-  backgroundColor: "black",
+  width: '100%',
+  // justifyContent: 'center',
+  // alignItems: 'center',
+  // backgroundColor: "orange",
 });
 
 export const StyledCheckboxContainer = styled(Box)({
@@ -70,15 +89,21 @@ export const StyledFormControlLabel = styled(FormControlLabel)({
   padding: "0.8em",
   textAlign: "start",
   outline: "white solid 1px",
-  margin: "auto",
+  margin: '0 auto',
+  width: '60%'
 });
 
 export const StyledCheckbox = styled(Checkbox)({
   color: "orange",
+  '&.Mui-checked': {
+    color: 'orange',
+  }
 });
 
 export const StyledFormControl = styled(FormControl)({
   marginTop: "1em",
+  width: '100%',
+  marginLeft: '3em'
 });
 
 export const StyledTypography = styled(Typography)({

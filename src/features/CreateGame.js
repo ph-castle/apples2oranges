@@ -67,7 +67,9 @@ export function CreateGame() {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainer sx={{mr: '30%'}}>
+
+      <StyledInnerBox>
       <StyledTypography
         sx={{
           padding: "1rem",
@@ -86,7 +88,6 @@ export function CreateGame() {
       >
         Create a Game
       </StyledTypography>
-      <StyledInnerBox>
         <StyledFormGroup>
           <StyledFormControl required>
             <StyledTextField
@@ -157,6 +158,7 @@ export function CreateGame() {
                   name="unlisted"
                   value={options.unlisted}
                   onChange={(e) => dispatch(e.target)}
+                  // color="orange"
                   required
                 />
               }
@@ -164,10 +166,11 @@ export function CreateGame() {
             />
           </StyledCheckboxContainer>
         </StyledFormGroup>
-      </StyledInnerBox>
-      <StyledButton variant="contained" onClick={createGameHandler}>
+        <StyledButton variant="contained" onClick={createGameHandler}>
         Create Game
       </StyledButton>
+      </StyledInnerBox>
+
     </StyledContainer>
   );
 }

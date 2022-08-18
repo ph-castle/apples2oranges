@@ -3,7 +3,7 @@ export const initialCreateGameState = {
   options: {
     numPlayers: 3,
     setupData: { rounds: 12 },
-    unlisted: false,
+    unlisted: true,
   },
   customCards: [],
 };
@@ -33,7 +33,7 @@ export default function createGameReducer(state, { name, checked, value }) {
         ...state,
         options: {
           ...state.options,
-          [name]: checked,
+          [name]: !checked,
         },
       };
     default:

@@ -7,4 +7,5 @@ export const StyledContainer = styled(Box)({
   height: "100vh",
   backgroundColor: "rgba(0,0,0, 0.8)",
   overflow: "hidden",
+  pTop: "40px"
 });
