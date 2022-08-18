@@ -38,6 +38,7 @@ export default function Hero() {
         <div
           style={{
             outline: "solid 2px white",
+            boxShadow: "0 1px 32px white",
             display: "inline-block",
             padding: "0.1em",
           }}

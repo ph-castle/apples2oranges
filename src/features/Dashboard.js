@@ -1,8 +1,12 @@
 import React from "react";
 import { Button, Box, ButtonGroup } from "@mui/material";
 import { Link } from "react-router-dom";
+import { toggleAnimation } from "../app/mainSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Dashboard = () => {
+  const dispatch = useDispatch();
+  const animationToggle = useSelector((state) => state.main.animationToggle);
   return (
     <Box
       display="flex"
@@ -11,7 +15,10 @@ export const Dashboard = () => {
       height="100vh"
       gap="12px"
     >
-      <ButtonGroup variant="contained">
+      <ButtonGroup
+        variant="contained"
+        onClick={() => dispatch(toggleAnimation())}
+      >
         <Link to={"/joingame"} style={{ textDecoration: "none" }}>
           <Button
             sx={{
