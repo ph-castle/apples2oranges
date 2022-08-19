@@ -9,9 +9,13 @@ router.post('/user', controllers.addNewUser);
 
 router.put('/user/:userId', controllers.updateUser);
 
-router.get('/cards/specific/:userId', controllers.getUserCards);
+router.get('/cards/specific/answer/:userId', controllers.getUserAnswerCards);
 
-router.put('/cards/:userId', controllers.addUserCards);
+router.get('/cards/specific/prompt/:userId', controllers.getUserPromptCards);
+
+router.put('/cards/answer/:userId', controllers.addUserAnswerCards);
+
+router.put('/cards/prompt/:userId', controllers.addUserPromptCards);
 
 router.get('/cards/prompt', controllers.getPromptCards);
 

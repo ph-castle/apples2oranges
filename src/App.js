@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { Container } from '@mui/material';
-import Header from './features/Header';
-import Dashboard from './features/Dashboard';
-import { CreateGame } from './features/CreateGame';
-import Lobby from './features/Lobby';
-import { WaitingRoom } from './features/WaitingRoom';
-import { StyledEngineProvider } from '@mui/material/styles';
-import { theme } from './styles/theme';
-import { ThemeProvider } from '@mui/material/styles';
-import Hero from './UI/Hero';
-import ProfilePage from './features/login/ProfilePage';
-import EditProfile from './features/login/EditProfile';
-import LoginPage from './features/login/LoginPage';
-import CreateUserPage from './features/login/CreateUserPage';
+
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { Container } from "@mui/material";
+import Header from "./features/Header";
+import Dashboard from "./features/Dashboard";
+import { CreateGame } from "./features/CreateGame";
+import Lobby from "./features/Lobby";
+import { WaitingRoom } from "./features/WaitingRoom";
+import { StyledEngineProvider } from "@mui/material/styles";
+import { theme } from "./styles/theme";
+import { ThemeProvider } from "@mui/material/styles";
+import Hero from "./UI/Hero";
+import ProfilePage from "./features/login/ProfilePage";
+import EditProfile from "./features/login/EditProfile";
+import LoginPage from "./features/login/LoginPage";
+import CreateUserPage from "./features/login/CreateUserPage";
+import CustomCards from "./features/custom/CustomCards";
+
 // import { useSelector } from "react-redux";
 import { Apples2Oranges } from './features/gameRoom';
 import BoomBox from './features/Spotify/BoomBox';
@@ -50,6 +53,7 @@ export default function App() {
               path="/user/create"
               element={<CreateUserPage setUser={setUser} />}
             />
+            <Route path="/user/customcards" element={<CustomCards user={user} />} />
             <Route path="/creategame" element={<CreateGame />} />
             <Route path="/joingame" element={<Lobby />} />
             <Route path="/waitingroom/:matchID" element={<WaitingRoom />} />

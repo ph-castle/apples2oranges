@@ -1,5 +1,5 @@
 const { Pool } = require('pg');
-
+require("dotenv").config();
 // deployed connection
 // const pool = new Pool({
 //   user: process.env.PGUSER,

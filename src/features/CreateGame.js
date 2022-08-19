@@ -1,7 +1,9 @@
-import React, { useReducer, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { lobbyClient } from './utils/lobbyClient';
-import createGameReducer, { initialCreateGameState } from './createGameReducer';
+
+import React, { useReducer, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { lobbyClient } from "./utils/lobbyClient";
+import createGameReducer, { initialCreateGameState } from "./createGameReducer";
+
 import {
   StyledMenuItem,
   StyledSelect,
@@ -23,6 +25,7 @@ import axios from 'axios';
 export function CreateGame() {
   const navigate = useNavigate();
 
+  const [NSFW, setNSFW] = useState(false);
   const [CreateGameState, dispatch] = useReducer(
     createGameReducer,
     initialCreateGameState
@@ -34,15 +37,30 @@ export function CreateGame() {
     // This useEffect function will run every time the customCards state changes
     // This is because the customCards state is added to the dependency array for this useEffect function
     // Do some conditional logic here and it should be good. And make sure the state is updated onChange of the checkbox
-
     axios
-      .get('http://localhost:45000/cards/prompt')
-      .then((data) => dispatch({ name: 'options1', value: data }))
-      .then(() => axios.get('http://localhost:45000/cards/answer'))
-      .then((result) => dispatch({ name: 'options2', value: result.data }));
+      .get("http://localhost:5050/cards/prompt?NSFW=true")
+      .then((data) => dispatch({ name: "options1", value: data.data }))
+      .then(() => axios.get("http://localhost:5050/cards/answer?NSFW=true"))
+      .then((result) => dispatch({ name: "options2", value: result.data }));
   }, [customCards]);
 
   const createGameHandler = async () => {
+    let { data } = await axios.get("http://localhost:5050/cards/prompt", {
+      params: {
+        NSFW: NSFW
+      }
+    });
+    console.log(data)
+    let result = await axios.get("http://localhost:5050/cards/answer", {
+      params: {
+        NSFW: NSFW
+      }
+    });
+    console.log(result.data)
+    dispatch({ name: "options1", value: data });
+    dispatch({ name: "options2", value: result.data });
+    console.log(CreateGameState)
+
     let matchTemp;
     lobbyClient
       .createMatch('Apples2Oranges', options)
@@ -61,10 +79,13 @@ export function CreateGame() {
             console.log('error joining match in CreateGame clickHandler', err)
           )
           .then((player) => {
-            localStorage.setItem('matchID', matchTemp);
-            localStorage.setItem('name', name);
-            localStorage.setItem('id', player.playerID);
-            localStorage.setItem('credentials', player.playerCredentials);
+
+            localStorage.setItem("matchID", matchTemp);
+            localStorage.setItem("name", name);
+            console.log('id', player.playerID);
+            localStorage.setItem("id", player.playerID);
+            localStorage.setItem("credentials", player.playerCredentials);
+
             // dispatch(setPlayerID(player.playerID));
             // dispatch(setPlayerCredentials(player.playerCredentials));
           });
@@ -156,6 +177,16 @@ export function CreateGame() {
                 />
               }
               label="Make game public"
+            />
+            <StyledFormControlLabel
+              control={
+                <StyledCheckbox
+                  name="NSFW"
+                  checked={NSFW}
+                  onChange={(e) => setNSFW(e.target.checked)}
+                />
+              }
+              label="NSFW"
             />
           </StyledCheckboxContainer>
         </StyledFormGroup>

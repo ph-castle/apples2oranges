@@ -1,7 +1,7 @@
 const pool = require("../../db/index.js");
 const format = require("pg-format");
 
-module.exports.readUser = (username, password) => {
+module.exports.readUser = (username) => {
   return pool
     .connect()
     .then((client) => {
@@ -9,11 +9,11 @@ module.exports.readUser = (username, password) => {
         .query(
           `
           SELECT
-            id, username, avatar
+            id, username, password, avatar
           FROM users
-          WHERE username = $1 AND password = $2
+          WHERE username = $1
         `,
-          [username, password]
+          [username]
         )
         .then((result) => {
           client.release();
@@ -122,7 +122,7 @@ module.exports.putUser = (userId, username, password, avatar) => {
     });
 };
 
-module.exports.readUserCards = (userId, NSFW) => {
+module.exports.readUserAnswerCards = (userId, NSFW) => {
   return pool
     .connect()
     .then((client) => {
@@ -140,7 +140,6 @@ module.exports.readUserCards = (userId, NSFW) => {
         )
         .then((result) => {
           client.release();
-          console.log(result);
           return result;
         })
         .catch((err) => {
@@ -155,13 +154,44 @@ module.exports.readUserCards = (userId, NSFW) => {
     });
 };
 
-module.exports.putUserCards = (userId, cards) => {
+module.exports.readUserPromptCards = (userId, NSFW) => {
   return pool
     .connect()
     .then((client) => {
       return client
         .query(
           `
+          SELECT
+            body
+          FROM
+            prompts
+          WHERE
+            user_id = $1 AND NSFW = $2
+        `,
+          [userId, NSFW]
+        )
+        .then((result) => {
+          client.release();
+          return result;
+        })
+        .catch((err) => {
+          console.log("Problem reading user: ", err);
+          client.release();
+          return err;
+        });
+    })
+    .catch((err) => {
+      console.log("Error connecting to pool: ", err);
+      return err;
+    });
+};
+
+module.exports.putUserAnswerCards = (userId, cards) => {
+  return (
+    pool
+      .connect()
+      .then((client) => {
+        return client.query(`
           DELETE FROM
             answers
           WHERE
@@ -196,7 +226,44 @@ module.exports.putUserCards = (userId, cards) => {
     .catch((err) => {
       console.log("Error connecting to pool: ", err);
       return err;
-    });
+    })
+  )
+};
+
+module.exports.putUserPromptCards = (userId, cards) => {
+  return (
+    pool
+      .connect()
+      .then((client) => {
+        return client.query(`
+          DELETE FROM
+            prompts
+          WHERE
+            user_id = $1
+        `, [userId])
+        .then(() => {
+          return client.query(format(`
+            INSERT INTO
+              prompts (body, user_id, NSFW)
+            VALUES
+              %L
+          `, cards), []);
+        })
+        .then((result) => {
+          client.release();
+          return result;
+        })
+        .catch((err) => {
+          console.log('Problem reading user: ', err);
+          client.release();
+          return err;
+        });
+      })
+      .catch((err) => {
+        console.log('Error connecting to pool: ', err);
+        return err;
+      })
+  );
 };
 
 module.exports.readPromptCards = (NSFW) => {

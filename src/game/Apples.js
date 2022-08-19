@@ -23,7 +23,7 @@ export const Apples = {
         handMax: 7,
 
         //Rounds are incremented once each player has had a 'turn' as the judge.
-    
+
         playRound: 1,
 
         //Prompt and answers for the current turn
@@ -127,6 +127,7 @@ function cleanUp (G, ctx) {
 }
 
 function drawRemotePrompt(G, ctx) {
+    console.log(G.data.remotePromptDeck);
     G.data.remotePromptDeck =  ctx.random.Shuffle(G.data.remotePromptDeck);
     G.activePrompt =  G.data.remotePromptDeck.pop();
     ctx.events.setActivePlayers({others: 'playAnswer', minMoves: 1, maxMoves: 1 });
@@ -155,7 +156,7 @@ function drawRemotePrompt(G, ctx) {
                 }
             }
             return {winner: winnerId};
-    
+
         }
 
     }
