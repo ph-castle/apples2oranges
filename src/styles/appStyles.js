@@ -11,7 +11,7 @@ export const StyledContainer = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  overflow: 'scroll',
+  overflow: 'hidden',
   maxWidth: '600px',
   borderRadius: '50px',
   width: '100%',
