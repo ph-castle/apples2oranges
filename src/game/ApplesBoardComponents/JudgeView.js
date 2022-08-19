@@ -76,7 +76,6 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
                   variant="contained"
                   onClick={() => {
                     moves.drawRemotePrompt();
-                    setRoundTime(60);
                   }}
                 >
                   Select me Daddy!
