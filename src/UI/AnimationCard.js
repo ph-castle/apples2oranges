@@ -21,9 +21,11 @@ export default function AnimationCard({ card, i }) {
     transform: "rotate3d(1, 1, 1, -45deg) scale(1.5)",
     cursor: "pointer",
     display: "inline-block",
-    animation: !animatestate
-      ? "rotate-in-diag-1 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both"
-      : `${rotateOut} 0.6s cubic-bezier(0.550, 0.085, 0.680, 0.530) both`,
+    animation:
+      animatestate === "true"
+        ? "rotate-in-diag-1 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both"
+        : `${rotateOut} 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both`,
+
     position: "absolute",
     top: `${cardProps[i].top}%`,
     left: `${cardProps[i].left}%`,
@@ -47,11 +49,12 @@ export default function AnimationCard({ card, i }) {
       "50%": {
         // "-webkit-transform": "rotate3d(1, 1, 0, 0deg)",
         transform: "rotate3d(1, 1, 0, 0deg)",
-        opacity: "1",
+        opacity: "0.5",
       },
       "100%": {
         // "-webkit-transform": "rotate3d(1, 1, 0, 0deg)",
         transform: "rotate3d(1, 1, 1, -45deg) scale(1.5)",
+        opacity: "1",
       },
     },
   }));
@@ -62,13 +65,13 @@ export default function AnimationCard({ card, i }) {
       // dispatch(toggleAnimation(false));
       timeout = setTimeout(() => {
         dispatch(toggleAnimation());
-      }, 1000);
+      }, 50000);
     }
     if (animatestate === false) {
       // dispatch(toggleAnimation(true));
       timeout = setTimeout(() => {
         dispatch(toggleAnimation(true));
-      }, 50000);
+      }, 2000);
     }
 
     return () => {
@@ -103,3 +106,4 @@ export default function AnimationCard({ card, i }) {
     </AnimatedCard>
   );
 }
+//         `,

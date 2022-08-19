@@ -7,9 +7,9 @@ export default function Hero() {
   const [cards, setCards] = useState([]);
   useEffect(() => {
     console.log("fetching cards");
-    axios("http://13.57.223.4:45000/cards/prompt")
+    axios("http://localhost:45000/cards/prompt/?NSFW=true")
       .then((res) => {
-        console.log("res");
+        console.log(res.data);
         setCards(res.data);
       })
       .catch((err) => console.log(err.message));
