@@ -57,9 +57,11 @@ export default function App() {
             <Route path="/creategame" element={<CreateGame />} />
             <Route path="/joingame" element={<Lobby />} />
             <Route path="/waitingroom/:matchID" element={<WaitingRoom />} />
-            <Route path="/game/apples/:matchID" element={<Apples2Oranges />} />
-          </Routes>
+        </Routes>
         </StyledContainer>
+        <Routes>
+          <Route path="/game/apples/:matchID" element={<Apples2Oranges />} />
+        </Routes>
         <BoomBox code={code} />
       </ThemeProvider>
     </StyledEngineProvider>
