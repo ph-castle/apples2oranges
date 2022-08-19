@@ -13,7 +13,7 @@ export default function ScoreBoard({
   playerID,
   matchData,
 }) {
-
+  console.log('G', G)
   let standings = {};  // {name:  , winningCards: }
   let players = G.players;
 
@@ -22,13 +22,14 @@ export default function ScoreBoard({
     standings[index] = player;
   });
   matchData.forEach((namedPlayer) => {
-    let playerID = namedPlayer.id;
-    let playerName = namedPlayer.name;
+    let playerID = namedPlayer?.id;
+    let playerName = namedPlayer?.name;
     standings[playerID].playerName = playerName;
   });
 
   var currStandings = Object.values(standings).sort((a, b) => (b.winningCards.length - a.winningCards.length));
-
+  console.log(currStandings);
+  console.log(players);
   return (
     <StyledContainer>
       <StyledTypographyH1>

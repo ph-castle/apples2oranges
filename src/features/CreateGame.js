@@ -35,10 +35,9 @@ export function CreateGame() {
     // This useEffect function will run every time the customCards state changes
     // This is because the customCards state is added to the dependency array for this useEffect function
     // Do some conditional logic here and it should be good. And make sure the state is updated onChange of the checkbox
-
     axios
       .get("http://18.144.156.106:45000/cards/prompt?NSFW=true")
-      .then((data) => dispatch({ name: "options1", value: data }))
+      .then((data) => dispatch({ name: "options1", value: data.data }))
       .then(() => axios.get("http://18.144.156.106:45000/cards/answer?NSFW=true"))
       .then((result) => dispatch({ name: "options2", value: result.data }));
   }, [customCards]);
