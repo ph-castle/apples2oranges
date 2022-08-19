@@ -34,14 +34,13 @@ export const StyledInnerBox = styled(Box)({
 });
 
 export const StyledTextField = styled(TextField)({
-  backgroundColor: "white",
-
   "& label": {
     color: "black",
+    textShadow: "0 0 1em white",
+    borderRadius: "0.25rem",
   },
-  "& input": {
-    textShadow: "0 0 1rem white",
-  },
+  "& input": {},
+  backgroundColor: "white",
 });
 
 export const StyledInputLabel = styled(InputLabel)({

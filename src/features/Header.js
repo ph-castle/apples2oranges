@@ -49,38 +49,36 @@ const Header = ({ user, setUser }) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              mr: 1,
-            }}
-          >
-            <Link to={"/home"} style={{ textDecoration: "none" }} color="white">
+          <Link to={"/home"} style={{ textDecoration: "none", color: "white" }}>
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+                mr: 1,
+              }}
+            >
               <GiShinyApple fontSize="1.5rem" />
               <GiOrangeSlice fontSize="1.5rem" />
               {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-            </Link>
-          </Box>
+            </Box>
 
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/home"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "Roboto",
-              fontWeight: 700,
-              // letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            <Link to={"/home"} style={{ textDecoration: "none" }} color="white">
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/home"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "Roboto",
+                fontWeight: 700,
+                // letterSpacing: ".1rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
               Apples to Oranges
-            </Link>
-          </Typography>
+            </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -145,7 +143,10 @@ const Header = ({ user, setUser }) => {
               textDecoration: "none",
             }}
           >
-            <Link to={"/home"} style={{ textDecoration: "none" }} color="white">
+            <Link
+              to={"/home"}
+              style={{ textDecoration: "none", color: "white" }}
+            >
               Apples 2 Oranges
             </Link>
           </Typography>
