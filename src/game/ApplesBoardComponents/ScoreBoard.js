@@ -6,15 +6,15 @@ export default function ScoreBoard({
   matchData,
 }) {
   let standings = {};  // {name:  , winningCards: }
-  let players = G.players;
-  players.forEach((player, index) => {
+  let players = G?.players;
+  players?.forEach((player, index) => {
     // validate that player.playerID === index;
     standings[index] = player;
   });
   console.log(standings);
-  matchData.forEach((namedPlayer) => {
-    let playerID = namedPlayer.id;
-    let playerName = namedPlayer.name;
+  matchData?.forEach((namedPlayer) => {
+    let playerID = namedPlayer?.id;
+    let playerName = namedPlayer?.name;
     standings[playerID].playerName = playerName;
   });
   console.log(standings);
