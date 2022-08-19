@@ -8,9 +8,15 @@ import styles from "../../card/Card.module.css";
 export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendChatMessage, chatMessages, matchData }) {
   const [chatInput, setChatInput] = useState('');
 
-  const mergedMatchData = Object.assign(...matchData);
 
-  console.log(mergedMatchData);
+  const playerNames = {};
+  console.log(matchData);
+
+  // creates object with player id as key
+  for (let i = 0; i < matchData.length; i++) {
+    playerNames[matchData[i].id] = matchData[i].name;
+  }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,7 +91,7 @@ export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendC
         justifyContent="center"
       >
         {chatMessages.length > 0 ? chatMessages.map(({ payload, sender }, index) => {
-            return <div>{`${sender}: ${payload.message}`}</div>
+            return <div>{`${playerNames[sender]}: ${payload.message}`}</div>
           }) : null}
 
           <form onSubmit={handleSubmit}>
