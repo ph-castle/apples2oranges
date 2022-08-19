@@ -7,59 +7,70 @@ export default function Hero() {
   const [cards, setCards] = useState([]);
   useEffect(() => {
     console.log("fetching cards");
-    axios("http://13.57.223.4:45000/cards/prompt")
+    axios("http://localhost:45000/cards/prompt/?NSFW=true")
       .then((res) => {
-        console.log("res");
+        console.log(res.data);
         setCards(res.data);
       })
       .catch((err) => console.log(err.message));
   }, []);
 
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div>
       {/* <Button color="primary">Hello</Button> */}
       <Typography
         variant="p"
         component="h1"
         position="absolute"
-        right="20px"
-        top="200px"
-        style={{
+        right="2%"
+        top="20%"
+        sx={{
           textTransform: "uppercase",
-          fontSize: "6rem",
+          fontSize: {
+            xs: "2rem",
+            sm: "3rem",
+            md: "4rem",
+            lg: "5rem",
+          },
           fontWeight: "800",
           width: "10ch",
           height: "2ch",
           fontFamily: "sans-serif",
-          color: "red",
+          color: "white",
           textShadow: "0 0 10px white",
+          gap: "1rem",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <div
           style={{
-            outline: "solid 2px white",
+            // outline: "solid 2px white",
             boxShadow: "0 1px 32px white",
-            display: "inline-block",
             padding: "0.1em",
+            textAlign: "center",
           }}
         >
           Apples
-        </div>{" "}
-        To{" "}
-        <Typography
-          color="orange"
-          sx={{
+        </div>
+        <div
+          style={{
+            display: "inline-block",
+            textShadow: "0 0 10px white",
+          }}
+        >
+          To
+        </div>
+        <div
+          style={{
             textTransform: "uppercase",
-            fontSize: "6rem",
-            fontWeight: "800",
-            // width: "10ch",
-            // height: "2ch",
+            color: "orange",
             fontFamily: "sans-serif",
             textShadow: "0 0 10px white",
           }}
         >
           Oranges
-        </Typography>
+        </div>
       </Typography>
       {cards.slice(0, 20).map((card, i) => (
         <AnimationCard key={card.body} card={card} i={i} />

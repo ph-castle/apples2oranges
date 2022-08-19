@@ -49,34 +49,38 @@ const Header = ({ user, setUser }) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              mr: 1,
-            }}
-          >
-            <GiShinyApple fontSize="1.5rem" />
-            <GiOrangeSlice fontSize="1.5rem" />
-            {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-          </Box>
-          <Link to={"/home"} style={{ textDecoration: "none" }} color="white">
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/home"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "Roboto",
-                fontWeight: 700,
-                // letterSpacing: ".1rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              Apples to Oranges
-            </Typography>
+          <Link to={"/home"} style={{ textDecoration: "none", color: "white" }}>
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <Box
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  mr: 1,
+                  padding: "1.5rem",
+                }}
+              >
+                <GiShinyApple fontSize="1.5rem" />
+                <GiOrangeSlice fontSize="1.5rem" />
+                {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
+              </Box>
+
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="/home"
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "Roboto",
+                  fontWeight: 700,
+                  // letterSpacing: ".1rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                Apples to Oranges
+              </Typography>
+            </Box>
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -125,6 +129,7 @@ const Header = ({ user, setUser }) => {
             <GiShinyApple fontSize="1.5rem" />
             <GiOrangeSlice fontSize="1.5rem" />
           </Box>
+
           <Typography
             variant="h7"
             noWrap
@@ -141,7 +146,12 @@ const Header = ({ user, setUser }) => {
               textDecoration: "none",
             }}
           >
-            Apples 2 Oranges
+            <Link
+              to={"/home"}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              Apples 2 Oranges
+            </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -163,7 +173,7 @@ const Header = ({ user, setUser }) => {
                   dispatch(toggleAnimation());
                 }}
               >
-                Join
+                Create Account
               </Button>
               <Button
                 sx={{ backgroundColor: "white", border: "1px solid white" }}

@@ -6,5 +6,6 @@ export const StyledContainer = styled(Box)({
   width: "100%",
   height: "100vh",
   backgroundColor: "rgba(0,0,0, 0.8)",
-  overflow: "hidden",
+  // overflow: "hidden",
+  overflow: "scroll",
 });

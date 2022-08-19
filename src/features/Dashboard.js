@@ -3,7 +3,10 @@ import { Button, Box, ButtonGroup } from "@mui/material";
 import { Link } from "react-router-dom";
 import { toggleAnimation } from "../app/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { StyledComponentContainer } from "../styles/globalStyles";
+import {
+  StyledComponentContainer,
+  StyledDashButtons,
+} from "../styles/globalStyles";
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
@@ -15,28 +18,41 @@ export const Dashboard = () => {
         onClick={() => dispatch(toggleAnimation())}
       >
         <Link to={"/joingame"} style={{ textDecoration: "none" }}>
-          <Button
+          <StyledDashButtons
+            fontSize={{ xs: "0.5rem", sm: "1rem", md: "1.5rem" }}
             sx={{
-              p: "1rem",
-              outline: "white 2px solid",
-              fontSize: { xs: "0.5rem", sm: "1rem", md: "1.5rem" },
               marginRight: "1rem",
-              backgroundColor: "secondary.bold",
+              fontSize: {
+                xs: "0.5rem",
+                sm: "1rem",
+                md: "1.5rem",
+              },
+              backgroundColor: "#212529",
+              "&:hover": {
+                backgroundColor: "#343a40",
+              },
             }}
           >
             Join a Game
-          </Button>
+          </StyledDashButtons>
         </Link>
         <Link to={"/creategame"} style={{ textDecoration: "none" }}>
-          <Button
+          <StyledDashButtons
             sx={{
-              p: "1rem",
-              outline: "white 2px solid",
-              fontSize: { xs: "0.5rem", sm: "1rem", md: "1.5rem" },
+              // backgroundColor: "orange",
+              fontSize: {
+                xs: "0.5rem",
+                sm: "1rem",
+                md: "1.5rem",
+              },
+              backgroundColor: "#868e96",
+              "&:hover": {
+                backgroundColor: "#adb5bd",
+              },
             }}
           >
             Create A Game
-          </Button>
+          </StyledDashButtons>
         </Link>
       </ButtonGroup>
     </StyledComponentContainer>

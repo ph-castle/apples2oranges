@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Timer from "./Timer";
+import React from "react";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
 import PCard from "../../card/PCard.js";
@@ -70,6 +69,23 @@ export default function PlayerView({
       </div>
     );
   }
+  let cardArray = [];
+  for (let playerId in G.submittedAnswers) {
+    cardArray.push(
+      <Card
+        playerId={playerId}
+        player={false}
+        G={G}
+        ctx={ctx}
+        text={G.submittedAnswers[playerId].body}
+      />
+    );
+  }
+  let submittedAnswers = (
+    <div className="player-choices">
+      {cardArray}
+    </div>
+  );
 
   return (
     <StyledContainer>

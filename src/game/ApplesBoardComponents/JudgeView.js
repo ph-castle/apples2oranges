@@ -50,7 +50,6 @@ export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendC
         G={G}
         ctx={ctx}
         moves={moves}
-        setRoundTime={setRoundTime}
         text={G.submittedAnswers[playerId].body}
       />
     );
@@ -67,7 +66,7 @@ export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendC
        <StyledGrid container spacing={2}>
         <StyledGridLeft item xs={9}>
           <StyledTypography>
-          THIS IS WHAT THE JUDGE SEES
+          I have unlimited powwaaaaaaaaah!
           <span className="active-prompt">
             {G.activePrompt.body ? (
               <PCard children={G.activePrompt.body} className={styles.answer_card}/>

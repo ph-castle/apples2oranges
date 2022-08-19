@@ -14,6 +14,22 @@ export const rotateOut = keyframes`
   }
 `;
 
+export const rotateIn = keyframes`
+  "0%": {
+    // "-webkit-transform": "rotate3d(1, 1, 0, -360deg)",
+    transform: "rotate3d(1, 1, 0, -360deg)",
+    opacity: "0",
+  },
+  "50%": {
+    // "-webkit-transform": "rotate3d(1, 1, 0, 0deg)",
+    transform: "rotate3d(1, 1, 0, 0deg)",
+    opacity: "1",
+  },
+  "100%": {
+    // "-webkit-transform": "rotate3d(1, 1, 0, 0deg)",
+    transform: "rotate3d(1, 1, 1, -45deg) scale(1.5)",
+}`;
+
 export const rollIn = keyframes`
   @keyframes roll-in-blurred-left {
     0% {
