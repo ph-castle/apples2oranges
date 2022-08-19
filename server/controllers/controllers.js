@@ -87,8 +87,8 @@ module.exports.getUserCards = (req, res) => {
 
 module.exports.addUserAnswerCards = (req, res) => {
   const { userId } = req.params;
-  const { NSFW } = req.query;
-  const cards = req.query.cards.split('\n');
+  const { NSFW } = req.body;
+  const { cards } = req.body;
   const userCards = cards.map((card) => [card, userId, NSFW]);
 
   models.putUserAnswerCards(userId, userCards)
@@ -104,8 +104,8 @@ module.exports.addUserAnswerCards = (req, res) => {
 
 module.exports.addUserPromptCards = (req, res) => {
   const { userId } = req.params;
-  const { NSFW } = req.query;
-  const cards = req.query.cards.split('\n');
+  const { NSFW } = req.body;
+  const { cards } = req.body;
   const userCards = cards.map((card) => [card, userId, NSFW]);
 
   models.putUserPromptCards(userId, userCards)

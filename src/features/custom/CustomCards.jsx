@@ -44,19 +44,15 @@ export default function EditCards({ user }) {
     console.log('in submit', prompts.split('\n'), answers.split('\n'), user.id);
     if (prompt.length > 0) {
       await axiosInstance.put(`/cards/prompt/${user.id}`, {
-        params: {
-          cards: prompts.split('\n').filter(item => item),
-          NSFW: false,
-        }
+        cards: prompts.split('\n').filter(item => item),
+        NSFW: false,
       });
     }
 
     if (answers.length > 0) {
       await axiosInstance.put(`/cards/answers/${user.id}`, {
-        params: {
-          cards: answers.split('\n').filter(item => item),
-          NSFW: false,
-        }
+        cards: answers.split('\n').filter(item => item),
+        NSFW: false,
       });
     }
     navigate('/home');
