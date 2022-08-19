@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
 import PCard from "../../card/PCard.js";
@@ -8,7 +8,8 @@ export default function PlayerView({
   G,
   ctx,
   moves,
-  playerID
+  playerID,
+  matchData
 }) {
   let answers;
   if (G.activePrompt.body) {
@@ -47,14 +48,22 @@ export default function PlayerView({
       {cardArray}
     </div>
   );
+
+  useEffect(()=> {
+    if (cardArray.length){
+      setTimeout(()=> {
+        cardArray[0].moves.playAnswer();
+      }, 60000)
+    }
+  })
   return (
     <div>
-      THIS IS WHAT THE PLEBS SEE
+      I am a pleb. A filthy casual pleb
       <span className="active-prompt">
         {G.activePrompt.body ? (
           <PCard children={G.activePrompt.body} className={styles.answer_card} />
         ) : (
-          <p>Waiting on Judge to wake up and pull his foot out of his ass</p>
+          <p>Waiting on Judge to draw a prompt card!</p>
         )}
       </span>
       <div className="answercards">
@@ -68,11 +77,10 @@ export default function PlayerView({
         ) : (
           <>
             {submittedAnswers}
-            <ScoreBoard />
+            <ScoreBoard G={G} ctx={ctx} playerID={playerID} matchData={matchData} />
           </>
         )}
       </div>
-      {/* {renderView()} */}
     </div>
   );
 }
