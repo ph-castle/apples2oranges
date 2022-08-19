@@ -21,6 +21,7 @@ export const StyledContainer = styled(Box)({
     top: '0',
     left: '0',
     width: '100%',
+    zIndex: -1,
     minHeight: '100%',
     padding: '0 2em',
     backgroundColor: 'rgba(0,0,0,0.9)',
