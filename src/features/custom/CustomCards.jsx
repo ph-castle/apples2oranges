@@ -9,6 +9,8 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { StyledButton } from "../../styles/createGameStyles";
 import { StyledTypography } from "../../styles/createGameStyles";
+import { styled } from '@mui/material/styles';
+
 
 export default function EditCards({ user }) {
   const [prompts, setPrompts] = useState('');
@@ -89,6 +91,9 @@ export default function EditCards({ user }) {
               color: "white",
             }
           }}
+          sx={{
+            fieldset: { borderColor: "white" }
+          }}
           maxRows={15}
           value={prompts}
           style={{width: '50%'}}
@@ -106,6 +111,9 @@ export default function EditCards({ user }) {
             style: {
               color: "white",
             }
+          }}
+          sx={{
+            fieldset: { borderColor: "white" }
           }}
           maxRows={15}
           value={answers}
@@ -125,8 +133,7 @@ export default function EditCards({ user }) {
                   },
                 pl: 2.5
                 }}
-              inputProps={{ 'aria-label': 'controlled' }}
-          />} label="NSFW" />
+          />} label={<StyledTypography color="white">NSFW</StyledTypography>} />
         </FormGroup>
         <StyledTypography>
           <StyledButton variant="contained" type="submit">Submit</StyledButton>
