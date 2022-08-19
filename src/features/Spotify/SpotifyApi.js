@@ -1,5 +1,5 @@
-import SpotifyWebApi from "spotify-web-api-node";
+import SpotifyWebApi from 'spotify-web-api-node';
 
 export const SpotifyApi = new SpotifyWebApi({
-  clientId: "e5c7befa7a5b4f209ae1986b51868db3",
+  clientId: '925ae1cbc41f4b249e72dfe28b1146ca',
 });
