@@ -1,10 +1,46 @@
-import React from "react";
+import React, { useState } from 'react';
 import Timer from "./Timer";
 import PCard from "../../card/PCard.js";
 import Card from "../../card/Card.js";
-import styles from "../../card/Card.module.css"
+import Box from '@mui/material/Box';
+import styles from "../../card/Card.module.css";
+import {
+  StyledContainer,
+  StyledGrid,
+  StyledGridLeft,
+  StyledGridRight,
+  StyledTextField,
+  StyledSendIcon,
+  StyledTypography
+} from "../../styles/playerViewStyles";
 
-export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
+import { StyledButton } from "../../styles/createGameStyles";
+
+export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages, matchData }) {
+  const [chatInput, setChatInput] = useState('');
+
+
+  const playerNames = {};
+  console.log(matchData);
+
+  // creates object with player id as key
+  for (let i = 0; i < matchData.length; i++) {
+    playerNames[matchData[i].id] = matchData[i].name;
+  }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendChatMessage({ message: chatInput, time: Date.now()});
+    setChatInput('');
+  }
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    console.log(value);
+    setChatInput(value);
+  }
+
   let cardArray = [];
   for (let playerId in G.submittedAnswers) {
     cardArray.push(
@@ -14,7 +50,6 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
         G={G}
         ctx={ctx}
         moves={moves}
-        setRoundTime={setRoundTime}
         text={G.submittedAnswers[playerId].body}
       />
     );
@@ -27,36 +62,54 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
   );
 
   return (
-    <div>
-      THIS IS WHAT THE JUDGE SEES
-      <span className="active-prompt">
-        {G.activePrompt.body ? (
-          <PCard children={G.activePrompt.body} className={styles.answer_card}/>
-        ) : (
-          <div>
-            <button
-              onClick={() => {
-                moves.drawRemotePrompt();
-                setRoundTime(60);
+    <StyledContainer>
+       <StyledGrid container spacing={2}>
+        <StyledGridLeft item xs={9}>
+          <StyledTypography>
+          <h3>YOU ARE JUDGING ________!</h3>
+          <span className="active-prompt">
+            {G.activePrompt.body ? (
+              <PCard children={G.activePrompt.body} className={styles.answer_card}/>
+            ) : (
+              <div>
+                <StyledButton
+                  variant="contained"
+                  onClick={() => {
+                    moves.drawRemotePrompt();
+                  }}
+                >
+                  Draw a prompt!
+                </StyledButton>
+              </div>
+            )}
+          </span>
+          </StyledTypography>
+          {answers}
+        </StyledGridLeft>
+        <StyledGridRight item xs={3}>
+          <div style={{
+            overflowWrap: "break-word",
+            overflowY: "scroll",
+            height: "86%"
+          }}>
+            {chatMessages.length > 0 ? chatMessages.map(({ payload, sender }, index) => {
+              return <div>{`${playerNames[sender]}: ${payload.message}`}</div>
+            }) : null}
+          </div>
+          <form onSubmit={handleSubmit}>
+            <StyledTextField
+              label="Send chat"
+              value={chatInput}
+              onChange={handleChange}
+              InputLabelProps={{
+                style: { color: 'white' },
               }}
-            >
-              Select me Daddy!
-            </button>
-          </div>
-        )}
-      </span>
-      <div className="answer">
-        {G.activePrompt.body &&
-        Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
-          <div>
-            <p>Waiting on player selections</p>
-            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
-          </div>
-        ) : (
-          answers
-        )}
-      </div>
-      {/* {renderView()} */}
-    </div>
+            />
+            <StyledSendIcon type="submit"/>
+          </form>
+        </StyledGridRight>
+       </StyledGrid>
+    </StyledContainer>
+
   );
 }

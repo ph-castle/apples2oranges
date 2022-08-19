@@ -223,7 +223,9 @@ const Header = ({ user, setUser }) => {
                           handleCloseUserMenu();
                           break;
                         // TODO: navigate to custom cards page
-                        case 'Custom Cards':
+
+                        case "Custom Cards":
+                          navigate("/user/customcards");
                           handleCloseUserMenu();
                           break;
                         case 'Logout':

@@ -11,7 +11,9 @@ router.put('/user/:userId', controllers.updateUser);
 
 router.get('/cards/specific/:userId', controllers.getUserCards);
 
-router.put('/cards/:userId', controllers.addUserCards);
+router.put('/cards/answer/:userId', controllers.addUserAnswerCards);
+
+router.put('/cards/prompt/:userId', controllers.addUserPromptCards);
 
 router.get('/cards/prompt', controllers.getPromptCards);
 
