@@ -1,11 +1,28 @@
-import { styled } from "@mui/material/styles";
-import { Box } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import { Box } from '@mui/material';
 
 export const StyledContainer = styled(Box)({
-  position: "relative",
-  width: "100%",
-  height: "100vh",
-  backgroundColor: "rgba(0,0,0, 0.8)",
-  // overflow: "hidden",
-  overflow: "scroll",
+  // position: 'relative',
+
+  transform: 'translate(-50%,-50%)',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  overflow: 'scroll',
+  maxWidth: '600px',
+  borderRadius: '50px',
+  width: '100%',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '100%',
+    minHeight: '100%',
+    padding: '0 2em',
+    backgroundColor: 'rgba(0,0,0,0.9)',
+  },
 });

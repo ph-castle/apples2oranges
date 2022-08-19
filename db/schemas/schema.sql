@@ -6,7 +6,7 @@
 CREATE TABLE users (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   username VARCHAR(200),
-  password VARCHAR(50),
+  password VARCHAR(200),
   avatar VARCHAR(500)
 );
 
