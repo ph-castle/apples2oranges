@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { lobbyClient } from "./utils/lobbyClient";
 import createGameReducer, { initialCreateGameState } from "./createGameReducer";
@@ -29,12 +29,20 @@ export function CreateGame() {
   );
   const { name, options, customCards } = CreateGameState;
 
-  const createGameHandler = async () => {
-    let { data } = await axios.get("http://3.101.13.217:45000/cards/prompt");
-    let result = await axios.get("http://3.101.13.217:45000/cards/answer");
-    dispatch({ name: "options1", value: data });
-    dispatch({ name: "options2", value: result.data });
+  useEffect(() => {
+    // Note for custom cards selection
+    // This useEffect function will run every time the customCards state changes
+    // This is because the customCards state is added to the dependency array for this useEffect function
+    // Do some conditional logic here and it should be good. And make sure the state is updated onChange of the checkbox
 
+    axios
+      .get("http://3.101.13.217:45000/cards/prompt")
+      .then((data) => dispatch({ name: "options1", value: data }))
+      .then(() => axios.get("http://3.101.13.217:45000/cards/answer"))
+      .then((result) => dispatch({ name: "options2", value: result.data }));
+  }, [customCards]);
+
+  const createGameHandler = async () => {
     let matchTemp;
     lobbyClient
       .createMatch("Apples2Oranges", options)
