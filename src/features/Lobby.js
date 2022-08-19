@@ -3,11 +3,11 @@ import { Button, Box, Input, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { lobbyClient } from "./utils/lobbyClient";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setMatchID,
-  setPlayerID,
-  setPlayerCredentials,
-} from "../app/mainSlice";
+// import {
+//   setMatchID,
+//   setPlayerID,
+//   setPlayerCredentials,
+// } from "../app/mainSlice";
 import { useNavigate } from "react-router-dom";
 import {
   StyledComponentContainer,
@@ -30,7 +30,7 @@ const Lobby = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const [playerMatch, setPlayerMatch] = useState({});
+  const [playerMatch, setPlayerMatch] = useState([]);
   const [playerAccessKey, setPlayerAccessKey] = useState({});
   const [gameMatchID, setGameMatchID] = useState("");
   const [sessionCode, setSessionCode] = useState("");
@@ -49,26 +49,30 @@ const Lobby = () => {
       .catch((err) => console.log(err));
   };
 
-  const joinMatchHandler = () => {
-    lobbyClient
-      .joinMatch("Apples2Oranges", sessionCode, {
-        // playerID: "0",
-        playerName: name,
-        //data: "optional player meta data",
-      })
-      .then((player) => {
-        console.log("player cred in Lobby", player);
-        localStorage.setItem("matchID", sessionCode);
-        localStorage.setItem("name", name);
-        localStorage.setItem("id", player.playerID);
-        localStorage.setItem("credentials", player.playerCredentials);
-        // dispatch(setPlayerID(player.playerID));
-        // dispatch(setPlayerCredentials(player.playerCredentials));
-      })
-      .then(() => {
-        navigate(`/waitingroom/${sessionCode}`);
-      })
-      .catch((err) => console.log("error in lobby join match handler", err));
+  const joinMatchHandler = (matchID) => {
+    if (name === "") {
+      alert("please select a name");
+    } else {
+      lobbyClient
+        .joinMatch("Apples2Oranges", matchID, {
+          // playerID: "0",
+          playerName: name,
+          //data: "optional player meta data",
+        })
+        .then((player) => {
+          console.log("player cred in Lobby", player);
+          localStorage.setItem("matchID", matchID);
+          localStorage.setItem("name", name);
+          localStorage.setItem("id", player.playerID);
+          localStorage.setItem("credentials", player.playerCredentials);
+          // dispatch(setPlayerID(player.playerID));
+          // dispatch(setPlayerCredentials(player.playerCredentials));
+        })
+        .then(() => {
+          navigate(`/waitingroom/${matchID}`);
+        })
+        .catch((err) => console.log("error in lobby join match handler", err));
+    }
   };
 
   return (
@@ -108,12 +112,15 @@ const Lobby = () => {
               setName(e.target.value);
             }}
           />
-          <Button variant="contained" onClick={() => joinMatchHandler()}>
+          <Button
+            variant="contained"
+            onClick={() => joinMatchHandler(sessionCode)}
+          >
             Join
           </Button>
         </StyledInnerBox>
       </Box>
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%", height: "100%" }}>
         <Typography variant="h5" sx={{ mt: "1em" }}>
           Join a public game
         </Typography>
@@ -129,17 +136,30 @@ const Lobby = () => {
             gap: "2em",
             mt: "1em",
             justifyItems: "center",
+            overflowY: "scroll",
           }}
           style={{ marginTop: "1em" }}
         >
-          {[0, 1, 2].map((matchId) => (
-            <Item
-              key={matchId}
-              elevation={8}
-              onClick={(e) => joinMatchHandler(e.target.key)}
-            >
-              Game
-            </Item>
+          {playerMatch.map((match) => (
+            <div style={{ width: "100%", height: "100%" }}>
+              <Item
+                sx={{ width: "100%", height: "100%" }}
+                key={match.matchID}
+                elevation={8}
+              >
+                {match.matchID}
+              </Item>
+              <Button
+                sx={{
+                  left: { sm: "60%", md: "70%" },
+                  top: "-20%",
+                  color: "white",
+                }}
+                onClick={(e) => joinMatchHandler(match.matchID)}
+              >
+                Join Game
+              </Button>
+            </div>
           ))}
         </Box>
       </Box>
