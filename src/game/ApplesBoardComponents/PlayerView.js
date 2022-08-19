@@ -102,11 +102,12 @@ export default function PlayerView({
             )}
           </span>
           <div className="answercards">
-            {Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ?
-            <>
-              {answers}
-            </>
-            : null}
+            {G.submittedAnswers[playerID] === undefined ?
+              <>
+                {answers}
+              </>
+            :
+            null}
           </div>
           </StyledTypography>
         </StyledGridLeft>
