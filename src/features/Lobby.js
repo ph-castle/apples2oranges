@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Input, Paper, Typography } from '@mui/material';
+import { Box, Input, Paper, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { lobbyClient } from './utils/lobbyClient';
 import { useDispatch, useSelector } from 'react-redux';
@@ -163,7 +163,6 @@ const Lobby = () => {
             gridTemplateColumns: {
               xs: '1fr',
               sm: 'repeat(2, 1fr)',
-              lg: 'repeat(3, 1fr)',
             },
             gap: '2em',
             mt: '1em',
@@ -177,26 +176,44 @@ const Lobby = () => {
               No games available...
             </Typography>
           ) : (
-            playerMatch.map((match) => (
-              <div style={{ width: '100%', height: '100%' }}>
-                <Item
-                  sx={{ width: '100%', height: '100%' }}
-                  key={match.matchID}
-                  elevation={8}
-                >
-                  {match.matchID}
-                </Item>
-                <ButtonGroup
+            playerMatch.map((match, i) => (
+              <Item
+                sx={{
+                  width: '100%',
+                  height: '100%',
+                  maxWidth: '20rem',
+                  maxHeight: '10rem',
+                  paddingBottom: '1rem',
+                  fontSize: '1rem',
+                  position: 'relative',
+                }}
+                key={match.matchID}
+                elevation={8}
+              >
+                Room- ({match.matchID})
+                <Button
                   sx={{
-                    left: { sm: '60%', md: '70%' },
-                    top: '-20%',
+                    position: 'absolute',
+                    left: {
+                      sm: '65%',
+                    },
+                    top: '65%',
                     color: 'white',
+                    outline: '1px solid white',
+                    fontSize: { sm: '0.5rem', md: '1rem' },
+                    padding: '0.5rem',
+                    backgroundColor: 'red',
+                    '&:hover': {
+                      backgroundColor: 'black',
+                      color: 'white',
+                      boxShadow: '0px 0px 10px 10px orange',
+                    },
                   }}
                   onClick={(e) => joinMatchHandler(match.matchID)}
                 >
-                  Join Game
-                </ButtonGroup>
-              </div>
+                  Join
+                </Button>
+              </Item>
             ))
           )}
         </Box>

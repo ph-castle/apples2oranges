@@ -116,7 +116,7 @@ const Header = ({ user, setUser }) => {
             >
               {pages.map((page, i) => (
                 <Link
-                  to={i === 0 ? '/home' : '/user/create'}
+                  to={i === 0 ? '/joingame' : '/creategame'}
                   style={{ textDecoration: 'none', color: 'white' }}
                 >
                   <MenuItem
@@ -166,7 +166,7 @@ const Header = ({ user, setUser }) => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, i) => (
               <Link
-                to={i === 0 ? '/home' : '/user/create'}
+                to={i === 0 ? '/joingame' : '/creategame'}
                 style={{ textDecoration: 'none', color: 'white' }}
               >
                 <Button
