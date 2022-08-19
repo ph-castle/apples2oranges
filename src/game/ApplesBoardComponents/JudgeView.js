@@ -3,15 +3,18 @@ import Timer from "./Timer";
 import PCard from "../../card/PCard.js";
 import Card from "../../card/Card.js";
 import Box from '@mui/material/Box';
+import styles from "../../card/Card.module.css";
 
-export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendChatMessage, chatMessages }) {
+export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendChatMessage, chatMessages, matchData }) {
   const [chatInput, setChatInput] = useState('');
 
+  const mergedMatchData = Object.assign(...matchData);
+
+  console.log(mergedMatchData);
+
   const handleSubmit = (e) => {
-    console.log('here is submit');
     e.preventDefault();
     sendChatMessage({ message: chatInput, time: Date.now()});
-    console.log('here is after send chat');
     setChatInput('');
   }
 

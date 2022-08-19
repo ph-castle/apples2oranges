@@ -8,7 +8,7 @@ import { lobbyClient } from '../features/utils/lobbyClient';
 // import ScoreBoard from './ApplesBoardComponents/ScoreBoard';
 // import Timer from './ApplesBoardComponents/Timer';
 
-export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMessages }) {
+export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMessages, matchData }) {
   const [roundTime, setRoundTime] = useState();
   let navigate = useNavigate();
   //create two different views that will be returned depending on if player is judge or not
@@ -31,7 +31,7 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
             lobbyClient
               .playAgain("Apples2Oranges", localStorage.getItem("matchID"), nextGameParams)
               .then((results) => {
-            
+
                 console.log("next match id: ", results.nextMatchID);
                 localStorage.setItem("matchID", results.nextMatchID);
                 navigate(`/waitingroom/${results.nextMatchID}`);
@@ -66,6 +66,7 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
             setRoundTime={setRoundTime}
             sendChatMessage={sendChatMessage}
             chatMessages={chatMessages}
+            matchData={matchData}
           />
         ) : (
           <PlayerView
@@ -77,6 +78,7 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
             setRoundTime={setRoundTime}
             sendChatMessage={sendChatMessage}
             chatMessages={chatMessages}
+            matchData={matchData}
           />
         )}
       </div>

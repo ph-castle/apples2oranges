@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { lobbyClient } from "./utils/lobbyClient";
 import createGameReducer, { initialCreateGameState } from "./createGameReducer";
@@ -24,6 +24,7 @@ import axios from "axios";
 export function CreateGame() {
   const navigate = useNavigate();
 
+  const [NSFW, setNSFW] = useState(false);
   const [CreateGameState, dispatch] = useReducer(
     createGameReducer,
     initialCreateGameState
@@ -31,9 +32,17 @@ export function CreateGame() {
   const { name, options, customCards } = CreateGameState;
 
   const createGameHandler = async () => {
-    let { data } = await axios.get("http://3.101.13.217:45000/cards/prompt");
+    let { data } = await axios.get("http://localhost:5050/cards/prompt", {
+      params: {
+        NSFW: NSFW
+      }
+    });
     console.log(data)
-    let result = await axios.get("http://3.101.13.217:45000/cards/answer");
+    let result = await axios.get("http://localhost:5050/cards/answer", {
+      params: {
+        NSFW: NSFW
+      }
+    });
     console.log(result.data)
     dispatch({ name: "options1", value: data });
     dispatch({ name: "options2", value: result.data });
@@ -170,6 +179,16 @@ export function CreateGame() {
                 />
               }
               label="Make game public"
+            />
+            <StyledFormControlLabel
+              control={
+                <StyledCheckbox
+                  name="NSFW"
+                  checked={NSFW}
+                  onChange={(e) => setNSFW(e.target.checked)}
+                />
+              }
+              label="NSFW"
             />
           </StyledCheckboxContainer>
         </StyledFormGroup>

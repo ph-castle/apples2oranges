@@ -3,7 +3,16 @@ import Timer from "./Timer";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
 import PCard from "../../card/PCard.js";
-import styles from "../../card/Card.module.css"
+import styles from "../../card/Card.module.css";
+import {
+  StyledContainer,
+  StyledGrid,
+  StyledGridLeft,
+  StyledGridRight,
+  StyledTextField,
+  StyledSendIcon,
+  StyledTypography
+} from "../../styles/playerViewStyles";
 
 export default function PlayerView({
   G,
@@ -13,9 +22,20 @@ export default function PlayerView({
   roundTime,
   setRoundTime,
   sendChatMessage,
-  chatMessages
+  chatMessages,
+  matchData
 }) {
   const [chatInput, setChatInput] = useState('');
+
+  const playerNames = {};
+  console.log(matchData);
+
+  // creates object with player id as key
+  for (let i = 0; i < matchData.length; i++) {
+    playerNames[matchData[i].id] = matchData[i].name;
+  }
+
+  console.log(playerNames);
 
   const handleSubmit = (e) => {
     console.log('here is submit');
@@ -52,39 +72,53 @@ export default function PlayerView({
   }
 
   return (
-    <div>
-      THIS IS WHAT THE PLEBS SEE
-      <span className="active-prompt">
-        {G.activePrompt.body ? (
-          <PCard children={G.activePrompt.body} className={styles.answer_card} />
-        ) : (
-          <p>Waiting on Judge to wake up and pull his foot out of his ass</p>
-        )}
-      </span>
-      <div className="answercards">
-        {Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
-          <>
-            {answers}
-            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
-          </>
-        ) : (
-          <>
-            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
-            <ScoreBoard />
-          </>
-        )}
-      </div>
-      <div style={{borderStyle: 'solid', width: '251px'}}>
-          {chatMessages.length > 0 ? chatMessages.map(({ payload, sender }, index) => {
-            return <div>{`${sender}: ${payload.message}`}</div>
-          }) : null}
-
+    <StyledContainer>
+      <StyledGrid container spacing={2}>
+        <StyledGridLeft item xs={9}>
+          <StyledTypography>
+          <h3>YOU ARE A PLAYER!</h3>
+          <span className="active-prompt">
+            {G.activePrompt.body ? (
+              <PCard children={G.activePrompt.body} className={styles.answer_card} />
+            ) : (
+              <p>Waiting on Judge to start the turn</p>
+            )}
+          </span>
+          <div className="answercards">
+            {Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
+              <>
+                {answers}
+                <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
+              </>
+            ) : (
+              <>
+                <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
+                <ScoreBoard />
+              </>
+            )}
+          </div>
+          </StyledTypography>
+        </StyledGridLeft>
+        <StyledGridRight item xs={3}>
+          <div style={{
+            overflowWrap: "break-word",
+            overflowY: "scroll",
+            height: "86%"
+          }}>
+            {chatMessages.length > 0 ? chatMessages.map(({ payload, sender }, index) => {
+              return <div>{`${playerNames[sender]}: ${payload.message}`}</div>
+            }) : null}
+          </div>
           <form onSubmit={handleSubmit}>
-            <input type="text" value={chatInput} onChange={handleChange} style={{width: '190px'}}/>
-            <button type="submit" style={{width: '55px'}}>Send</button>
+            <StyledTextField
+              label="Send chat"
+              value={chatInput}
+              onChange={handleChange}/>
+            <StyledSendIcon type="submit"/>
           </form>
-        </div>
-      {/* {renderView()} */}
-    </div>
+        </StyledGridRight>
+      </StyledGrid>
+    </StyledContainer>
+
   );
 }
