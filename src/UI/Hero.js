@@ -6,9 +6,8 @@ import { Box, Typography } from '@mui/material';
 export default function Hero() {
   const [cards, setCards] = useState([]);
   useEffect(() => {
-
-    axios('http://localhost:45000/cards/prompt/?NSFW=true')
-
+    console.log("fetching cards");
+    axios("http://localhost:5050/cards/prompt?NSFW=true")
       .then((res) => {
         setCards(res.data);
       })

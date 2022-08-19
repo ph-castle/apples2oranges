@@ -83,11 +83,12 @@
   background-image: linear-gradient(#009100 0%, #00c300 60%);
   border: 12px solid #00c300;
   border-radius: 25px;
-  height: 20rem;
+  min-height: 10rem;
+  max-height: 20rem;
   margin: 0 auto;
   position: relative;
   min-width: 12rem;
-  width: 80%;
+  max-width: 70%;
   position: relative;
 }
 
