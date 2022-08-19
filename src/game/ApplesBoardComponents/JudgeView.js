@@ -14,6 +14,8 @@ import {
   StyledTypography
 } from "../../styles/playerViewStyles";
 
+import { StyledButton } from "../../styles/createGameStyles";
+
 export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendChatMessage, chatMessages, matchData }) {
   const [chatInput, setChatInput] = useState('');
 
@@ -71,14 +73,15 @@ export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendC
               <PCard children={G.activePrompt.body} className={styles.answer_card}/>
             ) : (
               <div>
-                <button
+                <StyledButton
+                  variant="contained"
                   onClick={() => {
                     moves.drawRemotePrompt();
                     setRoundTime(60);
                   }}
                 >
                   Select me Daddy!
-                </button>
+                </StyledButton>
               </div>
             )}
           </span>
