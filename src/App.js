@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Container } from "@mui/material";
@@ -15,15 +16,18 @@ import EditProfile from "./features/login/EditProfile";
 import LoginPage from "./features/login/LoginPage";
 import CreateUserPage from "./features/login/CreateUserPage";
 import CustomCards from "./features/custom/CustomCards";
-// import { useSelector } from "react-redux";
-import { Apples2Oranges } from "./features/gameRoom";
 
-import { StyledContainer, StyledBox } from "./styles/appStyles";
+// import { useSelector } from "react-redux";
+import { Apples2Oranges } from './features/gameRoom';
+import BoomBox from './features/Spotify/BoomBox';
+import { StyledContainer } from './styles/appStyles';
+
+export const code = new URLSearchParams(window.location.search).get('code');
 
 export default function App() {
   const [user, setUser] = useState({
     id: 0,
-    username: "",
+    username: '',
     avatar: null,
   });
 
@@ -56,6 +60,7 @@ export default function App() {
             <Route path="/game/apples/:matchID" element={<Apples2Oranges />} />
           </Routes>
         </StyledContainer>
+        <BoomBox code={code} />
       </ThemeProvider>
     </StyledEngineProvider>
   );

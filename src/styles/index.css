@@ -8,7 +8,7 @@
 body {
   font-family: Roboto;
   background-color: grey;
-  color: white;
-  /* overflow: hidden; */
+  color: #ffffff;
+  overflow: hidden;
   width: 100%;
 }
