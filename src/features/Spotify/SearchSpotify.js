@@ -1,40 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 // import { SpotifyApi } from "./SpotifyApi";
-import SearchListItem from "./SearchListItem";
-import { TextField, Button, Box } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { setToken } from "./app/mainSlice";
-import { Controller, useForm } from "react-hook-form";
+import SearchSpotifyItem from './SearchSpotifyItem';
+import { TextField, Button, Box } from '@mui/material';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { setToken } from '../../app/spotifySlice';
+import { Controller, useForm } from 'react-hook-form';
+import { SpotifyApi } from './SpotifyApi';
+import { useDispatch, useSelector } from 'react-redux';
+import MusicPlayer from './MusicPlayer';
 
-function SearchSpotify({ accessToken, albumName, SpotifyApi }) {
-  const dispatch = useDispatch();
-  const { handleSubmit, reset, control } = useForm();
-  // const onSubmit = (data) => console.log(data);
+const styles = (theme) => ({
+  textField: {
+    width: '90%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    paddingBottom: 0,
+    marginTop: 0,
+    fontWeight: 500,
+  },
+  input: {
+    color: 'white',
+  },
+});
 
-  const [search, setSearch] = useState("");
+function SearchSpotify({ accessToken, isCollapsed }) {
+  const isMusicPlayerOpen = useSelector(
+    (state) => state.spotify.isMusicPlayerOpen
+  );
+
+  const { control } = useForm();
+  const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   const clear = () => {
-    setSearch("");
+    setSearch('');
     setSearchResults([]);
   };
 
   useEffect(() => {
-    if (!accessToken) {
-      dispatch(setToken(accessToken));
-    }
-  }, [accessToken, dispatch]);
-
-  useEffect(() => {
     if (!accessToken) return;
     SpotifyApi.setAccessToken(accessToken);
-  }, []);
-
-  useEffect(() => {
-    if (!albumName) return;
-    setSearch(albumName);
-  }, [albumName]);
+  }, [accessToken]);
 
   useEffect(() => {
     if (!accessToken || !search) return;
@@ -57,43 +64,82 @@ function SearchSpotify({ accessToken, albumName, SpotifyApi }) {
     return () => {
       cancel = true;
     };
-  }, [accessToken, search, SpotifyApi]);
+  }, [accessToken, search]);
   return (
-    <Box sx={{ width: "100%", height: "100%" }}>
+    <Box
+      sx={{
+        display: isCollapsed ? 'none' : 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '1.2rem',
+        maxWidth: '400px',
+        width: '100%',
+        boxShadow: '0px 0px 10px 10px white',
+        padding: '1rem',
+        paddingBottom: '2rem',
+        borderRadius: '1rem',
+        backgroundColor: 'rgba(0,0,0,0.8)',
+      }}
+    >
+      <Box sx={{ overflow: 'scroll' }}>
+        {searchResults.map((album) => (
+          <SearchSpotifyItem key={album.uri} album={album} />
+        ))}
+      </Box>
       <form>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            gap: "1rem",
-            margin: "1rem 0",
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
           }}
         >
           <Controller
-            name={"search"}
+            name={'search'}
             control={control}
+            sx={{ color: 'white' }}
             render={() => (
               <TextField
                 onChange={(e) => setSearch(e.target.value)}
                 value={search}
-                label={"Search Spotify"}
-                sx={{ flex: 1 }}
+                label={'Search Spotify'}
+                sx={{
+                  backgroundColor: 'rgba(0,0,0,0.8)',
+                  color: 'white',
+                  outline: '1px solid white',
+                  boxShadow: ' 0px 0px 10px 10px white',
+                  '&label': {
+                    color: 'white',
+                  },
+                  '&input': {
+                    color: 'white',
+                  },
+                  '&hover': {
+                    color: 'white',
+                  },
+                }}
+                InputProps={{
+                  style: {
+                    color: 'white',
+                  },
+                }}
               />
             )}
           />
-          <Button onClick={() => clear()} variant={"outlined"}>
+          <Button
+            onClick={() => clear()}
+            sx={{
+              backgroundColor: 'rgba(255,0,0,0.4)',
+              color: 'white',
+              outline: '1px solid white',
+            }}
+            variant={'outlined'}
+          >
             Reset
           </Button>
         </Box>
       </form>
-
-      <Box sx={{ overflow: "scroll" }}>
-        {searchResults.map((album) => (
-          <SearchListItem key={album.uri} album={album} />
-        ))}
-      </Box>
+      <MusicPlayer />
     </Box>
     // );
     //   return (

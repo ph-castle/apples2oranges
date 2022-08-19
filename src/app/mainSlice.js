@@ -1,15 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  matchID: "",
-  playerID: "",
-  playerCredentials: "",
-  spotifyToken: "",
+  matchID: '',
+  playerID: '',
+  playerCredentials: '',
   animatestate: false,
 };
 
 export const mainSlice = createSlice({
-  name: "main",
+  name: 'main',
   initialState,
   reducers: {
     setMatchID: (state, action) => {
@@ -20,9 +19,6 @@ export const mainSlice = createSlice({
     },
     setPlayerCredentials: (state, action) => {
       state.playerCredentials = action.payload;
-    },
-    setSpotifyToken: (state, action) => {
-      state.spotifyToken = action.payload;
     },
     toggleAnimation: (state, action) => {
       state.animatestate = action.payload
@@ -36,7 +32,6 @@ export const {
   setMatchID,
   setPlayerID,
   setPlayerCredentials,
-  setSpotifyToken,
   toggleAnimation,
 } = mainSlice.actions;
 

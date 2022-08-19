@@ -48,7 +48,7 @@ export default function PlayerView({
     setChatInput(value);
   }
   let answers;
-  if (G.activePrompt.text) {
+  if (G.activePrompt.body) {
     answers = (
       <div>
         {G.players[playerID].hand.map((card, i) => {
@@ -60,7 +60,7 @@ export default function PlayerView({
               playerId={i}
               moves={moves}
               key={card.id}
-              text={card.text}
+              text={card.body}
             />
           );
         })}

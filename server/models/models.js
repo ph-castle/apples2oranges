@@ -1,7 +1,7 @@
 const pool = require("../../db/index.js");
 const format = require("pg-format");
 
-module.exports.readUser = (username, password) => {
+module.exports.readUser = (username) => {
   return pool
     .connect()
     .then((client) => {
@@ -9,11 +9,11 @@ module.exports.readUser = (username, password) => {
         .query(
           `
           SELECT
-            id, username, avatar
+            id, username, password, avatar
           FROM users
-          WHERE username = $1 AND password = $2
+          WHERE username = $1
         `,
-          [username, password]
+          [username]
         )
         .then((result) => {
           client.release();
