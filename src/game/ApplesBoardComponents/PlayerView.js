@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Timer from "./Timer";
+import React from "react";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
 import PCard from "../../card/PCard.js";
@@ -10,8 +9,7 @@ export default function PlayerView({
   ctx,
   moves,
   playerID,
-  roundTime,
-  setRoundTime,
+  matchData
 }) {
   let answers;
   if (G.activePrompt.body) {
@@ -33,31 +31,52 @@ export default function PlayerView({
       </div>
     );
   }
+  let cardArray = [];
+  for (let playerId in G.submittedAnswers) {
+    cardArray.push(
+      <Card
+        playerId={playerId}
+        player={false}
+        G={G}
+        ctx={ctx}
+        text={G.submittedAnswers[playerId].body}
+      />
+    );
+  }
+  let submittedAnswers = (
+    <div className="player-choices">
+      {cardArray}
+    </div>
+  );
 
   return (
     <div>
-      THIS IS WHAT THE PLEBS SEE
+      I am a pleb. A filthy casual pleb
       <span className="active-prompt">
         {G.activePrompt.body ? (
           <PCard children={G.activePrompt.body} className={styles.answer_card} />
         ) : (
-          <p>Waiting on Judge to wake up and pull his foot out of his ass</p>
+          <>
+            <p>Waiting on Judge to draw a prompt card!</p>
+            <ScoreBoard G={G} ctx={ctx} playerID={playerID} matchData={matchData} />
+          </>
         )}
       </span>
       <div className="answercards">
         {Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
           <>
-            {answers}
-            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
+            {G.players[playerID].hand.length < 7 ?
+              submittedAnswers:
+              answers
+            }
           </>
         ) : (
           <>
-            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
-            <ScoreBoard />
+            {submittedAnswers}
+
           </>
         )}
       </div>
-      {/* {renderView()} */}
     </div>
   );
 }
