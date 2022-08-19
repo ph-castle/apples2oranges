@@ -42,6 +42,7 @@ export default function EditCards({ user }) {
     e.preventDefault();
 
     console.log('in submit', prompts.split('\n'), answers.split('\n'), user.id);
+    // add try and catch error checking later in production
     if (prompt.length > 0) {
       await axiosInstance.put(`/cards/prompt/${user.id}`, {
         cards: prompts.split('\n').filter(item => item),
