@@ -84,6 +84,7 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
             )}
           </span>
           </StyledTypography>
+          {answers}
         </StyledGridLeft>
         <StyledGridRight item xs={3}>
           <div style={{
