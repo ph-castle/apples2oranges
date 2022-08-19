@@ -20,7 +20,8 @@ import { HeaderButtons } from '../styles/globalStyles';
 import { toggleAnimation } from '../app/mainSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-const pages = ['Join A Game', 'Create A Game', 'Lobby', 'Game'];
+const pages = ['Join A Game', 'Create A Game'];
+// const pages = ['Join A Game', 'Create A Game', 'Current Game'];
 
 //TODO: Add additional pages to the user account here
 const settings = ['Profile', 'Custom Cards', 'Logout'];
