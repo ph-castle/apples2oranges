@@ -35,6 +35,7 @@ function SearchSpotifyItem({ album }) {
         border: 'grey solid 1px',
         marginTop: '2rem',
         marginBottom: '0.8rem',
+        width: '100%',
         '&:hover': {
           color: 'green',
           border: 'solid 3px rgba(0, 128, 0, 0.5)',

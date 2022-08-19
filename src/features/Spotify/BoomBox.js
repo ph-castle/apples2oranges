@@ -3,13 +3,13 @@ import Draggable from 'react-draggable';
 import { Box } from '@mui/material';
 import SpotifyLogin from './SpotifyLogin';
 import SearchSpotify from './SearchSpotify';
+import SpotifyIcon from './spotify-brands.svg';
 
-import { useDispatch, useSelector } from 'react-redux';
 import useAuth from './hooks/useAuth';
 
 export default function BoomBox({ code }) {
   const accessToken = useAuth(code);
-
+  const [isCollapsed, setIsCollapsed] = React.useState(false);
   return (
     <Draggable handle="#handle">
       <Box
@@ -20,10 +20,15 @@ export default function BoomBox({ code }) {
           right: '2%',
           bottom: '2%',
           transform: 'translate(-50%, -50%)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '1rem',
         }}
       >
         {accessToken ? (
-          <SearchSpotify accessToken={accessToken} />
+          <SearchSpotify accessToken={accessToken} isCollapsed={isCollapsed} />
         ) : (
           <SpotifyLogin />
         )}
@@ -31,12 +36,22 @@ export default function BoomBox({ code }) {
           id="handle"
           sx={{
             fontSize: '2rem',
-            backgroundColor: 'orange',
+            backgroundColor: isCollapsed ? 'orange' : 'red',
+            fontFamily: 'sans-serif',
+            boxShadow: '0 0 10px 10px white',
             width: '50px',
             height: '50px',
             borderRadius: '50%',
+            cursor: 'pointer',
+            '&:active': {
+              boxShadow: '0 0 20px 10px white',
+              backgroundColor: 'rgb(250, 71, 21)',
+            },
           }}
-        ></Box>
+          onDoubleClick={() => {
+            setIsCollapsed((isCollapsed) => !isCollapsed);
+          }}
+        />
       </Box>
     </Draggable>
   );

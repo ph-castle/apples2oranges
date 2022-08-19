@@ -24,7 +24,7 @@ const styles = (theme) => ({
   },
 });
 
-function SearchSpotify({ accessToken }) {
+function SearchSpotify({ accessToken, isCollapsed }) {
   const isMusicPlayerOpen = useSelector(
     (state) => state.spotify.isMusicPlayerOpen
   );
@@ -68,7 +68,7 @@ function SearchSpotify({ accessToken }) {
   return (
     <Box
       sx={{
-        display: 'flex',
+        display: isCollapsed ? 'none' : 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: '1.2rem',
@@ -112,6 +112,9 @@ function SearchSpotify({ accessToken }) {
                     color: 'white',
                   },
                   '&input': {
+                    color: 'white',
+                  },
+                  '&hover': {
                     color: 'white',
                   },
                 }}
