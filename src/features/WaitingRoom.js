@@ -95,7 +95,7 @@ if(show && playerID) {
         mt: '0.5rem'
       }}
       >
-        {playerID == 0 ?
+        {/* {playerID == 0 ?
         <Button variant="contained"
           // disabled={}
           sx={{
@@ -104,7 +104,7 @@ if(show && playerID) {
             ml: '1rem',
             fontSize: {sm: '1rem', md: '1.wrem'}
             }}
-            onClick={() => setShow(true)}>Start Game</Button> : null}
+            onClick={() => setShow(true)}>Start Game</Button> : null} */}
           <Button variant="contained"
             sx={{
               p:'0.5rem',

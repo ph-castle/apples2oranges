@@ -31,9 +31,9 @@ export function CreateGame() {
   const { name, options, customCards } = CreateGameState;
 
   const createGameHandler = async () => {
-    let { data } = await axios.get("http://3.101.13.217:45000/cards/prompt");
+    let { data } = await axios.get("http://18.144.156.106:45000/cards/prompt?NSFW=true");
     console.log(data)
-    let result = await axios.get("http://3.101.13.217:45000/cards/answer");
+    let result = await axios.get("http://18.144.156.106:45000/cards/answer?NSFW=true");
     console.log(result.data)
     dispatch({ name: "options1", value: data });
     dispatch({ name: "options2", value: result.data });

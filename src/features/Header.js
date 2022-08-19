@@ -163,7 +163,7 @@ const Header = ({ user, setUser }) => {
                   dispatch(toggleAnimation());
                 }}
               >
-                Join
+                Create Account
               </Button>
               <Button
                 sx={{ backgroundColor: "white", border: "1px solid white" }}
