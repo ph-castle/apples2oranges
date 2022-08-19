@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Timer from "./Timer";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
-import PCard from "../../card/PCard.js";
-import styles from "../../card/Card.module.css"
 
 export default function PlayerView({
   G,
@@ -12,9 +10,10 @@ export default function PlayerView({
   playerID,
   roundTime,
   setRoundTime,
+  matchData
 }) {
   let answers;
-  if (G.activePrompt.body) {
+  if (G.activePrompt.text) {
     answers = (
       <div>
         {G.players[playerID].hand.map((card, i) => {
@@ -26,7 +25,7 @@ export default function PlayerView({
               playerId={i}
               moves={moves}
               key={card.id}
-              text={card.body}
+              text={card.text}
             />
           );
         })}
@@ -36,12 +35,14 @@ export default function PlayerView({
 
   return (
     <div>
-      THIS IS WHAT THE PLEBS SEE
       <span className="active-prompt">
-        {G.activePrompt.body ? (
-          <PCard children={G.activePrompt.body} className={styles.answer_card} />
+        {G.activePrompt.text ? (
+          <p>{G.activePrompt.text}</p>
         ) : (
-          <p>Waiting on Judge to wake up and pull his foot out of his ass</p>
+          <>
+            <ScoreBoard G={G}  ctx={ctx} playerID={playerID} matchData={matchData}/>
+          </>
+
         )}
       </span>
       <div className="answercards">
@@ -53,7 +54,7 @@ export default function PlayerView({
         ) : (
           <>
             <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
-            <ScoreBoard />
+
           </>
         )}
       </div>
