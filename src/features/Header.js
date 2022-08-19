@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
-import IconButton from "@mui/material/IconButton";
-import { GiShinyApple, GiOrangeSlice } from "react-icons/gi";
+import * as React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
+import IconButton from '@mui/material/IconButton';
+import { GiShinyApple, GiOrangeSlice } from 'react-icons/gi';
 import {
   AppBar,
   Box,
@@ -14,14 +14,16 @@ import {
   MenuItem,
   Menu,
   Typography,
-} from "@mui/material/";
-import { toggleAnimation } from "../app/mainSlice";
-import { useDispatch, useSelector } from "react-redux";
+} from '@mui/material/';
+import { HeaderButtons } from '../styles/globalStyles';
 
-const pages = [];
+import { toggleAnimation } from '../app/mainSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+const pages = ['Join A Game', 'Create A Game', 'Lobby', 'Game'];
 
 //TODO: Add additional pages to the user account here
-const settings = ["Profile", "Custom Cards", "Logout"];
+const settings = ['Profile', 'Custom Cards', 'Logout'];
 
 const Header = ({ user, setUser }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -49,13 +51,13 @@ const Header = ({ user, setUser }) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to={"/home"} style={{ textDecoration: "none", color: "white" }}>
+          <Link to={'/home'} style={{ textDecoration: 'none', color: 'white' }}>
             <Box display="flex" justifyContent="center" alignItems="center">
               <Box
                 sx={{
-                  display: { xs: "none", md: "flex" },
+                  display: { xs: 'none', md: 'flex' },
                   mr: 1,
-                  padding: "1.5rem",
+                  padding: '1.5rem',
                 }}
               >
                 <GiShinyApple fontSize="1.5rem" />
@@ -70,19 +72,19 @@ const Header = ({ user, setUser }) => {
                 href="/home"
                 sx={{
                   mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "Roboto",
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'Roboto',
                   fontWeight: 700,
                   // letterSpacing: ".1rem",
-                  color: "inherit",
-                  textDecoration: "none",
+                  color: 'inherit',
+                  textDecoration: 'none',
                 }}
               >
                 Apples to Oranges
               </Typography>
             </Box>
           </Link>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -97,18 +99,18 @@ const Header = ({ user, setUser }) => {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
+                vertical: 'bottom',
+                horizontal: 'left',
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
+                vertical: 'top',
+                horizontal: 'left',
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: 'block', md: 'none' },
               }}
             >
               {pages.map((page) => (
@@ -125,7 +127,7 @@ const Header = ({ user, setUser }) => {
             </Menu>
           </Box>
           {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
-          <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
             <GiShinyApple fontSize="1.5rem" />
             <GiOrangeSlice fontSize="1.5rem" />
           </Box>
@@ -137,53 +139,55 @@ const Header = ({ user, setUser }) => {
             href=""
             sx={{
               mr: 2,
-              display: { xs: "flex", md: "none" },
+              display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: "Roboto",
+              fontFamily: 'Roboto',
               fontWeight: 700,
               // letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
+              color: 'inherit',
+              textDecoration: 'none',
             }}
           >
             <Link
-              to={"/home"}
-              style={{ textDecoration: "none", color: "white" }}
+              to={'/home'}
+              style={{ textDecoration: 'none', color: 'white' }}
             >
               Apples 2 Oranges
             </Link>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
               </Button>
             ))}
           </Box>
           {user.id === 0 ? (
-            <Box sx={{ display: "flex", gap: "1em" }}>
-              <Button
-                sx={{ color: "white", border: "1px solid white" }}
+            <Box sx={{ display: 'flex', gap: '1em' }}>
+              <HeaderButtons
+                color="white"
                 onClick={() => {
-                  navigate("/user/create");
+                  navigate('/user/create');
                   dispatch(toggleAnimation());
                 }}
               >
                 Join
-              </Button>
-              <Button
-                sx={{ backgroundColor: "white", border: "1px solid white" }}
+              </HeaderButtons>
+              <HeaderButtons
+                // sx={{ backgroundColor: 'white', border: '1px solid white' }}
+                color="rgba(0, 0, 0, 0.8)"
+                bgc="white"
                 onClick={() => {
-                  navigate("/user/login");
+                  navigate('/user/login');
                   dispatch(toggleAnimation());
                 }}
               >
                 Login
-              </Button>
+              </HeaderButtons>
             </Box>
           ) : (
             <Box sx={{ flexGrow: 0 }}>
@@ -193,17 +197,17 @@ const Header = ({ user, setUser }) => {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "45px" }}
+                sx={{ mt: '45px' }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
+                  vertical: 'top',
+                  horizontal: 'right',
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
+                  vertical: 'top',
+                  horizontal: 'right',
                 }}
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
@@ -213,25 +217,25 @@ const Header = ({ user, setUser }) => {
                     key={setting}
                     onClick={(e) => {
                       switch (e.target.textContent) {
-                        case "Profile":
-                          navigate("/user/profile");
+                        case 'Profile':
+                          navigate('/user/profile');
                           handleCloseUserMenu();
                           break;
                         // TODO: navigate to custom cards page
-                        case "Custom Cards":
+                        case 'Custom Cards':
                           handleCloseUserMenu();
                           break;
-                        case "Logout":
+                        case 'Logout':
                           setUser({
                             id: 0,
-                            username: "",
+                            username: '',
                             avatar: null,
                           });
-                          navigate("/home");
+                          navigate('/home');
                           handleCloseUserMenu();
                           break;
                         default:
-                          console.log("invalid page");
+                          console.log('invalid page');
                       }
                     }}
                   >

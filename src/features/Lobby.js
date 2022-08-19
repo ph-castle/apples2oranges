@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { Button, Box, Input, Paper, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { lobbyClient } from "./utils/lobbyClient";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { Box, Input, Paper, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { lobbyClient } from './utils/lobbyClient';
+import { useDispatch, useSelector } from 'react-redux';
+import { Heading, StyledButton } from '../styles/globalStyles';
 // import {
 //   setMatchID,
 //   setPlayerID,
 //   setPlayerCredentials,
 // } from "../app/mainSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import {
   StyledComponentContainer,
   StyledInnerBox,
-} from "../styles/globalStyles";
+} from '../styles/globalStyles';
 
 const Item = styled(Paper)(() => ({
-  textAlign: "center",
-  height: "10rem",
-  width: "100%",
-  maxWidth: "16rems",
-  lineHeight: "10rem",
-  outline: "white solid 1px",
-  backgroundColor: "black",
-  color: "white",
-  fontSize: "2rem",
+  textAlign: 'center',
+  height: '10rem',
+  width: '100%',
+  maxWidth: '16rems',
+  lineHeight: '10rem',
+  outline: 'white solid 1px',
+  backgroundColor: 'black',
+  color: 'white',
+  fontSize: '2rem',
 }));
 
 const Lobby = () => {
@@ -32,9 +33,9 @@ const Lobby = () => {
 
   const [playerMatch, setPlayerMatch] = useState([]);
   const [playerAccessKey, setPlayerAccessKey] = useState({});
-  const [gameMatchID, setGameMatchID] = useState("");
-  const [sessionCode, setSessionCode] = useState("");
-  const [name, setName] = useState("");
+  const [gameMatchID, setGameMatchID] = useState('');
+  const [sessionCode, setSessionCode] = useState('');
+  const [name, setName] = useState('');
 
   useEffect(() => {
     getAllAvailableGames().then(({ matches }) => {
@@ -45,33 +46,33 @@ const Lobby = () => {
 
   const getAllAvailableGames = () => {
     return lobbyClient
-      .listMatches("Apples2Oranges")
+      .listMatches('Apples2Oranges')
       .catch((err) => console.log(err));
   };
 
   const joinMatchHandler = (matchID) => {
-    if (name === "") {
-      alert("please select a name");
+    if (name === '') {
+      alert('please select a name');
     } else {
       lobbyClient
-        .joinMatch("Apples2Oranges", matchID, {
+        .joinMatch('Apples2Oranges', matchID, {
           // playerID: "0",
           playerName: name,
           //data: "optional player meta data",
         })
         .then((player) => {
-          console.log("player cred in Lobby", player);
-          localStorage.setItem("matchID", matchID);
-          localStorage.setItem("name", name);
-          localStorage.setItem("id", player.playerID);
-          localStorage.setItem("credentials", player.playerCredentials);
+          console.log('player cred in Lobby', player);
+          localStorage.setItem('matchID', matchID);
+          localStorage.setItem('name', name);
+          localStorage.setItem('id', player.playerID);
+          localStorage.setItem('credentials', player.playerCredentials);
           // dispatch(setPlayerID(player.playerID));
           // dispatch(setPlayerCredentials(player.playerCredentials));
         })
         .then(() => {
           navigate(`/waitingroom/${matchID}`);
         })
-        .catch((err) => console.log("error in lobby join match handler", err));
+        .catch((err) => console.log('error in lobby join match handler', err));
     }
   };
 
@@ -84,15 +85,23 @@ const Lobby = () => {
     //   width="100%"
     // ></Box>
     <StyledComponentContainer>
-      <Box>
-        <Typography variant="h3" sx={{ mt: "1em" }}>
-          Join a Game
-        </Typography>
+      <Box
+        sx={{
+          zIndex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+        }}
+      >
+        <Heading>Join a Game</Heading>
         <Box>
-          <Typography variant="h5" sx={{ mt: "1em" }}>
+          <Typography variant="body2">
             Enter the session code for the game you want to join
           </Typography>
           <Input
+            sx={{
+              color: 'white',
+            }}
             placeholder="Session Code"
             value={sessionCode}
             onChange={(e) => {
@@ -101,64 +110,69 @@ const Lobby = () => {
           />
         </Box>
         <StyledInnerBox>
-          <Typography variant="h5" sx={{ mt: "1em" }}>
-            Enter the player name you'll use for this game
-          </Typography>
-          <Input
-            placeholder="Nick Name"
-            value={name}
-            onChange={(e) => {
-              console.log(e.target.value);
-              setName(e.target.value);
-            }}
-          />
-          <Button
+          <Box>
+            <Typography variant="body2">
+              Enter the player name you'll use for this game
+            </Typography>
+            <Input
+              sx={{
+                color: 'white',
+              }}
+              placeholder="Nick Name"
+              value={name}
+              onChange={(e) => {
+                console.log(e.target.value);
+                setName(e.target.value);
+              }}
+            />
+          </Box>
+          <StyledButton
             variant="contained"
             onClick={() => joinMatchHandler(sessionCode)}
           >
             Join
-          </Button>
+          </StyledButton>
         </StyledInnerBox>
       </Box>
-      <Box sx={{ width: "100%", height: "100%" }}>
-        <Typography variant="h5" sx={{ mt: "1em" }}>
+      <Box sx={{ width: '100%', height: '100%' }}>
+        <Typography variant="h5" sx={{ mt: '1em' }}>
           Join a public game
         </Typography>
         <Box
           sx={{
             p: 2,
-            display: "grid",
+            display: 'grid',
             gridTemplateColumns: {
-              xs: "1fr",
-              sm: "repeat(2, 1fr)",
-              lg: "repeat(3, 1fr)",
+              xs: '1fr',
+              sm: 'repeat(2, 1fr)',
+              lg: 'repeat(3, 1fr)',
             },
-            gap: "2em",
-            mt: "1em",
-            justifyItems: "center",
-            overflowY: "scroll",
+            gap: '2em',
+            mt: '1em',
+            justifyItems: 'center',
+            overflowY: 'scroll',
           }}
-          style={{ marginTop: "1em" }}
+          style={{ marginTop: '1em' }}
         >
           {playerMatch.map((match) => (
-            <div style={{ width: "100%", height: "100%" }}>
+            <div style={{ width: '100%', height: '100%' }}>
               <Item
-                sx={{ width: "100%", height: "100%" }}
+                sx={{ width: '100%', height: '100%' }}
                 key={match.matchID}
                 elevation={8}
               >
                 {match.matchID}
               </Item>
-              <Button
+              <StyledButton
                 sx={{
-                  left: { sm: "60%", md: "70%" },
-                  top: "-20%",
-                  color: "white",
+                  left: { sm: '60%', md: '70%' },
+                  top: '-20%',
+                  color: 'white',
                 }}
                 onClick={(e) => joinMatchHandler(match.matchID)}
               >
                 Join Game
-              </Button>
+              </StyledButton>
             </div>
           ))}
         </Box>
