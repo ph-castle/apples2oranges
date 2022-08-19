@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { lobbyClient } from "./utils/lobbyClient";
 import createGameReducer, { initialCreateGameState } from "./createGameReducer";
@@ -9,15 +9,14 @@ import {
   StyledFormGroup,
   StyledFormControl,
   StyledInputLabel,
-  StyledTypography,
   StyledTextField,
   StyledCheckbox,
-  StyledButton,
   StyledFormControlLabel,
   StyledContainer,
   StyledInnerBox,
   StyledCheckboxContainer,
 } from "../styles/createGameStyles";
+import { Heading, StyledButton } from "../styles/globalStyles";
 import { Box, Typography } from "@mui/material";
 // import { StyledComponentContainer } from "../styles/globalStyles";
 import axios from "axios";
@@ -30,14 +29,20 @@ export function CreateGame() {
   );
   const { name, options, customCards } = CreateGameState;
 
+  useEffect(() => {
+    // Note for custom cards selection
+    // This useEffect function will run every time the customCards state changes
+    // This is because the customCards state is added to the dependency array for this useEffect function
+    // Do some conditional logic here and it should be good. And make sure the state is updated onChange of the checkbox
+
+    axios
+      .get("http://3.101.13.217:45000/cards/prompt")
+      .then((data) => dispatch({ name: "options1", value: data }))
+      .then(() => axios.get("http://3.101.13.217:45000/cards/answer"))
+      .then((result) => dispatch({ name: "options2", value: result.data }));
+  }, [customCards]);
+
   const createGameHandler = async () => {
-    let { data } = await axios.get("http://3.101.13.217:45000/cards/prompt");
-    console.log(data)
-    let result = await axios.get("http://3.101.13.217:45000/cards/answer");
-    console.log(result.data)
-    dispatch({ name: "options1", value: data });
-    dispatch({ name: "options2", value: result.data });
-    console.log(CreateGameState)
 
     let matchTemp;
     lobbyClient
@@ -76,24 +81,7 @@ export function CreateGame() {
 
   return (
     <StyledContainer>
-      <StyledTypography
-        sx={{
-          padding: "1rem",
-          fontFamily: "roboto",
-          textShadow: "0 0 10px white",
-          fontWeight: "800",
-          fontSize: {
-            xs: "1rem",
-            sm: "1.5rem",
-            md: "1.8rem",
-            lg: "2rem",
-          },
-          color: "white",
-        }}
-        variant="body2"
-      >
-        Create a Game
-      </StyledTypography>
+      <Heading>Create a Game</Heading>
       <StyledInnerBox>
         <StyledFormGroup>
           <StyledFormControl required>

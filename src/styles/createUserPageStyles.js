@@ -1,5 +1,4 @@
 import {
-  Typography,
   Button,
   FormControl,
   FormHelperText,
@@ -11,31 +10,17 @@ import { styled } from "@mui/material/styles";
 
 export const StyledFormControl = styled(FormControl)({
   width: "25ch",
-  border: "1px solid yellow",
-  backgroundColor: "green",
-  //   height: "100%",
-  display: "flex",
-  alignItems: "center",
-  //   marginTop: "1rem",
 });
-
-export const StyledTypography = styled(Typography)({});
 
 export const StyledInputLabel = styled(InputLabel)({
   //   color: "orange",
   color: "black",
-  "&:focus": {
-    textShadow: "0 0 10px green",
-  },
-  "&.Mui-focused fieldset": {
-    textShadow: "0 0 10px green",
-    borderColor: "#C52328",
-    borderWidth: "2px",
-  },
+  backgroundColor: "none",
 });
 export const StyledOutlineInput = styled(OutlinedInput)({
-  color: "white",
-  backgroundColor: "blue",
+  color: "black",
+  backgroundColor: "#f1f3f5",
+
   //   display: "flex",
   //   justifyContent: "center",
   //   alignItems: "center",
@@ -46,6 +31,12 @@ export const StyledFormHelperText = styled(FormHelperText)({
 });
 
 export const StyledButton = styled(Button)({
-  p: "sm",
-  width: "26ch",
+  // p: "sm",
+  width: "25ch",
+
+  outline: "white solid 1px",
+  boxShadow: "0 0 10px orange",
+  "&:hover": {
+    boxShadow: "0 0 20px orange",
+  },
 });
