@@ -95,16 +95,19 @@ export default function PlayerView({
             {G.activePrompt.body ? (
               <PCard children={G.activePrompt.body} className={styles.answer_card} />
             ) : (
-              <p>Waiting on Judge to start the turn</p>
+              <>
+                <p>Waiting on Judge to start the turn</p>
+                <ScoreBoard G={G}  ctx={ctx} playerID={playerID} matchData={matchData}/>
+              </>
             )}
           </span>
           <div className="answercards">
-            {Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? null
-            : (
+            {G.submittedAnswers[playerID] === undefined ?
               <>
-                <ScoreBoard />
+                {answers}
               </>
-            )}
+            :
+            null}
           </div>
           </StyledTypography>
         </StyledGridLeft>

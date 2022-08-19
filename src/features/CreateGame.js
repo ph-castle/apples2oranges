@@ -38,19 +38,19 @@ export function CreateGame() {
 
     axios
       .get("http://18.144.156.106:45000/cards/prompt?NSFW=true")
-      .then((data) => dispatch({ name: "options1", value: data }))
+      .then((data) => dispatch({ name: "options1", value: data.data }))
       .then(() => axios.get("http://18.144.156.106:45000/cards/answer?NSFW=true"))
       .then((result) => dispatch({ name: "options2", value: result.data }));
   }, [customCards]);
 
   const createGameHandler = async () => {
-    let { data } = await axios.get("http://localhost:5050/cards/prompt", {
+    let { data } = await axios.get("http://18.144.156.106:45000/cards/prompt", {
       params: {
         NSFW: NSFW
       }
     });
     console.log(data)
-    let result = await axios.get("http://localhost:5050/cards/answer", {
+    let result = await axios.get("http://18.144.156.106:45000/cards/answer", {
       params: {
         NSFW: NSFW
       }
