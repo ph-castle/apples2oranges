@@ -1,7 +1,7 @@
-import React, { useReducer, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { lobbyClient } from "./utils/lobbyClient";
-import createGameReducer, { initialCreateGameState } from "./createGameReducer";
+import React, { useReducer, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { lobbyClient } from './utils/lobbyClient';
+import createGameReducer, { initialCreateGameState } from './createGameReducer';
 import {
   StyledMenuItem,
   StyledSelect,
@@ -15,14 +15,17 @@ import {
   StyledContainer,
   StyledInnerBox,
   StyledCheckboxContainer,
-} from "../styles/createGameStyles";
-import { Heading, StyledButton } from "../styles/globalStyles";
-import { Box, Typography } from "@mui/material";
+} from '../styles/createGameStyles';
+import { Heading, StyledButton } from '../styles/globalStyles';
+import { Box, Typography } from '@mui/material';
 // import { StyledComponentContainer } from "../styles/globalStyles";
-import axios from "axios";
+import useSound from 'use-sound';
+import CheckboxEarCon from '../UI/Sound/zapsplat_vehicles_bicycle_gears_lever_click_change_002_79722.mp3';
+
+import axios from 'axios';
 export function CreateGame() {
   const navigate = useNavigate();
-
+  const [checkboxPlay] = useSound(CheckboxEarCon);
   const [CreateGameState, dispatch] = useReducer(
     createGameReducer,
     initialCreateGameState
@@ -36,46 +39,45 @@ export function CreateGame() {
     // Do some conditional logic here and it should be good. And make sure the state is updated onChange of the checkbox
 
     axios
-      .get("http://3.101.13.217:45000/cards/prompt")
-      .then((data) => dispatch({ name: "options1", value: data }))
-      .then(() => axios.get("http://3.101.13.217:45000/cards/answer"))
-      .then((result) => dispatch({ name: "options2", value: result.data }));
+      .get('http://3.101.13.217:45000/cards/prompt')
+      .then((data) => dispatch({ name: 'options1', value: data }))
+      .then(() => axios.get('http://3.101.13.217:45000/cards/answer'))
+      .then((result) => dispatch({ name: 'options2', value: result.data }));
   }, [customCards]);
 
   const createGameHandler = async () => {
-
     let matchTemp;
     lobbyClient
-      .createMatch("Apples2Oranges", options)
+      .createMatch('Apples2Oranges', options)
       .catch((err) =>
-        console.log("error creating match in CreateGame clickHandler", err)
+        console.log('error creating match in CreateGame clickHandler', err)
       )
       .then((match) => {
-        console.log("matchID from CreatGame", match);
+        console.log('matchID from CreatGame', match);
         matchTemp = match.matchID;
-        console.log("name", name);
+        console.log('name', name);
         lobbyClient
-          .joinMatch("Apples2Oranges", match.matchID, {
+          .joinMatch('Apples2Oranges', match.matchID, {
             playerName: name,
           })
           .catch((err) =>
-            console.log("error joining match in CreateGame clickHandler", err)
+            console.log('error joining match in CreateGame clickHandler', err)
           )
           .then((player) => {
-            localStorage.setItem("matchID", matchTemp);
-            localStorage.setItem("name", name);
-            localStorage.setItem("id", player.playerID);
-            localStorage.setItem("credentials", player.playerCredentials);
+            localStorage.setItem('matchID', matchTemp);
+            localStorage.setItem('name', name);
+            localStorage.setItem('id', player.playerID);
+            localStorage.setItem('credentials', player.playerCredentials);
             // dispatch(setPlayerID(player.playerID));
             // dispatch(setPlayerCredentials(player.playerCredentials));
           });
       })
       .then(() => {
-        console.log("matchTemp", matchTemp);
+        console.log('matchTemp', matchTemp);
         navigate(`/waitingroom/${matchTemp}`);
       })
       .catch((err) => {
-        console.log("catch all error in CreateGame clickHandler", err);
+        console.log('catch all error in CreateGame clickHandler', err);
       });
   };
 
@@ -144,7 +146,9 @@ export function CreateGame() {
           </StyledFormControl>
           <StyledCheckboxContainer>
             <StyledFormControlLabel
-              control={<StyledCheckbox name="customCards" />}
+              control={
+                <StyledCheckbox name="customCards" onClick={checkboxPlay} />
+              }
               label="Allow custom cards"
             />
             <StyledFormControlLabel
@@ -152,6 +156,7 @@ export function CreateGame() {
                 <StyledCheckbox
                   name="unlisted"
                   value={options.unlisted}
+                  onClick={checkboxPlay}
                   onChange={(e) => dispatch(e.target)}
                   required
                 />

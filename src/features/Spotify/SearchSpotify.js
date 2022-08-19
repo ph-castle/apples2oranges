@@ -9,26 +9,15 @@ import { Controller, useForm } from 'react-hook-form';
 import { SpotifyApi } from './SpotifyApi';
 import { useDispatch, useSelector } from 'react-redux';
 import MusicPlayer from './MusicPlayer';
-
-const styles = (theme) => ({
-  textField: {
-    width: '90%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    paddingBottom: 0,
-    marginTop: 0,
-    fontWeight: 500,
-  },
-  input: {
-    color: 'white',
-  },
-});
+import useSound from 'use-sound';
+import LoginSound from '../../UI/Sound/PM_BlurryDreams_169_254.mp3';
 
 function SearchSpotify({ accessToken, isCollapsed }) {
   const isMusicPlayerOpen = useSelector(
     (state) => state.spotify.isMusicPlayerOpen
   );
 
+  const [play] = useSound(LoginSound);
   const { control } = useForm();
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -40,8 +29,9 @@ function SearchSpotify({ accessToken, isCollapsed }) {
 
   useEffect(() => {
     if (!accessToken) return;
+    play();
     SpotifyApi.setAccessToken(accessToken);
-  }, [accessToken]);
+  }, [accessToken, play]);
 
   useEffect(() => {
     if (!accessToken || !search) return;
