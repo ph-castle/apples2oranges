@@ -16,7 +16,6 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Heading, StyledComponentContainer } from '../../styles/globalStyles';
 import {
-  StyledTypography,
   StyledOutlineInput,
   StyledButton,
   StyledInputLabel,

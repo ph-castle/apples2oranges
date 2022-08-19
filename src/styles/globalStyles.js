@@ -86,6 +86,11 @@ export function HeaderButtons(props) {
           xs: '0.8rem',
           md: '1.5rem',
         },
+        '&:hover': {
+          color: props.color === 'white' ? 'black' : 'white',
+          backgroundColor: props.bgc === 'white' ? 'black' : 'lightgray',
+          border: `1px solid black`,
+        },
       }}
       onClick={() => {
         // navigate('/user/create');

@@ -114,7 +114,7 @@ export default function PlayerView({
                   text={card.body}
                 />
 
-            )) : null)
+            )) : {cardArray})
           :
           null}
         </Box>
