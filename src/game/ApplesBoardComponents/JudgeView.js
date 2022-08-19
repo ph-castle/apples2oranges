@@ -67,7 +67,7 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
        <StyledGrid container spacing={2}>
         <StyledGridLeft item xs={9}>
           <StyledTypography>
-          I have unlimited powwaaaaaaaaah!
+          <h3>YOU ARE JUDGING ________!</h3>
           <span className="active-prompt">
             {G.activePrompt.body ? (
               <PCard children={G.activePrompt.body} className={styles.answer_card}/>
@@ -79,12 +79,13 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
                     moves.drawRemotePrompt();
                   }}
                 >
-                  Select me Daddy!
+                  Draw a prompt!
                 </StyledButton>
               </div>
             )}
           </span>
           </StyledTypography>
+          {answers}
         </StyledGridLeft>
         <StyledGridRight item xs={3}>
           <div style={{
