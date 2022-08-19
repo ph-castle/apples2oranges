@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS CardGame;
-CREATE DATABASE CardGame;
+-- DROP DATABASE IF EXISTS CardGame;
+-- CREATE DATABASE CardGame;
 
-\c cardgame;
+-- \c cardgame;
 
 CREATE TABLE users (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -24,9 +24,9 @@ CREATE TABLE answers (
   NSFW BOOLEAN NOT NULL
 );
 
-\COPY prompts(body, NSFW) FROM '/Users/roycechun/Desktop/RFP2205/apples2oranges/db/schemas/data/prompts.csv' CSV HEADER;
+\COPY prompts(body, NSFW) FROM '/Users/carolinepeake/HackReactor/blueOcean/prompts.csv' CSV HEADER;
 
-\COPY answers(body, NSFW) FROM '/Users/roycechun/Desktop/RFP2205/apples2oranges/db/schemas/data/answers.csv' CSV HEADER;
+\COPY answers(body, NSFW) FROM '/Users/carolinepeake/HackReactor/blueOcean/answers.csv' CSV HEADER;
 
 CREATE INDEX user_id_index ON users USING HASH (id);
 
