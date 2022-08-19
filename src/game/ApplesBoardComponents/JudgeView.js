@@ -63,37 +63,6 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
   );
 
   return (
-<<<<<<< HEAD
-    <div>
-      I have unlimited powwaaaaaaaaah!
-      <span className="active-prompt">
-        {G.activePrompt.text ? (
-          <p>{G.activePrompt.text}</p>
-        ) : (
-          <div>
-            <p>Push button to begin round</p>
-            <button
-              onClick={() => {
-                moves.drawRemotePrompt();
-              }}
-            >
-              Draw Prompt!
-            </button>
-          </div>
-        )}
-      </span>
-      <div className="answer">
-        {G.activePrompt.text &&
-        Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
-          <div>
-            <p>Waiting on player selections</p>
-          </div>
-        ) : (
-          answers
-        )}
-      </div>
-    </div>
-=======
     <StyledContainer>
        <StyledGrid container spacing={2}>
         <StyledGridLeft item xs={9}>
@@ -142,6 +111,5 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
        </StyledGrid>
     </StyledContainer>
 
->>>>>>> 160b3688e7e308c6767d6fc82ee66f94135625d8
   );
 }

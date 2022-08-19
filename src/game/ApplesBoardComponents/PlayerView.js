@@ -86,31 +86,6 @@ export default function PlayerView({
   );
 
   return (
-<<<<<<< HEAD
-    <div>
-      I am a pleb. A filthy casual pleb
-      <span className="active-prompt">
-        {G.activePrompt.text ? (
-          <p>{G.activePrompt.text}</p>
-        ) : (
-          <>
-            <p>Waiting on Judge to draw a prompt card!</p>
-            <ScoreBoard G={G} ctx={ctx} playerID={playerID} matchData={matchData} />
-          </>
-        )}
-      </span>
-      <div className="answercards">
-        {Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
-          <>
-            {G.players[playerID].hand.length < 7 ?
-              submittedAnswers:
-              answers
-            }
-          </>
-        ) : (
-          <>
-            {submittedAnswers}
-=======
     <StyledContainer>
       <StyledGrid container spacing={2}>
         <StyledGridLeft item xs={9}>
@@ -157,7 +132,6 @@ export default function PlayerView({
         </StyledGridRight>
       </StyledGrid>
     </StyledContainer>
->>>>>>> 160b3688e7e308c6767d6fc82ee66f94135625d8
 
   );
 }
