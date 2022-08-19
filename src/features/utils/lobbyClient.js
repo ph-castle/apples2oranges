@@ -1,3 +1,3 @@
 import { LobbyClient } from "boardgame.io/client";
 
-export const lobbyClient = new LobbyClient({ server: "http://localhost:8000" });
+export const lobbyClient = new LobbyClient({ server: "http://54.183.50.214:8000" });

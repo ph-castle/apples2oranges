@@ -8,5 +8,5 @@ export const ApplesClient = Client({
   board: ApplesBoard,
   debug: true,
   matchID: localStorage.getItem("matchID"),
-  multiplayer: SocketIO({server: 'localhost:8000'})
+  multiplayer: SocketIO({server: 'http://54.183.50.214:8000'})
   });

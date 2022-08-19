@@ -14,7 +14,7 @@ import {
   StyledComponentContainer,
   StyledInnerBox,
 } from '../styles/globalStyles';
-import { ButtonGroup } from 'reactstrap';
+
 
 const Item = styled(Paper)(() => ({
   textAlign: 'center',
