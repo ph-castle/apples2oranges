@@ -61,11 +61,13 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
       {/* <Timer time={30} /> */}
     </div>
   );
+  // <StyledContainer>
+       {/* <StyledGrid container spacing={2}> */}
 
+        {/* <StyledGridLeft item xs={9}> */}
   return (
-    <StyledContainer>
-       <StyledGrid container spacing={2}>
-        <StyledGridLeft item xs={9}>
+        <>
+        <StyledContainer>
           <StyledTypography>
           <h3>YOU ARE JUDGING ________!</h3>
           <span className="active-prompt">
@@ -86,8 +88,9 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
           </span>
           </StyledTypography>
           {answers}
-        </StyledGridLeft>
-        <StyledGridRight item xs={3}>
+        </StyledContainer>
+
+        <Box sx={{position: 'fixed', height: '600px', borderStyle: 'solid', right: '10%', top: '8rem'}}>
           <div style={{
             overflowWrap: "break-word",
             overflowY: "scroll",
@@ -108,9 +111,12 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
             />
             <StyledSendIcon type="submit"/>
           </form>
-        </StyledGridRight>
-       </StyledGrid>
-    </StyledContainer>
+        </Box>
+        </>
+
 
   );
 }
+        // </StyledGridRight>
+       {/* </StyledGrid> */}
+    // </StyledContainer>

@@ -65,15 +65,15 @@ if(show && playerID) {
       sx={{
         display:"flex",
         maxWidth: 500,
-        height: "80vh",
+        maxHeight: '70vh',
         flexDirection:"column",
         p:'1rem',
         ml: {md: '2rem'},
         mt: '0.5rem'
       }}
     >
-      <Typography variant="h4" sx={{fontSize: {xs:'1.7rem', sm: '2rem', md:'2.2rem'}, mt: '0.6rem'}}>Waiting for players</Typography>
-      <Box sx={{textAlign: 'center', background: 'blue', p:'0.5rem', mt: '1rem', fontSize: {sm: '1rem',md:'1.2rem'}}}>{matchID}</Box>
+      <Typography variant="h4" sx={{fontSize: {xs:'1.7rem', sm: '2rem', md:'2.2rem'}, mt: '0.6rem', zIndex: 1, textAlign: 'center'}}>Waiting for players</Typography>
+      <Box sx={{textAlign: 'center', background: 'blue', p:'0.5rem', mt: '1rem', fontSize: {sm: '1rem',md:'1.2rem'}, zIndex: 1}}>{matchID}</Box>
       <Box>
         <List sx={{ width: '100%', maxHeight: 400, bgcolor: 'color', p: '1rem', overflowY:'scroll' }}>
           {players.map((value, index) => (

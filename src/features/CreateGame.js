@@ -43,13 +43,13 @@ export function CreateGame() {
   }, [customCards]);
 
   const createGameHandler = async () => {
-    let { data } = await axios.get("http://18.144.156.106:45000/cards/prompt", {
+    let { data } = await axios.get("http://localhost:45000/cards/prompt", {
       params: {
         NSFW: NSFW
       }
     });
     console.log(data)
-    let result = await axios.get("http://18.144.156.106:45000/cards/answer", {
+    let result = await axios.get("http://localhost:45000/cards/answer", {
       params: {
         NSFW: NSFW
       }
