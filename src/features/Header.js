@@ -55,6 +55,7 @@ const Header = ({ user, setUser }) => {
                 sx={{
                   display: { xs: "none", md: "flex" },
                   mr: 1,
+                  padding: "1.5rem",
                 }}
               >
                 <GiShinyApple fontSize="1.5rem" />

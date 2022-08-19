@@ -38,7 +38,7 @@ export default function AnimationCard({ card, i }) {
     backgroundColor: isEven ? "black" : "white",
     color: !isEven ? "black" : "white",
     fontWeight: "800",
-    overflow: "hidden",
+    overflow: "contain",
     textShadow: "0 0 10px white",
     "@keyframes rotate-in-diag-1": {
       "0%": {

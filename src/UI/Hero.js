@@ -16,7 +16,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div>
       {/* <Button color="primary">Hello</Button> */}
       <Typography
         variant="p"
