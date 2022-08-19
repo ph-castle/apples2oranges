@@ -2,7 +2,7 @@ import React from "react";
 import {
   StyledContainer,
   StyledList,
-  StyledListItemText,
+  // StyledListItemText,
   StyledTypography,
   StyledTypographyH1
 } from "../../styles/scoreBoard.js";
@@ -21,7 +21,6 @@ export default function ScoreBoard({
     // validate that player.playerID === index;
     standings[index] = player;
   });
-
   matchData.forEach((namedPlayer) => {
     let playerID = namedPlayer.id;
     let playerName = namedPlayer.name;

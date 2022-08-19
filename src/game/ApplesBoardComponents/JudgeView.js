@@ -1,8 +1,8 @@
 import React from "react";
-import Timer from "./Timer";
+import PCard from "../../card/PCard.js";
 import Card from "../../card/Card.js";
 
-export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
+export default function JudgeView({ G, ctx, moves}) {
   let cardArray = [];
   for (let playerId in G.submittedAnswers) {
     cardArray.push(
@@ -12,8 +12,7 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
         G={G}
         ctx={ctx}
         moves={moves}
-        setRoundTime={setRoundTime}
-        text={G.submittedAnswers[playerId].text}
+        text={G.submittedAnswers[playerId].body}
       />
     );
   }
@@ -27,6 +26,7 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
 
   return (
     <div>
+      I have unlimited powwaaaaaaaaah!
       <span className="active-prompt">
         {G.activePrompt.text ? (
           <p>{G.activePrompt.text}</p>
@@ -35,11 +35,10 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
             <p>Push button to begin round</p>
             <button
               onClick={() => {
-                moves.drawPrompt();
-                setRoundTime(60);
+                moves.drawRemotePrompt();
               }}
             >
-              Select me daddy!
+              Draw Prompt!
             </button>
           </div>
         )}
@@ -49,13 +48,11 @@ export default function JudgeView({ G, ctx, moves, roundTime, setRoundTime }) {
         Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
           <div>
             <p>Waiting on player selections</p>
-            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
           </div>
         ) : (
           answers
         )}
       </div>
-      {/* {renderView()} */}
     </div>
   );
 }

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Timer from "./Timer";
+import React from "react";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
 
@@ -8,8 +7,6 @@ export default function PlayerView({
   ctx,
   moves,
   playerID,
-  roundTime,
-  setRoundTime,
   matchData
 }) {
   let answers;
@@ -32,33 +29,52 @@ export default function PlayerView({
       </div>
     );
   }
+  let cardArray = [];
+  for (let playerId in G.submittedAnswers) {
+    cardArray.push(
+      <Card
+        playerId={playerId}
+        player={false}
+        G={G}
+        ctx={ctx}
+        text={G.submittedAnswers[playerId].body}
+      />
+    );
+  }
+  let submittedAnswers = (
+    <div className="player-choices">
+      {cardArray}
+    </div>
+  );
 
   return (
     <div>
+      I am a pleb. A filthy casual pleb
       <span className="active-prompt">
         {G.activePrompt.text ? (
           <p>{G.activePrompt.text}</p>
         ) : (
           <>
-            <ScoreBoard G={G}  ctx={ctx} playerID={playerID} matchData={matchData}/>
+            <p>Waiting on Judge to draw a prompt card!</p>
+            <ScoreBoard G={G} ctx={ctx} playerID={playerID} matchData={matchData} />
           </>
-
         )}
       </span>
       <div className="answercards">
         {Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
           <>
-            {answers}
-            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
+            {G.players[playerID].hand.length < 7 ?
+              submittedAnswers:
+              answers
+            }
           </>
         ) : (
           <>
-            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
+            {submittedAnswers}
 
           </>
         )}
       </div>
-      {/* {renderView()} */}
     </div>
   );
 }

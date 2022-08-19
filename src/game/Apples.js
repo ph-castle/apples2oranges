@@ -23,7 +23,7 @@ export const Apples = {
         handMax: 7,
 
         //Rounds are incremented once each player has had a 'turn' as the judge.
-    
+
         playRound: 1,
 
         //Prompt and answers for the current turn
@@ -155,7 +155,7 @@ function drawRemotePrompt(G, ctx) {
                 }
             }
             return {winner: winnerId};
-    
+
         }
 
     }

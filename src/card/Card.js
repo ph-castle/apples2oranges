@@ -19,15 +19,14 @@ export default class Card extends React.Component {
     } else {
       console.log('selected player id: ', this.props.playerId);
       this.props.moves.pickWinner(this.props.playerId);
-      this.props.setRoundTime(60);
     }
   }
   render() {
     const shareTitle = 'Apples to Oranges!';
     const shareMessage = `I'm playing Apples to Oranges and found this hilarious!\n${this.props.text}`;
     const url = String(window.location);
-    
-  
+
+
 
     return (
       <div
