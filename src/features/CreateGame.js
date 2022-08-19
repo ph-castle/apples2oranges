@@ -1,7 +1,9 @@
+
 import React, { useReducer, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { lobbyClient } from "./utils/lobbyClient";
 import createGameReducer, { initialCreateGameState } from "./createGameReducer";
+
 import {
   StyledMenuItem,
   StyledSelect,
@@ -15,11 +17,11 @@ import {
   StyledContainer,
   StyledInnerBox,
   StyledCheckboxContainer,
-} from "../styles/createGameStyles";
-import { Heading, StyledButton } from "../styles/globalStyles";
-import { Box, Typography } from "@mui/material";
+} from '../styles/createGameStyles';
+import { Heading, StyledButton } from '../styles/globalStyles';
+import { Box, Typography } from '@mui/material';
 // import { StyledComponentContainer } from "../styles/globalStyles";
-import axios from "axios";
+import axios from 'axios';
 export function CreateGame() {
   const navigate = useNavigate();
 
@@ -61,37 +63,39 @@ export function CreateGame() {
 
     let matchTemp;
     lobbyClient
-      .createMatch("Apples2Oranges", options)
+      .createMatch('Apples2Oranges', options)
       .catch((err) =>
-        console.log("error creating match in CreateGame clickHandler", err)
+        console.log('error creating match in CreateGame clickHandler', err)
       )
       .then((match) => {
-        console.log("matchID from CreatGame", match);
+        console.log('matchID from CreatGame', match);
         matchTemp = match.matchID;
-        console.log("name", name);
+        console.log('name', name);
         lobbyClient
-          .joinMatch("Apples2Oranges", match.matchID, {
+          .joinMatch('Apples2Oranges', match.matchID, {
             playerName: name,
           })
           .catch((err) =>
-            console.log("error joining match in CreateGame clickHandler", err)
+            console.log('error joining match in CreateGame clickHandler', err)
           )
           .then((player) => {
+
             localStorage.setItem("matchID", matchTemp);
             localStorage.setItem("name", name);
             console.log('id', player.playerID);
             localStorage.setItem("id", player.playerID);
             localStorage.setItem("credentials", player.playerCredentials);
+
             // dispatch(setPlayerID(player.playerID));
             // dispatch(setPlayerCredentials(player.playerCredentials));
           });
       })
       .then(() => {
-        console.log("matchTemp", matchTemp);
+        console.log('matchTemp', matchTemp);
         navigate(`/waitingroom/${matchTemp}`);
       })
       .catch((err) => {
-        console.log("catch all error in CreateGame clickHandler", err);
+        console.log('catch all error in CreateGame clickHandler', err);
       });
   };
 

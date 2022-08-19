@@ -30,7 +30,7 @@ export default function BoomBox({ code }) {
         {accessToken ? (
           <SearchSpotify accessToken={accessToken} isCollapsed={isCollapsed} />
         ) : (
-          <SpotifyLogin />
+          <SpotifyLogin isCollapsed={isCollapsed} />
         )}
         <Box
           id="handle"
