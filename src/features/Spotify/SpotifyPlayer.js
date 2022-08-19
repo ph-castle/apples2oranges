@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import SpotifyPlayer from "react-spotify-web-playback";
-import { useSelector, useDispatch } from "react-redux";
-import { setPlay } from "./app/mainSlice";
+import React, { useEffect } from 'react';
+import SpotifyPlayer from 'react-spotify-web-playback';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPlay } from './app/mainSlice';
 
 function SpotifyPlayer() {
   const dispatch = useDispatch();
@@ -25,14 +25,14 @@ function SpotifyPlayer() {
       play={true}
       uris={album ? [album.uri] : []}
       styles={{
-        activeColor: "#fff",
-        bgColor: "rgba(0, 0, 0, 0.8)",
-        color: "#fff",
-        loaderColor: "#fff",
-        sliderColor: "#1cb954",
-        trackArtistColor: "#ccc",
-        trackNameColor: "#fff",
-        volumeSliderColor: "#1cb954",
+        activeColor: '#fff',
+        bgColor: 'rgba(0, 0, 0, 0.8)',
+        color: '#fff',
+        loaderColor: '#fff',
+        sliderColor: '#1cb954',
+        trackArtistColor: '#ccc',
+        trackNameColor: '#fff',
+        volumeSliderColor: '#1cb954',
       }}
     />
   );

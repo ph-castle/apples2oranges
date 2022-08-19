@@ -1,26 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./app/store";
-import App from "./App.js";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './app/store';
+import App from './App.js';
 
-import { StyledEngineProvider } from "@mui/material/styles";
-import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./styles/theme";
-import "./styles/index.css";
+import { StyledEngineProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './styles/theme';
+import './styles/index.css';
 // import reportWebVitals from './reportWebVitals';
 
 const ENV = process.env.REACT_APP_ENV;
 
 let SERVER;
-if (ENV === "dev") {
+if (ENV === 'dev') {
   SERVER = `http://${window.location.hostname}:8000`; // Local
 } else {
   SERVER = `https://${window.location.hostname}`; // Prod
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <StyledEngineProvider injectFirst>
     <ThemeProvider theme={theme}>

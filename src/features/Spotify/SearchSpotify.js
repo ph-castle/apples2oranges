@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 // import { SpotifyApi } from "./SpotifyApi";
-import SearchListItem from "./SearchListItem";
-import { TextField, Button, Box } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { setToken } from "./app/mainSlice";
-import { Controller, useForm } from "react-hook-form";
+import SearchListItem from './SearchListItem';
+import { TextField, Button, Box } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { setToken } from './app/mainSlice';
+import { Controller, useForm } from 'react-hook-form';
 
 function SearchSpotify({ accessToken, albumName, SpotifyApi }) {
   const dispatch = useDispatch();
   const { handleSubmit, reset, control } = useForm();
   // const onSubmit = (data) => console.log(data);
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   const clear = () => {
-    setSearch("");
+    setSearch('');
     setSearchResults([]);
   };
 
@@ -59,37 +59,37 @@ function SearchSpotify({ accessToken, albumName, SpotifyApi }) {
     };
   }, [accessToken, search, SpotifyApi]);
   return (
-    <Box sx={{ width: "100%", height: "100%" }}>
+    <Box sx={{ width: '100%', height: '100%' }}>
       <form>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            gap: "1rem",
-            margin: "1rem 0",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            gap: '1rem',
+            margin: '1rem 0',
           }}
         >
           <Controller
-            name={"search"}
+            name={'search'}
             control={control}
             render={() => (
               <TextField
                 onChange={(e) => setSearch(e.target.value)}
                 value={search}
-                label={"Search Spotify"}
+                label={'Search Spotify'}
                 sx={{ flex: 1 }}
               />
             )}
           />
-          <Button onClick={() => clear()} variant={"outlined"}>
+          <Button onClick={() => clear()} variant={'outlined'}>
             Reset
           </Button>
         </Box>
       </form>
 
-      <Box sx={{ overflow: "scroll" }}>
+      <Box sx={{ overflow: 'scroll' }}>
         {searchResults.map((album) => (
           <SearchListItem key={album.uri} album={album} />
         ))}

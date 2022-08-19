@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import {
   StyledFormControl,
   StyledButton,
   StyledInputLabel,
   StyledOutlineInput,
   StyledFormHelperText,
-} from "../../styles/createUserPageStyles";
-import "./Login.css";
-import { Heading, StyledComponentContainer } from "../../styles/globalStyles";
+} from '../../styles/createUserPageStyles';
+import './Login.css';
+import { Heading, StyledComponentContainer } from '../../styles/globalStyles';
 
 export default function CreateUserPage({ setUser }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [photo, setPhoto] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
+  const [photo, setPhoto] = useState('');
   const [usernameTaken, setUsernameTaken] = useState(false);
   const [passwordMismatch, setPasswordMismatch] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -57,7 +57,7 @@ export default function CreateUserPage({ setUser }) {
       // uploads photo to cloudinary
 
       if (photo) {
-        postCloudinary(photo || "")
+        postCloudinary(photo || '')
           .then((photoURL) =>
             // posts new user
             postNewUser({
@@ -66,12 +66,12 @@ export default function CreateUserPage({ setUser }) {
               avatar: photoURL,
             })
           )
-          .catch((err) => console.log("Error uploading image: ", err));
+          .catch((err) => console.log('Error uploading image: ', err));
       } else {
         postNewUser({
           username,
           password,
-          avatar: "",
+          avatar: '',
         });
       }
     });
@@ -79,21 +79,21 @@ export default function CreateUserPage({ setUser }) {
 
   const postCloudinary = (photo) =>
     axiosInstance
-      .post("/cloudinary", { img: photo })
+      .post('/cloudinary', { img: photo })
       .then((photoURL) => photoURL.data)
       .catch((err) => err);
 
   const postNewUser = (data) =>
     axiosInstance
-      .post("/user", data)
+      .post('/user', data)
       .then((results) => handleUserData(results))
-      .catch((err) => console.log("Error creating user: ", err));
+      .catch((err) => console.log('Error creating user: ', err));
 
   const handleResetInputs = () => {
-    setUsername("");
-    setPassword("");
-    setPassword2("");
-    setPhoto("");
+    setUsername('');
+    setPassword('');
+    setPassword2('');
+    setPhoto('');
     setSubmitting(false);
   };
 
@@ -106,7 +106,7 @@ export default function CreateUserPage({ setUser }) {
     setTimeout(() => {
       setUserCreated(false);
       // route back to main page
-      navigate("/home");
+      navigate('/home');
     }, 1000);
   };
 
@@ -117,7 +117,7 @@ export default function CreateUserPage({ setUser }) {
     setPasswordMismatch(false);
     setUserCreated(false);
     // route back to main page
-    navigate("/home");
+    navigate('/home');
   };
 
   return (

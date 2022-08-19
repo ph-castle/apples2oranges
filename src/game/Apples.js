@@ -1,6 +1,6 @@
 //Decks should come in as GET requests from the API.
-import { AnswerDeck, PromptDeck } from "./Deck";
-import { INVALID_MOVE } from "boardgame.io/core";
+import { AnswerDeck, PromptDeck } from './Deck';
+import { INVALID_MOVE } from 'boardgame.io/core';
 //TODOS
 
 //END GAME
@@ -8,7 +8,7 @@ import { INVALID_MOVE } from "boardgame.io/core";
 //IMPORT INVALID_MOVES for move validation
 // TURN ORDER / RANDOM JUDGE SELECTION *Low Priority *
 export const Apples = {
-  name: "Apples2Oranges",
+  name: 'Apples2Oranges',
 
   setup: (ctx) => ({
     players: Array(ctx.numPlayers).fill({ hand: [], winningCards: [] }),
@@ -35,18 +35,18 @@ export const Apples = {
       onBegin: startDealPhase,
       start: true,
       endIf: checkHands,
-      next: "play",
+      next: 'play',
     },
     play: {
       moves: { drawPrompt },
       turn: {
         stages: {
-          playAnswer: { moves: { playAnswer }, next: "judgement" },
+          playAnswer: { moves: { playAnswer }, next: 'judgement' },
           judgement: { moves: { pickWinner } },
         },
       },
       onEnd: cleanUp,
-      next: "dealing",
+      next: 'dealing',
     },
   },
 };
@@ -74,7 +74,7 @@ function drawPrompt(G, ctx) {
   G.secret.promptDeck = ctx.random.Shuffle(G.secret.promptDeck);
   G.activePrompt = G.secret.promptDeck.pop();
   ctx.events.setActivePlayers({
-    others: "playAnswer",
+    others: 'playAnswer',
     minMoves: 1,
     maxMoves: 1,
   });
@@ -92,7 +92,7 @@ function playAnswer(G, ctx, answerIndex) {
 
   if (allAnswersSumbitted(G, ctx)) {
     ctx.events.setActivePlayers({
-      currentPlayer: "judgement",
+      currentPlayer: 'judgement',
       minMoves: 1,
       maxMoves: 1,
     });
@@ -107,7 +107,7 @@ function pickWinner(G, ctx, winnerIndex) {
   let mutantPrompt = G.activePrompt.text.slice(),
     mutantAnswer = G.submittedAnswers[winnerIndex].text,
     blank = `________`;
-  console.log("winnerIndex inside pickWinner: ", winnerIndex);
+  console.log('winnerIndex inside pickWinner: ', winnerIndex);
   let combo = mutantPrompt.replace(blank, mutantAnswer);
   G.players[winnerIndex].winningCards.push(combo); //mutantAnswer//G.activePrompt.text + G.submittedAnswers[0].text
   ctx.events.endPhase();

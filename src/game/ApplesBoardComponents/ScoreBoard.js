@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 export default function ScoreBoard(props) {
   return (
     <div>
-      {" "}
+      {' '}
       This is the scoreboard
       <ol>
         <li>FIRST</li>

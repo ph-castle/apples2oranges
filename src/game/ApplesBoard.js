@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import JudgeView from "./ApplesBoardComponents/JudgeView";
-import PlayerView from "./ApplesBoardComponents/PlayerView";
+import React, { useState } from 'react';
+import JudgeView from './ApplesBoardComponents/JudgeView';
+import PlayerView from './ApplesBoardComponents/PlayerView';
 // import PlayPhase from './ApplesBoardComponents/PlayPhase';
 // import DealPhase from './ApplesBoardComponents/DealPhase';
 // import ScoreBoard from './ApplesBoardComponents/ScoreBoard';
@@ -13,7 +13,7 @@ export function ApplesBoard({ ctx, G, moves, playerID }) {
   //define functions that affect how the board elements are displayed
 
   //define board elements on when win condition is met
-  let winner = "";
+  let winner = '';
   if (ctx.gameover) {
     winner =
       ctx.gameover.winner !== undefined ? (

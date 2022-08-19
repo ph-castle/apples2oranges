@@ -1,12 +1,12 @@
-import React from "react";
-import { Button, Box, ButtonGroup } from "@mui/material";
-import { Link } from "react-router-dom";
-import { toggleAnimation } from "../app/mainSlice";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { Button, Box, ButtonGroup } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { toggleAnimation } from '../app/mainSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   StyledComponentContainer,
   StyledDashButtons,
-} from "../styles/globalStyles";
+} from '../styles/globalStyles';
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
@@ -17,37 +17,37 @@ export const Dashboard = () => {
         variant="contained"
         onClick={() => dispatch(toggleAnimation())}
       >
-        <Link to={"/joingame"} style={{ textDecoration: "none" }}>
+        <Link to={'/joingame'} style={{ textDecoration: 'none' }}>
           <StyledDashButtons
-            fontSize={{ xs: "0.5rem", sm: "1rem", md: "1.5rem" }}
+            fontSize={{ xs: '0.5rem', sm: '1rem', md: '1.5rem' }}
             sx={{
-              marginRight: "1rem",
+              marginRight: '1rem',
               fontSize: {
-                xs: "0.5rem",
-                sm: "1rem",
-                md: "1.5rem",
+                xs: '0.5rem',
+                sm: '1rem',
+                md: '1.5rem',
               },
-              backgroundColor: "#212529",
-              "&:hover": {
-                backgroundColor: "#343a40",
+              backgroundColor: '#212529',
+              '&:hover': {
+                backgroundColor: '#343a40',
               },
             }}
           >
             Join a Game
           </StyledDashButtons>
         </Link>
-        <Link to={"/creategame"} style={{ textDecoration: "none" }}>
+        <Link to={'/creategame'} style={{ textDecoration: 'none' }}>
           <StyledDashButtons
             sx={{
               // backgroundColor: "orange",
               fontSize: {
-                xs: "0.5rem",
-                sm: "1rem",
-                md: "1.5rem",
+                xs: '0.5rem',
+                sm: '1rem',
+                md: '1.5rem',
               },
-              backgroundColor: "#868e96",
-              "&:hover": {
-                backgroundColor: "#adb5bd",
+              backgroundColor: '#868e96',
+              '&:hover': {
+                backgroundColor: '#adb5bd',
               },
             }}
           >

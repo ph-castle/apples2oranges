@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import { Container } from "@mui/material";
-import Header from "./features/Header";
-import Dashboard from "./features/Dashboard";
-import { CreateGame } from "./features/CreateGame";
-import Lobby from "./features/Lobby";
-import { WaitingRoom } from "./features/WaitingRoom";
-import { StyledEngineProvider } from "@mui/material/styles";
-import { theme } from "./styles/theme";
-import { ThemeProvider } from "@mui/material/styles";
-import Hero from "./UI/Hero";
-import ProfilePage from "./features/login/ProfilePage";
-import EditProfile from "./features/login/EditProfile";
-import LoginPage from "./features/login/LoginPage";
-import CreateUserPage from "./features/login/CreateUserPage";
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Container } from '@mui/material';
+import Header from './features/Header';
+import Dashboard from './features/Dashboard';
+import { CreateGame } from './features/CreateGame';
+import Lobby from './features/Lobby';
+import { WaitingRoom } from './features/WaitingRoom';
+import { StyledEngineProvider } from '@mui/material/styles';
+import { theme } from './styles/theme';
+import { ThemeProvider } from '@mui/material/styles';
+import Hero from './UI/Hero';
+import ProfilePage from './features/login/ProfilePage';
+import EditProfile from './features/login/EditProfile';
+import LoginPage from './features/login/LoginPage';
+import CreateUserPage from './features/login/CreateUserPage';
 // import { useSelector } from "react-redux";
-import { Apples2Oranges } from "./features/gameRoom";
+import { Apples2Oranges } from './features/gameRoom';
 
-import { StyledContainer, StyledBox } from "./styles/appStyles";
+import { StyledContainer, StyledBox } from './styles/appStyles';
 
 export default function App() {
   const [user, setUser] = useState({
     id: 0,
-    username: "",
+    username: '',
     avatar: null,
   });
 

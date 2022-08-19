@@ -4,22 +4,22 @@ import {
   FormHelperText,
   InputLabel,
   OutlinedInput,
-} from "@mui/material";
+} from '@mui/material';
 
-import { styled } from "@mui/material/styles";
+import { styled } from '@mui/material/styles';
 
 export const StyledFormControl = styled(FormControl)({
-  width: "25ch",
+  width: '25ch',
 });
 
 export const StyledInputLabel = styled(InputLabel)({
   //   color: "orange",
-  color: "black",
-  backgroundColor: "none",
+  color: 'black',
+  backgroundColor: 'none',
 });
 export const StyledOutlineInput = styled(OutlinedInput)({
-  color: "black",
-  backgroundColor: "#f1f3f5",
+  color: 'black',
+  backgroundColor: '#f1f3f5',
 
   //   display: "flex",
   //   justifyContent: "center",
@@ -27,16 +27,16 @@ export const StyledOutlineInput = styled(OutlinedInput)({
   //   flexDirection: "column",
 });
 export const StyledFormHelperText = styled(FormHelperText)({
-  color: "white",
+  color: 'white',
 });
 
 export const StyledButton = styled(Button)({
   // p: "sm",
-  width: "25ch",
+  width: '25ch',
 
-  outline: "white solid 1px",
-  boxShadow: "0 0 10px orange",
-  "&:hover": {
-    boxShadow: "0 0 20px orange",
+  outline: 'white solid 1px',
+  boxShadow: '0 0 10px orange',
+  '&:hover': {
+    boxShadow: '0 0 20px orange',
   },
 });

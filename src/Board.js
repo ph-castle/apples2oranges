@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./styles/board.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './styles/board.css';
 
 class TicTacToeBoard extends React.Component {
   static propTypes = {
@@ -9,10 +9,10 @@ class TicTacToeBoard extends React.Component {
     moves: PropTypes.any.isRequired,
     playerID: PropTypes.string,
     isActive: PropTypes.bool,
-    isMultiplayer: PropTypes.bool
+    isMultiplayer: PropTypes.bool,
   };
 
-  onClick = id => {
+  onClick = (id) => {
     if (this.isActive(id)) {
       this.props.moves.clickCell(id);
     }
@@ -33,7 +33,7 @@ class TicTacToeBoard extends React.Component {
         cells.push(
           <td
             key={id}
-            className={this.isActive(id) ? "active" : ""}
+            className={this.isActive(id) ? 'active' : ''}
             onClick={() => this.onClick(id)}
           >
             {this.props.G.cells[id]}
@@ -55,7 +55,7 @@ class TicTacToeBoard extends React.Component {
 
     return (
       <div>
-        <table id="board" style={{width: '250px', height: '250px'}}>
+        <table id="board" style={{ width: '250px', height: '250px' }}>
           <tbody>{tbody}</tbody>
         </table>
         {winner}

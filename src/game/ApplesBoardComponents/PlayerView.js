@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Timer from "./Timer";
-import ScoreBoard from "./ScoreBoard";
-import Card from "../../card/Card.js";
+import React, { useState } from 'react';
+import Timer from './Timer';
+import ScoreBoard from './ScoreBoard';
+import Card from '../../card/Card.js';
 
 export default function PlayerView({
   G,

@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Typography, Button, Box } from "@mui/material";
-import { selectAlbum, setPlay } from "./app/mainSlice";
-import { useDispatch } from "react-redux";
-import { styled } from "@mui/material/styles";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Typography, Button, Box } from '@mui/material';
+import { selectAlbum, setPlay } from './app/mainSlice';
+import { useDispatch } from 'react-redux';
+import { styled } from '@mui/material/styles';
 
 const Logo = styled(Typography)({
   // fontSize: {
@@ -12,9 +12,9 @@ const Logo = styled(Typography)({
   // },
   // padding: "1rem",
   // borderRadius: "10px",
-  fontWeight: "bold",
-  textDecoration: "none",
-  color: "white",
+  fontWeight: 'bold',
+  textDecoration: 'none',
+  color: 'white',
 });
 function SearchListItem({ album }) {
   const dispatch = useDispatch();
@@ -26,14 +26,14 @@ function SearchListItem({ album }) {
   return (
     <Box
       sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: "1rem",
-        outline: "grey solid 1px",
-        marginBottom: "0.8rem",
-        "&:hover": {
-          color: "green",
-          border: "solid 3px green",
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1rem',
+        outline: 'grey solid 1px',
+        marginBottom: '0.8rem',
+        '&:hover': {
+          color: 'green',
+          border: 'solid 3px green',
         },
       }}
       onClick={handleMusicPlay}
@@ -41,7 +41,7 @@ function SearchListItem({ album }) {
       <img
         src={album.albumUrl}
         alt={album.title}
-        style={{ height: "100px", width: "100px" }}
+        style={{ height: '100px', width: '100px' }}
       />
       <Box>
         <Logo>{album.title}</Logo>

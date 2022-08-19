@@ -1,5 +1,5 @@
 export const initialCreateGameState = {
-  name: "",
+  name: '',
   options: {
     numPlayers: 3,
     setupData: { rounds: 12 },
@@ -10,17 +10,17 @@ export const initialCreateGameState = {
 
 export default function createGameReducer(state, { name, checked, value }) {
   switch (name) {
-    case "customCards":
+    case 'customCards':
       return {
         ...state,
         customCards: checked,
       };
-    case "nickname":
+    case 'nickname':
       return {
         ...state,
         name: value,
       };
-    case "rounds":
+    case 'rounds':
       return {
         ...state,
         options: {
@@ -28,7 +28,7 @@ export default function createGameReducer(state, { name, checked, value }) {
           setupData: { rounds: value },
         },
       };
-    case "unlisted":
+    case 'unlisted':
       return {
         ...state,
         options: {
@@ -36,7 +36,7 @@ export default function createGameReducer(state, { name, checked, value }) {
           [name]: checked,
         },
       };
-    case "options1":
+    case 'options1':
       return {
         ...state,
         options: {
@@ -47,7 +47,7 @@ export default function createGameReducer(state, { name, checked, value }) {
           },
         },
       };
-    case "options2":
+    case 'options2':
       return {
         ...state,
         options: {
@@ -59,7 +59,7 @@ export default function createGameReducer(state, { name, checked, value }) {
         },
       };
     default:
-      localStorage.setItem("players", value);
+      localStorage.setItem('players', value);
 
       return {
         ...state,

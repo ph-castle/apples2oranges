@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "./Login.css";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import Avatar from "@mui/material/Avatar";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './Login.css';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Avatar from '@mui/material/Avatar';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 export default function EditProfile({ user, setUser }) {
   const [username, setUsername] = useState(user.username);
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [newPassword2, setNewPassword2] = useState("");
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [newPassword2, setNewPassword2] = useState('');
   const [photo, setPhoto] = useState(user.avatar);
   const [usernameTaken, setUsernameTaken] = useState(false);
   const [incorrectPassword, setIncorrectPassword] = useState(false);
@@ -29,9 +29,9 @@ export default function EditProfile({ user, setUser }) {
   useEffect(() => {
     // if user changes, resets fields
     setUsername(user.username);
-    setOldPassword("");
-    setNewPassword("");
-    setNewPassword2("");
+    setOldPassword('');
+    setNewPassword('');
+    setNewPassword2('');
     setPhoto(user.avatar);
     setUsernameTaken(false);
     setIncorrectPassword(false);
@@ -107,7 +107,7 @@ export default function EditProfile({ user, setUser }) {
             },
           };
           axiosInstance
-            .get("/user", options)
+            .get('/user', options)
             .then((results) => {
               if (results.data.id !== undefined) {
                 // password correct, update current user
@@ -117,7 +117,7 @@ export default function EditProfile({ user, setUser }) {
                 let avatarPromise = new Promise((resolve, reject) => {
                   if (newPhoto) {
                     axiosInstance
-                      .post("/cloudinary", { img: photo })
+                      .post('/cloudinary', { img: photo })
                       .then((photo) => {
                         resolve(photo.data);
                       })
@@ -149,26 +149,26 @@ export default function EditProfile({ user, setUser }) {
                         };
                         setUser(newUser);
                         // switched back to user profile
-                        navigate("/user/profile");
+                        navigate('/user/profile');
                       })
                       .catch((err) => {
-                        console.log("Error updating user: ", err);
+                        console.log('Error updating user: ', err);
                       });
                   })
                   .catch((err) => {
-                    console.log("Error uploading image: ", err);
+                    console.log('Error uploading image: ', err);
                   });
               } else {
                 setIncorrectPassword(true);
               }
             })
             .catch((err) => {
-              console.log("Error getting user");
+              console.log('Error getting user');
             });
         }
       })
       .catch((err) => {
-        console.log("Error getting username: ", err);
+        console.log('Error getting username: ', err);
       });
   };
 
@@ -194,13 +194,13 @@ export default function EditProfile({ user, setUser }) {
     >
       <Typography variant="h4">Edit Profile</Typography>
       <form autoComplete="off" onSubmit={(e) => handleSubmit(e)}>
-        <Avatar src={photo} alt="avatar" sx={{ width: "4em", height: "4em" }} />
+        <Avatar src={photo} alt="avatar" sx={{ width: '4em', height: '4em' }} />
         <br />
-        <FormControl sx={{ width: "25ch" }}>
+        <FormControl sx={{ width: '25ch' }}>
           <Button
             variant="contained"
             component="label"
-            sx={{ p: "sm", width: "26ch" }}
+            sx={{ p: 'sm', width: '26ch' }}
           >
             <AddPhotoAlternateIcon />
             &nbsp;Upload avatar
@@ -213,7 +213,7 @@ export default function EditProfile({ user, setUser }) {
           </Button>
         </FormControl>
         <br />
-        <FormControl sx={{ width: "25ch", mt: "1rem" }}>
+        <FormControl sx={{ width: '25ch', mt: '1rem' }}>
           <InputLabel size="small">Username</InputLabel>
           <OutlinedInput
             type="text"
@@ -231,7 +231,7 @@ export default function EditProfile({ user, setUser }) {
           )}
         </FormControl>
         <br />
-        <FormControl sx={{ width: "25ch" }}>
+        <FormControl sx={{ width: '25ch' }}>
           <InputLabel required size="small">
             Password
           </InputLabel>
@@ -251,7 +251,7 @@ export default function EditProfile({ user, setUser }) {
           )}
         </FormControl>
         <br />
-        <FormControl sx={{ width: "25ch" }}>
+        <FormControl sx={{ width: '25ch' }}>
           <InputLabel size="small">New Password</InputLabel>
           <OutlinedInput
             type="password"
@@ -264,7 +264,7 @@ export default function EditProfile({ user, setUser }) {
           <FormHelperText>&nbsp;</FormHelperText>
         </FormControl>
         <br />
-        <FormControl sx={{ width: "25ch" }}>
+        <FormControl sx={{ width: '25ch' }}>
           <InputLabel size="small">Confirm New Password</InputLabel>
           <OutlinedInput
             type="password"
@@ -284,7 +284,7 @@ export default function EditProfile({ user, setUser }) {
         <Button
           type="submit"
           variant="contained"
-          sx={{ p: "sm", width: "26ch" }}
+          sx={{ p: 'sm', width: '26ch' }}
           disabled={submitting}
         >
           Submit
@@ -292,8 +292,8 @@ export default function EditProfile({ user, setUser }) {
       </form>
       <Button
         variant="contained"
-        sx={{ p: "sm", width: "26ch", mt: "1rem" }}
-        onClick={(e) => navigate("/user/profile")}
+        sx={{ p: 'sm', width: '26ch', mt: '1rem' }}
+        onClick={(e) => navigate('/user/profile')}
       >
         Cancel
       </Button>
