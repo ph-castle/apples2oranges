@@ -9,7 +9,9 @@ router.post('/user', controllers.addNewUser);
 
 router.put('/user/:userId', controllers.updateUser);
 
-router.get('/cards/specific/:userId', controllers.getUserCards);
+router.get('/cards/specific/answer/:userId', controllers.getUserAnswerCards);
+
+router.get('/cards/specific/prompt/:userId', controllers.getUserPromptCards);
 
 router.put('/cards/answer/:userId', controllers.addUserAnswerCards);
 

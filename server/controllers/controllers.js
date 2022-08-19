@@ -65,14 +65,32 @@ module.exports.updateUser = (req, res) => {
     });
 };
 
-module.exports.getUserCards = (req, res) => {
+module.exports.getUserAnswerCards = (req, res) => {
   const { userId } = req.params;
   const { NSFW } = req.query;
 
   models
-    .readUserCards(userId, NSFW)
+    .readUserAnswerCards(userId, NSFW)
     .then((result) => {
-      console.log(result);
+      if (result === undefined) {
+        res.status(200).send("No User Cards");
+      } else {
+        res.status(200).send(result);
+      }
+    })
+    .catch((err) => {
+      console.log("Problem retrieving user cards: ", err);
+      res.status(500).send(err);
+    });
+};
+
+module.exports.getUserPromptCards = (req, res) => {
+  const { userId } = req.params;
+  const { NSFW } = req.query;
+
+  models
+    .readUserPromptCards(userId, NSFW)
+    .then((result) => {
       if (result === undefined) {
         res.status(200).send("No User Cards");
       } else {
