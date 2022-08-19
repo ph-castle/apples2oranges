@@ -36,20 +36,20 @@ export function CreateGame() {
     // This is because the customCards state is added to the dependency array for this useEffect function
     // Do some conditional logic here and it should be good. And make sure the state is updated onChange of the checkbox
     axios
-      .get("http://18.144.156.106:45000/cards/prompt?NSFW=true")
+      .get("http://localhost:5050/cards/prompt?NSFW=true")
       .then((data) => dispatch({ name: "options1", value: data.data }))
-      .then(() => axios.get("http://18.144.156.106:45000/cards/answer?NSFW=true"))
+      .then(() => axios.get("http://localhost:5050/cards/answer?NSFW=true"))
       .then((result) => dispatch({ name: "options2", value: result.data }));
   }, [customCards]);
 
   const createGameHandler = async () => {
-    let { data } = await axios.get("http://18.144.156.106:45000/cards/prompt", {
+    let { data } = await axios.get("http://localhost:5050/cards/prompt", {
       params: {
         NSFW: NSFW
       }
     });
     console.log(data)
-    let result = await axios.get("http://18.144.156.106:45000/cards/answer", {
+    let result = await axios.get("http://localhost:5050/cards/answer", {
       params: {
         NSFW: NSFW
       }

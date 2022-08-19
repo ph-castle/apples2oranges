@@ -32,6 +32,7 @@ export default function LoginPage({ setUser }) {
   const [attemptingLogin, setAttemptingLogin] = useState(false);
   let navigate = useNavigate();
 
+  console.log(process.env.REACT_APP_SERVER_PORT);
   const axiosInstance = axios.create({
     baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`,
   });

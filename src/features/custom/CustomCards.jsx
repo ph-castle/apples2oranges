@@ -7,6 +7,8 @@ import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { StyledButton } from "../../styles/createGameStyles";
+import { StyledTypography } from "../../styles/createGameStyles";
 
 export default function EditCards({ user }) {
   const [prompts, setPrompts] = useState('');
@@ -22,15 +24,18 @@ export default function EditCards({ user }) {
   useEffect(() => {
     const fetchData = async () => {
       // change to concurrent calls later in production
-      const currentPrompts = await axiosInstance.get(`/cards/prompt/${user.id}`);
-      const currentAnswers = await axiosInstance.get(`/cards/answer/${user.id}`);
+      const currentPrompts = await axiosInstance.get(`/cards/specific/prompt/${user.id}?NSFW=false`);
+      const currentAnswers = await axiosInstance.get(`/cards/specific/answer/${user.id}?NSFW=false`);
 
-      if (currentPrompts.length > 0) {
-        setPrompts(currentPrompts.map((data) => data.body).join('\n'));
+
+      console.log(currentPrompts);
+      console.log(currentAnswers);
+      if (currentPrompts.data.rows.length > 0) {
+        setPrompts(currentPrompts.data.rows.map((data) => data.body).join('\n'));
       }
 
-      if (currentAnswers.length > 0) {
-        setAnswers(currentAnswers.map((data) => data.body).join('\n'));
+      if (currentAnswers.data.rows.length > 0) {
+        setAnswers(currentAnswers.data.rows.map((data) => data.body).join('\n'));
       }
     }
 
@@ -43,7 +48,7 @@ export default function EditCards({ user }) {
 
     console.log('in submit', prompts.split('\n'), answers.split('\n'), user.id);
     // add try and catch error checking later in production
-    if (prompt.length > 0) {
+    if (prompts.length > 0) {
       await axiosInstance.put(`/cards/prompt/${user.id}`, {
         cards: prompts.split('\n').filter(item => item),
         NSFW: false,
@@ -51,7 +56,7 @@ export default function EditCards({ user }) {
     }
 
     if (answers.length > 0) {
-      await axiosInstance.put(`/cards/answers/${user.id}`, {
+      await axiosInstance.put(`/cards/answer/${user.id}`, {
         cards: answers.split('\n').filter(item => item),
         NSFW: false,
       });
@@ -72,18 +77,18 @@ export default function EditCards({ user }) {
       justifyContent="center"
     >
       <form onSubmit={handleSubmit}>
-        <FormGroup>
-          <FormControlLabel control={
-            <Checkbox
-              checked={NSFW}
-              onChange={(e) => setNSFW(e.target.checked)}
-              inputProps={{ 'aria-label': 'controlled' }}
-            />} label="NSFW" />
-        </FormGroup>
         <TextField
           id="outlined-textarea"
           label="Prompt Cards"
           placeholder="Prompt Cards"
+          InputLabelProps={{
+            style: { color: 'white' },
+          }}
+          inputProps={{
+            style: {
+              color: "white",
+            }
+          }}
           maxRows={15}
           value={prompts}
           style={{width: '50%'}}
@@ -94,13 +99,38 @@ export default function EditCards({ user }) {
           id="outlined-textarea"
           label="Answer Cards"
           placeholder="Answer Cards"
+          InputLabelProps={{
+            style: { color: 'white' },
+          }}
+          inputProps={{
+            style: {
+              color: "white",
+            }
+          }}
           maxRows={15}
           value={answers}
           style={{width: '50%'}}
           onChange={(e) => setAnswers(e.target.value)}
           multiline
         />
-        <Button type="submit">Submit</Button>
+        <FormGroup>
+          <FormControlLabel control={
+            <Checkbox
+              checked={NSFW}
+              onChange={(e) => setNSFW(e.target.checked)}
+              sx={{
+                color: "white",
+                '&.Mui-checked': {
+                color: "white",
+                  },
+                pl: 2.5
+                }}
+              inputProps={{ 'aria-label': 'controlled' }}
+          />} label="NSFW" />
+        </FormGroup>
+        <StyledTypography>
+          <StyledButton variant="contained" type="submit">Submit</StyledButton>
+        </StyledTypography>
       </form>
     </Box>
   );
