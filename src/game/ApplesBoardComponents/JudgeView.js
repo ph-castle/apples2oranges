@@ -4,6 +4,15 @@ import PCard from "../../card/PCard.js";
 import Card from "../../card/Card.js";
 import Box from '@mui/material/Box';
 import styles from "../../card/Card.module.css";
+import {
+  StyledContainer,
+  StyledGrid,
+  StyledGridLeft,
+  StyledGridRight,
+  StyledTextField,
+  StyledSendIcon,
+  StyledTypography
+} from "../../styles/playerViewStyles";
 
 export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendChatMessage, chatMessages, matchData }) {
   const [chatInput, setChatInput] = useState('');
@@ -52,55 +61,53 @@ export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendC
   );
 
   return (
-    <div>
-      THIS IS WHAT THE JUDGE SEES
-      <span className="active-prompt">
-        {G.activePrompt.body ? (
-          <PCard children={G.activePrompt.body} className={styles.answer_card}/>
-        ) : (
-          <div>
-            <button
-              onClick={() => {
-                moves.drawRemotePrompt();
-                setRoundTime(60);
-              }}
-            >
-              Select me Daddy!
-            </button>
+    <StyledContainer>
+       <StyledGrid container spacing={2}>
+        <StyledGridLeft item xs={9}>
+          <StyledTypography>
+          THIS IS WHAT THE JUDGE SEES
+          <span className="active-prompt">
+            {G.activePrompt.body ? (
+              <PCard children={G.activePrompt.body} className={styles.answer_card}/>
+            ) : (
+              <div>
+                <button
+                  onClick={() => {
+                    moves.drawRemotePrompt();
+                    setRoundTime(60);
+                  }}
+                >
+                  Select me Daddy!
+                </button>
+              </div>
+            )}
+          </span>
+          </StyledTypography>
+        </StyledGridLeft>
+        <StyledGridRight item xs={3}>
+          <div style={{
+            overflowWrap: "break-word",
+            overflowY: "scroll",
+            height: "86%"
+          }}>
+            {chatMessages.length > 0 ? chatMessages.map(({ payload, sender }, index) => {
+              return <div>{`${playerNames[sender]}: ${payload.message}`}</div>
+            }) : null}
           </div>
-        )}
-      </span>
-      <div className="answer">
-        {G.activePrompt.body &&
-        Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
-          <div>
-            <p>Waiting on player selections</p>
-            <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
-          </div>
-        ) : (
-          answers
-        )}
-      </div>
-
-      <Box
-        display="flex"
-        flexDirection="column"
-        height="100vh"
-        margin="auto"
-        alignItems="center"
-        justifyContent="center"
-      >
-        {chatMessages.length > 0 ? chatMessages.map(({ payload, sender }, index) => {
-            return <div>{`${playerNames[sender]}: ${payload.message}`}</div>
-          }) : null}
-
           <form onSubmit={handleSubmit}>
-            <input type="text" value={chatInput} onChange={handleChange} style={{width: '190px'}}/>
-            <button type="submit" style={{width: '55px'}}>Send</button>
+            <StyledTextField
+              label="Send chat"
+              value={chatInput}
+              onChange={handleChange}
+              InputLabelProps={{
+                style: { color: 'white' },
+              }}
+            />
+            <StyledSendIcon type="submit"/>
           </form>
-      </Box>
+        </StyledGridRight>
+       </StyledGrid>
+    </StyledContainer>
 
-      {/* {renderView()} */}
-    </div>
   );
 }

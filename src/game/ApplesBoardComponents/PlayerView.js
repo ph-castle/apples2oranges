@@ -113,7 +113,11 @@ export default function PlayerView({
             <StyledTextField
               label="Send chat"
               value={chatInput}
-              onChange={handleChange}/>
+              onChange={handleChange}
+              InputLabelProps={{
+                style: { color: 'white' },
+              }}
+            />
             <StyledSendIcon type="submit"/>
           </form>
         </StyledGridRight>
