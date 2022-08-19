@@ -93,6 +93,7 @@ const Header = ({ user, setUser }) => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
+              sx={{ display: { sm: 'none' } }}
             >
               <MenuIcon />
             </IconButton>
@@ -156,19 +157,19 @@ const Header = ({ user, setUser }) => {
               Apples 2 Oranges
             </Link>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, color: 'black' }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'black', display: 'block', backgroundColor: 'black' }}
               >
                 {page}
               </Button>
             ))}
           </Box>
           {user.id === 0 ? (
-            <Box sx={{ display: 'flex', gap: '1em' }}>
+            <Box sx={{ display: { xs:'none', sm:'flex' }, gap: '1em' }}>
               <HeaderButtons
                 color="white"
                 onClick={() => {

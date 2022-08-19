@@ -133,9 +133,9 @@ export function CreateGame() {
             </StyledSelect>
           </StyledFormControl>
           <StyledFormControl required>
-            <StyledInputLabel id="demo-simple-select-required-label">
+            {/* <StyledInputLabel id="demo-simple-select-required-label">
               Number of Rounds
-            </StyledInputLabel>
+            </StyledInputLabel> */}
             <StyledSelect
               id="demo-simple-select-required"
               label="Number of Rounds"
@@ -157,6 +157,7 @@ export function CreateGame() {
               <StyledMenuItem value={10}>Ten</StyledMenuItem>
               <StyledMenuItem value={11}>Eleven</StyledMenuItem>
               <StyledMenuItem value={12}>Twelve</StyledMenuItem>
+              <StyledMenuItem sx={{ selected: "true" }} hidden>Number of Rounds</StyledMenuItem>
             </StyledSelect>
           </StyledFormControl>
           <StyledCheckboxContainer>
