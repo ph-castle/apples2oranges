@@ -1,35 +1,45 @@
 import React from "react";
+import {
+  StyledContainer,
+  StyledList,
+  // StyledListItemText,
+  StyledTypography,
+  StyledTypographyH1
+} from "../../styles/scoreBoard.js";
+
 export default function ScoreBoard({
   G,
   ctx,
   playerID,
   matchData,
 }) {
+  console.log('G', G)
   let standings = {};  // {name:  , winningCards: }
-  let players = G?.players;
-  players?.forEach((player, index) => {
+  let players = G.players;
+
+  players.forEach((player, index) => {
     // validate that player.playerID === index;
     standings[index] = player;
   });
-  console.log(standings);
-  matchData?.forEach((namedPlayer) => {
+  matchData.forEach((namedPlayer) => {
     let playerID = namedPlayer?.id;
     let playerName = namedPlayer?.name;
     standings[playerID].playerName = playerName;
   });
-  console.log(standings);
+
   var currStandings = Object.values(standings).sort((a, b) => (b.winningCards.length - a.winningCards.length));
   console.log(currStandings);
+  console.log(players);
   return (
-    <div>
-      {" "}
-      This is the scoreboard
-      <ol>
-        {currStandings.map((standing) => {
-          console.log('standing', standing);
-      return <li>{standing.playerName}</li>
+    <StyledContainer>
+      <StyledTypographyH1>
+        Leader Board
+      </StyledTypographyH1>
+      <StyledList>
+        {currStandings.map((standing, index) => {
+      return <StyledTypography>{`${index + 1}. ${standing.playerName}`}</StyledTypography>
     })}
-      </ol>
-    </div>
+      </StyledList>
+    </StyledContainer>
   );
 }

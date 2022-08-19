@@ -97,7 +97,7 @@ export default function PlayerView({
             ) : (
               <>
                 <p>Waiting on Judge to start the turn</p>
-                <ScoreBoard />
+                <ScoreBoard G={G}  ctx={ctx} playerID={playerID} matchData={matchData}/>
               </>
             )}
           </span>

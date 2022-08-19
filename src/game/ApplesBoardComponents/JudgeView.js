@@ -58,6 +58,7 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
   let answers = (
     <div className="player-choices">
       {cardArray}
+      {/* <Timer time={30} /> */}
     </div>
   );
 
