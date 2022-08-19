@@ -195,7 +195,7 @@ module.exports.putUserAnswerCards = (userId, cards) => {
     .catch((err) => {
       console.log("Error connecting to pool: ", err);
       return err;
-    });
+    })
   )
 };
 
