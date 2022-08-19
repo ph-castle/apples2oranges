@@ -9,7 +9,6 @@ import { lobbyClient } from '../features/utils/lobbyClient';
 // import Timer from './ApplesBoardComponents/Timer';
 
 export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMessages, matchData }) {
-  const [roundTime, setRoundTime] = useState();
   let navigate = useNavigate();
   //create two different views that will be returned depending on if player is judge or not
 
@@ -62,8 +61,6 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
             G={G}
             ctx={ctx}
             moves={moves}
-            roundTime={roundTime}
-            setRoundTime={setRoundTime}
             sendChatMessage={sendChatMessage}
             chatMessages={chatMessages}
             matchData={matchData}
@@ -74,8 +71,6 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
             ctx={ctx}
             moves={moves}
             playerID={playerID}
-            roundTime={roundTime}
-            setRoundTime={setRoundTime}
             sendChatMessage={sendChatMessage}
             chatMessages={chatMessages}
             matchData={matchData}

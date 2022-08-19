@@ -16,7 +16,7 @@ import {
 
 import { StyledButton } from "../../styles/createGameStyles";
 
-export default function JudgeView({G, ctx, moves, roundTime, setRoundTime, sendChatMessage, chatMessages, matchData }) {
+export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages, matchData }) {
   const [chatInput, setChatInput] = useState('');
 
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
 import PCard from "../../card/PCard.js";
@@ -18,8 +18,6 @@ export default function PlayerView({
   ctx,
   moves,
   playerID,
-  roundTime,
-  setRoundTime,
   sendChatMessage,
   chatMessages,
   matchData
@@ -101,14 +99,9 @@ export default function PlayerView({
             )}
           </span>
           <div className="answercards">
-            {Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? (
+            {Object.keys(G.submittedAnswers).length !== ctx.numPlayers - 1 ? null
+            : (
               <>
-                {answers}
-                <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
-              </>
-            ) : (
-              <>
-                <Timer roundTime={roundTime} setRoundTime={setRoundTime} />
                 <ScoreBoard />
               </>
             )}
