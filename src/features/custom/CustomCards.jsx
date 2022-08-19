@@ -21,6 +21,7 @@ export default function EditCards({ user }) {
 
   useEffect(() => {
     const fetchData = async () => {
+      // change to concurrent calls later in production
       const currentPrompts = await axiosInstance.get(`/cards/prompt/${user.id}`);
       const currentAnswers = await axiosInstance.get(`/cards/answer/${user.id}`);
 
