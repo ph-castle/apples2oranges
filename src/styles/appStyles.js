@@ -16,6 +16,7 @@ export const StyledContainer = styled(Box)({
   borderRadius: '50px',
   width: '100%',
   '&::before': {
+    zIndex: '-1',
     content: '""',
     position: 'absolute',
     top: '0',
