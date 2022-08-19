@@ -114,16 +114,23 @@ const Header = ({ user, setUser }) => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem
-                  key={page}
-                  onClick={() => {
-                    handleCloseNavMenu();
-                    dispatch(toggleAnimation());
-                  }}
+              {pages.map((page, i) => (
+                <Link
+                  to={i === 0 ? '/home' : '/user/create'}
+                  style={{ textDecoration: 'none', color: 'white' }}
                 >
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                  <MenuItem
+                    key={page}
+                    onClick={() => {
+                      handleCloseNavMenu();
+                      dispatch(toggleAnimation());
+                    }}
+                  >
+                    <Typography textAlign="center" color="black">
+                      {page}
+                    </Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -157,14 +164,19 @@ const Header = ({ user, setUser }) => {
             </Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+            {pages.map((page, i) => (
+              <Link
+                to={i === 0 ? '/home' : '/user/create'}
+                style={{ textDecoration: 'none', color: 'white' }}
               >
-                {page}
-              </Button>
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              </Link>
             ))}
           </Box>
           {user.id === 0 ? (
@@ -240,7 +252,9 @@ const Header = ({ user, setUser }) => {
                       }
                     }}
                   >
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography color="black" textAlign="center">
+                      {setting}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>
