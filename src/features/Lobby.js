@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Input, Paper, Typography } from '@mui/material';
+import { Box, Input, Paper, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { lobbyClient } from './utils/lobbyClient';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +14,7 @@ import {
   StyledComponentContainer,
   StyledInnerBox,
 } from '../styles/globalStyles';
+import { ButtonGroup } from 'reactstrap';
 
 const Item = styled(Paper)(() => ({
   textAlign: 'center',
@@ -94,13 +95,21 @@ const Lobby = () => {
         }}
       >
         <Heading>Join a Game</Heading>
-        <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+          }}
+        >
           <Typography variant="body2">
             Enter the session code for the game you want to join
           </Typography>
           <Input
             sx={{
               color: 'white',
+              outline: '1px solid white',
+              padding: '0 0.5rem',
             }}
             placeholder="Session Code"
             value={sessionCode}
@@ -110,13 +119,22 @@ const Lobby = () => {
           />
         </Box>
         <StyledInnerBox>
-          <Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1rem',
+            }}
+          >
             <Typography variant="body2">
               Enter the player name you'll use for this game
             </Typography>
             <Input
               sx={{
                 color: 'white',
+                outline: '1px solid white',
+                padding: '0 0.5rem',
+                marginRight: '1rem',
               }}
               placeholder="Nick Name"
               value={name}
@@ -134,10 +152,10 @@ const Lobby = () => {
           </StyledButton>
         </StyledInnerBox>
       </Box>
-      <Box sx={{ width: '100%', height: '100%' }}>
-        <Typography variant="h5" sx={{ mt: '1em' }}>
+      <Box sx={{ width: '100%', height: '100%', zIndex: 1 }}>
+        <Heading variant="h5" sx={{ mt: '1em', color: 'white' }}>
           Join a public game
-        </Typography>
+        </Heading>
         <Box
           sx={{
             p: 2,
@@ -145,7 +163,6 @@ const Lobby = () => {
             gridTemplateColumns: {
               xs: '1fr',
               sm: 'repeat(2, 1fr)',
-              lg: 'repeat(3, 1fr)',
             },
             gap: '2em',
             mt: '1em',
@@ -154,27 +171,51 @@ const Lobby = () => {
           }}
           style={{ marginTop: '1em' }}
         >
-          {playerMatch.map((match) => (
-            <div style={{ width: '100%', height: '100%' }}>
+          {playerMatch.length === 0 ? (
+            <Typography variant="body2" sx={{ textAlign: 'center' }}>
+              No games available...
+            </Typography>
+          ) : (
+            playerMatch.map((match, i) => (
               <Item
-                sx={{ width: '100%', height: '100%' }}
+                sx={{
+                  width: '100%',
+                  height: '100%',
+                  maxWidth: '20rem',
+                  maxHeight: '10rem',
+                  paddingBottom: '1rem',
+                  fontSize: '1rem',
+                  position: 'relative',
+                }}
                 key={match.matchID}
                 elevation={8}
               >
-                {match.matchID}
+                Room- ({match.matchID})
+                <Button
+                  sx={{
+                    position: 'absolute',
+                    left: {
+                      sm: '65%',
+                    },
+                    top: '65%',
+                    color: 'white',
+                    outline: '1px solid white',
+                    fontSize: { sm: '0.5rem', md: '1rem' },
+                    padding: '0.5rem',
+                    backgroundColor: 'red',
+                    '&:hover': {
+                      backgroundColor: 'black',
+                      color: 'white',
+                      boxShadow: '0px 0px 10px 10px orange',
+                    },
+                  }}
+                  onClick={(e) => joinMatchHandler(match.matchID)}
+                >
+                  Join
+                </Button>
               </Item>
-              <StyledButton
-                sx={{
-                  left: { sm: '60%', md: '70%' },
-                  top: '-20%',
-                  color: 'white',
-                }}
-                onClick={(e) => joinMatchHandler(match.matchID)}
-              >
-                Join Game
-              </StyledButton>
-            </div>
-          ))}
+            ))
+          )}
         </Box>
       </Box>
     </StyledComponentContainer>

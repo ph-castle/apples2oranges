@@ -122,7 +122,7 @@ module.exports.putUser = (userId, username, password, avatar) => {
     });
 };
 
-module.exports.readUserCards = (userId, NSFW) => {
+module.exports.readUserAnswerCards = (userId, NSFW) => {
   return pool
     .connect()
     .then((client) => {
@@ -140,7 +140,38 @@ module.exports.readUserCards = (userId, NSFW) => {
         )
         .then((result) => {
           client.release();
-          console.log(result);
+          return result;
+        })
+        .catch((err) => {
+          console.log("Problem reading user: ", err);
+          client.release();
+          return err;
+        });
+    })
+    .catch((err) => {
+      console.log("Error connecting to pool: ", err);
+      return err;
+    });
+};
+
+module.exports.readUserPromptCards = (userId, NSFW) => {
+  return pool
+    .connect()
+    .then((client) => {
+      return client
+        .query(
+          `
+          SELECT
+            body
+          FROM
+            prompts
+          WHERE
+            user_id = $1 AND NSFW = $2
+        `,
+          [userId, NSFW]
+        )
+        .then((result) => {
+          client.release();
           return result;
         })
         .catch((err) => {

@@ -127,6 +127,7 @@ function cleanUp (G, ctx) {
 }
 
 function drawRemotePrompt(G, ctx) {
+    console.log(G.data.remotePromptDeck);
     G.data.remotePromptDeck =  ctx.random.Shuffle(G.data.remotePromptDeck);
     G.activePrompt =  G.data.remotePromptDeck.pop();
     ctx.events.setActivePlayers({others: 'playAnswer', minMoves: 1, maxMoves: 1 });

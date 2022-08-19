@@ -16,7 +16,6 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Heading, StyledComponentContainer } from '../../styles/globalStyles';
 import {
-  StyledTypography,
   StyledOutlineInput,
   StyledButton,
   StyledInputLabel,
@@ -32,6 +31,7 @@ export default function LoginPage({ setUser }) {
   const [attemptingLogin, setAttemptingLogin] = useState(false);
   let navigate = useNavigate();
 
+  console.log(process.env.REACT_APP_SERVER_PORT);
   const axiosInstance = axios.create({
     baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`,
   });

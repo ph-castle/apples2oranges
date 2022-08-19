@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Box } from '@mui/material';
 
-function SpotifyLogin() {
+function SpotifyLogin({ isCollapsed }) {
   const AUTH_URL =
     'https://accounts.spotify.com/authorize?client_id=925ae1cbc41f4b249e72dfe28b1146ca&response_type=code&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20playlist-modify-public%20playlist-modify-private%20user-top-read';
 
@@ -11,6 +11,7 @@ function SpotifyLogin() {
         <Box
           component="img"
           sx={{
+            display: isCollapsed ? 'none' : 'flex',
             transform: 'scale(0.3)',
             borderRadius: '50%',
             boxShadow: '6px 6px 18px 18px rgba(249, 153, 0, 0.3)',
