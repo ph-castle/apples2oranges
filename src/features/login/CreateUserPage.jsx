@@ -55,8 +55,9 @@ export default function CreateUserPage({ setUser }) {
       setPasswordMismatch(false);
       setSubmitting(true);
       // uploads photo to cloudinary
-      photo &&
-        postCloudinary(photo)
+
+      if (photo) {
+        postCloudinary(photo || "")
           .then((photoURL) =>
             // posts new user
             postNewUser({
@@ -66,6 +67,13 @@ export default function CreateUserPage({ setUser }) {
             })
           )
           .catch((err) => console.log("Error uploading image: ", err));
+      } else {
+        postNewUser({
+          username,
+          password,
+          avatar: "",
+        });
+      }
     });
   };
 
