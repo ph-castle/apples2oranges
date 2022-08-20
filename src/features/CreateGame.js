@@ -166,7 +166,7 @@ export function CreateGame() {
                   required
                 />
               }
-              label="Make game public"
+              label="Make game private"
             />
             <StyledFormControlLabel
               control={
