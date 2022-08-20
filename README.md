@@ -149,11 +149,12 @@ gaming functionality.
   * ### Morale Booster by Jessica Chen
     * User Authentication and Security
     * Backend APIs and database
-    *
+    * Live Chat Box
+    * Social Media Sharing
   * ### UI / UX by Coty Janeway
     * Interactive Game Design
-    * 
-    *
+    * Card Data Collection
+    * Styling
   * ### UI / UX by Heemo Yang
     * Interactive Background for UX
     * Spotify Music Player
