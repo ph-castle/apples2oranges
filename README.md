@@ -142,10 +142,9 @@ gaming functionality.
     * User Form and UI
     * Lobby Component functionality
     * Connecting clients into games utilizing built in websocket
-  * ### Hype Man by Daniel Chu
+  * ### Morale Manager by Daniel Chu
     * Game Score Board
-    * 
-    *
+    * Base Game Board Design
   * ### Workflow Manager by Jessica Chen
     * User Authentication and Security
     * Backend APIs and database
