@@ -92,7 +92,7 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
           </Box>
         </StyledContainer>
 
-        <Box sx={{position: 'fixed', height: '600px', borderStyle: 'solid', right: '15%', top: '8rem', background: 'rgba(0,0,0, 0.8)'}}>
+        <Box sx={{position: 'fixed', height: '600px', maxWidth: '30%', borderStyle: 'solid', right: '10%', top: '8rem', background: 'rgba(0,0,0, 1)'}}>
           <div style={{
             overflowWrap: "break-word",
             overflowY: "scroll",
