@@ -62,14 +62,15 @@ Apples to Oranges is a multiplayer card matching game with live chat, music, and
 
 ### Prerequisites
 
-This is an instruction on how to get started fast!
+These are instructions on how to get started fast!
  
-To run the game in developer's mode, you need to set debugger to false in ApplesClient.js
+To run the game in production mode, you need to set debugger to false in ApplesClient.js
 
-You need to have premium spotify account to have access to music player.
-Also create your developer account here [HERE!]([HERE!](https://developer.spotify.com/dashboard/applications))
+You need to have a premium spotify account to access the music player.
+Also, create your Spotify developer account here [HERE!]([HERE!](https://developer.spotify.com/dashboard/applications))
 and create an app for this project to get client id & client secret. This is optional and will not affect the 
 gaming functionality.
+To support the upload of user avatar pictures, you will need to create a Cloudinary account (also optional).
 
 ### Installation
 
@@ -85,11 +86,11 @@ gaming functionality.
    ```js
    npm run install2
    ```   
-5. Make a copy of sample.env file and rename it to .env. Update with correct information.
+5. Make a copy of the sample.env file and rename it as .env. Update the env file with correct information.
    ```js
    cp ./sample.env .env
    ```      
-6. Run client, server, and boardgame-server each on its own terminal
+6. Run client, server, and boardgame-server each in its own terminal
    ```sh
     npm start
     npm run postgres-server or postgres-server-dev (development mode)
@@ -105,11 +106,8 @@ gaming functionality.
     * Custom Cards Functionality
   * ### Project Manager by Caroline Peake
     * Dynamic SPA Routing
-    * 
-    *
   * ### Architect by Andrew Schwaderer
     * Core Game Logic
-    *  
     * Deployment
   * ### Architect by Kesang Dingtsa
     * User Form and UI
