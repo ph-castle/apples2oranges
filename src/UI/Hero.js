@@ -3,11 +3,15 @@ import axios from 'axios';
 import AnimationCard from './AnimationCard';
 import { Box, Typography } from '@mui/material';
 
+const axiosInstance = axios.create({
+  baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
+});
+
 export default function Hero() {
   const [cards, setCards] = useState([]);
   useEffect(() => {
     console.log("fetching cards");
-    axios("http://localhost:45000/cards/prompt?NSFW=true")
+    axiosInstance.get("/cards/prompt?NSFW=true")
       .then((res) => {
         setCards(res.data);
       })

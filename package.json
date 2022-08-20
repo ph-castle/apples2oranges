@@ -31,6 +31,7 @@
         "react-redux": "^8.0.2",
         "react-router-dom": "^6.3.0",
         "react-scripts": "5.0.1",
+        "react-share": "^4.4.0",
         "react-spotify-web-playback": "^0.10.0",
         "spotify-web-api-node": "^5.0.2",
         "web-vitals": "^2.1.4"
@@ -43,7 +44,7 @@
         "bg-server": "nodemon -r esm server/bgserver.js",
         "server": "node server/index.js",
         "server-dev": "npx nodemon --watch server server/index.js",
-        "react-share": "npm install react-share --legacy-peer-deps",
+        "react-share": "npm install react-share --legacy-peer-deps"
     },
     "eslintConfig": {
         "extends": [

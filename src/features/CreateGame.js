@@ -3,11 +3,11 @@ import React, { useReducer, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { lobbyClient } from "./utils/lobbyClient";
 import createGameReducer, { initialCreateGameState } from "./createGameReducer";
+import axios from 'axios';
 
 import {
   StyledMenuItem,
   StyledSelect,
-  // StyledComponentContainer,
   StyledFormGroup,
   StyledFormControl,
   StyledInputLabel,
@@ -19,9 +19,11 @@ import {
   StyledCheckboxContainer,
 } from '../styles/createGameStyles';
 import { Heading, StyledButton } from '../styles/globalStyles';
-import { Box, Typography } from '@mui/material';
-// import { StyledComponentContainer } from "../styles/globalStyles";
-import axios from 'axios';
+
+const axiosInstance = axios.create({
+  baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
+});
+
 export function CreateGame() {
   const navigate = useNavigate();
 
@@ -37,21 +39,21 @@ export function CreateGame() {
     // This useEffect function will run every time the customCards state changes
     // This is because the customCards state is added to the dependency array for this useEffect function
     // Do some conditional logic here and it should be good. And make sure the state is updated onChange of the checkbox
-    axios
-      .get("http://localhost:5050/cards/prompt?NSFW=true")
+    axiosInstance
+      .get("cards/prompt?NSFW=true")
       .then((data) => dispatch({ name: "options1", value: data.data }))
-      .then(() => axios.get("http://localhost:5050/cards/answer?NSFW=true"))
+      .then(() => axiosInstance.get("/cards/answer?NSFW=true"))
       .then((result) => dispatch({ name: "options2", value: result.data }));
   }, [customCards]);
 
   const createGameHandler = async () => {
-    let { data } = await axios.get("http://localhost:45000/cards/prompt", {
+    let { data } = await axiosInstance.get("/cards/prompt", {
       params: {
         NSFW: NSFW
       }
     });
     console.log(data)
-    let result = await axios.get("http://localhost:45000/cards/answer", {
+    let result = await axiosInstance.get("/cards/answer", {
       params: {
         NSFW: NSFW
       }
