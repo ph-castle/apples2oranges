@@ -162,27 +162,29 @@ gaming functionality.
    ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- USAGE EXAMPLES -->
-### Features
+ 
+### Contribution
   * ### Project Manager by Royce Chun
     * 
     * 
     *
-  * ### Project Manager by Caroline Locke 
+  * ### Project Manager by Caroline Peake
     * 
     * 
     *
-  * ### 
+  * ### architech by Andrew Schwaderer
     * 
     * 
     *
-   * ### 
+  * ### architech by Kesang Dingtsa
     * 
     * 
     *
-   * ### 
+   * ### Hype Man by Daniel Chu
+    * 
+    * 
+    *
+   * ### Morale Booster by Jessica Chen
     * 
     * 
     *
@@ -190,8 +192,8 @@ gaming functionality.
     * 
     * 
     *
-   * ### UI / UX by Coty Janeway
-    * 
+  * ### UI / UX by Heemo Yang
+    * Highlight something you did here.
     * 
     *
 
