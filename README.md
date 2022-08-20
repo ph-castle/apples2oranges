@@ -134,11 +134,11 @@ gaming functionality.
     * 
     * 
     *
-  * ### architech by Andrew Schwaderer
+  * ### Architect by Andrew Schwaderer
     * Game Logic
     * 
     *
-  * ### architech by Kesang Dingtsa
+  * ### Architect by Kesang Dingtsa
     * 
     * 
     *
