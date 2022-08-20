@@ -28,7 +28,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Apples to Oranges is live card matching game with live chat, music, and interactive UI.
+Apples to Oranges is a multiplayer card matching game with live chat, music, and interactive UI.
 
 <!-- MORE about what problems we solved here!!!! -->
 
@@ -83,7 +83,7 @@ gaming functionality.
    ```
 4. Install react-share
    ```js
-   npm install react-share --legacy-peer-deps
+   npm run install2
    ```   
 5. Make a copy of sample.env file and rename it to .env. Update with correct information.
    ```js
