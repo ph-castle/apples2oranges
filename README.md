@@ -105,7 +105,7 @@ Use the `BLANK_README.md` to get started.
 <!-- ***************************** FIX HERE ***************************** -->
 * [![React][React.js]][React-url]
 * [![Boardgame][Boardgame.io][Boardgameio-url]
-* [![Redux]
+* [![Redux Toolkit][RTK][RTK-url]
 * [![Laravel][Laravel.com]][Laravel-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 * [![JQuery][JQuery.com]][JQuery-url]
@@ -254,4 +254,4 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com 
-
+[RTK-url]: https://redux-toolkit.js.org
