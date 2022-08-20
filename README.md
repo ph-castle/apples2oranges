@@ -146,7 +146,11 @@ gaming functionality.
    ```js
    npm install react-share --legacy-peer-deps
    ```   
-5. Run client, server, and boardgame-server each on its own terimanl
+5. Make a copy of sample.env file and rename it to .env. Update with correct information.
+   ```js
+   cp ./sample.env .env
+   ```      
+6. Run client, server, and boardgame-server each on its own terminal
    ```sh
     npm start
     npm run postgres-server or postgres-server-dev (development mode)
