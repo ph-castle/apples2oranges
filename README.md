@@ -129,7 +129,7 @@ gaming functionality.
   * ### Project Manager by Royce Chun
     * Backend APIs and database
     * Live Chat Box
-    *
+    * Custom Cards Functionality
   * ### Project Manager by Caroline Peake
     * Dynamic SPA Routing
     * 
