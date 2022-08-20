@@ -13,25 +13,18 @@ export const StyledFormControl = styled(FormControl)({
 });
 
 export const StyledInputLabel = styled(InputLabel)({
-  //   color: "orange",
   color: "black",
   backgroundColor: "none",
 });
 export const StyledOutlineInput = styled(OutlinedInput)({
   color: "black",
   backgroundColor: "#f1f3f5",
-
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   flexDirection: "column",
 });
 export const StyledFormHelperText = styled(FormHelperText)({
   color: "white",
 });
 
 export const StyledButton = styled(Button)({
-  // p: "sm",
   width: "25ch",
 
   outline: "white solid 1px",

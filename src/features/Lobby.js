@@ -2,13 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Input, Paper, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { lobbyClient } from './utils/lobbyClient';
-import { useDispatch, useSelector } from 'react-redux';
 import { Heading, StyledButton } from '../styles/globalStyles';
-// import {
-//   setMatchID,
-//   setPlayerID,
-//   setPlayerCredentials,
-// } from "../app/mainSlice";
 import { useNavigate } from 'react-router-dom';
 import {
   StyledComponentContainer,
@@ -28,18 +22,14 @@ const Item = styled(Paper)(() => ({
 }));
 
 const Lobby = () => {
-  const dispatch = useDispatch();
   let navigate = useNavigate();
 
   const [playerMatch, setPlayerMatch] = useState([]);
-  const [playerAccessKey, setPlayerAccessKey] = useState({});
-  const [gameMatchID, setGameMatchID] = useState('');
   const [sessionCode, setSessionCode] = useState('');
   const [name, setName] = useState('');
 
   useEffect(() => {
     getAllAvailableGames().then(({ matches }) => {
-      console.log(matches);
       setPlayerMatch(matches);
     });
   }, []);
@@ -61,13 +51,10 @@ const Lobby = () => {
           //data: "optional player meta data",
         })
         .then((player) => {
-          console.log('player cred in Lobby', player);
           localStorage.setItem('matchID', matchID);
           localStorage.setItem('name', name);
           localStorage.setItem('id', player.playerID);
           localStorage.setItem('credentials', player.playerCredentials);
-          // dispatch(setPlayerID(player.playerID));
-          // dispatch(setPlayerCredentials(player.playerCredentials));
         })
         .then(() => {
           navigate(`/waitingroom/${matchID}`);
@@ -77,13 +64,6 @@ const Lobby = () => {
   };
 
   return (
-    // <Box
-    //   display="flex"
-    //   flexDirection="column"
-    //   alignItems="flex-start"
-    //   minHeight="100vh"
-    //   width="100%"
-    // ></Box>
     <StyledComponentContainer>
       <Box
         sx={{
@@ -138,7 +118,6 @@ const Lobby = () => {
               placeholder="Nick Name"
               value={name}
               onChange={(e) => {
-                console.log(e.target.value);
                 setName(e.target.value);
               }}
             />

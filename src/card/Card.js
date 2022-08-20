@@ -1,7 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import styles from './Card.module.css';
-import { ListItemText } from '@mui/material';
 import {
   TwitterShareButton, TwitterIcon,
   FacebookShareButton, FacebookIcon,
@@ -17,7 +15,6 @@ export default class Card extends React.Component {
     if (this.props.player) {
       this.props.moves.playAnswer(this.props.playerId);
     } else {
-      console.log('selected player id: ', this.props.playerId);
       this.props.moves.pickWinner(this.props.playerId);
     }
   }
@@ -25,8 +22,6 @@ export default class Card extends React.Component {
     const shareTitle = 'Apples to Oranges!';
     const shareMessage = `I'm playing Apples to Oranges and found this hilarious!\n${this.props.text}`;
     const url = String(window.location);
-
-
 
     return (
       <div

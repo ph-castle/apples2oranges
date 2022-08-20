@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './Card.module.css';
 
 export default class Card extends React.Component {
@@ -16,10 +15,4 @@ export default class Card extends React.Component {
       </div>
     )
   }
-};
-
-Card.propTypes = {
-  id: PropTypes.string,
-  style: PropTypes.object,
-  children: PropTypes.node,
 };

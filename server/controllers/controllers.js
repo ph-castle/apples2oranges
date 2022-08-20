@@ -18,7 +18,6 @@ module.exports.validateUser = (req, res) => {
           tempRes.id = result.id;
           tempRes.username = result.username;
           tempRes.avatar = result.avatar;
-          console.log('tempRes: ', tempRes);
           res.status(200).send(tempRes);
         } else {
           res.status(200).send({});
@@ -191,7 +190,6 @@ module.exports.getAnswerCards = (req, res) => {
 module.exports.postAvatar = (req, res) => {
   cloudinary
     .uploadImage(req.body.img, function (error, result) {
-      console.log(result, error);
     })
     .then((results) => {
       res.status(201).send(results.url);

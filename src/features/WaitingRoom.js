@@ -7,7 +7,7 @@ import {
   ListItem,
   ListItemText,
 } from '@mui/material';
-import { useParams, useNavigate, Route, Routes } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { lobbyClient } from './utils/lobbyClient';
 
 export const WaitingRoom = () => {
@@ -22,9 +22,7 @@ export const WaitingRoom = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       lobbyClient.getMatch('Apples2Oranges', matchID).then(({ players }) => {
-        console.log(players);
         setPlayers(players);
-        // localStorage.setItem("players", players.length);
         const currentPlayers = players.filter((player) => player.name);
         setCurrPlayers(currentPlayers);
         if (currentPlayers.length === players.length) {
@@ -41,7 +39,6 @@ export const WaitingRoom = () => {
   }, [show, players.length, matchID]);
 
   const leaveRoom = () => {
-    console.log('hello');
     lobbyClient
       .leaveMatch('Apples2Oranges', matchID, {
         playerID: playerID,

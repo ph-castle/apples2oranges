@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import Timer from "./Timer";
 import PCard from "../../card/PCard.js";
 import Card from "../../card/Card.js";
 import Box from '@mui/material/Box';
 import styles from "../../card/Card.module.css";
 import {
   StyledContainer,
-  StyledGrid,
-  StyledGridLeft,
-  StyledGridRight,
   StyledTextField,
   StyledSendIcon,
   StyledTypography
@@ -19,15 +15,12 @@ import { StyledButton } from "../../styles/createGameStyles";
 export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages, matchData }) {
   const [chatInput, setChatInput] = useState('');
 
-
   const playerNames = {};
-  console.log(matchData);
 
   // creates object with player id as key
   for (let i = 0; i < matchData.length; i++) {
     playerNames[matchData[i].id] = matchData[i].name;
   }
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,7 +30,6 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
 
   const handleChange = (e) => {
     const { value } = e.target;
-    console.log(value);
     setChatInput(value);
   }
 
@@ -58,13 +50,8 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
   let answers = (
     <div className="player-choices">
       {cardArray}
-      {/* <Timer time={30} /> */}
     </div>
   );
-  // <StyledContainer>
-       {/* <StyledGrid container spacing={2}> */}
-
-        {/* <StyledGridLeft item xs={9}> */}
   return (
         <>
         <StyledContainer>
@@ -119,6 +106,3 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
 
   );
 }
-        // </StyledGridRight>
-       {/* </StyledGrid> */}
-    // </StyledContainer>

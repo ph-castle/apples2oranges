@@ -1,7 +1,6 @@
 
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Container } from "@mui/material";
 import Header from "./features/Header";
 import Dashboard from "./features/Dashboard";
 import { CreateGame } from "./features/CreateGame";
@@ -16,8 +15,6 @@ import EditProfile from "./features/login/EditProfile";
 import LoginPage from "./features/login/LoginPage";
 import CreateUserPage from "./features/login/CreateUserPage";
 import CustomCards from "./features/custom/CustomCards";
-
-// import { useSelector } from "react-redux";
 import { Apples2Oranges } from './features/gameRoom';
 import BoomBox from './features/Spotify/BoomBox';
 import { StyledContainer } from './styles/appStyles';
@@ -67,23 +64,3 @@ export default function App() {
     </StyledEngineProvider>
   );
 }
-// import React, { useState } from "react";
-// import Header from "./features/Header";
-// import MainRoutes from "./MainRoutes";
-// import Hero from "./UI/Hero";
-
-// export default function App() {
-//   const [user, setUser] = useState({
-//     id: 0,
-//     username: "",
-//     avatar: null,
-//   });
-
-//   return (
-//     <>
-//       <Header user={user} setUser={setUser} />
-//       <Hero />
-//       <MainRoutes user={user} setUser={setUser} />
-//     </>
-//   );
-// }

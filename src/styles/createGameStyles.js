@@ -26,11 +26,10 @@ export const StyledContainer = styled(Box)({
   height: '100%',
   margin: '0 auto',
   padding: '2rem',
-  // height: "100%",
 });
 
 export const StyledInnerBox = styled(Box)({
-  // padding: "2rem",
+
 });
 
 export const StyledTextField = styled(TextField)({
@@ -58,9 +57,7 @@ export const StyledMenuItem = styled(MenuItem)({
 });
 
 export const StyledFormGroup = styled(FormGroup)({
-  // height: "18rem",
-  // display: "flex",
-  // backgroundColor: "black",
+
 });
 
 export const StyledCheckboxContainer = styled(Box)({
@@ -68,7 +65,6 @@ export const StyledCheckboxContainer = styled(Box)({
   gap: '1rem',
   padding: '1rem',
   marginTop: '1rem',
-  // justifyContent: "center",
   alignItems: 'space-between',
   flexDirection: 'column',
 });
@@ -79,7 +75,6 @@ export const StyledFormControlLabel = styled(FormControlLabel)({
   outline: 'white solid 1px',
   margin: 'auto',
   zIndex: '1',
-  // color: "black",
 });
 
 export const StyledCheckbox = styled(Checkbox)({
@@ -120,9 +115,4 @@ export const StyledButton = styled(Button)({
 export const StyledOutlineInput = styled(OutlinedInput)({
   color: 'black',
   backgroundColor: '#f1f3f5',
-
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   flexDirection: "column",
 });

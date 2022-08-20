@@ -7,7 +7,6 @@ import createGameReducer, { initialCreateGameState } from "./createGameReducer";
 import {
   StyledMenuItem,
   StyledSelect,
-  // StyledComponentContainer,
   StyledFormGroup,
   StyledFormControl,
   StyledInputLabel,
@@ -19,8 +18,6 @@ import {
   StyledCheckboxContainer,
 } from '../styles/createGameStyles';
 import { Heading, StyledButton } from '../styles/globalStyles';
-import { Box, Typography } from '@mui/material';
-// import { StyledComponentContainer } from "../styles/globalStyles";
 import axios from 'axios';
 export function CreateGame() {
   const navigate = useNavigate();
@@ -50,16 +47,13 @@ export function CreateGame() {
         NSFW: NSFW
       }
     });
-    console.log(data)
     let result = await axios.get(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/cards/answer`, {
       params: {
         NSFW: NSFW
       }
     });
-    console.log(result.data)
     dispatch({ name: "options1", value: data });
     dispatch({ name: "options2", value: result.data });
-    console.log(CreateGameState)
 
     let matchTemp;
     lobbyClient
@@ -68,9 +62,7 @@ export function CreateGame() {
         console.log('error creating match in CreateGame clickHandler', err)
       )
       .then((match) => {
-        console.log('matchID from CreatGame', match);
         matchTemp = match.matchID;
-        console.log('name', name);
         lobbyClient
           .joinMatch('Apples2Oranges', match.matchID, {
             playerName: name,
@@ -82,7 +74,6 @@ export function CreateGame() {
 
             localStorage.setItem("matchID", matchTemp);
             localStorage.setItem("name", name);
-            console.log('id', player.playerID);
             localStorage.setItem("id", player.playerID);
             localStorage.setItem("credentials", player.playerCredentials);
 
@@ -91,7 +82,6 @@ export function CreateGame() {
           });
       })
       .then(() => {
-        console.log('matchTemp', matchTemp);
         navigate(`/waitingroom/${matchTemp}`);
       })
       .catch((err) => {
