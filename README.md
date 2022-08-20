@@ -205,14 +205,14 @@ gaming functionality.
 
 <table>
   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th>Heemo</th>
-    <th></th>
-    <th></th>
+    <th>Royce C.</th>
+    <th>Caroline P.</th>
+    <th>Andrew S.</th>
+    <th>Kesang D.</th>
+    <th>Daniel C.</th>
+    <th>Jessica C.</th>
+    <th>Coty J.</th>
+    <th>Heemo Y.</th>
   </tr>
   <tr>
     <td>
