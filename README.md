@@ -90,6 +90,8 @@ Apples to Oranges is live card matching game with live chat, music, and interact
 ### Prerequisites
 
 This is an instruction on how to get started fast!
+ 
+To run the game in developer's mode, you need to set debugger to false in ApplesClient.js
 
 You need to have premium spotify account to have access to music player.
 Also create your developer account here [HERE!]([HERE!](https://developer.spotify.com/dashboard/applications))
