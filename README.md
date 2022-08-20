@@ -149,8 +149,13 @@ and create an app for this project to get client id & client secret
 4. Install react-share
    ```js
    npm install react-share --legacy-peer-deps
+   ```   
+5. Run client, server, and boardgame-server each on its own terimanl
+   ```sh
+    npm start
+    npm run postgres-server or postgres-server-dev (development mode)
+    npm run bg-server
    ```
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
