@@ -38,18 +38,15 @@
   <h3 align="center">Apples to Oranges</h3>
 
   <p align="center">
-    Apples to Oranges is "straightforward card pattern matching game that is a fun family game and includes a touch of strategy. It is quick and easy for multi-generational family play."     <a href="https://www.thegamecrafter.com/games/apples-oranges">Learn more about the game!!!</a>
-    
-
+    Apples to Oranges is "straightforward card pattern matching game that is a fun family game and includes a touch of strategy. It is quick and easy for multi-generational family play."    
     <br />
-    <a href="https://github.com/ph-castle/apples2oranges"><strong>Explore the docs »</strong></a>
+    <a href="https://www.thegamecrafter.com/games/apples-oranges">Learn more about the game!!!</a>
     <br />
     <br />
+   ·
     <a href="https://github.com/ph-castle/apples2oranges">View Demo(DEMO LINK HERE!!!!)</a>
-    ·
+   ·
     <a href="https://github.com/ph-castle/apples2oranges/issues">Report Bug</a>
-    
-    <a href="https://github.com/ph-castle/apples2oranges/issues">Request Feature</a>
   </p>
 </div>
 
