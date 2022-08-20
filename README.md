@@ -163,7 +163,7 @@ gaming functionality.
     * 
     *
   * ### architech by Andrew Schwaderer
-    * 
+    * Game Logic
     * 
     *
   * ### architech by Kesang Dingtsa
@@ -171,11 +171,11 @@ gaming functionality.
     * 
     *
    * ### Hype Man by Daniel Chu
-    * 
+    * Score board
     * 
     *
    * ### Morale Booster by Jessica Chen
-    * 
+    * Login
     * 
     *
   * ### UI / UX by Coty Janeway
@@ -183,9 +183,8 @@ gaming functionality.
     * 
     *
   * ### UI / UX by Heemo Yang
-    * Highlight something you did here.
-    * 
-    *
+    * Interactive Background with animation
+    * Spotify Music Player
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
