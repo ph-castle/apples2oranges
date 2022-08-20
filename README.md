@@ -127,35 +127,35 @@ gaming functionality.
  
 ### Contribution
   * ### Project Manager by Royce Chun
-    * 
-    * 
+    * Backend APIs and database
+    * Live Chat Box
     *
   * ### Project Manager by Caroline Peake
-    * 
+    * Dynamic SPA Routing
     * 
     *
   * ### Architect by Andrew Schwaderer
-    * Game Logic
-    * 
-    *
+    * Core Game Logic
+    *  
+    * Deployment
   * ### Architect by Kesang Dingtsa
-    * 
+    * User Form and UI
     * 
     *
   * ### Hype Man by Daniel Chu
-    * Score board
+    * Game Score Board
     * 
     *
   * ### Morale Booster by Jessica Chen
-    * Login
-    * 
+    * User Authentication and Security
+    * Backend APIs and database
     *
   * ### UI / UX by Coty Janeway
-    * 
+    * Interactive Game Design
     * 
     *
   * ### UI / UX by Heemo Yang
-    * Interactive Background with animation
+    * Interactive Background for UX
     * Spotify Music Player
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
