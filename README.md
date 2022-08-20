@@ -146,7 +146,7 @@ gaming functionality.
     * Game Score Board
     * 
     *
-  * ### Morale Booster by Jessica Chen
+  * ### Workflow Manager by Jessica Chen
     * User Authentication and Security
     * Backend APIs and database
     * Live Chat Box
