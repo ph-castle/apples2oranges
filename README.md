@@ -129,12 +129,8 @@ This is an instruction on how to get started fast!
 
 You need to have premium spotify account to have access to music player.
 Also create your developer account here @[https://developer.spotify.com/dashboard/applications](HERE!)
-and create an app for this project to get client id & client secret
-
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+and create an app for this project to get client id & client secret. This is optional and will not affect the 
+gaming functionality.
 
 ### Installation
 
