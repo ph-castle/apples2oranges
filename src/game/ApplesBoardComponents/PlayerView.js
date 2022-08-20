@@ -114,13 +114,13 @@ export default function PlayerView({
                   text={card.body}
                 />
 
-            )) : {cardArray})
+            )) : submittedAnswers)
           :
           null}
         </Box>
         </StyledContainer>
 
-        <Box sx={{position: 'fixed', height: '600px', borderStyle: 'solid', right: '10%', top: '8rem'}}>
+        <Box sx={{position: 'fixed', height: '600px', borderStyle: 'solid', right: '10%', top: '8rem', background: 'rgba(0,0,0, 0.8)'}}>
           <div style={{
             overflowWrap: "break-word",
             overflowY: "scroll",
