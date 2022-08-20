@@ -104,20 +104,18 @@ Use the `BLANK_README.md` to get started.
 ### Built With
 <!-- ***************************** FIX HERE ***************************** -->
 <div align="center">
-<!--  <img width="55" src="https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=flat"/> -->
- <img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/eslint.svg"/>
- <img width="55" src="https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white&style=flat"/>
- <img width="55" src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white&style=flat"/>
- <img width="55" src="https://boardgame.io/logo-optimized.svg"/>
- <img width="55" src="https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white&style=flat"/>
- <img width="55" src="https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white&style=flat"/></div>
 
-* <img width="55" src="https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=flat"/>
-* <img width="55" src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white&style=flat"/>
-* Boardgame.io
+* ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) 
+* ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black) 
+* ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) 
+* ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) 
+* ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) 
+* ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) 	
+* ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) 
+* ![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white) 
+* ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+* ![Boardgame.io](https://img.shields.io/badge/Boardgame.io-Bg.io-lightgrey)
 * Material UI
-* Express
-* Node
 * PostgreSQL
 * Docker
 * Spotify
