@@ -87,7 +87,7 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
             )}
           </span>
           </StyledTypography>
-          <Box sx={{width: '60%', margin: '0 auto'}}>
+          <Box sx={{width: '40%', margin: '0 auto', marginLeft: '200px'}}>
             {answers}
           </Box>
         </StyledContainer>
