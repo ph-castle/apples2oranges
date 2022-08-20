@@ -9,20 +9,25 @@ import SendIcon from '@mui/icons-material/Send';
 
 export const StyledContainer = styled(Box)({
   display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+  // justifyContent: "center",
+  alignItems: "flexStart",
   flexDirection: "column",
   gap: "1rem",
   width: "100%",
   maxWidth: "1200px",
-  height: "100%",
+  height: "90vh",
+  // overflowY: 'scroll',
+  minWidth: '400px',
   margin: "0 auto",
   padding: "2rem",
+  background: 'rgba(0,0,0,0.6)'
 });
 
 export const StyledGrid = styled(Grid)({
   // spacing: 2,
-  height: "90%"
+  // position: 'fixed',
+  overflow: 'scroll',
+  height: '80vh',
 });
 
 export const StyledGridLeft = styled(Grid)({
@@ -64,4 +69,5 @@ export const StyledTypography = styled(Typography)({
     lg: "2rem",
   },
   color: "white",
+  width: '80%',
 });

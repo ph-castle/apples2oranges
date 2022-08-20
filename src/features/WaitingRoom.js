@@ -60,8 +60,9 @@ export const WaitingRoom = () => {
       <Box
         sx={{
           display: 'flex',
+          minWidth: 300,
           maxWidth: 500,
-          height: '80vh',
+          maxHeight: '70vh',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
@@ -87,11 +88,12 @@ export const WaitingRoom = () => {
             p: '0.5rem',
             mt: '1rem',
             fontSize: { sm: '1rem', md: '1.2rem' },
+            width: '100%'
           }}
         >
           {matchID}
         </Box>
-        <Box>
+        <Box sx={{width: '100%'}}>
           <List
             sx={{
               width: '100%',
@@ -124,27 +126,11 @@ export const WaitingRoom = () => {
             mt: '0.5rem',
           }}
         >
-          {playerID == 0 ? (
-            <Button
-              variant="contained"
-              // disabled={}
-              sx={{
-                p: '0.5rem',
-                width: '50%',
-                ml: '1rem',
-                fontSize: { sm: '1rem', md: '1.wrem' },
-                outline: '1px solid white',
-              }}
-              onClick={() => setShow(true)}
-            >
-              Start Game
-            </Button>
-          ) : null}
           <Button
             variant="contained"
             sx={{
               p: '0.5rem',
-              width: '50%',
+              width: '100%',
               ml: '1rem',
               fontSize: { sm: '1rem', md: '1.wrem' },
               outline: '1px solid white',

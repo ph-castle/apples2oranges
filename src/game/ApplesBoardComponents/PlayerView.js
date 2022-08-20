@@ -12,6 +12,7 @@ import {
   StyledSendIcon,
   StyledTypography
 } from "../../styles/playerViewStyles";
+import { Box, Grid } from '@mui/material';
 
 export default function PlayerView({
   G,
@@ -47,26 +48,7 @@ export default function PlayerView({
     console.log(value);
     setChatInput(value);
   }
-  let answers;
-  if (G.activePrompt.body) {
-    answers = (
-      <div>
-        {G.players[playerID].hand.map((card, i) => {
-          return (
-            <Card
-              G={G}
-              ctx={ctx}
-              player={true}
-              playerId={i}
-              moves={moves}
-              key={card.id}
-              text={card.body}
-            />
-          );
-        })}
-      </div>
-    );
-  }
+
   let cardArray = [];
   for (let playerId in G.submittedAnswers) {
     cardArray.push(
@@ -86,32 +68,59 @@ export default function PlayerView({
   );
 
   return (
+    <>
     <StyledContainer>
-      <StyledGrid container spacing={2}>
-        <StyledGridLeft item xs={9}>
-          <StyledTypography>
-          <h3>YOU ARE A PLAYER!</h3>
-          <span className="active-prompt">
-            {G.activePrompt.body ? (
-              <PCard children={G.activePrompt.body} className={styles.answer_card} />
-            ) : (
-              <>
-                <p>Waiting on Judge to start the turn</p>
-                <ScoreBoard G={G}  ctx={ctx} playerID={playerID} matchData={matchData}/>
-              </>
-            )}
-          </span>
-          <div className="answercards">
-            {G.submittedAnswers[playerID] === undefined ?
-              <>
-                {answers}
-              </>
-            :
-            null}
-          </div>
-          </StyledTypography>
-        </StyledGridLeft>
-        <StyledGridRight item xs={3}>
+        <StyledTypography>
+        <h3>YOU ARE A PLAYER!</h3>
+        <span className="active-prompt">
+        {G.activePrompt.body ? (
+          <PCard children={G.activePrompt.body} className={styles.answer_card} />
+        ) : (
+          <>
+            <p>Waiting on Judge to start the turn</p>
+            <ScoreBoard G={G}  ctx={ctx} playerID={playerID} matchData={matchData}/>
+          </>
+        )}
+        </span>
+        </StyledTypography>
+        <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: {
+            xs: '1fr',
+            sm: 'repeat(2, 1fr)',
+            lg: 'repeat(2, 1fr)',
+          },
+          gap: '1em',
+          mt: '1em',
+          justifyItems: 'center',
+          overflowY: 'scroll',
+          width: '75%',
+        }}
+        // style={{ marginTop: '1em' }}
+      >
+          {G.submittedAnswers[playerID] === undefined ?
+            (G.activePrompt.body ?
+            G.players[playerID].hand.map((card, i) =>
+              (
+
+                <Card
+                  G={G}
+                  ctx={ctx}
+                  player={true}
+                  playerId={i}
+                  moves={moves}
+                  key={card.id}
+                  text={card.body}
+                />
+
+            )) : {cardArray})
+          :
+          null}
+        </Box>
+        </StyledContainer>
+
+        <Box sx={{position: 'fixed', height: '600px', borderStyle: 'solid', right: '10%', top: '8rem'}}>
           <div style={{
             overflowWrap: "break-word",
             overflowY: "scroll",
@@ -132,9 +141,7 @@ export default function PlayerView({
             />
             <StyledSendIcon type="submit"/>
           </form>
-        </StyledGridRight>
-      </StyledGrid>
-    </StyledContainer>
-
+      </Box>
+    </>
   );
 }
