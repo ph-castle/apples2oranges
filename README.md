@@ -92,7 +92,7 @@ Apples to Oranges is live card matching game with live chat, music, and interact
 This is an instruction on how to get started fast!
 
 You need to have premium spotify account to have access to music player.
-Also create your developer account here @[https://developer.spotify.com/dashboard/applications](HERE!)
+Also create your developer account here [HERE!]([HERE!](https://developer.spotify.com/dashboard/applications))
 and create an app for this project to get client id & client secret. This is optional and will not affect the 
 gaming functionality.
 
