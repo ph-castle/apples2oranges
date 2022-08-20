@@ -104,7 +104,7 @@ Use the `BLANK_README.md` to get started.
 ### Built With
 <!-- ***************************** FIX HERE ***************************** -->
 <div align="center">
- <img width="55" src="https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=flat"/>
+<!--  <img width="55" src="https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=flat"/> -->
  <img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/eslint.svg"/>
  <img width="55" src="https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white&style=flat"/>
  <img width="55" src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white&style=flat"/>
@@ -112,7 +112,8 @@ Use the `BLANK_README.md` to get started.
  <img width="55" src="https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white&style=flat"/>
  <img width="55" src="https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white&style=flat"/></div>
 
-* React
+* <img width="55" src="https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=flat"/>
+* <img width="55" src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white&style=flat"/>
 * Boardgame.io
 * Material UI
 * Express
