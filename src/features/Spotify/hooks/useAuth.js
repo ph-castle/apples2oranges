@@ -13,7 +13,7 @@ export default function useAuth(code) {
     if (spotifyToken || !code) return;
 
     axios
-      .post('http://localhost:5050/spotify/login', {
+      .post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/spotify/login`, {
         code,
       })
       .then((res) => {
@@ -35,7 +35,7 @@ export default function useAuth(code) {
     console.log('refreshToken' + refreshToken);
     const interval = setInterval(() => {
       axios
-        .post('http://localhost:5050/spotify/refresh', {
+        .post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/spotify/refresh`, {
           refreshToken,
         })
         .then((res) => {
