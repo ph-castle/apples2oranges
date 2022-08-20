@@ -106,9 +106,10 @@ Use the `BLANK_README.md` to get started.
 * [![React][React.js]][React-url]
 * [![Boardgame][Boardgame.io][Boardgameio-url]
 * [![Redux Toolkit][RTK][RTK-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* Material UI
+* Express
+* Node
+* PostgreSQL
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -224,7 +225,8 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[Boardgameio-url]: https://boardgame.io
+[Boardgameio]: https://boardgame.io/logo-optimized.svg
+[Boardgameio-url]: https://boardgame.io/
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
 [contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
@@ -254,4 +256,5 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com 
+[RTK]: https://d33wuabrfki0l68.cloudfront.net/97f337956b87f4589dbf68591f22f5f3dacf2736/55f2a/img/redux_white.svg
 [RTK-url]: https://redux-toolkit.js.org
