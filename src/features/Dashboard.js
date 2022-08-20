@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Box, ButtonGroup } from "@mui/material";
+import { ButtonGroup } from "@mui/material";
 import { Link } from "react-router-dom";
 import { toggleAnimation } from "../app/mainSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   StyledComponentContainer,
   StyledDashButtons,
@@ -10,7 +10,6 @@ import {
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
-  const animationtoggle = useSelector((state) => state.main.animationtoggle);
   return (
     <StyledComponentContainer>
       <ButtonGroup
@@ -39,7 +38,6 @@ export const Dashboard = () => {
         <Link to={"/creategame"} style={{ textDecoration: "none" }}>
           <StyledDashButtons
             sx={{
-              // backgroundColor: "orange",
               fontSize: {
                 xs: "0.5rem",
                 sm: "1rem",

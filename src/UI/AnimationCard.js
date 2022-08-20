@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
 import {
   Card,
-  CardContent,
-  Hidden,
   Typography,
-  keyframes,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { cardProps } from "./cardProps";
 import { toggleAnimation } from "../app/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { rotateOut, rollIn, rollOut } from "./KeyFrames";
+import { rotateOut } from "./KeyFrames";
 
 export default function AnimationCard({ card, i }) {
   const dispatch = useDispatch();
@@ -42,33 +39,27 @@ export default function AnimationCard({ card, i }) {
     textShadow: "0 0 10px white",
     "@keyframes rotate-in-diag-1": {
       "0%": {
-        // "-webkit-transform": "rotate3d(1, 1, 0, -360deg)",
         transform: "rotate3d(1, 1, 0, -360deg)",
         opacity: "0",
       },
       "50%": {
-        // "-webkit-transform": "rotate3d(1, 1, 0, 0deg)",
         transform: "rotate3d(1, 1, 0, 0deg)",
         opacity: "0.5",
       },
       "100%": {
-        // "-webkit-transform": "rotate3d(1, 1, 0, 0deg)",
         transform: "rotate3d(1, 1, 1, -45deg) scale(1.5)",
         opacity: "1",
       },
     },
   }));
-  // "translateY(0)"
   useEffect(() => {
     let timeout;
     if (animatestate === true) {
-      // dispatch(toggleAnimation(false));
       timeout = setTimeout(() => {
         dispatch(toggleAnimation());
       }, 50000);
     }
     if (animatestate === false) {
-      // dispatch(toggleAnimation(true));
       timeout = setTimeout(() => {
         dispatch(toggleAnimation(true));
       }, 2000);
@@ -83,7 +74,6 @@ export default function AnimationCard({ card, i }) {
       animatestate={animatestate.toString()}
       onClick={() => dispatch(toggleAnimation())}
     >
-      {/* <CardContent> */}
       <Typography
         variant="body2"
         sx={{
@@ -102,8 +92,6 @@ export default function AnimationCard({ card, i }) {
       >
         {card.body}
       </Typography>
-      {/* </CardContent> */}
     </AnimatedCard>
   );
 }
-//         `,

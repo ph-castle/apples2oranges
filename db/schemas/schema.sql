@@ -28,9 +28,9 @@ CREATE TABLE answers (
   NSFW BOOLEAN NOT NULL
 );
 
-\COPY prompts(body, NSFW) FROM '/Users/roycechun/Desktop/apples2oranges/db/data/prompts.csv' CSV HEADER;
+\COPY prompts(body, NSFW) FROM '/Download/apples2oranges/db/data/prompts.csv' CSV HEADER;
 
-\COPY answers(body, NSFW) FROM '/Users/roycechun/Desktop/apples2oranges/db/data/answers.csv' CSV HEADER;
+\COPY answers(body, NSFW) FROM '/Download/apples2oranges/db/data/answers.csv' CSV HEADER;
 
 CREATE INDEX user_id_index ON users USING HASH (id);
 

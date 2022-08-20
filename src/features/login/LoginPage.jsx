@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './Login.css';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import FormHelperText from '@mui/material/FormHelperText';
-// import StyledInputLabel from "@mui/material/StyledInputLabel";
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-// import StyledOutlineInput from "@mui/material/StyledOutlineInput";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Heading, StyledComponentContainer } from '../../styles/globalStyles';
@@ -31,7 +25,6 @@ export default function LoginPage({ setUser }) {
   const [attemptingLogin, setAttemptingLogin] = useState(false);
   let navigate = useNavigate();
 
-  console.log(process.env.REACT_APP_SERVER_PORT);
   const axiosInstance = axios.create({
     baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`,
   });
@@ -131,7 +124,6 @@ export default function LoginPage({ setUser }) {
       </form>
       <StyledButton
         variant="contained"
-        // sx={{ p: "sm", width: "26ch", mt: "2rem" }}
         onClick={(e) => navigate('/user/create')}
       >
         Create account

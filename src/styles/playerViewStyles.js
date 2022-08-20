@@ -9,14 +9,12 @@ import SendIcon from '@mui/icons-material/Send';
 
 export const StyledContainer = styled(Box)({
   display: "flex",
-  // justifyContent: "center",
   alignItems: "flexStart",
   flexDirection: "column",
   gap: "1rem",
   width: "100%",
   maxWidth: "1200px",
   height: "90vh",
-  // overflowY: 'scroll',
   minWidth: '400px',
   margin: "0 auto",
   padding: "2rem",
@@ -24,8 +22,6 @@ export const StyledContainer = styled(Box)({
 });
 
 export const StyledGrid = styled(Grid)({
-  // spacing: 2,
-  // position: 'fixed',
   overflow: 'scroll',
   height: '80vh',
 });

@@ -9,7 +9,6 @@ function MusicPlayer() {
   const album = useSelector((state) => state.spotify.album);
   const play = useSelector((state) => state.spotify.play);
 
-  console.log(token);
   useEffect(() => {
     dispatch(setPlay(true));
   }, [album, dispatch]);

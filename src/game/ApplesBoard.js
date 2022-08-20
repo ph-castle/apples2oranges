@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import JudgeView from "./ApplesBoardComponents/JudgeView";
 import PlayerView from "./ApplesBoardComponents/PlayerView";
-// import PlayPhase from './ApplesBoardComponents/PlayPhase';
-// import DealPhase from './ApplesBoardComponents/DealPhase';
-// import ScoreBoard from './ApplesBoardComponents/ScoreBoard';
-// import Timer from './ApplesBoardComponents/Timer';
 import { useNavigate } from "react-router-dom";
 import { lobbyClient } from '../features/utils/lobbyClient';
 
@@ -31,7 +27,6 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
             lobbyClient
               .playAgain("Apples2Oranges", localStorage.getItem("matchID"), nextGameParams)
               .then((results) => {
-                console.log("next match id: ", results.nextMatchID);
                 localStorage.setItem("matchID", results.nextMatchID);
                 navigate(`/waitingroom/${results.nextMatchID}`);
               })
@@ -50,6 +45,7 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
         </div>
       ) : null;
   }
+
   //board elements will change based on phase, stage, and if it is players turn to be judge
 
   return (

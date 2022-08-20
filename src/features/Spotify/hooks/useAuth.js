@@ -17,7 +17,6 @@ export default function useAuth(code) {
         code,
       })
       .then((res) => {
-        console.log('login', res.data);
         setAccessToken(res.data.accessToken);
         dispatch(setToken(res.data.accessToken));
         setRefreshToken(res.data.refreshToken);
@@ -26,27 +25,23 @@ export default function useAuth(code) {
       })
       .catch((err) => {
         console.log('login error' + err);
-        // window.location = "/";
       });
   }, [code, dispatch, spotifyToken]);
 
   useEffect(() => {
     if (!refreshToken || !expiresIn) return;
-    console.log('refreshToken' + refreshToken);
     const interval = setInterval(() => {
       axios
         .post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/spotify/refresh`, {
           refreshToken,
         })
         .then((res) => {
-          console.log('refresh', res.data);
           setAccessToken(res.data.accessToken);
           dispatch(setToken(res.data.accessToken));
           setExpiresIn(res.data.expiresIn);
         })
         .catch((err) => {
           console.log(err);
-          //   window.location = "/";
         });
     }, (expiresIn - 60) * 1000);
 

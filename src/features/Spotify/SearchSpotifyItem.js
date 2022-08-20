@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Typography, Button, Box } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import {
   selectAlbum,
   setPlay,
@@ -21,7 +20,6 @@ function SearchSpotifyItem({ album }) {
   const dispatch = useDispatch();
 
   const handleMusicPlay = () => {
-    console.log('handleMusicPlay');
     dispatch(selectAlbum(album));
     dispatch(setPlay(true));
     dispatch(setIsMusicPlayerOpen(true));

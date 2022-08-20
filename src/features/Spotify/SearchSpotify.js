@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
-// import { SpotifyApi } from "./SpotifyApi";
 import SearchSpotifyItem from './SearchSpotifyItem';
 import { TextField, Button, Box } from '@mui/material';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { setToken } from '../../app/spotifySlice';
 import { Controller, useForm } from 'react-hook-form';
 import { SpotifyApi } from './SpotifyApi';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MusicPlayer from './MusicPlayer';
 
 const styles = (theme) => ({
@@ -141,29 +137,6 @@ function SearchSpotify({ accessToken, isCollapsed }) {
       </form>
       <MusicPlayer />
     </Box>
-    // );
-    //   return (
-    //     <>
-    //       <div className="container">
-    //         <div
-    //           className="main-wrapper"
-    //           style={{ display: "flex", gap: "0.5rem" }}
-    //         >
-    //           <form>
-    //             <label>
-    //               Search:
-    //               <input
-    //                 type="text"
-    //                 onChange={(e) => setSearch(e.target.value)}
-    //                 value={search}
-    //               />
-    //             </label>
-    //           </form>
-    //           <button onClick={() => setSearch("")}>Clear</button>
-    //         </div>
-    //
-    //       </div>
-    //     </>
   );
 }
 

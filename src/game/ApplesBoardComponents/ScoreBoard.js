@@ -2,7 +2,6 @@ import React from "react";
 import {
   StyledContainer,
   StyledList,
-  // StyledListItemText,
   StyledTypography,
   StyledTypographyH1
 } from "../../styles/scoreBoard.js";
@@ -13,8 +12,7 @@ export default function ScoreBoard({
   playerID,
   matchData,
 }) {
-  console.log('G', G)
-  let standings = {};  // {name:  , winningCards: }
+  let standings = {};
   let players = G.players;
 
   players.forEach((player, index) => {
@@ -28,8 +26,7 @@ export default function ScoreBoard({
   });
 
   var currStandings = Object.values(standings).sort((a, b) => (b.winningCards.length - a.winningCards.length));
-  console.log(currStandings);
-  console.log(players);
+
   return (
     <StyledContainer>
       <StyledTypographyH1>

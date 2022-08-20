@@ -29,9 +29,3 @@ function SpotifyLogin({ isCollapsed }) {
 }
 
 export default SpotifyLogin;
-// textDecoration: 'none',
-//           display: 'flex',
-//           flexDirection: 'column',
-//           alignItems: 'center',
-//           justifyContent: 'center',
-//           height: '100vh',

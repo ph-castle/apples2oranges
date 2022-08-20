@@ -7,8 +7,6 @@ export const StyledComponentContainer = styled(Box)({
   alignItems: 'center',
   flexDirection: 'column',
   gap: '1rem',
-  // width: '100%',
-  // maxWidth: '1200px',
   height: '100%',
   margin: 'auto',
   padding: '2rem',
@@ -41,7 +39,6 @@ export const StyledButton = styled(Button)({
 });
 export const StyledDashButtons = styled(Button)({
   padding: '1rem',
-  //   width: "25",
   outline: 'white 2px solid',
 
   '&:hover': {
@@ -49,8 +46,6 @@ export const StyledDashButtons = styled(Button)({
   },
   backgroundColor: 'black',
 });
-
-// export
 
 export function Heading(props) {
   return (
@@ -93,8 +88,6 @@ export function HeaderButtons(props) {
         },
       }}
       onClick={() => {
-        // navigate('/user/create');
-        // dispatch(toggleAnimation());
         props.onClick();
       }}
     >
