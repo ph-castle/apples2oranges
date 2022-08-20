@@ -170,11 +170,11 @@ gaming functionality.
     * 
     * 
     *
-   * ### Hype Man by Daniel Chu
+  * ### Hype Man by Daniel Chu
     * Score board
     * 
     *
-   * ### Morale Booster by Jessica Chen
+  * ### Morale Booster by Jessica Chen
     * Login
     * 
     *
