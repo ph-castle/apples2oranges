@@ -1,12 +1,6 @@
 //Decks should come in as GET requests from the API.
-//import { AnswerDeck, PromptDeck} from "./Deck";
 import { INVALID_MOVE } from 'boardgame.io/core'
-//TODOS
 
-//END GAME
-//INTEGRATE BACKEND DECKS
-//IMPORT INVALID_MOVES for move validation
-// TURN ORDER / RANDOM JUDGE SELECTION *Low Priority *
 export const Apples = {
     name: 'Apples2Oranges',
 
@@ -15,10 +9,6 @@ export const Apples = {
 
         players: Array(ctx.numPlayers).fill({hand: [], winningCards: []}),
 
-        // secret: {
-        //     promptDeck: PromptDeck,
-        //     answerDeck: AnswerDeck,
-        // },
         //Maxiumum Cards per hand.
         handMax: 7,
 
@@ -56,17 +46,6 @@ export const Apples = {
     endIf: endCondition
 }
 
-// function startDealPhase(G, ctx) {
-//     G.secret.answerDeck = ctx.random.Shuffle(G.secret.answerDeck);
-//     G.players.forEach((player) => {
-//         while(player.hand.length < G.handMax) {
-//             player.hand.push(G.secret.answerDeck.pop())
-//         }
-//     })
-//   }
-
-
-
 function checkHands(G, ctx) {
    let total = 0;
 
@@ -76,14 +55,6 @@ function checkHands(G, ctx) {
 
     return (total === (G.handMax * ctx.numPlayers))
   }
-
-
-
-// function drawPrompt(G, ctx) {
-//     G.secret.promptDeck =  ctx.random.Shuffle(G.secret.promptDeck);
-//     G.activePrompt =  G.secret.promptDeck.pop();
-//     ctx.events.setActivePlayers({others: 'playAnswer', minMoves: 1, maxMoves: 1 });
-//   }
 
 function playAnswer(G, ctx, answerIndex) {
     if(G.players[ctx.playerID].hand[answerIndex] === undefined) {
@@ -107,8 +78,6 @@ function pickWinner(G, ctx, winnerIndex) {
     }
 
     let mutantPrompt = G.activePrompt.body.slice(), mutantAnswer = G.submittedAnswers[winnerIndex].body , blank = `________`
-    console.log('winnerIndex inside pickWinner: ', winnerIndex);
-    //let combo  = mutantPrompt.replace(blank, mutantAnswer);
     G.players[winnerIndex].winningCards.push({mutantPrompt, mutantAnswer})//mutantAnswer//G.activePrompt.text + G.submittedAnswers[0].text
     ctx.events.endPhase();
 }
@@ -127,7 +96,6 @@ function cleanUp (G, ctx) {
 }
 
 function drawRemotePrompt(G, ctx) {
-    console.log(G.data.remotePromptDeck);
     G.data.remotePromptDeck =  ctx.random.Shuffle(G.data.remotePromptDeck);
     G.activePrompt =  G.data.remotePromptDeck.pop();
     ctx.events.setActivePlayers({others: 'playAnswer', minMoves: 1, maxMoves: 1 });
@@ -156,8 +124,6 @@ function drawRemotePrompt(G, ctx) {
                 }
             }
             return {winner: winnerId};
-
         }
-
     }
 }

@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { StyledButton } from "../../styles/createGameStyles";
 import { StyledTypography } from "../../styles/createGameStyles";
-import { styled } from '@mui/material/styles';
-
 
 export default function EditCards({ user }) {
   const [prompts, setPrompts] = useState('');
@@ -25,13 +22,9 @@ export default function EditCards({ user }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      // change to concurrent calls later in production
       const currentPrompts = await axiosInstance.get(`/cards/specific/prompt/${user.id}?NSFW=false`);
       const currentAnswers = await axiosInstance.get(`/cards/specific/answer/${user.id}?NSFW=false`);
 
-
-      console.log(currentPrompts);
-      console.log(currentAnswers);
       if (currentPrompts.data.rows.length > 0) {
         setPrompts(currentPrompts.data.rows.map((data) => data.body).join('\n'));
       }
@@ -42,14 +35,12 @@ export default function EditCards({ user }) {
     }
 
     fetchData();
-  }, []);
+  }, [user]);
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('in submit', prompts.split('\n'), answers.split('\n'), user.id);
-    // add try and catch error checking later in production
     if (prompts.length > 0) {
       await axiosInstance.put(`/cards/prompt/${user.id}`, {
         cards: prompts.split('\n').filter(item => item),
@@ -65,8 +56,6 @@ export default function EditCards({ user }) {
     }
     navigate('/home');
   }
-
-  console.log(NSFW, prompts, answers);
 
   return (
     <Box

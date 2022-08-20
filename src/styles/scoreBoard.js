@@ -1,7 +1,6 @@
 import {
   Box,
   List,
-  ListItem,
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -12,7 +11,6 @@ export const StyledContainer = styled(Box)({
   justifyContent: 'space-evenly',
   gap: '1rem',
   width: '80%',
-  // marginLeft: '15%',
   background: 'rgba(255, 165, 120, 0.6)',
   margin: '5% auto',
   padding: '1em',
@@ -24,12 +22,6 @@ export const StyledList = styled(List) ({
 
   marginLeft: '1.5em',
 })
-
-// export const StyledListItemText = styled(ListItem) ({
-//   fontSize: '24px',
-//   fontFamily: 'Roboto',
-//   padding: '1em',
-// })
 
 export const StyledTypography = styled(Typography)({
   padding: "1rem",

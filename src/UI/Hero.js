@@ -6,8 +6,7 @@ import { Box, Typography } from '@mui/material';
 export default function Hero() {
   const [cards, setCards] = useState([]);
   useEffect(() => {
-    console.log("fetching cards");
-    axios("http://localhost:45000/cards/prompt?NSFW=true")
+    axios(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/cards/prompt?NSFW=true`)
       .then((res) => {
         setCards(res.data);
       })
@@ -16,7 +15,6 @@ export default function Hero() {
 
   return (
     <Box>
-      {/* <Button color="primary">Hello</Button> */}
       <Typography
         variant="p"
         component="h1"
@@ -42,7 +40,6 @@ export default function Hero() {
       >
         <div
           style={{
-            // outline: "solid 2px white",
             boxShadow: '0 1px 32px white',
             padding: '0.1em',
             textAlign: 'center',

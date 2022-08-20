@@ -5,14 +5,11 @@ import PCard from "../../card/PCard.js";
 import styles from "../../card/Card.module.css";
 import {
   StyledContainer,
-  StyledGrid,
-  StyledGridLeft,
-  StyledGridRight,
   StyledTextField,
   StyledSendIcon,
   StyledTypography
 } from "../../styles/playerViewStyles";
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 
 export default function PlayerView({
   G,
@@ -26,26 +23,20 @@ export default function PlayerView({
   const [chatInput, setChatInput] = useState('');
 
   const playerNames = {};
-  console.log(matchData);
 
   // creates object with player id as key
   for (let i = 0; i < matchData.length; i++) {
     playerNames[matchData[i].id] = matchData[i].name;
   }
 
-  console.log(playerNames);
-
   const handleSubmit = (e) => {
-    console.log('here is submit');
     e.preventDefault();
     sendChatMessage({ message: chatInput, time: Date.now()});
-    console.log('here is after send chat');
     setChatInput('');
   }
 
   const handleChange = (e) => {
     const { value } = e.target;
-    console.log(value);
     setChatInput(value);
   }
 
@@ -97,7 +88,6 @@ export default function PlayerView({
           overflowY: 'scroll',
           width: '75%',
         }}
-        // style={{ marginTop: '1em' }}
       >
           {G.submittedAnswers[playerID] === undefined ?
             (G.activePrompt.body ?
@@ -114,13 +104,13 @@ export default function PlayerView({
                   text={card.body}
                 />
 
-            )) : {cardArray})
+            )) : submittedAnswers)
           :
           null}
         </Box>
         </StyledContainer>
 
-        <Box sx={{position: 'fixed', height: '600px', borderStyle: 'solid', right: '10%', top: '8rem'}}>
+        <Box sx={{position: 'fixed', height: '600px', borderStyle: 'solid', right: '10%', top: '8rem', background: 'rgba(0,0,0, 0.8)'}}>
           <div style={{
             overflowWrap: "break-word",
             overflowY: "scroll",

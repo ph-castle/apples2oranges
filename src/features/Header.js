@@ -18,12 +18,10 @@ import {
 import { HeaderButtons } from '../styles/globalStyles';
 
 import { toggleAnimation } from '../app/mainSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const pages = ['Join A Game', 'Create A Game'];
-// const pages = ['Join A Game', 'Create A Game', 'Current Game'];
 
-//TODO: Add additional pages to the user account here
 const settings = ['Profile', 'Custom Cards', 'Logout'];
 
 const Header = ({ user, setUser }) => {
@@ -63,7 +61,6 @@ const Header = ({ user, setUser }) => {
               >
                 <GiShinyApple fontSize="1.5rem" />
                 <GiOrangeSlice fontSize="1.5rem" />
-                {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
               </Box>
 
               <Typography
@@ -76,7 +73,6 @@ const Header = ({ user, setUser }) => {
                   display: { xs: 'none', md: 'flex' },
                   fontFamily: 'Roboto',
                   fontWeight: 700,
-                  // letterSpacing: ".1rem",
                   color: 'inherit',
                   textDecoration: 'none',
                 }}
@@ -116,6 +112,7 @@ const Header = ({ user, setUser }) => {
             >
               {pages.map((page, i) => (
                 <Link
+                  key={page}
                   to={i === 0 ? '/joingame' : '/creategame'}
                   style={{ textDecoration: 'none', color: 'white' }}
                 >
@@ -134,7 +131,6 @@ const Header = ({ user, setUser }) => {
               ))}
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
           <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
             <GiShinyApple fontSize="1.5rem" />
             <GiOrangeSlice fontSize="1.5rem" />
@@ -151,7 +147,6 @@ const Header = ({ user, setUser }) => {
               flexGrow: 1,
               fontFamily: 'Roboto',
               fontWeight: 700,
-              // letterSpacing: ".3rem",
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -166,6 +161,7 @@ const Header = ({ user, setUser }) => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, i) => (
               <Link
+                key={page}
                 to={i === 0 ? '/joingame' : '/creategame'}
                 style={{ textDecoration: 'none', color: 'white' }}
               >
@@ -188,10 +184,9 @@ const Header = ({ user, setUser }) => {
                   dispatch(toggleAnimation());
                 }}
               >
-                Join
+                Create Account
               </HeaderButtons>
               <HeaderButtons
-                // sx={{ backgroundColor: 'white', border: '1px solid white' }}
                 color="rgba(0, 0, 0, 0.8)"
                 bgc="white"
                 onClick={() => {
@@ -234,8 +229,6 @@ const Header = ({ user, setUser }) => {
                           navigate('/user/profile');
                           handleCloseUserMenu();
                           break;
-                        // TODO: navigate to custom cards page
-
                         case "Custom Cards":
                           navigate("/user/customcards");
                           handleCloseUserMenu();

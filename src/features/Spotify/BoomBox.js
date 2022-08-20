@@ -3,7 +3,6 @@ import Draggable from 'react-draggable';
 import { Box } from '@mui/material';
 import SpotifyLogin from './SpotifyLogin';
 import SearchSpotify from './SearchSpotify';
-import SpotifyIcon from './spotify-brands.svg';
 
 import useAuth from './hooks/useAuth';
 

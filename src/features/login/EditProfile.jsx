@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
@@ -123,7 +122,6 @@ export default function EditProfile({ user, setUser }) {
                         resolve(photo.data);
                       })
                       .catch((err) => {
-                        console.log();
                         reject(err);
                       });
                   } else {
@@ -174,25 +172,16 @@ export default function EditProfile({ user, setUser }) {
   };
 
   return (
-    // <Box
-    //   sx={{
-    //       width: '50%',
-    //       margin: 'auto',
-    //       mt: 4,
-    //       display: 'block'
-    //   }}>
     <Box
       display="flex"
       justifyContent="center"
       alignItems="center"
       flexDirection="column"
-      // height="100vh"
       gap="12px"
       width="50%"
       margin="auto"
       mt={4}
       paddingBottom="2rem"
-      // display='block'
     >
       <Heading variant="h4" zIndex={1}>
         Edit Profile
