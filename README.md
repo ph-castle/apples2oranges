@@ -176,11 +176,11 @@ gaming functionality.
   <tr>
     <td>
 <!-- GITHUB LINKS      -->
-      <a href=""> <!-- Royce    -->
+      <a href="https://github.com/rochun"> <!-- Royce    -->
         <img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
       </a>
     <td>
-      <a href=""> <!-- Caroline    -->
+      <a href="https://github.com/carolinepeake"> <!-- Caroline    -->
         <img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
       </a>
     </td>
@@ -196,17 +196,17 @@ gaming functionality.
     </td>
     </td>
     <td>
-      <a href=""> <!-- Daniel    -->
+      <a href="https://github.com/crypto-bender"> <!-- Daniel    -->
         <img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
       </a>
     </td>
     <td>
-      <a href="">  <!-- Jessica    -->
+      <a href="https://github.com/codingavatar">  <!-- Jessica    -->
         <img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
       </a>
     </td>
   <td>
-      <a href="">  <!-- Coty    -->
+      <a href="https://github.com/CotyJ">  <!-- Coty    -->
         <img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/>
       </a>
     </td>
@@ -224,7 +224,7 @@ gaming functionality.
       </a>
     </td>
     <td>
-      <a href="">  <!-- Caroline    -->
+      <a href="https://www.linkedin.com/in/caroline-k-peake/">  <!-- Caroline    -->
         <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
       </a>
     </td>
@@ -239,17 +239,17 @@ gaming functionality.
       </a>
     </td>
    <td>
-      <a href=""> <!-- Daniel    -->
+      <a href="https://www.linkedin.com/in/chuda/"> <!-- Daniel    -->
         <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
       </a>
     </td>
    <td>
-      <a href=""> <!-- Jessica    -->
+      <a href="https://www.linkedin.com/in/jessica-chen-md/"> <!-- Jessica    -->
         <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
       </a>
     </td>
    <td>
-      <a href=""> <!-- Coty    -->
+      <a href="https://www.linkedin.com/in/CotyJ/"> <!-- Coty    -->
         <img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/>
       </a>
     </td>
