@@ -33,5 +33,6 @@ COPY prompts(body, NSFW) FROM '/Download/apples2oranges/db/data/prompts.csv' CSV
 COPY answers(body, NSFW) FROM '/Download/apples2oranges/db/data/answers.csv' CSV HEADER;
 
 CREATE INDEX user_id_index ON users USING HASH (id);
+ALTER TABLE users ALTER COLUMN password TYPE varchar(200);
 
 
