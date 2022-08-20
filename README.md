@@ -140,8 +140,8 @@ gaming functionality.
     * Deployment
   * ### Architect by Kesang Dingtsa
     * User Form and UI
-    * 
-    *
+    * Lobby Component functionality
+    * Connecting clients into games utilizing built in websocket
   * ### Hype Man by Daniel Chu
     * Game Score Board
     * 
