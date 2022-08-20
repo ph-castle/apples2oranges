@@ -34,5 +34,6 @@ COPY prompts(body, NSFW) FROM '/Users/carolinepeake/HackReactor/blueOcean/prompt
 COPY answers(body, NSFW) FROM '/Users/carolinepeake/HackReactor/blueOcean/answers.csv' CSV HEADER;
 
 CREATE INDEX user_id_index ON users USING HASH (id);
+ALTER TABLE users ALTER COLUMN password TYPE varchar(200);
 
 
