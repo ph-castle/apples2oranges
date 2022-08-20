@@ -41,8 +41,9 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "bg-server": "nodemon -r esm server/bgserver.js",
-        "postgres-server": "node server/index.js",
-        "postgres-server-dev": "npx nodemon --watch server server/index.js"
+        "server": "node server/index.js",
+        "server-dev": "npx nodemon --watch server server/index.js",
+        "react-share": "npm install react-share --legacy-peer-deps",
     },
     "eslintConfig": {
         "extends": [
