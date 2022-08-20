@@ -103,8 +103,10 @@ Use the `BLANK_README.md` to get started.
 
 ### Built With
 <!-- ***************************** FIX HERE ***************************** -->
+<div align="center"><img width="55" src="https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=flat"/><img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/eslint.svg"/><img width="55" src="https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white&style=flat"/><img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/javascript.svg"/><img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/karma.svg"/><img width="55" src="https://raw.githubusercontent.com/gilbarbara/logos/master/logos/protactor.svg"/><img width="55" src="https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white&style=flat"/></div>
+
 * [![React][React.js]][React-url]
-* [![Boardgame][Boardgame.io][Boardgameio-url]
+* Boardgame.io
 * Material UI
 * Express
 * Node
