@@ -105,7 +105,6 @@ Use the `BLANK_README.md` to get started.
 <!-- ***************************** FIX HERE ***************************** -->
 * [![React][React.js]][React-url]
 * [![Boardgame][Boardgame.io][Boardgameio-url]
-* [![Redux Toolkit][RTK][RTK-url]
 * Material UI
 * Express
 * Node
