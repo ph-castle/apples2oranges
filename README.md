@@ -6,7 +6,7 @@
 <div align="center">
   <a href="https://github.com/ph-castle/apples2oranges">
     <!-- ******************************************************************** -->
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://i.imgur.com/1p7rmlS.gif" alt="Logo">
   </a>
 
   <h3 align="center">Apples to Oranges</h3>
@@ -26,7 +26,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Gameplay](https://i.imgur.com/zKfnLUM.gif)
 
 Apples to Oranges is a multiplayer card matching game with live chat, music, and interactive UI.
 
@@ -98,7 +98,18 @@ To support the upload of user avatar pictures, you will need to create a Cloudin
    ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
- 
+### Screenshots
+
+<details> 
+  <summary> Login and Custom Cards </summary>
+  <img src="https://i.imgur.com/04x1fgr.gif" alt="Logo">
+</details>
+
+<details>
+  <summary> Chat </summary>
+  <img src="https://i.imgur.com/zJwSFa3.gif" alt="Logo">
+</details>
+
 ### Contribution
   * ### Project Manager by Royce Chun
     * Backend APIs and database
