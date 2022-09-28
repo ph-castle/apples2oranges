@@ -19,6 +19,7 @@ import {
 } from '../styles/createGameStyles';
 import { Heading, StyledButton } from '../styles/globalStyles';
 import axios from 'axios';
+
 export function CreateGame() {
   const navigate = useNavigate();
 
@@ -29,25 +30,29 @@ export function CreateGame() {
   );
   const { name, options, customCards } = CreateGameState;
 
+  const axiosInstance = axios.create({
+    baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
+  });
+
   useEffect(() => {
     // Note for custom cards selection
     // This useEffect function will run every time the customCards state changes
     // This is because the customCards state is added to the dependency array for this useEffect function
     // Do some conditional logic here and it should be good. And make sure the state is updated onChange of the checkbox
-    axios
-      .get(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/cards/prompt?NSFW=true`)
+    axiosInstance
+      .get('/cards/prompt?NSFW=true')
       .then((data) => dispatch({ name: "options1", value: data.data }))
-      .then(() => axios.get(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/cards/answer?NSFW=true`))
+      .then(() => axios.get('/cards/answer?NSFW=true'))
       .then((result) => dispatch({ name: "options2", value: result.data }));
   }, [customCards]);
 
   const createGameHandler = async () => {
-    let { data } = await axios.get(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/cards/prompt`, {
+    let { data } = await axiosInstance.get('/cards/prompt', {
       params: {
         NSFW: NSFW
       }
     });
-    let result = await axios.get(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/cards/answer`, {
+    let result = await axiosInstance.get('/cards/answer', {
       params: {
         NSFW: NSFW
       }
@@ -63,14 +68,13 @@ export function CreateGame() {
       )
       .then((match) => {
         matchTemp = match.matchID;
-        lobbyClient
-          .joinMatch('Apples2Oranges', match.matchID, {
+        return lobbyClient.joinMatch('Apples2Oranges', match, {
             playerName: name,
-          })
-          .catch((err) =>
-            console.log('error joining match in CreateGame clickHandler', err)
-          )
-          .then((player) => {
+        })
+          // .catch((err) =>
+          //   console.log('error joining match in CreateGame clickHandler', err)
+          // )
+      .then((player) => {
 
             localStorage.setItem("matchID", matchTemp);
             localStorage.setItem("name", name);

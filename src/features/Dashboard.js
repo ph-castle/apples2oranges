@@ -1,16 +1,18 @@
 import React from "react";
 import { ButtonGroup } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { toggleAnimation } from "../app/mainSlice";
 import { useDispatch } from "react-redux";
 import {
   StyledComponentContainer,
   StyledDashButtons,
 } from "../styles/globalStyles";
+import { StyledContainer } from '../styles/appStyles';
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
   return (
+    // <StyledContainer>
     <StyledComponentContainer>
       <ButtonGroup
         variant="contained"
@@ -35,7 +37,7 @@ export const Dashboard = () => {
             Join a Game
           </StyledDashButtons>
         </Link>
-        <Link to={"/creategame"} style={{ textDecoration: "none" }}>
+        <Link to={"creategame"} style={{ textDecoration: "none" }}>
           <StyledDashButtons
             sx={{
               fontSize: {
@@ -54,6 +56,8 @@ export const Dashboard = () => {
         </Link>
       </ButtonGroup>
     </StyledComponentContainer>
+    // <Outlet />
+    // </StyledContainer>
   );
 };
 
