@@ -1,9 +1,7 @@
-
 import React, { useReducer, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { lobbyClient } from "./utils/lobbyClient";
 import createGameReducer, { initialCreateGameState } from "./createGameReducer";
-
 import {
   StyledMenuItem,
   StyledSelect,
@@ -20,6 +18,7 @@ import {
 import { Heading, StyledButton } from '../styles/globalStyles';
 import axios from 'axios';
 
+
 export function CreateGame() {
   const navigate = useNavigate();
 
@@ -31,7 +30,8 @@ export function CreateGame() {
   const { name, options, customCards } = CreateGameState;
 
   const axiosInstance = axios.create({
-    baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
+    //baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
+    baseURL: 'http://localhost:5050'
   });
 
   useEffect(() => {
@@ -42,9 +42,10 @@ export function CreateGame() {
     axiosInstance
       .get('/cards/prompt?NSFW=true')
       .then((data) => dispatch({ name: "options1", value: data.data }))
-      .then(() => axios.get('/cards/answer?NSFW=true'))
-      .then((result) => dispatch({ name: "options2", value: result.data }));
-  }, [customCards]);
+      .then(() => axiosInstance.get('/cards/answer?NSFW=true'))
+      .then((result) => dispatch({ name: "options2", value: result.data }))
+      .catch(err => console.log('error getting custom cards', err));
+  }, [customCards, axiosInstance]);
 
   const createGameHandler = async () => {
     let { data } = await axiosInstance.get('/cards/prompt', {
@@ -68,7 +69,7 @@ export function CreateGame() {
       )
       .then((match) => {
         matchTemp = match.matchID;
-        return lobbyClient.joinMatch('Apples2Oranges', match, {
+        return lobbyClient.joinMatch('Apples2Oranges', matchTemp, {
             playerName: name,
         })
           // .catch((err) =>

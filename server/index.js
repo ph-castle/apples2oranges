@@ -32,7 +32,7 @@ app.use("/", router);
 app.use("/spotify", spotifyRouter);
 
 app.listen(port, () => {
-  console.log(`\nListening on port ${port}\n`);
+  console.log(`Listening on port ${port}`);
 });
 
 module.exports = app;
