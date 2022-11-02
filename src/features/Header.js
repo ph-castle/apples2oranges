@@ -50,7 +50,7 @@ const Header = ({ user, setUser }) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link to={'/home'} style={{ textDecoration: 'none', color: 'white' }}>
+          <Link to={'/'} style={{ textDecoration: 'none', color: 'white' }}>
             <Box display="flex" justifyContent="center" alignItems="center">
               <Box
                 sx={{
@@ -67,7 +67,7 @@ const Header = ({ user, setUser }) => {
                 variant="h6"
                 noWrap
                 component="a"
-                href="/home"
+                href="/"
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },
@@ -140,7 +140,7 @@ const Header = ({ user, setUser }) => {
             variant="h7"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -152,7 +152,7 @@ const Header = ({ user, setUser }) => {
             }}
           >
             <Link
-              to={'/home'}
+              to={'/'}
               style={{ textDecoration: 'none', color: 'white' }}
             >
               Apples 2 Oranges
@@ -239,10 +239,11 @@ const Header = ({ user, setUser }) => {
                             username: '',
                             avatar: null,
                           });
-                          navigate('/home');
+                          navigate('/');
                           handleCloseUserMenu();
                           break;
                         default:
+                          navigate("*");
                           console.log('invalid page');
                       }
                     }}

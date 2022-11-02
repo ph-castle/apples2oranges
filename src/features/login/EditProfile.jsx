@@ -6,11 +6,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
+//import InputLabel from '@mui/material/InputLabel';
+//import OutlinedInput from '@mui/material/OutlinedInput';
 import Avatar from '@mui/material/Avatar';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import { StyledButton } from '../../styles/createUserPageStyles';
+import { StyledButton, StyledOutlineInput, StyledInputLabel } from '../../styles/createUserPageStyles';
 import { Heading } from '../../styles/globalStyles';
 export default function EditProfile({ user, setUser }) {
   const [username, setUsername] = useState(user.username);
@@ -211,8 +211,8 @@ export default function EditProfile({ user, setUser }) {
         </FormControl>
         <br />
         <FormControl sx={{ width: '25ch', mt: '1rem' }}>
-          <InputLabel size="small">Username</InputLabel>
-          <OutlinedInput
+          <StyledInputLabel size="small">Username</StyledInputLabel>
+          <StyledOutlineInput
             type="text"
             value={username}
             required
@@ -229,10 +229,10 @@ export default function EditProfile({ user, setUser }) {
         </FormControl>
         <br />
         <FormControl sx={{ width: '25ch' }}>
-          <InputLabel required size="small">
+          <StyledInputLabel required size="small">
             Password
-          </InputLabel>
-          <OutlinedInput
+          </StyledInputLabel>
+          <StyledOutlineInput
             type="password"
             value={oldPassword}
             required
@@ -249,8 +249,8 @@ export default function EditProfile({ user, setUser }) {
         </FormControl>
         <br />
         <FormControl sx={{ width: '25ch' }}>
-          <InputLabel size="small">New Password</InputLabel>
-          <OutlinedInput
+          <StyledInputLabel size="small">New Password</StyledInputLabel>
+          <StyledOutlineInput
             type="password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
@@ -262,8 +262,8 @@ export default function EditProfile({ user, setUser }) {
         </FormControl>
         <br />
         <FormControl sx={{ width: '25ch' }}>
-          <InputLabel size="small">Confirm New Password</InputLabel>
-          <OutlinedInput
+          <StyledInputLabel size="small">Confirm New Password</StyledInputLabel>
+          <StyledOutlineInput
             type="password"
             value={newPassword2}
             onChange={(e) => setNewPassword2(e.target.value)}
