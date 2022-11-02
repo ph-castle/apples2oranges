@@ -6,9 +6,10 @@ import Dashboard from "./features/Dashboard";
 import { CreateGame } from "./features/CreateGame";
 import Lobby from "./features/Lobby";
 import { WaitingRoom } from "./features/WaitingRoom";
-import { StyledEngineProvider } from "@mui/material/styles";
-import { theme } from "./styles/theme";
-import { ThemeProvider } from "@mui/material/styles";
+import { NoMatch } from "./features/NoMatch";
+// import { StyledEngineProvider } from "@mui/material/styles";
+// import { theme } from "./styles/theme";
+// import { ThemeProvider } from "@mui/material/styles";
 import Hero from "./UI/Hero";
 import ProfilePage from "./features/login/ProfilePage";
 import EditProfile from "./features/login/EditProfile";
@@ -30,8 +31,9 @@ export default function App() {
   });
 
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
+    <>
+    {/* // <StyledEngineProvider injectFirst> */}
+    {/* //   <ThemeProvider theme={theme}> */}
         <Header user={user} setUser={setUser} />
         <Hero />
         {/* <StyledContainer> */}
@@ -61,11 +63,13 @@ export default function App() {
             </Route>
            {/* <Routes> */}
           <Route path="/game/apples/:matchID" element={<Apples2Oranges />} />
+          <Route path="*" element={<NoMatch />} />
           {/* </Route> */}
         </Routes>
 
         {/* <BoomBox code={code} /> */}
-      </ThemeProvider>
-    </StyledEngineProvider>
+    {/* //   </ThemeProvider> */}
+    {/* // </StyledEngineProvider> */}
+    </>
   );
 }
