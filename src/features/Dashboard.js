@@ -1,18 +1,16 @@
 import React from "react";
 import { ButtonGroup } from "@mui/material";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toggleAnimation } from "../app/mainSlice";
 import { useDispatch } from "react-redux";
 import {
   StyledComponentContainer,
   StyledDashButtons,
 } from "../styles/globalStyles";
-import { StyledContainer } from '../styles/appStyles';
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
   return (
-    // <StyledContainer>
     <StyledComponentContainer>
       <ButtonGroup
         variant="contained"
@@ -56,8 +54,6 @@ export const Dashboard = () => {
         </Link>
       </ButtonGroup>
     </StyledComponentContainer>
-    // <Outlet />
-    // </StyledContainer>
   );
 };
 

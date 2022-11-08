@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import { StyledButton } from '../../styles/createUserPageStyles';
-import { Heading } from '../../styles/globalStyles';
+import { Heading, StyledButton } from '../../styles/globalStyles';
 export default function ProfilePage({ user }) {
   let navigate = useNavigate();
 
@@ -58,7 +57,7 @@ export default function ProfilePage({ user }) {
               display: 'block',
               margin: 'auto',
             }}
-            onClick={() => navigate('/home')}
+            onClick={() => navigate('/')}
           >
             Back to Home
           </StyledButton>

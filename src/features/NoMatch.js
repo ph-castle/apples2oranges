@@ -1,18 +1,16 @@
 import React from "react";
 import { ButtonGroup } from "@mui/material";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toggleAnimation } from "../app/mainSlice";
 import { useDispatch } from "react-redux";
 import {
   StyledComponentContainer,
   StyledDashButtons,
 } from "../styles/globalStyles";
-import { StyledContainer } from '../styles/appStyles';
 
 export const NoMatch = () => {
   const dispatch = useDispatch();
   return (
-    // <StyledContainer>
     <StyledComponentContainer>
       <h2>Page Not Found</h2>
       <ButtonGroup
@@ -40,9 +38,5 @@ export const NoMatch = () => {
         </Link>
       </ButtonGroup>
     </StyledComponentContainer>
-    // <Outlet />
-    // </StyledContainer>
   );
 };
-
-//export default NoMatch;

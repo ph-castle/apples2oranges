@@ -14,83 +14,17 @@ export const WaitingRoom = () => {
   const navigate = useNavigate();
   const { matchID } = useParams();
   const [players, setPlayers] = useState([]);
-  //const [currPlayers, setCurrPlayers] = useState([]);
   const [show, setShow] = useState(false);
   const playerID = localStorage.getItem('id');
   const playerCredentials = localStorage.getItem('credentials');
 
-  // useEffect(() => {
-  //   // might want this outside of useEffect too
-  //   if (show) {
-  //     clearInterval(interval);
-  //   }
-  //   // return () => {
-  //   //   clearInterval(interval);
-  //   // };
-  // }, [show, interval]);  // no dot length?
-  // }, [show, players.length, matchID]);  // no dot length?
-
-  // const getJoinedPlayers = async () => {
-  //   try {
-  //     let { players } = await lobbyClient.getMatch('Apples2Oranges', matchID);
-  //     console.log('players: ', players);
-  //     return players;
-  //   } catch (err) {
-  //     console.log('error getting players', err);
-  //   }
-  // };
-
-  // await setPlayers(() => players);
-  // console.log('players: ', players);
-  // let joinedPlayers = players.map(player => player.name);
-  // if (joinedPlayers.length === players.length) {
-  //   await setShow(() => true);
-  // }
-  // const interval = setInterval(() => {
-  //   getPlayers();
-  // }, 500);
-
-  // const getPlayers = () => {
-  //   lobbyClient.getMatch('Apples2Oranges', matchID)
-  //   .then(({ players }) => {
-  //     console.log('players: ', players);
-  //     setPlayers(players);
-  //     const currentPlayers = players.filter((player) => player.name);
-  //     setCurrPlayers(() => currentPlayers);
-  //     if (currentPlayers.length === players.length) {
-  //       setShow(() => true); //everyone has joined, show them the board
-  //     }
-  //   })
-  //   .catch(err => console.log('error getting players: ', err));
-  // };
-  // }, 500);
-  // if (show) {
-  //   clearInterval(interval);
-  // }
-
-  // const interval = setInterval(() => {
-  //   lobbyClient.getMatch('Apples2Oranges', matchID)
-  //   .then(({ players }) => {
-  //     setPlayers(players);
-  //     const currentPlayers = players.filter((player) => player.name);
-  //     setCurrPlayers(() => currentPlayers);
-  //     if (currentPlayers.length === players.length) {
-  //       setShow(() => true); //everyone has joined, show them the board
-  //     }
-  //   });
-  // }, 500);
-  // if (show) {
-  //   clearInterval(interval);
-  // }
   useEffect(() => {
-    // might want this outside of useEffect too
     const intervalId = setInterval(() => {
       lobbyClient.getMatch('Apples2Oranges', matchID)
       .then(({ players }) => {
         console.log('players: ', players);
         setPlayers(players);
         const currentPlayers = players.filter((player) => player.name);
-        //setCurrPlayers(() => currentPlayers);
         if (currentPlayers.length === players.length) {
           setShow(() => true); //everyone has joined, show them the board
         }
@@ -103,7 +37,7 @@ export const WaitingRoom = () => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [show, matchID]);  // no dot length?
+  }, [show, matchID]);
 
   const leaveRoom = () => {
     lobbyClient
@@ -114,7 +48,10 @@ export const WaitingRoom = () => {
       .then(() => {
         navigate(`/joingame`);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        navigate('/');
+      });
   };
 
   if (show && playerID) {
@@ -148,11 +85,11 @@ export const WaitingRoom = () => {
         <Box
           sx={{
             textAlign: 'center',
-            background: 'blue',
+            background: 'orange',
             p: '0.5rem',
             mt: '1rem',
             fontSize: { sm: '1rem', md: '1.2rem' },
-            width: '100%'
+            width: '100%',
           }}
         >
           {matchID}

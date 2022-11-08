@@ -15,7 +15,6 @@ export default function Hero() {
 
   return (
     <Box
-    // sx={{ zIndex: -2 }}
     >
       <Typography
         variant="p"

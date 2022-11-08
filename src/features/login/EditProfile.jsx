@@ -6,13 +6,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
-//import InputLabel from '@mui/material/InputLabel';
-//import OutlinedInput from '@mui/material/OutlinedInput';
 import Avatar from '@mui/material/Avatar';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import { StyledButton, StyledOutlineInput, StyledInputLabel } from '../../styles/createUserPageStyles';
-import { Heading } from '../../styles/globalStyles';
+import { StyledOutlineInput, StyledInputLabel } from '../../styles/createUserPageStyles';
+import { Heading, StyledButton } from '../../styles/globalStyles';
 export default function EditProfile({ user, setUser }) {
+  // can use useReducer or redux slice
   const [username, setUsername] = useState(user.username);
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');

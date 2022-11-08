@@ -29,7 +29,6 @@ export const StyledContainer = styled(Box)({
 });
 
 export const StyledInnerBox = styled(Box)({
-
 });
 
 export const StyledTextField = styled(TextField)({

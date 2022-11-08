@@ -6,14 +6,11 @@ import FormGroup from '@mui/material/FormGroup';
 import FormHelperText from '@mui/material/FormHelperText';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Heading, StyledComponentContainer } from '../../styles/globalStyles';
-import {
-  StyledOutlineInput,
-  StyledButton,
-  StyledInputLabel,
-} from '../../styles/createUserPageStyles';
+import { Heading, StyledComponentContainer, StyledButton } from '../../styles/globalStyles';
+import { StyledOutlineInput, StyledInputLabel } from '../../styles/createUserPageStyles';
 
 export default function LoginPage({ setUser }) {
   const [username, setUsername] = useState('');
@@ -52,7 +49,8 @@ export default function LoginPage({ setUser }) {
           // updates state of user
           setUser(results.data);
           // switch page to home
-          navigate('/home');
+          // or switch back one page
+          navigate('/');
           setAttemptingLogin(false);
         }
       })
@@ -68,6 +66,11 @@ export default function LoginPage({ setUser }) {
   return (
     <StyledComponentContainer>
       <Heading>Login</Heading>
+      <Button
+        onClick={(e) => navigate(-1)}
+        variant="contained"
+        sx={{ position: 'absolute', top: '5%', right: '5%', minWidth: '10px', height: '1.0em', width: '1.0em', fontSize: { xs: '1.5rem', md: '2.5rem', lg: '3rem', xl: '4rem' }, padding: '0.1em', borderRadius: '4px', color: 'white', '&:hover': { boxShadow: '0 0 20px orange', scale: '1.25', transition: 'scale 5ms ease' } }}
+      >&times;</Button>
       <form autoComplete="off" onSubmit={(e) => handleLogin(e)}>
         <FormGroup>
           <FormControl sx={{ width: '25ch' }}>

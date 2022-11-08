@@ -1,5 +1,4 @@
 import {
-  Button,
   FormControl,
   FormHelperText,
   InputLabel,
@@ -24,12 +23,4 @@ export const StyledFormHelperText = styled(FormHelperText)({
   color: "white",
 });
 
-export const StyledButton = styled(Button)({
-  width: "25ch",
 
-  outline: "white solid 1px",
-  boxShadow: "0 0 10px orange",
-  "&:hover": {
-    boxShadow: "0 0 20px orange",
-  },
-});

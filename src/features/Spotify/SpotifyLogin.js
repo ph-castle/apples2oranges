@@ -2,12 +2,11 @@ import React from 'react';
 import { Link, Box } from '@mui/material';
 
 function SpotifyLogin({ isCollapsed }) {
-  const AUTH_URL =
-    'https://accounts.spotify.com/authorize?client_id=925ae1cbc41f4b249e72dfe28b1146ca&response_type=code&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state%20playlist-modify-public%20playlist-modify-private%20user-top-read';
+  const authURL = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_AUTH_URL}`;
 
   return (
     <Box>
-      <Link className="btn-spotify" href={AUTH_URL} sx={{}}>
+      <Link className="btn-spotify" href={authURL} sx={{}}>
         <Box
           component="img"
           sx={{

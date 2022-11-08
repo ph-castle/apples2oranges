@@ -46,9 +46,7 @@ const Lobby = () => {
     } else {
       lobbyClient
         .joinMatch('Apples2Oranges', matchID, {
-          // playerID: "0",
           playerName: name,
-          //data: "optional player meta data",
         })
         .then((player) => {
           localStorage.setItem('matchID', matchID);
@@ -65,6 +63,11 @@ const Lobby = () => {
 
   return (
     <StyledComponentContainer>
+      <Button
+        onClick={(e) => navigate(-1)}
+        variant="contained"
+        sx={{ position: 'absolute', zIndex: '2', top: '5%', right: '5%', minWidth: '10px', height: '1.0em', width: '1.0em', fontSize: { xs: '1.5rem', md: '2.5rem', lg: '3rem', xl: '4rem' }, padding: '0.1em', borderRadius: '4px', color: 'white', '&:hover': { boxShadow: '0 0 20px orange', scale: '1.25', transition: 'scale 5ms ease' } }}
+      >&times;</Button>
       <Box
         sx={{
           zIndex: 1,
@@ -125,7 +128,6 @@ const Lobby = () => {
           <StyledButton
             variant="contained"
             onClick={() => joinMatchHandler(sessionCode)}
-            // onClick={() => joinMatchHandler(sessionCode)}
           >
             Join
           </StyledButton>

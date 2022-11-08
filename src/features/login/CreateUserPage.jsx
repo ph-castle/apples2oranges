@@ -4,12 +4,11 @@ import axios from "axios";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import {
   StyledFormControl,
-  StyledButton,
   StyledInputLabel,
   StyledOutlineInput,
   StyledFormHelperText,
 } from "../../styles/createUserPageStyles";
-import { Heading, StyledComponentContainer } from "../../styles/globalStyles";
+import { Heading, StyledComponentContainer, StyledButton } from "../../styles/globalStyles";
 
 export default function CreateUserPage({ setUser }) {
   const [username, setUsername] = useState("");
@@ -40,15 +39,19 @@ export default function CreateUserPage({ setUser }) {
     e.preventDefault();
     // check if username exists first
     axiosInstance.get(`/user/${username}`).then((results) => {
-      if (results.data.id !== undefined) return setUsernameTaken(true);
+      if (results.data.id !== undefined) {
+        return setUsernameTaken(true);
+      }
       // username not taken, check if passwords match
       setUsernameTaken(false);
-      if (password !== password2) return setPasswordMismatch(true);
+      if (password !== password2) {
+        return setPasswordMismatch(true);
+      }
       // password matches, can create a new account
       setPasswordMismatch(false);
       setSubmitting(true);
-      // uploads photo to cloudinary
 
+      // uploads photo to cloudinary
       if (photo) {
         postCloudinary(photo || "")
           .then((photoURL) =>
@@ -92,25 +95,15 @@ export default function CreateUserPage({ setUser }) {
 
   const handleUserData = ({ data }) => {
     // sets current user data
-    setUser(data);
-    // reset fields
+    setUser(() => data);
+    // reset fields => don't think is necessary
     handleResetInputs();
     setUserCreated(true);
     setTimeout(() => {
       setUserCreated(false);
       // route back to main page
-      navigate("/home");
+      navigate("/");
     }, 1000);
-  };
-
-  const handleCancel = () => {
-    // reset fields
-    handleResetInputs();
-    setUsernameTaken(false);
-    setPasswordMismatch(false);
-    setUserCreated(false);
-    // route back to main page
-    navigate("/home");
   };
 
   return (
@@ -188,7 +181,7 @@ export default function CreateUserPage({ setUser }) {
           Create account
         </StyledButton>
       </form>
-      <StyledButton variant="contained" onClick={(e) => handleCancel()}>
+      <StyledButton variant="contained" onClick={e => navigate(-1)}>
         Cancel
       </StyledButton>
     </StyledComponentContainer>

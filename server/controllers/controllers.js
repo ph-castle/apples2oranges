@@ -188,10 +188,13 @@ module.exports.getAnswerCards = (req, res) => {
 
 // uploads image to cloudinary and returns url
 module.exports.postAvatar = (req, res) => {
+  console.log('request from postAvatar: ', req);
+  console.log('request body from postAvatar: ', req.body);
   cloudinary
     .uploadImage(req.body.img, function (error, result) {
     })
     .then((results) => {
+      console.log('results from postAvatar: ', results);
       res.status(201).send(results.url);
     })
     .catch((err) => {

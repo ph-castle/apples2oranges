@@ -16,6 +16,7 @@ import {
   StyledCheckboxContainer,
 } from '../styles/createGameStyles';
 import { Heading, StyledButton } from '../styles/globalStyles';
+import Button from '@mui/material/Button';
 import axios from 'axios';
 
 
@@ -30,8 +31,7 @@ export function CreateGame() {
   const { name, options, customCards } = CreateGameState;
 
   const axiosInstance = axios.create({
-    //baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
-    baseURL: 'http://localhost:5050'
+    baseURL: `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
   });
 
   useEffect(() => {
@@ -65,24 +65,17 @@ export function CreateGame() {
     console.log('options: ', options);
     lobbyClient
       .createMatch('Apples2Oranges', options)
-      // .catch((err) =>
-      //   console.log('error creating match in CreateGame clickHandler', err)
-      // )
       .then((match) => {
         matchTemp = match.matchID;
         return lobbyClient.joinMatch('Apples2Oranges', matchTemp, {
             playerName: name,
         })
-          // .catch((err) =>
-          //   console.log('error joining match in CreateGame clickHandler', err)
-          // )
       .then((player) => {
 
             localStorage.setItem("matchID", matchTemp);
             localStorage.setItem("name", name);
             localStorage.setItem("id", player.playerID);
             localStorage.setItem("credentials", player.playerCredentials);
-
             // dispatch(setPlayerID(player.playerID));
             // dispatch(setPlayerCredentials(player.playerCredentials));
           });
@@ -98,6 +91,11 @@ export function CreateGame() {
   return (
     <StyledContainer>
       <Heading>Create a Game</Heading>
+      <Button
+        onClick={(e) => navigate(-1)}
+        variant="contained"
+        sx={{ position: 'absolute', top: '5%', right: '5%', minWidth: '10px', height: '1.0em', width: '1.0em', fontSize: { xs: '1.5rem', md: '2.5rem', lg: '3rem', xl: '4rem' }, padding: '0.1em', borderRadius: '4px', color: 'white', '&:hover': { boxShadow: '0 0 20px orange', scale: '1.25', transition: 'scale 5ms ease' } }}
+      >&times;</Button>
       <StyledInnerBox>
         <StyledFormGroup>
           <StyledFormControl required>
@@ -122,7 +120,6 @@ export function CreateGame() {
               value={options.numPlayers}
               required
             >
-              <StyledMenuItem value="">None</StyledMenuItem>
               <StyledMenuItem value={3}>Three</StyledMenuItem>
               <StyledMenuItem value={4}>Four</StyledMenuItem>
               <StyledMenuItem value={5}>Five</StyledMenuItem>

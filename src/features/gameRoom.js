@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React from "react";
 import { ApplesClient } from "./utils/ApplesClient";
 
 export const Apples2Oranges = () => {

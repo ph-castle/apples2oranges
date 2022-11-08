@@ -45,6 +45,8 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
       credentials: localStorage.getItem("credentials")
       // defaults numPlayers and setupData to previous game
     };
+    // could extend (make dynamic copy of) nextGameParams array and
+    // add newName property
     let joinNextGameParams = {
       newName: localStorage.getItem("name"),
       playerID: localStorage.getItem("id"),
@@ -99,6 +101,8 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
 
   //board elements will change based on phase, stage, and if it is players turn to be judge
 
+  // can filter out chat component and useMemo to make it so it re-maps the chat messages only when the chat messages changes
+
   return (
     <div className="Game">
       <div className="View">
@@ -109,8 +113,6 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
             G={G}
             ctx={ctx}
             moves={moves}
-            sendChatMessage={sendChatMessage}
-            chatMessages={chatMessages}
             matchData={matchData}
           />
         ) : (
@@ -119,8 +121,6 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
             ctx={ctx}
             moves={moves}
             playerID={playerID}
-            sendChatMessage={sendChatMessage}
-            chatMessages={chatMessages}
             matchData={matchData}
           />
         ))
