@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import ScoreBoard from "./ScoreBoard";
 import Card from "../../card/Card.js";
 import PCard from "../../card/PCard.js";
 import styles from "../../card/Card.module.css";
 import {
   StyledContainer,
-  StyledTextField,
-  StyledSendIcon,
   StyledTypography
 } from "../../styles/playerViewStyles";
 import { Box } from '@mui/material';
@@ -16,32 +14,13 @@ export default function PlayerView({
   ctx,
   moves,
   playerID,
-  sendChatMessage,
-  chatMessages,
   matchData
 }) {
-  const [chatInput, setChatInput] = useState('');
 
-  const playerNames = {};
-
-  // creates object with player id as key
-  for (let i = 0; i < matchData.length; i++) {
-    playerNames[matchData[i].id] = matchData[i].name;
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    sendChatMessage({ message: chatInput, time: Date.now()});
-    setChatInput('');
-  }
-
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setChatInput(value);
-  }
-
+  let playersRemaining = matchData.length - 1;
   let cardArray = [];
   for (let playerId in G.submittedAnswers) {
+    playersRemaining--;
     cardArray.push(
       <Card
         playerId={playerId}
@@ -49,6 +28,7 @@ export default function PlayerView({
         G={G}
         ctx={ctx}
         text={G.submittedAnswers[playerId].body}
+        showAnswers={true}
       />
     );
   }
@@ -59,9 +39,8 @@ export default function PlayerView({
   );
 
   return (
-    <>
     <StyledContainer>
-        <StyledTypography>
+      <StyledTypography>
         <h3>YOU ARE A PLAYER!</h3>
         <span className="active-prompt">
         {G.activePrompt.body ? (
@@ -73,8 +52,8 @@ export default function PlayerView({
           </>
         )}
         </span>
-        </StyledTypography>
-        <Box
+      </StyledTypography>
+      <Box
         sx={{
           display: 'grid',
           gridTemplateColumns: {
@@ -89,11 +68,10 @@ export default function PlayerView({
           width: '75%',
         }}
       >
-          {G.submittedAnswers[playerID] === undefined ?
-            (G.activePrompt.body ?
-            G.players[playerID].hand.map((card, i) =>
+          {G.activePrompt.body
+          && (G.submittedAnswers[playerID] === undefined
+             ? G.players[playerID].hand.map((card, i) =>
               (
-
                 <Card
                   G={G}
                   ctx={ctx}
@@ -103,35 +81,13 @@ export default function PlayerView({
                   key={card.id}
                   text={card.body}
                 />
-
-            )) : submittedAnswers)
-          :
-          null}
-        </Box>
-        </StyledContainer>
-
-        <Box sx={{position: 'fixed', height: '600px', borderStyle: 'solid', right: '10%', top: '8rem', background: 'rgba(0,0,0, 0.8)'}}>
-          <div style={{
-            overflowWrap: "break-word",
-            overflowY: "scroll",
-            height: "86%"
-          }}>
-            {chatMessages.length > 0 ? chatMessages.map(({ payload, sender }, index) => {
-              return <div>{`${playerNames[sender]}: ${payload.message}`}</div>
-            }) : null}
-          </div>
-          <form onSubmit={handleSubmit}>
-            <StyledTextField
-              label="Send chat"
-              value={chatInput}
-              onChange={handleChange}
-              InputLabelProps={{
-                style: { color: 'white' },
-              }}
-            />
-            <StyledSendIcon type="submit"/>
-          </form>
+              ))
+              : (playersRemaining === 0
+                ? submittedAnswers
+                : <div>Waiting on {playersRemaining} players to select an answer.</div>
+                )
+          )}
       </Box>
-    </>
+    </StyledContainer>
   );
 }

@@ -1,40 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PCard from "../../card/PCard.js";
 import Card from "../../card/Card.js";
 import Box from '@mui/material/Box';
 import styles from "../../card/Card.module.css";
 import {
   StyledContainer,
-  StyledTextField,
-  StyledSendIcon,
   StyledTypography
 } from "../../styles/playerViewStyles";
-
 import { StyledButton } from "../../styles/createGameStyles";
 
-export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages, matchData }) {
-  const [chatInput, setChatInput] = useState('');
+export default function JudgeView({G, ctx, moves, matchData }) {
 
-  const playerNames = {};
-
-  // creates object with player id as key
-  for (let i = 0; i < matchData.length; i++) {
-    playerNames[matchData[i].id] = matchData[i].name;
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    sendChatMessage({ message: chatInput, time: Date.now()});
-    setChatInput('');
-  }
-
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setChatInput(value);
-  }
-
+  let playersRemaining = matchData.length - 1;
+  // can map the cards, might need to make submitted answers an array first
   let cardArray = [];
   for (let playerId in G.submittedAnswers) {
+    playersRemaining--;
     cardArray.push(
       <Card
         playerId={playerId}
@@ -46,14 +27,13 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
       />
     );
   }
-
   let answers = (
     <div className="player-choices">
       {cardArray}
     </div>
   );
+
   return (
-        <>
         <StyledContainer>
           <StyledTypography>
           <h3>YOU ARE JUDGING ________!</h3>
@@ -75,34 +55,12 @@ export default function JudgeView({G, ctx, moves, sendChatMessage, chatMessages,
           </span>
           </StyledTypography>
           <Box sx={{width: '60%', margin: '0 auto'}}>
-            {answers}
+          {G.activePrompt.body
+          && (playersRemaining === 0
+              ? answers
+              : <div>Waiting on {playersRemaining} players to select an answer.</div>
+          )}
           </Box>
         </StyledContainer>
-
-        <Box sx={{position: 'fixed', height: '600px', maxWidth: '30%', borderStyle: 'solid', right: '10%', top: '8rem', background: 'rgba(0,0,0, 0.8)'}}>
-          <div style={{
-            overflowWrap: "break-word",
-            overflowY: "scroll",
-            height: "86%"
-          }}>
-            {chatMessages.length > 0 ? chatMessages.map(({ payload, sender }, index) => {
-              return <div>{`${playerNames[sender]}: ${payload.message}`}</div>
-            }) : null}
-          </div>
-          <form onSubmit={handleSubmit}>
-            <StyledTextField
-              label="Send chat"
-              value={chatInput}
-              onChange={handleChange}
-              InputLabelProps={{
-                style: { color: 'white' },
-              }}
-            />
-            <StyledSendIcon type="submit"/>
-          </form>
-        </Box>
-        </>
-
-
   );
 }

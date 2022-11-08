@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import JudgeView from "./ApplesBoardComponents/JudgeView";
 import PlayerView from "./ApplesBoardComponents/PlayerView";
+import Box from '@mui/material/Box';
+import {
+  StyledContainer,
+  StyledTextField,
+  StyledSendIcon,
+  StyledTypography
+} from "../styles/playerViewStyles";
+import { StyledButton } from "../styles/createGameStyles";
 import { useNavigate } from "react-router-dom";
 import { lobbyClient } from '../features/utils/lobbyClient';
 
-
 export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMessages, matchData }) {
   let navigate = useNavigate();
+  const [chatInput, setChatInput] = useState('');
+
+  const playerNames = {};
+  // creates object with player id as key
+  for (let i = 0; i < matchData.length; i++) {
+    playerNames[matchData[i].id] = matchData[i].name;
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendChatMessage({ message: chatInput, time: Date.now()});
+    setChatInput('');
+  };
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setChatInput(value);
+  };
+
   //create two different views that will be returned depending on if player is judge or not
 
   //define functions that affect how the board elements are displayed
@@ -19,29 +45,54 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
       credentials: localStorage.getItem("credentials")
       // defaults numPlayers and setupData to previous game
     };
+    let joinNextGameParams = {
+      newName: localStorage.getItem("name"),
+      playerID: localStorage.getItem("id"),
+      credentials: localStorage.getItem("credentials")
+    };
+    let matchID = localStorage.getItem("matchID");
     winner =
       ctx.gameover.winner !== undefined ? (
         <div id="winner">
-          Winner: {ctx.gameover.winner}
-          <button onClick={() => {
-            lobbyClient
-              .playAgain("Apples2Oranges", localStorage.getItem("matchID"), nextGameParams)
-              .then((results) => {
-                localStorage.setItem("matchID", results.nextMatchID);
-                navigate(`/waitingroom/${results.nextMatchID}`);
-              })
-              .catch((err) => {
-                console.log('Error creating next game: ', err);
-              });
-          }}>
+          <h3>Winner: {matchData[ctx.gameover.winner].name}</h3>
+          <br/>
+          <Box sx={{width: '30%', margin: '0 auto'}}>
+          <StyledButton
+            variant="contained"
+            onClick={() => {
+              let nextMatch;
+              lobbyClient
+                .playAgain('Apples2Oranges', matchID, nextGameParams)
+                .then((match) => {
+                  nextMatch = match.nextMatchID;
+                  console.log('next match id: ', nextMatch);
+                  return nextMatch;
+                })
+                .then(() => {
+                  localStorage.setItem("matchID", nextMatch);
+                })
+                .then(() => {
+                  lobbyClient.updatePlayer('Apples2Oranges', nextMatch, joinNextGameParams);
+                })
+                .then(() => {
+                  navigate(`/waitingroom/${nextMatch}`);
+                })
+                .catch((err) => {
+                  console.log('Error creating next game: ', err);
+                });
+            }}
+          >
             Play Again
-          </button>
-          <button onClick={() => {
-            navigate('/home');
-          }}
+          </StyledButton>
+          <StyledButton
+            variant="contained"
+            onClick={() => {
+              navigate('/');
+            }}
           >
             Back to Home
-          </button>
+          </StyledButton>
+          </Box>
         </div>
       ) : null;
   }
@@ -51,8 +102,9 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
   return (
     <div className="Game">
       <div className="View">
-        {/* change board view IF player is the current Judge */}
-        {ctx.currentPlayer === playerID ? (
+      {!ctx.gameover
+        /* change board view IF player is the current Judge */
+      ? (ctx.currentPlayer === playerID ? (
           <JudgeView
             G={G}
             ctx={ctx}
@@ -71,9 +123,39 @@ export function ApplesBoard({ ctx, G, moves, playerID, sendChatMessage, chatMess
             chatMessages={chatMessages}
             matchData={matchData}
           />
-        )}
+        ))
+      : <StyledContainer>
+          <StyledTypography>
+            <h1>GAME OVER!</h1>
+            <br/>
+            {winner}
+          </StyledTypography>
+        </StyledContainer>}
+
+        <Box sx={{position: 'fixed', height: '600px', maxWidth: '30%', borderStyle: 'solid', right: '10%', top: '5rem', background: 'rgba(0,0,0, 0.8)'}}>
+          <div style={{
+            overflowWrap: "break-word",
+            overflowY: "scroll",
+            height: "86%"
+          }}>
+            {chatMessages.length > 0 ? chatMessages.map(({ payload, sender }, index) => {
+              return <div>{`${playerNames[sender]}: ${payload.message}`}</div>
+            }) : null}
+          </div>
+          <form onSubmit={handleSubmit}>
+            <StyledTextField
+              label="Send chat"
+              value={chatInput}
+              onChange={handleChange}
+              InputLabelProps={{
+                style: { color: 'white' },
+              }}
+            />
+            <StyledSendIcon type="submit"/>
+          </form>
+        </Box>
+
       </div>
-      {winner}
     </div>
   );
 }

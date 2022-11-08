@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import { ApplesClient } from "./utils/ApplesClient";
 
 export const Apples2Oranges = () => {
@@ -11,5 +11,3 @@ export const Apples2Oranges = () => {
   );
 };
 
-
-// what is this?

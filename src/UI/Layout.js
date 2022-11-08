@@ -8,9 +8,9 @@ export default function Layout({ user, setUser }) {
     <>
       <Header user={user} setUser={setUser} />
       <Hero />
-      {/* <StyledContainer> */}
+      <StyledContainer>
         <Outlet />
-      {/* </StyledContainer> */}
+      </StyledContainer>
     </>
   )
 };

@@ -14,29 +14,96 @@ export const WaitingRoom = () => {
   const navigate = useNavigate();
   const { matchID } = useParams();
   const [players, setPlayers] = useState([]);
-  const [currPlayers, setCurrPlayers] = useState([]);
+  //const [currPlayers, setCurrPlayers] = useState([]);
   const [show, setShow] = useState(false);
   const playerID = localStorage.getItem('id');
   const playerCredentials = localStorage.getItem('credentials');
 
+  // useEffect(() => {
+  //   // might want this outside of useEffect too
+  //   if (show) {
+  //     clearInterval(interval);
+  //   }
+  //   // return () => {
+  //   //   clearInterval(interval);
+  //   // };
+  // }, [show, interval]);  // no dot length?
+  // }, [show, players.length, matchID]);  // no dot length?
+
+  // const getJoinedPlayers = async () => {
+  //   try {
+  //     let { players } = await lobbyClient.getMatch('Apples2Oranges', matchID);
+  //     console.log('players: ', players);
+  //     return players;
+  //   } catch (err) {
+  //     console.log('error getting players', err);
+  //   }
+  // };
+
+  // await setPlayers(() => players);
+  // console.log('players: ', players);
+  // let joinedPlayers = players.map(player => player.name);
+  // if (joinedPlayers.length === players.length) {
+  //   await setShow(() => true);
+  // }
+  // const interval = setInterval(() => {
+  //   getPlayers();
+  // }, 500);
+
+  // const getPlayers = () => {
+  //   lobbyClient.getMatch('Apples2Oranges', matchID)
+  //   .then(({ players }) => {
+  //     console.log('players: ', players);
+  //     setPlayers(players);
+  //     const currentPlayers = players.filter((player) => player.name);
+  //     setCurrPlayers(() => currentPlayers);
+  //     if (currentPlayers.length === players.length) {
+  //       setShow(() => true); //everyone has joined, show them the board
+  //     }
+  //   })
+  //   .catch(err => console.log('error getting players: ', err));
+  // };
+  // }, 500);
+  // if (show) {
+  //   clearInterval(interval);
+  // }
+
+  // const interval = setInterval(() => {
+  //   lobbyClient.getMatch('Apples2Oranges', matchID)
+  //   .then(({ players }) => {
+  //     setPlayers(players);
+  //     const currentPlayers = players.filter((player) => player.name);
+  //     setCurrPlayers(() => currentPlayers);
+  //     if (currentPlayers.length === players.length) {
+  //       setShow(() => true); //everyone has joined, show them the board
+  //     }
+  //   });
+  // }, 500);
+  // if (show) {
+  //   clearInterval(interval);
+  // }
   useEffect(() => {
-    const interval = setInterval(() => {
-      lobbyClient.getMatch('Apples2Oranges', matchID).then(({ players }) => {
+    // might want this outside of useEffect too
+    const intervalId = setInterval(() => {
+      lobbyClient.getMatch('Apples2Oranges', matchID)
+      .then(({ players }) => {
+        console.log('players: ', players);
         setPlayers(players);
         const currentPlayers = players.filter((player) => player.name);
-        setCurrPlayers(currentPlayers);
+        //setCurrPlayers(() => currentPlayers);
         if (currentPlayers.length === players.length) {
-          setShow(true); //everyone has joined, show them the board
+          setShow(() => true); //everyone has joined, show them the board
         }
-      });
+      })
+      .catch(err => console.log('error getting players: ', err));
     }, 500);
     if (show) {
-      clearInterval(interval);
+      clearInterval(intervalId);
     }
     return () => {
-      clearInterval(interval);
+      clearInterval(intervalId);
     };
-  }, [show, players.length, matchID]);
+  }, [show, matchID]);  // no dot length?
 
   const leaveRoom = () => {
     lobbyClient
@@ -51,7 +118,7 @@ export const WaitingRoom = () => {
   };
 
   if (show && playerID) {
-    return navigate(`/game/apples/${localStorage.getItem('matchID')}`);
+    return navigate(`/game/apples/${localStorage.getItem('matchID')}`); // can just use matchID, defined above
   } else {
     return (
       <Box

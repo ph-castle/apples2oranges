@@ -32,9 +32,14 @@ export default class Card extends React.Component {
         <div className={styles.card_text}>
           {this.props.text}
         </div>
-        <button className={styles.select_button} onClick={this.handleSelect.bind(this)}>
+        {this.props.showAnswers
+        ? <div/>
+        : <button className={styles.select_button} onClick={this.handleSelect.bind(this)}>
+            Select
+          </button>}
+        {/* <button className={styles.select_button} onClick={this.handleSelect.bind(this)}>
           Select
-        </button>
+        </button> */}
         <div className={styles.social_media}>
           <TwitterShareButton url={url} title={shareTitle} via={shareMessage}>
             <TwitterIcon size="1.3em" round/>

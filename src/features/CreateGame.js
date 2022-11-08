@@ -62,11 +62,12 @@ export function CreateGame() {
     dispatch({ name: "options2", value: result.data });
 
     let matchTemp;
+    console.log('options: ', options);
     lobbyClient
       .createMatch('Apples2Oranges', options)
-      .catch((err) =>
-        console.log('error creating match in CreateGame clickHandler', err)
-      )
+      // .catch((err) =>
+      //   console.log('error creating match in CreateGame clickHandler', err)
+      // )
       .then((match) => {
         matchTemp = match.matchID;
         return lobbyClient.joinMatch('Apples2Oranges', matchTemp, {

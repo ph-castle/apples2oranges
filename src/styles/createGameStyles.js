@@ -110,6 +110,7 @@ export const StyledButton = styled(Button)({
   padding: '0.8em',
   outline: '1px solid orange',
   zIndex: '1',
+  margin: '1rem auto',
 });
 
 export const StyledOutlineInput = styled(OutlinedInput)({

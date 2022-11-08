@@ -23,7 +23,7 @@ import Layout from './UI/Layout';
 
 export const code = new URLSearchParams(window.location.search).get('code');
 
-export default function App() {
+export default function App({ gameServer }) {
   const [user, setUser] = useState({
     id: 0,
     username: '',
@@ -34,12 +34,12 @@ export default function App() {
     <>
     {/* // <StyledEngineProvider injectFirst> */}
     {/* //   <ThemeProvider theme={theme}> */}
-        <Header user={user} setUser={setUser} />
-        <Hero />
+        {/* <Header user={user} setUser={setUser} />
+        <Hero /> */}
         {/* <StyledContainer> */}
           <Routes>
-            {/* <Route path="/" element={<Layout user={user} setUser={setUser} />}> */}
-            <Route path="/" element={<StyledContainer children={<Outlet />} />}> | {" "}
+            <Route path="/" element={<Layout user={user} setUser={setUser} />}> | {" "}
+            {/* <Route path="/" element={<StyledContainer children={<Outlet />} />}> | {" "} */}
               <Route index element={<Dashboard />} />
               <Route
                 path="user/login"
@@ -66,7 +66,7 @@ export default function App() {
           <Route path="*" element={<NoMatch />} />
           {/* </Route> */}
         </Routes>
-
+ {/* </StyledContainer> */}
         {/* <BoomBox code={code} /> */}
     {/* //   </ThemeProvider> */}
     {/* // </StyledEngineProvider> */}

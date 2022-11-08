@@ -66,8 +66,8 @@ const Header = ({ user, setUser }) => {
               <Typography
                 variant="h6"
                 noWrap
-                component="a"
-                href="/"
+                // component="a"
+                // href="/"
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },
@@ -139,8 +139,8 @@ const Header = ({ user, setUser }) => {
           <Typography
             variant="h7"
             noWrap
-            component="a"
-            href="/"
+            // component="a"
+            // href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
