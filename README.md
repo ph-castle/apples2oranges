@@ -117,6 +117,8 @@ To support the upload of user avatar pictures, you will need to create a Cloudin
     * Custom Cards Functionality
   * ### Project Manager by Caroline Peake
     * Dynamic SPA Routing
+    * Lobby Component functionality
+    * Connecting clients into games utilizing built in websocket
   * ### Architect by Andrew Schwaderer
     * Core Game Logic
     * Deployment
