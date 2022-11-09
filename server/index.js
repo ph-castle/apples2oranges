@@ -6,8 +6,6 @@ const bodyParser = require("body-parser");
 const router = require("./routes/routes.js");
 const spotifyRouter = require("./routes/spotifyRouter.js");
 
-const port = process.env.REACT_APP_SERVER_PORT || 5050;
-
 const app = express();
 app.use(cors());
 
@@ -30,6 +28,8 @@ app.use(express.json());
 
 app.use("/", router);
 app.use("/spotify", spotifyRouter);
+
+const port = process.env.EXPRESS_PORT;
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

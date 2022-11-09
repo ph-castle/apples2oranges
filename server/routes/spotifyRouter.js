@@ -7,9 +7,9 @@ spotifyRouter.post('/refresh', (req, res) => {
   const refreshToken = req.body.refreshToken;
 
   const Spotify = new SpotifyWebApi({
-    redirectUri: 'http://localhost:3000',
-    clientId: process.env.S_CLIENT_ID,
-    clientSecret: process.env.S_CLIENT_SECRET,
+    redirectUri: `http://localhost:${process.env.EXPRESS_PORT}`,
+    clientId: `${process.env.S_CLIENT_ID}`,
+    clientSecret: `${process.env.S_CLIENT_SECRET}`,
     refreshToken,
   });
 
@@ -29,9 +29,9 @@ spotifyRouter.post('/login', (req, res) => {
   const code = req.body.code;
 
   const Spotify = new SpotifyWebApi({
-    redirectUri: 'http://localhost:3000',
-    clientId: process.env.S_CLIENT_ID,
-    clientSecret: process.env.S_CLIENT_SECRET,
+    redirectUri: `http://localhost:${process.env.SERVER_PORT}`,
+    clientId: `${process.env.S_CLIENT_ID}`,
+    clientSecret: `${process.env.S_CLIENT_SECRET}`,
   });
 
   Spotify.authorizationCodeGrant(code)

@@ -14,7 +14,7 @@ const ENV = process.env.REACT_APP_ENV;
 
 let SERVER;
 if (ENV === "dev") {
-  SERVER = `http://${window.location.hostname}:8000`; // Local
+  SERVER = `http://${window.location.hostname}:${process.env.REACT_APP_BG_PORT}`; // Local
 } else {
   SERVER = `https://${window.location.hostname}`; // Prod
 }
