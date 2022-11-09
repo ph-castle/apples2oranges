@@ -1,61 +1,34 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-<!-- [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
- -->
-
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/ph-castle/apples2oranges">
     <!-- ******************************************************************** -->
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://i.imgur.com/1p7rmlS.gif" alt="Logo">
   </a>
 
   <h3 align="center">Apples to Oranges</h3>
 
   <p align="center">
-    Apples to Oranges is "straightforward card pattern matching game that is a fun family game and includes a touch of strategy. It is quick and easy for multi-generational family play."    
+    Apples to Oranges is a fun card game where players submit answer cards to pair with a prompt card. Judges select their favorite card and the players accumulate points for selected cards. This online multiplayer version allows you to play with your friends wherever you are! NSFW option increases the hilarity of gameplay. Create an account and save custom cards to mix things up!
     <br />
-    <a href="https://www.thegamecrafter.com/games/apples-oranges">Learn more about the game!!!</a>
+    <a href="https://www.cardsagainsthumanity.com/about">Learn more about the game!!!</a>
     <br />
     <br />
    ·
     <a href="https://github.com/ph-castle/apples2oranges">View Demo(DEMO LINK HERE!!!!)</a>
-   ·
-    <a href="https://github.com/ph-castle/apples2oranges/issues">Report Bug</a>
+
   </p>
 </div>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Gameplay](https://i.imgur.com/zKfnLUM.gif)
 
-Apples to Oranges is live card matching game with live chat, music, and interactive UI.
+Apples to Oranges is a multiplayer card matching game with live chat, music, and interactive UI.
 
 <!-- MORE about what problems we solved here!!!! -->
 
@@ -89,14 +62,15 @@ Apples to Oranges is live card matching game with live chat, music, and interact
 
 ### Prerequisites
 
-This is an instruction on how to get started fast!
+These are instructions on how to get started fast!
  
-To run the game in developer's mode, you need to set debugger to false in ApplesClient.js
+To run the game in production mode, you need to set debugger to false in ApplesClient.js
 
-You need to have premium spotify account to have access to music player.
-Also create your developer account here [HERE!]([HERE!](https://developer.spotify.com/dashboard/applications))
+You need to have a premium spotify account to access the music player.
+Also, create your Spotify developer account here [HERE!]([HERE!](https://developer.spotify.com/dashboard/applications))
 and create an app for this project to get client id & client secret. This is optional and will not affect the 
 gaming functionality.
+To support the upload of user avatar pictures, you will need to create a Cloudinary account (also optional).
 
 ### Installation
 
@@ -110,13 +84,13 @@ gaming functionality.
    ```
 4. Install react-share
    ```js
-   npm install react-share --legacy-peer-deps
+   npm run install2
    ```   
-5. Make a copy of sample.env file and rename it to .env. Update with correct information.
+5. Make a copy of the sample.env file and rename it as .env. Update the env file with correct information.
    ```js
    cp ./sample.env .env
    ```      
-6. Run client, server, and boardgame-server each on its own terminal
+6. Run client, server, and boardgame-server each in its own terminal
    ```sh
     npm start
     npm run postgres-server or postgres-server-dev (development mode)
@@ -124,38 +98,46 @@ gaming functionality.
    ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
- 
+### Screenshots
+
+<details> 
+  <summary> Login and Custom Cards </summary>
+  <img src="https://i.imgur.com/04x1fgr.gif" alt="Logo">
+</details>
+
+<details>
+  <summary> Chat </summary>
+  <img src="https://i.imgur.com/zJwSFa3.gif" alt="Logo">
+</details>
+
 ### Contribution
   * ### Project Manager by Royce Chun
-    * 
-    * 
-    *
+    * Backend APIs and database
+    * Live Chat Box
+    * Custom Cards Functionality
   * ### Project Manager by Caroline Peake
-    * 
-    * 
-    *
-  * ### architech by Andrew Schwaderer
-    * Game Logic
-    * 
-    *
-  * ### architech by Kesang Dingtsa
-    * 
-    * 
-    *
-  * ### Hype Man by Daniel Chu
-    * Score board
-    * 
-    *
-  * ### Morale Booster by Jessica Chen
-    * Login
-    * 
-    *
+    * Dynamic SPA Routing
+  * ### Architect by Andrew Schwaderer
+    * Core Game Logic
+    * Deployment
+  * ### Architect by Kesang Dingtsa
+    * User Form and UI
+    * Lobby Component functionality
+    * Connecting clients into games utilizing built in websocket
+  * ### Morale Manager by Daniel Chu
+    * Game Score Board
+    * Base Game Board Design
+  * ### Workflow Manager by Jessica Chen
+    * User Authentication and Security
+    * Backend APIs and database
+    * Live Chat Box
+    * Social Media Sharing
   * ### UI / UX by Coty Janeway
-    * 
-    * 
-    *
+    * Interactive Game Design
+    * Card Data Collection
+    * Styling
   * ### UI / UX by Heemo Yang
-    * Interactive Background with animation
+    * Interactive Background for UX
     * Spotify Music Player
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -264,3 +246,4 @@ gaming functionality.
 </table>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
